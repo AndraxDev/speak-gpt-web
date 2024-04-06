@@ -1,0 +1,88 @@
+@import "colors.css";
+
+* {
+    color-scheme: dark;
+}
+
+html, body {
+    background-color: var(--color-accent-200);
+}
+
+html {
+    overflow-y: scroll;
+}
+
+.ui {
+    margin-top: 56px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-accent-0);
+    min-height: calc(100vh - 56px);
+}
+
+.ui__dialog {
+    margin-top: 48px;
+    min-width: 300px;
+    /*min-height: 180px;*/
+    padding: 16px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: var(--color-secondary-light);
+    background-color: var(--color-accent-50);
+}
+
+.ui__dialog__title {
+    padding: 0;
+    margin: 4px;
+    color: var(--color-accent-800);
+    font-size: 18pt;
+}
+
+.ui__disclaimer {
+    margin-top: 48px;
+    color: var(--color-disclaimer);
+    text-align: center;
+    width: 720px;
+    font-size: 12pt;
+}
+
+@media only screen and (max-width: 721px) {
+    .ui__disclaimer {
+        width: 360px;
+    }
+}
+
+.app_logo {
+    margin-top: 64px;
+    width: 120px;
+    height: 120px;
+    background-color: var(--color-accent-200);
+    border-radius: 50%;
+    animation: logo 30s linear infinite;
+}
+
+@keyframes logo {
+    0% {
+        transform: rotate(0deg);
+        background-color: var(--color-dark-red);
+    }
+
+    33% {
+        transform: rotate(360deg);
+        background-color: var(--color-dark-green);
+    }
+
+    67% {
+        transform: rotate(720deg);
+        background-color: var(--color-dark-blue);
+    }
+
+    100% {
+        transform: rotate(1080deg);
+        background-color: var(--color-dark-red);
+    }
+}

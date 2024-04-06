@@ -1,0 +1,43 @@
+:root {
+    --color-primary-light: #ffffff;
+    --color-secondary-light: rgba(255, 255, 255, 0.8);
+    --color-tretinary-light: rgba(255, 255, 255, 0.7);
+    --color-accent-0: #181d1a;
+    --color-accent-50: #141715;
+    --color-accent-100: #181d1a;
+    --color-accent-200: #29342c;
+    --color-accent-300: #354e3d;
+    --color-accent-400: #4c6754;
+    --color-accent-800: #99ffbb;
+    --color-accent-900: #d2ffdf;
+    --color-primary-accent-transparent: rgba(255, 255, 255, 0.07);
+    --color-secondary-accent: #00ffff;
+    --color-disclaimer: #ffff00;
+    --color-dark-red: #422121;
+    --color-dark-green: #214221;
+    --color-dark-blue: #212142;
+    --color-autofill: #181d1a;
+    --color-warn: #db4437;
+    --color-warn-transparent: rgba(219, 68, 55, 0.16);
+}
+
+@font-face {
+    font-family: 'squares-custom';
+    src: local('squares'), url('fonts/squares.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ocr-custom';
+    src: local('ocr'), url('fonts/ocr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'google-sans';
+    src: local('google'), url('fonts/google.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
