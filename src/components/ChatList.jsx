@@ -9,29 +9,6 @@ import {modelToType} from "../util/ModelTypeConverter";
 import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
 
-const exampleChats = [
-    {
-        title: "Chat 1",
-        model: "gpt-3.5-turbo",
-        type: "GPT 3.5"
-    },
-    {
-        title: "Chat 2",
-        model: "gpt-4-turbo-preview",
-        type: "GPT 4 Turbo"
-    },
-    {
-        title: "Chat 3",
-        model: "gpt-4",
-        type: "GPT 4"
-    },
-    {
-        title: "Chat 4",
-        model: "custom-fine-tuned-model",
-        type: "FT"
-    }
-];
-
 function ChatList(props) {
     const [selectedChat, setSelectedChat] = React.useState("");
     const [newChatDialogOpen, setNewChatDialogOpen] = React.useState(false);
@@ -44,6 +21,56 @@ function ChatList(props) {
     const [isEditing, setIsEditing] = React.useState(false);
     const [deletionDialogOpen, setDeletionDialogOpen] = React.useState(false);
     const [deleteChatName, setDeleteChatName] = React.useState("");
+    const [db, setDb] = React.useState(null);
+
+    useEffect(() => {
+        getDatabase()
+    }, []);
+
+    const getDatabase = () => {
+        let db;
+
+        const request = indexedDB.open("chats", 1);
+
+        request.onupgradeneeded = function(event) {
+            // Save the IDBDatabase interface
+            db = event.target.result;
+
+            // Create an objectStore for this database
+            if (!db.objectStoreNames.contains('chats')) {
+                db.createObjectStore('chats', { keyPath: 'chatId'});
+            }
+        };
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+            setDb(db)
+            console.log("Database opened successfully");
+        };
+
+        request.onerror = function(event) {
+            console.log("Error opening database", event.target.errorCode);
+        };
+    }
+
+    const saveConversation = (chatId, conversation, closeChatId, closeChatName) => {
+        const transaction = db.transaction(['chats'], 'readwrite');
+        const objectStore = transaction.objectStore('chats');
+        const request = objectStore.put({ chatId: chatId, content: conversation });
+
+        request.onsuccess = function() {
+            console.log("Conversation saved successfully");
+            closeEditAndUpdate(closeChatId, closeChatName)
+        };
+
+        request.onerror = function(event) {
+            console.log("Error saving conversation", event);
+        }
+    }
+
+    const deleteConversation = (chatId) => {
+        saveConversation(chatId, "[]", "", "");
+    }
 
     let { id } = useParams();
 
@@ -89,7 +116,8 @@ function ChatList(props) {
 
         setChats(newChats);
         localStorage.setItem("chats", JSON.stringify(newChats));
-        localStorage.removeItem(sha256(chatName));
+        deleteConversation(sha256(chatName));
+        // localStorage.removeItem(sha256(chatName));
         localStorage.removeItem(sha256(chatName) + ".settings");
 
         setDeleteChatName("");
@@ -125,15 +153,40 @@ function ChatList(props) {
 
                 setChats(newChats)
 
-                localStorage.setItem(sha256(newChatName), localStorage.getItem(sha256(chatName)) !== null ? localStorage.getItem(sha256(chatName)) : "[]");
-                localStorage.setItem(sha256(newChatName) + ".settings", localStorage.getItem(sha256(chatName) + ".settings") !== null ? localStorage.getItem(sha256(chatName) + ".settings") : "{}");
+                const transaction = db.transaction(['chats'], 'readonly');
+                const objectStore = transaction.objectStore('chats');
+                const request = objectStore.getAll();
 
-                setNewChatDialogOpen(false);
+                request.onsuccess = function() {
+                    let isFound = false;
 
-                if (id === sha256(chatName)) {
-                    window.location.replace("/chat/" + sha256(newChatName));
+                    request.result.forEach((e) => {
+                        if (e.chatId === sha256(chatName)) {
+                            console.log("Found conversation", e.content);
+                            isFound = true;
+                            saveConversation(sha256(newChatName), e.content, id, chatName);
+                        }
+                    });
+
+                    if (!isFound) {
+                        saveConversation(sha256(newChatName), "[]", id, chatName);
+                    }
+                };
+
+                request.onerror = function(event) {
+                    console.log("Error getting conversation", event.target.errorCode);
                 }
             }
+        }
+    }
+
+    const closeEditAndUpdate = (id, chatName) => {
+        deleteConversation(sha256(chatName));
+
+        setNewChatDialogOpen(false);
+
+        if (id === sha256(chatName) && chatName !== "") {
+            window.location.replace("/chat/" + sha256(newChatName));
         }
     }
 

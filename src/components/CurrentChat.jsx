@@ -8,6 +8,11 @@ function CurrentChat({chats, id, chatName}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
+    const [db, setDb] = React.useState(null);
+
+    useEffect(() => {
+        getDatabase()
+    }, []);
 
     useEffect(() => {
         chats.forEach((e) => {
@@ -26,17 +31,24 @@ function CurrentChat({chats, id, chatName}) {
             setConversation([]);
             return;
         }
-        setConversation(localStorage.getItem(sha256(stateSelectedChat)) !== null ? JSON.parse(localStorage.getItem(sha256(stateSelectedChat))) : []);
-    }, [stateSelectedChat]);
+
+        if (db !== undefined && db !== null) {
+            getConversation(sha256(stateSelectedChat));
+        }
+
+        // setConversation(localStorage.getItem(sha256(stateSelectedChat)) !== null ? JSON.parse(localStorage.getItem(sha256(stateSelectedChat))) : []);
+    }, [db, stateSelectedChat]);
 
     const prepareConversation = (messages) => {
         const msgs = [];
 
         messages.forEach((e) => {
-            msgs.push({
-                content: e.message,
-                role: e.isBot ? "assistant" : "user"
-            });
+            if (!e.message.toString().includes("~file:")) {
+                msgs.push({
+                    content: e.message,
+                    role: e.isBot ? "assistant" : "user"
+                });
+            }
         });
 
         return msgs;
@@ -62,7 +74,7 @@ function CurrentChat({chats, id, chatName}) {
         });
 
         setConversation([...m]);
-        localStorage.setItem(sha256(stateSelectedChat), JSON.stringify(m));
+        saveConversation(sha256(stateSelectedChat), JSON.stringify(m))
 
         for await (const chunk of chatCompletion) {
             const r = chunk.choices[0].delta;
@@ -73,11 +85,77 @@ function CurrentChat({chats, id, chatName}) {
                 m[m.length - 1].message += r.content;
 
                 setConversation([...m]);
-                localStorage.setItem(sha256(stateSelectedChat), JSON.stringify(m));
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(m))
+                document.getElementById("bottom").scrollIntoView();
             }
         }
 
         return "";
+    }
+
+    const getDatabase = () => {
+        let db;
+
+        const request = indexedDB.open("chats", 1);
+
+        request.onupgradeneeded = function(event) {
+            // Save the IDBDatabase interface
+            db = event.target.result;
+
+            // Create an objectStore for this database
+            if (!db.objectStoreNames.contains('chats')) {
+                db.createObjectStore('chats', { keyPath: 'chatId'});
+            }
+        };
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+            setDb(db)
+            console.log("Database opened successfully");
+        };
+
+        request.onerror = function(event) {
+            console.log("Error opening database", event.target.errorCode);
+        };
+    }
+
+    const getConversation = (chatId) => {
+        const transaction = db.transaction(['chats'], 'readonly');
+        const objectStore = transaction.objectStore('chats');
+        const request = objectStore.getAll();
+
+        request.onsuccess = function() {
+            let isFound = false;
+
+            request.result.forEach((e) => {
+                if (e.chatId === chatId) {
+                    isFound = true;
+                    setConversation(JSON.parse(e.content));
+                }
+            });
+
+            if (!isFound) {
+                setConversation([]);
+            }
+        };
+
+        request.onerror = function(event) {
+            console.log("Error getting conversation", event.target.errorCode);
+        }
+    }
+
+    const saveConversation = (chatId, conversation) => {
+        const transaction = db.transaction(['chats'], 'readwrite');
+        const objectStore = transaction.objectStore('chats');
+        const request = objectStore.put({ chatId: chatId, content: conversation });
+
+        request.onsuccess = function() {
+            console.log("Conversation saved successfully");
+        };
+
+        request.onerror = function(event) {
+            console.log("Error saving conversation", event);
+        }
     }
 
     const processRequest = () => {
@@ -96,7 +174,7 @@ function CurrentChat({chats, id, chatName}) {
         document.querySelector(".chat-textarea").value = "";
 
         setConversation([...messages]);
-        localStorage.setItem(sha256(stateSelectedChat), JSON.stringify(messages));
+        saveConversation(sha256(stateSelectedChat), JSON.stringify(messages));
 
         sendAIRequest(prepareConversation(messages)).then(r => {
             setLockedState(false);
@@ -117,6 +195,7 @@ function CurrentChat({chats, id, chatName}) {
                             })
                         }
                     </div>
+                    <div id={"bottom"}></div>
                 </div>
                 <div className={"write-bar"}>
                     <textarea className={"chat-textarea"} placeholder={"Start typing here..."}/>

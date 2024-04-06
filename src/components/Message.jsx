@@ -9,7 +9,11 @@ function Message({isBot, message, ...props}) {
                         <span className={"message-icon material-symbols-outlined"}>smart_toy</span>
                         <b className={"message-author-2"}>SpeakGPT</b>
                     </div>
-                    <p className={"message-content"}>{message}</p>
+                    {!message.toString().includes("~file:") ? <p className={"message-content"}>{message}</p> :
+                        <img className={"chat-image"}
+                                src={message.toString().replace("~file:", "data:image/jpeg;base64,")}/>
+                    }
+
                 </div>
             ) : (
                 <div className={"message-user"}>
