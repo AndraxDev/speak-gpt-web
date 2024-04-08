@@ -117,7 +117,6 @@ function ChatList(props) {
         setChats(newChats);
         localStorage.setItem("chats", JSON.stringify(newChats));
         deleteConversation(sha256(chatName));
-        // localStorage.removeItem(sha256(chatName));
         localStorage.removeItem(sha256(chatName) + ".settings");
 
         setDeleteChatName("");
@@ -129,7 +128,6 @@ function ChatList(props) {
 
     const renameChat = (chatName, newChatName) => {
         if (chatName !== "" && newChatName !== "") {
-
             let isFoundChat = false;
 
             chats.forEach((e) => {

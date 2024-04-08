@@ -24,7 +24,7 @@ function CurrentChat({chats, id, chatName}) {
         if (id === undefined) {
             setStateSelectedChat("");
         }
-    }, [id, chatName]);
+    }, [chats, id, chatName]);
 
     useEffect(() => {
         if (stateSelectedChat === "") {
@@ -39,6 +39,10 @@ function CurrentChat({chats, id, chatName}) {
         // setConversation(localStorage.getItem(sha256(stateSelectedChat)) !== null ? JSON.parse(localStorage.getItem(sha256(stateSelectedChat))) : []);
     }, [db, stateSelectedChat]);
 
+    useEffect(() => {
+        document.getElementById("bottom").scrollIntoView();
+    }, [conversation])
+
     const prepareConversation = (messages) => {
         const msgs = [];
 
@@ -52,6 +56,62 @@ function CurrentChat({chats, id, chatName}) {
         });
 
         return msgs;
+    }
+
+    async function convertImageToBase64(url) {
+        try {
+            let urlEncoded = btoa(url);
+            const response = await fetch("https://gpt.teslasoft.org/api/v1/images?u=" + urlEncoded);
+
+            if (!response.ok) throw new Error('Network response was not ok.');
+
+            // Step 2: Convert it to a Blob
+            const blob = await response.blob();
+
+            return new Promise((resolve, reject) => {
+                // Step 3: Use FileReader to read the Blob as a base64 string
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    // This will be a URL starting with `data:image/png;base64,`
+                    resolve(reader.result.replace("data:image/png;base64,", ""));
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        } catch (error) {
+            console.error('Error converting image to Base64:', error);
+            return null;
+        }
+    }
+
+    const generateImage = async (prompt) => {
+        console.log("Generating image")
+        const openai = new OpenAI({
+            apiKey: localStorage.getItem("apiKey"),
+            dangerouslyAllowBrowser: true
+        });
+
+        const response = await openai.images.generate({
+            model: "dall-e-3",
+            prompt: prompt,
+            n: 1,
+            size: "1024x1024",
+        });
+        let image = response.data[0].url;
+
+        console.log(image)
+
+        let image1 = await convertImageToBase64(image);
+
+        let c = conversation;
+        c.push({
+            message: "~file:" + image1,
+            isBot: true
+        });
+
+        setConversation(c)
+
+        saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
     }
 
     const sendAIRequest = async (messages) => {
@@ -73,8 +133,10 @@ function CurrentChat({chats, id, chatName}) {
             isBot: true
         });
 
+        // document.getElementById("bottom").scrollIntoView();
+
         setConversation([...m]);
-        saveConversation(sha256(stateSelectedChat), JSON.stringify(m))
+        saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
 
         for await (const chunk of chatCompletion) {
             const r = chunk.choices[0].delta;
@@ -85,12 +147,44 @@ function CurrentChat({chats, id, chatName}) {
                 m[m.length - 1].message += r.content;
 
                 setConversation([...m]);
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m))
-                document.getElementById("bottom").scrollIntoView();
+
+                // document.getElementById("bottom").scrollIntoView();
             }
         }
 
+        saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
         return "";
+    }
+
+    const processRequest = () => {
+        if (lockedState) {
+            return;
+        }
+
+        const messages = conversation;
+
+        setLockedState(true);
+        messages.push({
+            message: document.querySelector(".chat-textarea").value,
+            isBot: false
+        });
+
+        setConversation([...messages]);
+        saveConversation(sha256(stateSelectedChat), JSON.stringify(messages));
+
+        let mx = document.querySelector(".chat-textarea").value
+        if (mx.includes("/imagine ")) {
+            generateImage(mx.replace("/imagine ", "")).then(r => {
+                setLockedState(false)
+            })
+        } else {
+            sendAIRequest(prepareConversation(messages)).then(r => {
+                setLockedState(false);
+            });
+        }
+
+        document.querySelector(".chat-textarea").value = "";
     }
 
     const getDatabase = () => {
@@ -156,29 +250,6 @@ function CurrentChat({chats, id, chatName}) {
         request.onerror = function(event) {
             console.log("Error saving conversation", event);
         }
-    }
-
-    const processRequest = () => {
-        if (lockedState) {
-            return;
-        }
-
-        const messages = conversation;
-
-        setLockedState(true);
-        messages.push({
-            message: document.querySelector(".chat-textarea").value,
-            isBot: false
-        });
-
-        document.querySelector(".chat-textarea").value = "";
-
-        setConversation([...messages]);
-        saveConversation(sha256(stateSelectedChat), JSON.stringify(messages));
-
-        sendAIRequest(prepareConversation(messages)).then(r => {
-            setLockedState(false);
-        });
     }
 
     return (
