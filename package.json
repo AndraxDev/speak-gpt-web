@@ -1,8 +1,9 @@
 {
   "name": "speakgpt-web",
-  "version": "0.0.2-alpha2",
+  "version": "0.0.4-alpha4",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.15",
@@ -11,12 +12,17 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "babel-preset-gatsby": "^3.13.1",
     "js-sha256": "^0.11.0",
     "openai": "^4.33.0",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^4.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -31,6 +37,16 @@
       "react-app/jest"
     ]
   },
+  "babel": {
+    "presets": [
+      "@babel/react",
+      "@babel/env"
+    ],
+    "plugins": [
+      "@babel/proposal-class-properties",
+      "@babel/plugin-transform-runtime"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -42,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.24.1"
   }
 }

@@ -66,3 +66,13 @@ S
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 A
 src/LicenseKey.js,d\a\da03a7b4dbbfc52696734eed578fca5c7d1f80f1
+?
+babel.config.js,7\7\775bd43a34022cef87b6af825cbd551f29473f73
+A
+babel.config.json,5\8\583d98cb89ece0bc02e2430af46f338c74427084
+8
+.babelrc,b\c\bcac7464521b8c19a2372c739f6dc9e9ab7dfc80
+?
+public/prism.js,9\6\9696f22e3699d1c6045eb98980d266358c61c9f6
+@
+public/prism.css,6\9\698bd84662a95771ee677122b7cb44b2637b89ed

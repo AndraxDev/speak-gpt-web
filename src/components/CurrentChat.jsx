@@ -10,6 +10,18 @@ function CurrentChat({chats, id, chatName}) {
     const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
     const [db, setDb] = React.useState(null);
 
+    const handleKeyDown = (event) => {
+        // Check if Enter key is pressed without Shift key
+        if (event.key === 'Enter' && !event.shiftKey) {
+            // Prevent default action to avoid adding a new line
+            event.preventDefault();
+
+            // Perform your action here (e.g., submit the text)
+            processRequest()
+        }
+        // Optional: handle other key events or conditions, if necessary
+    };
+
     useEffect(() => {
         getDatabase()
     }, []);
@@ -133,8 +145,6 @@ function CurrentChat({chats, id, chatName}) {
             isBot: true
         });
 
-        // document.getElementById("bottom").scrollIntoView();
-
         setConversation([...m]);
         saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
 
@@ -147,8 +157,6 @@ function CurrentChat({chats, id, chatName}) {
                 m[m.length - 1].message += r.content;
 
                 setConversation([...m]);
-
-                // document.getElementById("bottom").scrollIntoView();
             }
         }
 
@@ -269,7 +277,7 @@ function CurrentChat({chats, id, chatName}) {
                     <div id={"bottom"}></div>
                 </div>
                 <div className={"write-bar"}>
-                    <textarea className={"chat-textarea"} placeholder={"Start typing here..."}/>
+                    <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
                     <div>
                         <MaterialButtonTonal className={"chat-send"} onClick={() => {
                             processRequest();

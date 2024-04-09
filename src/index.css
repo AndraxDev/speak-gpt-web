@@ -116,7 +116,7 @@ html, body {
 }
 
 .chat-list {
-    width: 300px;
+    width: 400px;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -128,7 +128,7 @@ html, body {
 
 .chat-content {
     background-color: var(--color-accent-50);
-    width: calc(100vw - 400px);
+    width: calc(100vw - 500px);
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -142,11 +142,13 @@ html, body {
     flex-direction: row;
     align-items: center;
     align-content: center;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 8px;
-    margin: 4px;
-    width: 258px;
+    width: 328px;
     justify-content: space-between;
+    margin-left: 36px;
+    margin-right: 16px;
+    margin-top: 8px;
 }
 
 .chat-item-1 {
@@ -322,7 +324,7 @@ html, body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .message-author-2 {
@@ -372,8 +374,8 @@ html, body {
 
 .fw {
     position: fixed;
-    bottom: 16px;
-    width: 300px;
+    bottom: 24px;
+    width: 388px;
     left: 100px;
     display: flex;
     flex-direction: row;
@@ -485,4 +487,59 @@ html, body {
     border-radius: 16px;
     margin-top: 16px;
     margin-left: 40px;
+    background-color: var(--color-accent-100);
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent-800);
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #ffffff;
+    transition: color 0.2s;
+}
+
+.code-block {
+    border-radius: 16px;
+    background-color: var(--color-accent-100);
+    overflow-x: auto;
+    padding: 16px;
+    width: calc(100% - 32px);
+}
+
+.unknown-code-block {
+    background-color: var(--color-accent-200);
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 16px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background-color: var(--color-accent-200);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    padding: 8px;
+    text-align: left;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+td {
+    background-color: var(--color-accent-100);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    text-align: left;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
