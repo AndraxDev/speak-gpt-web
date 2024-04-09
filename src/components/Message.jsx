@@ -9,7 +9,7 @@ const failedImage = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAA
 function Message({isBot, message, ...props}) {
     const highlightCode = (code, lang, l) => {
         try {
-            return Prism.highlight(code, lang, l).replace("<textarea>", "textarea");
+            return Prism.highlight(code, lang, l);
         } catch (e) {
             return null;
         }
@@ -29,7 +29,7 @@ function Message({isBot, message, ...props}) {
                                     const {children, className, node, ...rest} = props
                                     const match = /language-(\w+)/.exec(className || '')
                                     return match ? (
-                                        <div className={"code-block"} dangerouslySetInnerHTML={{__html: highlightCode(children, Prism.languages[match[1]], className) == null ? children.replace("<textarea>", "textarea") : highlightCode(children, Prism.languages[match[1]], className)}}/>
+                                        <div className={"code-block"} dangerouslySetInnerHTML={{__html: highlightCode(children, Prism.languages[match[1]], className) == null ? children : highlightCode(children, Prism.languages[match[1]], className)}}/>
                                     ) : (
                                             <code {...rest} className={"unknown-code-block " + className}>
                                                 {children}
