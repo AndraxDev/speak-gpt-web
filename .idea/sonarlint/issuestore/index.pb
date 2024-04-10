@@ -70,3 +70,7 @@ A
 babel.config.json,5\8\583d98cb89ece0bc02e2430af46f338c74427084
 S
 #src/components/ConfirmChatClear.jsx,8\8\88ca171d89ea06fdb835987a89b6fa764e120efb
+O
+src/components/ChatSettings.jsx,9\c\9c64db4638083fc7373f410222e023536d88939d
+G
+src/components/Tile.jsx,2\2\223c66c70cf73088ec078c211a1c5be8d9378184

@@ -258,6 +258,10 @@ html, body {
     margin: 0;
     color: rgba(255, 255, 255, 0.8);
     font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 230px;
 }
 
 .chat-item-model {
@@ -349,10 +353,15 @@ html, body {
 }
 
 .chat-title {
-    width: 100%;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
     font-size: 24px;
+    padding: 0;
+    margin: 0;
+    max-width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .chat-frame {
@@ -508,13 +517,17 @@ a:hover {
     overflow-x: auto;
     padding: 16px;
     width: calc(100% - 32px);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .unknown-code-block {
     background-color: var(--color-accent-200);
-    border-radius: 4px;
+    border-radius: 6px;
     color: #ffffff;
     font-weight: 700;
+    padding: 2px 4px;
 }
 
 table {
@@ -544,9 +557,125 @@ td {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.chat-ab-actions {
+.chat-ab-actions-container {
     position: absolute;
     left: 424px;
     top: 20px;
     z-index: 70;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: calc(100vw - 524px);
+}
+
+.chat-ab-actions {
+    border-radius: 48px;
+    padding: 12px;
+    background-color: var(--color-accent-200);
+    display: flex;
+    flex-direction: row;
+}
+
+.tile-bg-active {
+    background-color: var(--color-accent-900);
+    color: var(--color-accent-0);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    border-radius: 8px;
+    transition: .15s;
+    user-select: none;
+    align-items: stretch;
+    margin: 8px;
+}
+
+.tile-bg {
+    background-color: var(--color-accent-200);
+    color: var(--color-accent-900);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    border-radius: 8px;
+    transition: .15s;
+    user-select: none;
+    align-items: stretch;
+    margin: 8px;
+}
+
+.tile-icon-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+}
+
+.tile-content-frame {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+    width: 100px;
+}
+
+.tile-title {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 18px;
+}
+
+.tile-subtitle {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+.tiles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    width: 376px;
+    padding: 24px;
+}
+
+.dialog-paper-settings {
+    background-color: var(--color-accent-100);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog-title-settings {
+    color: var(--color-accent-900);
+    font-size: 24px;
+    margin-bottom: 0;
+    margin-top: 24px;
+    padding: 0;
+}
+
+.lines {
+    user-select: none;
+    color: rgba(127, 127, 127, 0.8);
+    text-align: right;
+    font-weight: 300;
+}
+
+.lines-delim {
+    min-height: 100%;
+    width: 0;
+    border-right: 1px solid rgba(127, 127, 127, 0.3);
+    margin-left: 8px;
+    margin-right: 8px;
 }

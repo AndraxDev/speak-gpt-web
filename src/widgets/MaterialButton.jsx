@@ -40,27 +40,27 @@ export const MaterialButton16 = styled(Button)(({ theme }) => ({
 
 export const MaterialButtonTonal = styled(Button)(({ theme }) => ({
     color: "var(--color-accent-800)",
-    backgroundColor: "var(--color-accent-200)",
+    backgroundColor: "var(--color-accent-300)",
     textTransform: "none",
     boxShadow: "none",
     borderRadius: "12px",
     '&:hover': {
-        backgroundColor: "var(--color-accent-300)",
+        backgroundColor: "var(--color-accent-400)",
         boxShadow: "none",
     },
 }));
 
 export const MaterialButtonTonal24 = styled(Button)(({ theme }) => ({
     color: "var(--color-accent-800)",
-    backgroundColor: "var(--color-accent-200)",
+    backgroundColor: "var(--color-accent-300)",
     textTransform: "none",
     boxShadow: "none",
     borderRadius: "24px",
-    border: "1px solid var(--color-accent-200)",
+    border: "1px solid var(--color-accent-300)",
     '&:hover': {
-        backgroundColor: "var(--color-accent-300)",
+        backgroundColor: "var(--color-accent-400)",
         boxShadow: "none",
-        border: "1px solid var(--color-accent-300)",
+        border: "1px solid var(--color-accent-400)",
     },
 }));
 

@@ -5,6 +5,7 @@ import OpenAI from "openai";
 import {sha256} from "js-sha256";
 import ConfirmChatClear from "./ConfirmChatClear";
 import {CircularProgress} from "@mui/material";
+import ChatSettings from "./ChatSettings";
 
 function CurrentChat({chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
@@ -16,6 +17,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     const [currentImageResolution, setCurrentImageResolution] = React.useState("1024x1024");
     const [systemMessage, setSystemMessage] = React.useState("");
     const [slashCommands, setSlashCommands] = React.useState(true);
+    const [settingsOpen, setSettingsOpen] = React.useState(false);
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
     const [confirmClear, setConfirmClear] = React.useState(false);
 
@@ -287,17 +289,28 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             {
                 clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
             }
+            {
+                settingsOpen ? <ChatSettings chatId={stateSelectedChat} setIsOpen={setSettingsOpen}/> : null
+            }
             <div className={"chat-area"}>
                 <div className={"chat-history"}>
-                    <h3 className={"chat-title"}>{stateSelectedChat}</h3>
-                    <div className={"chat-ab-actions"}>
-                        <MaterialButtonError onClick={() => {
-                            setConfirmClear(false);
-                            setClearDialogOpen(true);
-                        }}><span className={"material-symbols-outlined"}>cancel</span>&nbsp;&nbsp;Clear chat&nbsp;</MaterialButtonError>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <MaterialButtonTonal24 onClick={() => {}}><span className={"material-symbols-outlined"}>settings</span>&nbsp;&nbsp;Chat settings&nbsp;</MaterialButtonTonal24>
+                    <div className={"chat-ab-actions-container"}>
+                        <div className={"chat-ab-actions"}>
+                            <MaterialButtonError onClick={() => {
+                                setConfirmClear(false);
+                                setClearDialogOpen(true);
+                            }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonError>
+                            &nbsp;&nbsp;&nbsp;
+                            <h3 className={"chat-title"}>{stateSelectedChat}</h3>
+                            &nbsp;&nbsp;&nbsp;
+                            <MaterialButtonTonal24 onClick={() => {
+                                setSettingsOpen(true);
+                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonal24>
+                        </div>
                     </div>
+                    <div style={{
+                        height: '120px'
+                    }}/>
                     <div>
                         {
                             conversation.map((e, i) => {
