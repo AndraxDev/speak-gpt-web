@@ -2,7 +2,10 @@ import React from 'react';
 
 function ChatNotSelected(props) {
     return (
-        <div></div>
+        <div className={"placeholder-bg"}>
+            <span className={"placeholder-icon material-symbols-outlined"}>chat</span>
+            <p className={"placeholder-text"}>Create or select a chat to start conversation.</p>
+        </div>
     );
 }
 

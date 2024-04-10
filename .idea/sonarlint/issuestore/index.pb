@@ -74,3 +74,11 @@ O
 src/components/ChatSettings.jsx,9\c\9c64db4638083fc7373f410222e023536d88939d
 G
 src/components/Tile.jsx,2\2\223c66c70cf73088ec078c211a1c5be8d9378184
+D
+src/util/Settings.js,9\f\9fb983f6bfac8bb7e6cc7f49339b25faba8552d7
+Y
+)src/components/SelectResolutionDialog.jsx,e\0\e027c64a51626be3da9a5da3a0c443b80c18d74e
+T
+$src/components/SelectModelDialog.jsx,6\0\60ef8500715763b81a3f5f894f75c359029fff5b
+Z
+*src/components/SystemMessageEditDialog.jsx,8\f\8fe0b561aa0163ca4612c341d8ea044b40c575d5

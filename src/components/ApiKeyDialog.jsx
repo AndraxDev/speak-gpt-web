@@ -16,7 +16,7 @@ function ApiKeyDialog(props) {
         <>
             {
                 localStorage.getItem('apiKey') === null || localStorage.getItem('apiKey') === undefined || localStorage.getItem('apiKey') === "" ?
-                    <div className={"dialog-backdrop"}>
+                    <div className={"priority dialog-backdrop"}>
                         <div className={"dialog-paper"}>
                             <h3 className={"dialog-title"}>Setup</h3>
                             <p className={"dialog-content"}>To use this software you need to provide your OpenAI API key. SpeakGPT uses paid OpenAI models. API usage is significantly cheaper than fixed subscription. API-key authentication is safer than username/password authentication. App can access only API but not account info. You can revoke API key anytime without losing your account. API key is stored only on your device.</p>

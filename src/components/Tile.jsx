@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Tile({icon, title, subtitle, description, checkable, checked, setChecked}) {
+function Tile({clickAction, icon, title, subtitle, description, checkable, checked, setChecked}) {
     const [checkedState, setCheckedState] = React.useState(checked);
 
     return (
@@ -9,6 +9,8 @@ function Tile({icon, title, subtitle, description, checkable, checked, setChecke
                 setCheckedState(!checkedState);
                 setChecked(!checkedState);
             }
+
+            if (clickAction !== undefined) clickAction();
         }} className={checkedState ? "tile-bg-active" : "tile-bg"}>
             <div className={"tile-icon-frame"}>
                 <span className={"tile-icon material-symbols-outlined"}>{icon}</span>

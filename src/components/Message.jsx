@@ -8,7 +8,7 @@ const failedImage = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAA
 
 function Message({isBot, message, ...props}) {
     const linesNumbers = (str) => {
-        let lines = str.split("\n").length;
+        let lines = str.split("\n").length - 1;
 
         let l = [];
 
@@ -68,7 +68,6 @@ function Message({isBot, message, ...props}) {
                             document.getElementById("image-" + sha256(message)).src = failedImage;
                         }}/>
                     }
-
                 </div>
             ) : (
                 <div className={"message-user"}>

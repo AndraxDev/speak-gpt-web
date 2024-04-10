@@ -6,20 +6,63 @@ import {sha256} from "js-sha256";
 import ConfirmChatClear from "./ConfirmChatClear";
 import {CircularProgress} from "@mui/material";
 import ChatSettings from "./ChatSettings";
+import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
+import {getModel, setModel, getSystemMessage, setSystemMessage, getDalleVersion, setDalleVersion, getResolution, setResolution} from "../util/Settings";
+import SelectResolutionDialog from "./SelectResolutionDialog";
+import SelectModelDialog from "./SelectModelDialog";
+import {modelToType} from "../util/ModelTypeConverter";
+import SystemMessageEditDialog from "./SystemMessageEditDialog";
 
 function CurrentChat({chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
     const [db, setDb] = React.useState(null);
-    const [currentModel, setCurrentModel] = React.useState("gpt-4-turbo-preview");
-    const [currentImageModel, setCurrentImageModel] = React.useState("dall-e-3");
-    const [currentImageResolution, setCurrentImageResolution] = React.useState("1024x1024");
-    const [systemMessage, setSystemMessage] = React.useState("");
-    const [slashCommands, setSlashCommands] = React.useState(true);
+    const [currentModel, setCurrentModel] = React.useState(getModel(id));
+    const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
+    const [useDalle3, setUseDalle3] = React.useState(getDalleVersion(id) === "3");
+    const [currentImageResolution, setCurrentImageResolution] = React.useState(getResolution(id));
+    const [resolutionDialogOpened, setResolutionDialogOpened] = React.useState(false);
+    const [systemMessage, setSystemMessageX] = React.useState(getSystemMessage(id));
+    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = React.useState(false);
+    // const [slashCommands, setSlashCommands] = React.useState(true);
+    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = React.useState(false);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
     const [confirmClear, setConfirmClear] = React.useState(false);
+
+    useEffect(() => {
+        let c = [];
+
+        chats.forEach((e) => {
+            if (sha256(e.title) === id) {
+                c.push({
+                    title: e.title,
+                    model: currentModel,
+                    type: modelToType(currentModel)
+                })
+            } else {
+                c.push(e);
+            }
+        })
+
+        updateChats(c);
+    }, [currentModel, modelDialogOpened])
+
+    // Load settings
+    useEffect(() => {
+        setCurrentModel(getModel(id))
+        setCurrentImageResolution(getResolution(id))
+        setUseDalle3(getDalleVersion(id) === "3")
+        setSystemMessageX(getSystemMessage(id))
+    }, [id]);
+    
+    useEffect(() => {
+        setModel(id, currentModel)
+        setDalleVersion(id, useDalle3 ? "3" : "2")
+        setResolution(id, currentImageResolution)
+        setSystemMessage(id, systemMessage)
+    }, [currentModel, useDalle3, currentImageResolution, systemMessage, id]);
 
     const handleKeyDown = (event) => {
         // Check if Enter key is pressed without Shift key
@@ -290,7 +333,31 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
             }
             {
-                settingsOpen ? <ChatSettings chatId={stateSelectedChat} setIsOpen={setSettingsOpen}/> : null
+                settingsOpen ? <ChatSettings
+                    chatId={stateSelectedChat}
+                    setIsOpen={setSettingsOpen}
+                    apiDialogOpen={setOpenAIKeyChangeDialogIsOpened}
+                    setDalleVersion={setUseDalle3}
+                    dalle3={useDalle3}
+                    model={currentModel}
+                    openModelDialog={setModelDialogOpened}
+                    resolution={currentImageResolution}
+                    openResolutionDialog={setResolutionDialogOpened}
+                    systemMessage={systemMessage}
+                    openSystemMessageDialog={setSystemMessageDialogOpened}
+                /> : null
+            }
+            {
+                openAIKeyChangeDialogIsOpened ? <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} /> : null
+            }
+            {
+                resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} /> : null
+            }
+            {
+                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} /> : null
+            }
+            {
+                systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} /> : null
             }
             <div className={"chat-area"}>
                 <div className={"chat-history"}>

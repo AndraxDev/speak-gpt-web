@@ -6,13 +6,17 @@ function WelcomePage(props) {
     return (
         <div>
             <h2 className={"title"}>SpeakGPT Desktop</h2>
-            <p className={"warning"}>This version of SpeakGPT is currently on alpha stage. You can try it before official release. Be careful as some rough edges may appear.
+            <p className={"warning"}>This version of SpeakGPT is currently on alpha stage. You can try it before
+                official release. Be careful as some rough edges may appear.
                 Click the button below
                 to launch SpeakGPT.</p>
             <Link to={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></Link>
             <br/><br/>
             <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
             <h3 className={"title"}>Changelog:</h3>
+            <code className={"title"}>0.0.7-alpha7</code><br/>
+            <code className={"text"}>- Added chat settings</code><br/>
+            <br/>
             <code className={"title"}>0.0.6-alpha6</code><br/>
             <code className={"text"}>- Added ability to clear chats</code><br/>
             <code className={"text"}>- Bugs fixed</code><br/>

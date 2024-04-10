@@ -9,6 +9,7 @@ import {modelToType} from "../util/ModelTypeConverter";
 import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
 import { useNavigate } from "react-router-dom";
+import {copySettings, getSettingsJSON} from "../util/Settings";
 
 function ChatList() {
     const [selectedChat, setSelectedChat] = React.useState("");
@@ -59,7 +60,6 @@ function ChatList() {
     }
 
     const saveConversation = (chatId, conversation, closeChatId, closeChatName, isDelete) => {
-        console.log("[DEBUG:saveConversation()] Save chat", chatId);
         const transaction = db.transaction(['chats'], 'readwrite');
         const objectStore = transaction.objectStore('chats');
         const request = objectStore.put({ chatId: chatId, content: conversation });
@@ -81,7 +81,6 @@ function ChatList() {
     }
 
     useEffect(() => {
-        console.log("[DEBUG:ChatList()] ID", id);
         if (id === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") {
             setSelectedChat("");
             navigate("/chat");
@@ -92,7 +91,6 @@ function ChatList() {
     }, [id]);
 
     const deleteConversation = (chatId) => {
-        console.log("[DEBUG:deleteConversation()] Deleting chat", chatId);
         saveConversation(chatId, "[]", "", "", true);
         setDeletionDialogOpen(false);
         setSelectedChatForEdit("");
@@ -145,9 +143,8 @@ function ChatList() {
                     setNewChatName("");
                     setInvalidMessage("");
                     setChatNameInvalid(false);
-
+                    localStorage.setItem(sha256(newChatName) + ".settings", JSON.stringify(getSettingsJSON("")));
                     navigate("/chat/" + sha256(newChatName));
-                    // window.location.assign("/chat/" + sha256(newChatName));
                 } else {
                     setChatNameInvalid(true);
                     setInvalidMessage("Chat name already exists.");
@@ -160,7 +157,6 @@ function ChatList() {
     }, [chats, newChatName, newChatDialogOpen]);
 
     const deleteChat = (chatName) => {
-        console.log("[DEBUG:deleteChat()] Deleting chat", chatName);
         let newChats = chats.filter((e) => {
             return e.title !== chatName;
         });
@@ -216,8 +212,8 @@ function ChatList() {
 
                     request.result.forEach((e) => {
                         if (e.chatId === sha256(chatName)) {
-                            console.log("Found conversation", e.content);
                             isFound = true;
+                            copySettings(sha256(chatName), sha256(newChatName));
                             saveConversation(sha256(newChatName), e.content, id, chatName, false);
                         }
                     });
@@ -241,7 +237,6 @@ function ChatList() {
 
         if (id === sha256(chatName) && chatName !== "") {
             navigate("/chat/" + sha256(newChatName));
-            // window.location.replace("/chat/" + sha256(newChatName));
         }
     }
 
@@ -278,7 +273,6 @@ function ChatList() {
     }, [newChatDialogOpen, deletionDialogOpen]);
 
     useEffect(() => {
-        console.log("Delete chat name", deleteChatName)
         if (deleteChatName !== "" && !deletionDialogOpen) {
             deleteChat(deleteChatName);
             setDeleteChatName("");
