@@ -32,7 +32,6 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
 
         if (isEditTemp) {
             setIsEditTemp(false);
-            console.log("Edit triggered");
 
             setSelectedChatForEdit(selectedChatForEditTemp);
         }

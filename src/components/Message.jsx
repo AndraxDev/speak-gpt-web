@@ -17,7 +17,7 @@ function Message({isBot, message, ...props}) {
 
     return (
         <div className={"message"}>
-            {isBot ? (
+            { isBot ? (
                 <div className={"message-bot"}>
                     <div className={"message-author"}>
                         <span className={"message-icon material-symbols-outlined"}>smart_toy</span>

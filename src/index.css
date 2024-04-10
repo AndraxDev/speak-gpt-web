@@ -543,3 +543,10 @@ td {
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.chat-ab-actions {
+    position: absolute;
+    left: 424px;
+    top: 20px;
+    z-index: 70;
+}

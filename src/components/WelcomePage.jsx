@@ -13,6 +13,10 @@ function WelcomePage(props) {
             <br/><br/>
             <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
             <h3 className={"title"}>Changelog:</h3>
+            <code className={"title"}>0.0.6-alpha6</code><br/>
+            <code className={"text"}>- Added ability to clear chats</code><br/>
+            <code className={"text"}>- Bugs fixed</code><br/>
+            <br/>
             <code className={"title"}>0.0.5-alpha5</code><br/>
             <code className={"text"}>- Minor bugs fixed</code><br/>
             <br/>

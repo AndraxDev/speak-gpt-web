@@ -5,7 +5,6 @@ import ChatList from "./components/ChatList";
 import WelcomePage from "./components/WelcomePage";
 import PromptStore from "./components/PromptStore";
 import Tips from "./components/Tips";
-import Chat from "./components/Chat";
 import PromptView from "./components/PromptView";
 
 function BaseRoutes(props) {

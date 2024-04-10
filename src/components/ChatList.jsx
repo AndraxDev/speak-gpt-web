@@ -8,20 +8,25 @@ import NewChatDialog from "./NewChatDialog";
 import {modelToType} from "../util/ModelTypeConverter";
 import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
+import { useNavigate } from "react-router-dom";
 
-function ChatList(props) {
+function ChatList() {
     const [selectedChat, setSelectedChat] = React.useState("");
     const [newChatDialogOpen, setNewChatDialogOpen] = React.useState(false);
     const [newChatName, setNewChatName] = React.useState("");
     const [chatNameInvalid, setChatNameInvalid] = React.useState(false);
     const [invalidMessage, setInvalidMessage] = React.useState("");
-    const [chatModel, setChatModel] = React.useState("gpt-3.5-turbo");
+    const [chatModel, setChatModel] = React.useState(localStorage.getItem("globalSettings") === null ? "gpt-4-turbo-preview" : JSON.parse(localStorage.getItem("globalSettings")).model);
     const [selectedChatForDeletion, setSelectedChatForDeletion] = React.useState("");
     const [selectedChatForEdit, setSelectedChatForEdit] = React.useState("");
     const [isEditing, setIsEditing] = React.useState(false);
     const [deletionDialogOpen, setDeletionDialogOpen] = React.useState(false);
     const [deleteChatName, setDeleteChatName] = React.useState("");
     const [db, setDb] = React.useState(null);
+
+    let { id } = useParams();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getDatabase()
@@ -53,14 +58,21 @@ function ChatList(props) {
         };
     }
 
-    const saveConversation = (chatId, conversation, closeChatId, closeChatName) => {
+    const saveConversation = (chatId, conversation, closeChatId, closeChatName, isDelete) => {
+        console.log("[DEBUG:saveConversation()] Save chat", chatId);
         const transaction = db.transaction(['chats'], 'readwrite');
         const objectStore = transaction.objectStore('chats');
         const request = objectStore.put({ chatId: chatId, content: conversation });
 
         request.onsuccess = function() {
             console.log("Conversation saved successfully");
-            closeEditAndUpdate(closeChatId, closeChatName)
+            if (!isDelete) {
+                closeEditAndUpdate(closeChatId, closeChatName)
+            } else {
+                if (id === chatId && chatId !== "") {
+                    navigate("/chat/" + sha256(newChatName));
+                }
+            }
         };
 
         request.onerror = function(event) {
@@ -68,13 +80,48 @@ function ChatList(props) {
         }
     }
 
+    useEffect(() => {
+        console.log("[DEBUG:ChatList()] ID", id);
+        if (id === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") {
+            setSelectedChat("");
+            navigate("/chat");
+        } else if (id === undefined) {
+            console.log("HUI BUMAZHNYI")
+            setSelectedChat("");
+        }
+    }, [id]);
+
     const deleteConversation = (chatId) => {
-        saveConversation(chatId, "[]", "", "");
+        console.log("[DEBUG:deleteConversation()] Deleting chat", chatId);
+        saveConversation(chatId, "[]", "", "", true);
+        setDeletionDialogOpen(false);
+        setSelectedChatForEdit("");
+        setSelectedChatForDeletion("");
+        setDeleteChatName("");
+        setNewChatDialogOpen(false);
+        setIsEditing(false);
     }
 
-    let { id } = useParams();
-
     const [chats, setChats] = React.useState(localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : []);
+
+    const receiveLatestAvailableChatName = () => {
+        let chatName = "New chat ";
+        let chatNumber = 1;
+
+        chats.forEach((e) => {
+            if (e.title === chatName + chatNumber.toString()) {
+                chatNumber++;
+            }
+        });
+
+        return chatName + chatNumber.toString();
+    }
+
+    const [latestAvailableChatName, setLatestAvailableChatName] = React.useState(receiveLatestAvailableChatName());
+
+    useEffect(() => {
+        setLatestAvailableChatName(receiveLatestAvailableChatName());
+    }, [chats]);
 
     useEffect(() => {
         if (!isEditing) {
@@ -98,6 +145,9 @@ function ChatList(props) {
                     setNewChatName("");
                     setInvalidMessage("");
                     setChatNameInvalid(false);
+
+                    navigate("/chat/" + sha256(newChatName));
+                    // window.location.assign("/chat/" + sha256(newChatName));
                 } else {
                     setChatNameInvalid(true);
                     setInvalidMessage("Chat name already exists.");
@@ -110,6 +160,7 @@ function ChatList(props) {
     }, [chats, newChatName, newChatDialogOpen]);
 
     const deleteChat = (chatName) => {
+        console.log("[DEBUG:deleteChat()] Deleting chat", chatName);
         let newChats = chats.filter((e) => {
             return e.title !== chatName;
         });
@@ -119,10 +170,15 @@ function ChatList(props) {
         deleteConversation(sha256(chatName));
         localStorage.removeItem(sha256(chatName) + ".settings");
 
+        setDeletionDialogOpen(false);
+        setSelectedChatForEdit("");
+        setSelectedChatForDeletion("");
         setDeleteChatName("");
+        setNewChatDialogOpen(false);
+        setIsEditing(false);
 
         if (id === sha256(chatName)) {
-            window.location.replace("/chat");
+            navigate("/chat");
         }
     }
 
@@ -162,12 +218,12 @@ function ChatList(props) {
                         if (e.chatId === sha256(chatName)) {
                             console.log("Found conversation", e.content);
                             isFound = true;
-                            saveConversation(sha256(newChatName), e.content, id, chatName);
+                            saveConversation(sha256(newChatName), e.content, id, chatName, false);
                         }
                     });
 
                     if (!isFound) {
-                        saveConversation(sha256(newChatName), "[]", id, chatName);
+                        saveConversation(sha256(newChatName), "[]", id, chatName, false);
                     }
                 };
 
@@ -184,7 +240,8 @@ function ChatList(props) {
         setNewChatDialogOpen(false);
 
         if (id === sha256(chatName) && chatName !== "") {
-            window.location.replace("/chat/" + sha256(newChatName));
+            navigate("/chat/" + sha256(newChatName));
+            // window.location.replace("/chat/" + sha256(newChatName));
         }
     }
 
@@ -221,18 +278,21 @@ function ChatList(props) {
     }, [newChatDialogOpen, deletionDialogOpen]);
 
     useEffect(() => {
-        if (deleteChatName !== "") {
+        console.log("Delete chat name", deleteChatName)
+        if (deleteChatName !== "" && !deletionDialogOpen) {
             deleteChat(deleteChatName);
+            setDeleteChatName("");
+            setDeletionDialogOpen(false);
         }
-    }, [deleteChatName]);
+    }, [deleteChatName, deletionDialogOpen]);
 
     return (
         <div className={"chat-window"}>
             {
-                newChatDialogOpen && selectedChatForEdit === "" ? <NewChatDialog chatName={""} setChatName={setNewChatName} invalidState={chatNameInvalid} invalidMessage={invalidMessage} setChatDialogOpen={setNewChatDialogOpen} isEdit={false} chatModel={chatModel} setChatModel={setChatModel} setIsEditing={setIsEditing} /> : null
+                newChatDialogOpen && selectedChatForEdit === "" && latestAvailableChatName !== "" ? <NewChatDialog chatName={latestAvailableChatName} setChatName={setNewChatName} invalidState={chatNameInvalid || latestAvailableChatName === ""} invalidMessage={invalidMessage || latestAvailableChatName === ""} setChatDialogOpen={setNewChatDialogOpen} isEdit={false} chatModel={chatModel} setIsEditing={setIsEditing} /> : null
             }
             {
-                newChatDialogOpen && selectedChatForEdit !== "" ? <NewChatDialog chatName={selectedChatForEdit} setChatName={setNewChatName} invalidState={chatNameInvalid} invalidMessage={invalidMessage} setChatDialogOpen={setNewChatDialogOpen} isEdit={true} chatModel={chatModel} setChatModel={setChatModel} setIsEditing={setIsEditing} /> : null
+                newChatDialogOpen && selectedChatForEdit !== "" ? <NewChatDialog chatName={selectedChatForEdit} setChatName={setNewChatName} invalidState={chatNameInvalid} invalidMessage={invalidMessage} setChatDialogOpen={setNewChatDialogOpen} isEdit={true} chatModel={chatModel} setIsEditing={setIsEditing} /> : null
             }
             {
                 deletionDialogOpen ? <DeleteChatDialog setOpenState={setDeletionDialogOpen} chatName={selectedChatForDeletion} setChatName={setDeleteChatName} /> : null
@@ -247,11 +307,11 @@ function ChatList(props) {
                         setNewChatDialogOpen(true)
                     }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;<span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
-                {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>
+                {id === undefined || selectedChat === "" ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>
                     : <Chats chats={chats} id={id} setSelected={setSelectedChat} selectedChat={selectedChat} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>}
             </div>
             <div className={"chat-content"}>
-                {id === undefined ? <ChatNotSelected/> : <CurrentChat chats={chats} id={id} chatName={selectedChat}/>}
+                {id === undefined || selectedChat === "" ? <ChatNotSelected/> : <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>
         </div>
     );

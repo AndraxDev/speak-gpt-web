@@ -1,14 +1,23 @@
 import React, {useEffect} from 'react';
-import {MaterialButtonTonal} from "../widgets/MaterialButton";
+import {MaterialButtonError, MaterialButtonTonal, MaterialButtonTonal24} from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
 import {sha256} from "js-sha256";
+import ConfirmChatClear from "./ConfirmChatClear";
+import {CircularProgress} from "@mui/material";
 
-function CurrentChat({chats, id, chatName}) {
+function CurrentChat({chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
     const [db, setDb] = React.useState(null);
+    const [currentModel, setCurrentModel] = React.useState("gpt-4-turbo-preview");
+    const [currentImageModel, setCurrentImageModel] = React.useState("dall-e-3");
+    const [currentImageResolution, setCurrentImageResolution] = React.useState("1024x1024");
+    const [systemMessage, setSystemMessage] = React.useState("");
+    const [slashCommands, setSlashCommands] = React.useState(true);
+    const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
+    const [confirmClear, setConfirmClear] = React.useState(false);
 
     const handleKeyDown = (event) => {
         // Check if Enter key is pressed without Shift key
@@ -25,6 +34,14 @@ function CurrentChat({chats, id, chatName}) {
     useEffect(() => {
         getDatabase()
     }, []);
+
+    useEffect(() => {
+        if (confirmClear) {
+            clearConversation();
+            setConfirmClear(false);
+            setClearDialogOpen(false);
+        }
+    }, [confirmClear])
 
     useEffect(() => {
         chats.forEach((e) => {
@@ -184,7 +201,7 @@ function CurrentChat({chats, id, chatName}) {
         let mx = document.querySelector(".chat-textarea").value
         if (mx.includes("/imagine ")) {
             generateImage(mx.replace("/imagine ", "")).then(r => {
-                setLockedState(false)
+                setLockedState(false);
             })
         } else {
             sendAIRequest(prepareConversation(messages)).then(r => {
@@ -260,11 +277,27 @@ function CurrentChat({chats, id, chatName}) {
         }
     }
 
+    const clearConversation = () => {
+        setConversation([]);
+        saveConversation(sha256(stateSelectedChat), JSON.stringify([]));
+    }
+
     return (
         <div className={"chat-frame"}>
+            {
+                clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
+            }
             <div className={"chat-area"}>
                 <div className={"chat-history"}>
                     <h3 className={"chat-title"}>{stateSelectedChat}</h3>
+                    <div className={"chat-ab-actions"}>
+                        <MaterialButtonError onClick={() => {
+                            setConfirmClear(false);
+                            setClearDialogOpen(true);
+                        }}><span className={"material-symbols-outlined"}>cancel</span>&nbsp;&nbsp;Clear chat&nbsp;</MaterialButtonError>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <MaterialButtonTonal24 onClick={() => {}}><span className={"material-symbols-outlined"}>settings</span>&nbsp;&nbsp;Chat settings&nbsp;</MaterialButtonTonal24>
+                    </div>
                     <div>
                         {
                             conversation.map((e, i) => {
@@ -279,10 +312,18 @@ function CurrentChat({chats, id, chatName}) {
                 <div className={"write-bar"}>
                     <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
                     <div>
-                        <MaterialButtonTonal className={"chat-send"} onClick={() => {
-                            processRequest();
-                        }}><span
-                            className={"material-symbols-outlined"}>send</span></MaterialButtonTonal>
+                        {
+                            lockedState ? <MaterialButtonTonal className={"chat-send"} onClick={() => {
+                                processRequest();
+                            }}><CircularProgress style={{
+                                    color: "var(--color-accent-900)",
+                                }}/></MaterialButtonTonal>
+                                :
+                                <MaterialButtonTonal className={"chat-send"} onClick={() => {
+                                    processRequest();
+                                }}><span
+                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonal>
+                        }
                     </div>
                 </div>
             </div>
