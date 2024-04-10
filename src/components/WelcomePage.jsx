@@ -5,8 +5,8 @@ import {MaterialButton24} from "../widgets/MaterialButton";
 function WelcomePage(props) {
     return (
         <div>
-            <h2 className={"title"}>SpeakGPT web on alpha stage</h2>
-            <p className={"text"}>This version of SpeakGPT is experimental. You can try it before official release.
+            <h2 className={"title"}>SpeakGPT Desktop</h2>
+            <p className={"warning"}>This version of SpeakGPT is currently on alpha stage. You can try it before official release. Be careful as some rough edges may appear.
                 Click the button below
                 to launch SpeakGPT.</p>
             <Link to={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></Link>
