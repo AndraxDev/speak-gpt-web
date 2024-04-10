@@ -307,11 +307,11 @@ function ChatList() {
                         setNewChatDialogOpen(true)
                     }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;<span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
-                {id === undefined || selectedChat === "" ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>
+                {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>
                     : <Chats chats={chats} id={id} setSelected={setSelectedChat} selectedChat={selectedChat} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>}
             </div>
             <div className={"chat-content"}>
-                {id === undefined || selectedChat === "" ? <ChatNotSelected/> : <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
+                {id === undefined ? <ChatNotSelected/> : <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>
         </div>
     );
