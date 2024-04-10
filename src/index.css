@@ -59,6 +59,7 @@ html, body {
     left: 0;
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;
+    user-select: none;
 }
 
 .nav-item {
@@ -80,6 +81,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.15s;
 }
 
 .nav-item-unselected {
@@ -89,11 +91,13 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.15s;
 }
 
 .nav-item:hover > .nav-item-unselected {
     background-color: var(--color-accent-300);
     color: #ffffff;
+    transition: 0.15s;
 }
 
 .nav-item-title {
@@ -124,6 +128,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     padding-left: 4px;
+    user-select: none;
 }
 
 .chat-content {
@@ -153,62 +158,77 @@ html, body {
 
 .chat-item-1 {
     background-color: rgba(135, 114, 73, 0.1);
+    transition: 0.15s;
 }
 
 .chat-item-2 {
     background-color: rgba(115, 150, 101, 0.1);
+    transition: 0.15s;
 }
 
 .chat-item-3 {
     background-color: rgba(150, 80, 80, 0.1);
+    transition: 0.15s;
 }
 
 .chat-item-4 {
     background-color: rgba(95, 124, 167, 0.1);
+    transition: 0.15s;
 }
 
 .chat-item-5 {
     background-color: rgba(121, 88, 150, 0.1);
+    transition: 0.15s;
 }
 
 .chat-item-1:hover {
     background-color: rgba(135, 114, 73, 0.3);
+    transition: 0.15s;
 }
 
 .chat-item-2:hover {
     background-color: rgba(115, 150, 101, 0.3);
+    transition: 0.15s;
 }
 
 .chat-item-3:hover {
     background-color: rgba(150, 80, 80, 0.3);
+    transition: 0.15s;
 }
 
 .chat-item-4:hover {
     background-color: rgba(95, 124, 167, 0.3);
+    transition: 0.15s;
 }
 
 .chat-item-5:hover {
     background-color: rgba(121, 88, 150, 0.3);
+    transition: 0.15s;
 }
 
 .chat-item-active-1 {
     background-color: rgba(135, 114, 73, 0.5);
+    transition: 0.15s;
 }
 
 .chat-item-active-2 {
     background-color: rgba(115, 150, 101, 0.5);
+    transition: 0.15s;
 }
 
 .chat-item-active-3 {
     background-color: rgba(150, 80, 80, 0.5);
+    transition: 0.15s;
 }
 
 .chat-item-active-4 {
     background-color: rgba(95, 124, 167, 0.5);
+    transition: 0.15s;
 }
 
 .chat-item-active-5 {
     background-color: rgba(121, 88, 150, 0.5);
+    transition: 0.15s;
 }
 
 .chat-icon-frame {
@@ -322,6 +342,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .message-author {
@@ -329,10 +350,12 @@ html, body {
     flex-direction: row;
     align-items: center;
     font-size: 22px;
+    user-select: none;
 }
 
 .message-author-2 {
     color: var(--color-accent-900);
+    user-select: none;
 }
 
 .message-content {
@@ -350,6 +373,7 @@ html, body {
     height: 28px;
     font-size: 28px;
     color: var(--color-accent-900);
+    user-select: none;
 }
 
 .chat-title {
@@ -362,6 +386,7 @@ html, body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    user-select: none;
 }
 
 .chat-frame {
@@ -397,6 +422,7 @@ html, body {
     padding: 0;
     margin: 0;
     z-index: 52;
+    user-select: none;
 }
 
 .dialog-backdrop {
@@ -429,6 +455,7 @@ html, body {
     align-items: center;
     width: 100%;
     margin-top: 24px;
+    user-select: none;
 }
 
 .dialog-title {
@@ -443,6 +470,7 @@ html, body {
     color: rgba(255, 255, 255, 0.5);
     font-size: 14px;
     opacity: 0.5;
+    user-select: none;
 }
 
 .action:hover {
@@ -463,6 +491,7 @@ html, body {
 
 .chat-actions {
     height: 42px;
+    user-select: none;
 }
 
 .dialog-content {
@@ -566,6 +595,7 @@ td {
     flex-direction: row;
     justify-content: center;
     width: calc(100vw - 524px);
+    user-select: none;
 }
 
 .chat-ab-actions {
