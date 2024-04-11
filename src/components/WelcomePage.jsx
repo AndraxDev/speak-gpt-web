@@ -14,6 +14,10 @@ function WelcomePage(props) {
             <br/><br/>
             <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
             <h3 className={"title"}>Changelog:</h3>
+            <code className={"title"}>0.0.8-alpha8</code><br/>
+            <code className={"text"}>- Implemented GPT 4 Vision</code><br/>
+            <code className={"text"}>- Chats settings are now take effect</code><br/>
+            <br/>
             <code className={"title"}>0.0.7-alpha7</code><br/>
             <code className={"text"}>- Added chat settings</code><br/>
             <br/>

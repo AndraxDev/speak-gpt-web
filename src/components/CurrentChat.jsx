@@ -1,5 +1,10 @@
 import React, {useEffect} from 'react';
-import {MaterialButtonError, MaterialButtonTonal, MaterialButtonTonal24} from "../widgets/MaterialButton";
+import {
+    MaterialButtonError,
+    MaterialButtonTonal,
+    MaterialButtonTonal24,
+    VisuallyHiddenInput
+} from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
 import {sha256} from "js-sha256";
@@ -30,6 +35,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
     const [confirmClear, setConfirmClear] = React.useState(false);
+    const [selectedFile, setSelectedFile] = React.useState(null);
 
     useEffect(() => {
         let c = [];
@@ -166,10 +172,10 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         });
 
         const response = await openai.images.generate({
-            model: "dall-e-3",
+            model: "dall-e-" + getDalleVersion(id),
             prompt: prompt,
             n: 1,
-            size: "1024x1024",
+            size: getResolution(id),
         });
         let image = response.data[0].url;
 
@@ -194,37 +200,96 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             dangerouslyAllowBrowser: true
         });
 
-        const chatCompletion = await openai.chat.completions.create({
-            messages: messages,
-            model: "gpt-4-turbo-preview",
-            stream: true,
-        });
+        if (selectedFile !== null) {
+            let ms = messages;
 
-        const m = conversation;
+            let prompt = ms[ms.length - 1].content;
 
-        m.push({
-            message: "",
-            isBot: true
-        });
+            ms[ms.length - 1].content = [
+                { type: "text", text: prompt },
+                {
+                    type: "image_url",
+                    image_url: {
+                        "url": selectedFile,
+                    }
+                }
+            ]
 
-        setConversation([...m]);
-        saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
-        for await (const chunk of chatCompletion) {
-            const r = chunk.choices[0].delta;
+            const chatCompletion = await openai.chat.completions.create({
+                messages: ms,
+                model: "gpt-4-vision-preview",
+                stream: true,
+            });
 
             const m = conversation;
 
-            if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
-                m[m.length - 1].message += r.content;
+            m.push({
+                message: "",
+                isBot: true
+            });
 
-                setConversation([...m]);
+            setSelectedFile(null)
+
+            setConversation([...m]);
+            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+            for await (const chunk of chatCompletion) {
+                const r = chunk.choices[0].delta;
+
+                const m = conversation;
+
+                if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
+                    m[m.length - 1].message += r.content;
+
+                    setConversation([...m]);
+                }
             }
+
+            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+            return "";
+        } else {
+            let ms = messages;
+
+            if (getSystemMessage(id) !== "") {
+                ms.push({
+                    content: getSystemMessage(id),
+                    role: "system"
+                });
+            }
+
+            const chatCompletion = await openai.chat.completions.create({
+                messages: ms,
+                model: getModel(id),
+                stream: true,
+            });
+
+            const m = conversation;
+
+            m.push({
+                message: "",
+                isBot: true
+            });
+
+            setConversation([...m]);
+            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+            for await (const chunk of chatCompletion) {
+                const r = chunk.choices[0].delta;
+
+                const m = conversation;
+
+                if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
+                    m[m.length - 1].message += r.content;
+
+                    setConversation([...m]);
+                }
+            }
+
+            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+            return "";
         }
-
-        saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
-        return "";
     }
 
     const processRequest = () => {
@@ -237,7 +302,8 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         setLockedState(true);
         messages.push({
             message: document.querySelector(".chat-textarea").value,
-            isBot: false
+            isBot: false,
+            image: selectedFile
         });
 
         setConversation([...messages]);
@@ -327,6 +393,20 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         saveConversation(sha256(stateSelectedChat), JSON.stringify([]));
     }
 
+    const processFile = (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            let srcData = e.target.result;
+            let fileType = file.type;
+
+            if (fileType.startsWith("image")) {
+                setSelectedFile(srcData);
+            }
+        }
+
+        reader.readAsDataURL(file);
+    }
+
     return (
         <div className={"chat-frame"}>
             {
@@ -382,15 +462,33 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                         {
                             conversation.map((e, i) => {
                                 return (
-                                    <Message key={i} isBot={e.isBot} message={e.message}/>
+                                    <Message key={i} isBot={e.isBot} message={e.message} image={e.image === null || e.image === undefined ? null : e.image}/>
                                 )
                             })
                         }
                     </div>
                     <div id={"bottom"}></div>
                 </div>
+                {
+                    selectedFile !== null ? <div className={"selected-image-frame"}>
+                        <img className={"selected-image"} src={selectedFile} alt={"Selected file"} style={{
+                            width: "100%"
+                        }}/>
+                        <div className={"discard-image"} onClick={() => {
+                            setSelectedFile(null);
+                        }}><span className={"material-symbols-outlined"}>cancel</span></div>
+                    </div>: null
+                }
                 <div className={"write-bar"}>
                     <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
+                    <div>
+                        <MaterialButtonTonal className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
+                            if (e.target.files.length !== 0) {
+                                processFile(e.target.files[0])
+                            }
+                        }} type="file" /></MaterialButtonTonal>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
                     <div>
                         {
                             lockedState ? <MaterialButtonTonal className={"chat-send"} onClick={() => {

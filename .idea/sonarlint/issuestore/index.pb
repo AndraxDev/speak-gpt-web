@@ -82,3 +82,5 @@ T
 $src/components/SelectModelDialog.jsx,6\0\60ef8500715763b81a3f5f894f75c359029fff5b
 Z
 *src/components/SystemMessageEditDialog.jsx,8\f\8fe0b561aa0163ca4612c341d8ea044b40c575d5
+D
+public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
