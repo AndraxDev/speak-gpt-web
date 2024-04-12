@@ -503,9 +503,6 @@ html, body {
     flex-direction: column;
     align-items: center;
     padding: 24px;
-    max-height: calc(100vh - 84px);
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .dialog-actions {
@@ -556,9 +553,13 @@ html, body {
 }
 
 .dialog-content {
-    width: 100%;
+    width: calc(100% + 24px);
+    margin-left: 24px;
     text-align: start;
     color: rgba(255, 255, 255, 0.8);
+    max-height: calc(100vh - 220px);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .warning {
@@ -796,8 +797,6 @@ td {
     height: 24px;
     border-radius: 24px;
     padding: 16px;
-    margin-left: 16px;
-    margin-right: 16px;
     transition: 0.15s;
     color: var(--color-accent-0);
     display: flex;
@@ -811,8 +810,6 @@ td {
     height: 24px;
     width: calc(100% - 32px);
     padding: 16px;
-    margin-left: 16px;
-    margin-right: 16px;
     transition: 0.15s;
     border-radius: 24px;
     color: var(--color-accent-900);

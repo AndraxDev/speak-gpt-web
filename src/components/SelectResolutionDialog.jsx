@@ -33,19 +33,21 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution}) {
                 e.stopPropagation()
             }}>
                 <h3 className={"dialog-title"}>Select images resolution</h3>
-                {
-                    availableResolutions.map((res, index) => {
-                        return (
-                            <div key={index} className={res === selectedResolution ? "selector-item-active" : "selector-item"} onClick={() => {
-                                setSelectedResolution(res);
-                            }}>{res}</div>
-                        )
-                    })
-                }
-                <p className={"warning"} style={{
-                    width: "calc(100% - 32px)",
-                    marginBottom: "0"
-                }}>DALL-e 3 supports 1024x1024 only.</p>
+                <div className={"dialog-content"}>
+                    {
+                        availableResolutions.map((res, index) => {
+                            return (
+                                <div key={index} className={res === selectedResolution ? "selector-item-active" : "selector-item"} onClick={() => {
+                                    setSelectedResolution(res);
+                                }}>{res}</div>
+                            )
+                        })
+                    }
+                    <p className={"warning"} style={{
+                        width: "calc(100% - 32px)",
+                        marginBottom: "0"
+                    }}>DALL-e 3 supports 1024x1024 only.</p>
+                </div>
                 <div className={"dialog-actions"}>
                     <MaterialButtonOutlined24 onClick={() => {
                         setIsOpen(false);

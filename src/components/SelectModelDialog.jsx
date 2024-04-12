@@ -14,9 +14,10 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
+import {CircularProgress} from "@mui/material";
 
 function SelectModelDialog({setIsOpen, setModel, model}) {
 
@@ -49,6 +50,33 @@ function SelectModelDialog({setIsOpen, setModel, model}) {
 
     const [selectedModel, setSelectedModel] = React.useState(model);
 
+    const [allModels, setAllModels] = React.useState([]);
+
+    useEffect(() => {
+        fetch('https://api.openai.com/v1/models', {
+            method: 'GET', // The HTTP method
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("apiKey")}`, // Authorization header
+                'Content-Type': 'application/json' // Set the content type
+            }
+        })
+        .then(response => response.json()) // Parse the JSON response
+        .then(data => {
+            let mm = [];
+            data.data.forEach((m) => {
+                if (m.id.includes("gpt-") || m.id.includes(":ft") || m.id.includes("ft:")) {
+                    mm.push({
+                        model: m.id,
+                        label: m.id
+                    })
+                }
+            })
+
+            setAllModels(mm);
+        }) // Log the data
+        .catch(error => console.error('Error:', error)); // Log errors, if any
+    }, []);
+
     return (
         <div className={"dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
@@ -56,33 +84,76 @@ function SelectModelDialog({setIsOpen, setModel, model}) {
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
-                <h3 className={"dialog-title"}>Select images resolution</h3>
-                {
-                    availableModels.map((m, index) => {
-                        return (
-                            <div key={index}
-                                 className={m.model === selectedModel ? "selector-item-active" : "selector-item"}
-                                 onClick={() => {
-                                     setSelectedModel(m.model);
-                                 }}>{m.label}</div>
-                        )
-                    })
-                }
-                {
-                    selectedModel === "custom" ?
-                        <div style={{
-                            marginTop: "24px",
-                            width: "100%"
-                        }}>
-                            <MaterialEditText label="AI model" value={model} onChange={(e) => setSelectedModel(e.target.value)} />
-                        </div>
-                        : null
+                <h3 className={"dialog-title"}>Select AI model</h3>
+                <div className={"dialog-content"}>
+                    {
+                        availableModels.map((m, index) => {
+                            return (
+                                <div key={index}
+                                     className={m.model === selectedModel ? "selector-item-active" : "selector-item"}
+                                     onClick={() => {
+                                         setSelectedModel(m.model);
+                                     }}>{m.label}</div>
+                            )
+                        })
+                    }
+                    {
+                        selectedModel === "custom" ?
+                            <div style={{
+                                marginTop: "24px",
+                                width: "100%"
+                            }}>
+                                <MaterialEditText label="AI model" value={model}
+                                                  onChange={(e) => setSelectedModel(e.target.value)}/>
+                            </div>
+                            : null
 
-                }
-                <p className={"hint"} style={{
-                    width: "calc(100% - 32px)",
-                    marginBottom: "0"
-                }}>Cost effective model (gpt-3.5-turbo-0125) has reduced pricing: input prices for the new model are reduced by 50% to $0.0005 /1K tokens and output prices are reduced by 25% to $0.0015 /1K tokens. On Friday, February 16 2024, gpt-3.5-turbo will be automatically switched to this model and you will receive lower pricing even if you forgot to update to this model.</p>
+                    }
+                    <hr style={{
+                        width: "100%",
+                        margin: "16px 0",
+                        borderBottom: "1px solid var(--color-accent-200)",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                    }}/>
+                    <h4 style={{
+                        width: "100%",
+                        fontSize: "18px",
+                        padding: "0",
+                        margin: "0",
+                    }} className={"dialog-title"}>All models</h4>
+                    <hr style={{
+                        width: "100%",
+                        margin: "16px 0",
+                        borderBottom: "1px solid var(--color-accent-200)",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                    }}/>
+                    {
+                        allModels.length > 0 ?
+                            allModels.map((m, index) => {
+                                return (
+                                    <div key={index}
+                                         className={m.model === selectedModel ? "selector-item-active" : "selector-item"}
+                                         onClick={() => {
+                                             setSelectedModel(m.model);
+                                         }}>{m.label}</div>
+                                )
+                            })
+                            : <div style={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}><CircularProgress style={{
+                                color: "var(--color-accent-900)",
+                                width: "48px",
+                                height: "48px"
+                            }}/></div>
+                    }
+                </div>
                 <div className={"dialog-actions"}>
                     <MaterialButtonOutlined24 onClick={() => {
                         setIsOpen(false);

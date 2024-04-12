@@ -16,7 +16,7 @@
 
 import React from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
-import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialButton24, MaterialButtonError, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 
 function ApiKeyChangeDialog(props) {
     const [apiKey, setApiKey] = React.useState("");
@@ -41,6 +41,10 @@ function ApiKeyChangeDialog(props) {
                     <MaterialButtonOutlined24 onClick={() => {
                         props.setIsOpen(false);
                     }}>Cancel</MaterialButtonOutlined24>
+                    &nbsp;&nbsp;&nbsp;
+                    <MaterialButtonError onClick={() => {
+                        localStorage.removeItem('apiKey');
+                    }}>Delete OpenAI key</MaterialButtonError>
                     &nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                 </div>
