@@ -16,7 +16,7 @@
 
 import React from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
-import {MaterialButton24} from "../widgets/MaterialButton";
+import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 
 function ApiKeyDialog(props) {
     const [apiKey, setApiKey] = React.useState("");
@@ -31,14 +31,28 @@ function ApiKeyDialog(props) {
     return (
         <>
             {
-                localStorage.getItem('apiKey') === null || localStorage.getItem('apiKey') === undefined || localStorage.getItem('apiKey') === "" ?
+                (localStorage.getItem('apiKey') === null || localStorage.getItem('apiKey') === undefined || localStorage.getItem('apiKey') === "") && localStorage.getItem("skipApiKeyCheck") !== "true" ?
                     <div className={"priority dialog-backdrop"}>
                         <div className={"dialog-paper"}>
                             <h3 className={"dialog-title"}>Setup</h3>
-                            <p className={"dialog-content"}>To use this software you need to provide your OpenAI API key. SpeakGPT uses paid OpenAI models. API usage is significantly cheaper than fixed subscription. API-key authentication is safer than username/password authentication. App can access only API but not account info. You can revoke API key anytime without losing your account. API key is stored only on your device.</p>
-                            <MaterialEditText label="API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} />
-                            <p className={"warning"}>Enter the key only if you are using this app at https://assistant.teslasoft.org/. Other links may be insecure and phishing.</p>
+                            <div className={"dialog-content"}>
+                                <p>To use this software you need to provide your OpenAI API
+                                    key. SpeakGPT uses paid OpenAI models. API usage is significantly cheaper than fixed
+                                    subscription. API-key authentication is safer than username/password authentication.
+                                    App can access only API but not account info. You can revoke API key anytime without
+                                    losing your account. API key is stored only on your device.</p>
+                                <MaterialEditText label="API Key" value={apiKey}
+                                                  onChange={(e) => setApiKey(e.target.value)}/>
+                                <p className={"warning"}>Enter the key only if you are using this app at
+                                    https://assistant.teslasoft.org/. Other links may be insecure and phishing.</p>
+                                <p className={"hint"}>You can skip API key setup and use app features that do not require API access like access conversations or prompts store. If you want to use full functionality you need to set an API key. You can do it in chat settings. To access chat settings create or open a chat.</p>
+                            </div>
                             <div className={"dialog-actions"}>
+                                <MaterialButtonOutlined24 onClick={() => {
+                                    localStorage.setItem('skipApiKeyCheck', 'true');
+                                    window.location.reload();
+                                }}>Skip</MaterialButtonOutlined24>
+                                &nbsp;&nbsp;&nbsp;
                                 <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                             </div>
                         </div>

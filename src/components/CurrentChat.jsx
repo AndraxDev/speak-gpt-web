@@ -182,129 +182,180 @@ function CurrentChat({chats, id, chatName, updateChats}) {
 
     const generateImage = async (prompt) => {
         console.log("Generating image")
-        const openai = new OpenAI({
-            apiKey: localStorage.getItem("apiKey"),
-            dangerouslyAllowBrowser: true
-        });
 
-        const response = await openai.images.generate({
-            model: "dall-e-" + getDalleVersion(id),
-            prompt: prompt,
-            n: 1,
-            size: getResolution(id),
-        });
-        let image = response.data[0].url;
+        try {
+            const openai = new OpenAI({
+                apiKey: localStorage.getItem("apiKey"),
+                dangerouslyAllowBrowser: true
+            });
 
-        console.log(image)
+            const response = await openai.images.generate({
+                model: "dall-e-" + getDalleVersion(id),
+                prompt: prompt,
+                n: 1,
+                size: getResolution(id),
+            });
+            let image = response.data[0].url;
 
-        let image1 = await convertImageToBase64(image);
+            console.log(image)
 
-        let c = conversation;
-        c.push({
-            message: "~file:" + image1,
-            isBot: true
-        });
+            let image1 = await convertImageToBase64(image);
 
-        setConversation(c)
+            let c = conversation;
+            c.push({
+                message: "~file:" + image1,
+                isBot: true
+            });
 
-        saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            setConversation(c)
+
+            saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+        } catch (e) {
+            setSelectedFile(null)
+            if (e.message.includes("401 Incorrect API key")) {
+                let c = conversation;
+                c.push({
+                    message: "This feature requires a valid API key. API key is invalid or is not set. Please set it in chat settings.",
+                    isBot: true
+                });
+
+                setConversation(c)
+
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            } else {
+                let c = conversation;
+                c.push({
+                    message: "An error occurred while performing request. Please check your connection and try again later.",
+                    isBot: true
+                });
+
+                setConversation(c)
+
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            }
+        }
     }
 
     const sendAIRequest = async (messages) => {
-        const openai = new OpenAI({
-            apiKey: localStorage.getItem("apiKey"),
-            dangerouslyAllowBrowser: true
-        });
+        try {
+            const openai = new OpenAI({
+                apiKey: localStorage.getItem("apiKey"),
+                dangerouslyAllowBrowser: true
+            });
 
-        if (selectedFile !== null) {
-            let ms = messages;
+            if (selectedFile !== null) {
+                let ms = messages;
 
-            let prompt = ms[ms.length - 1].content;
+                let prompt = ms[ms.length - 1].content;
 
-            ms[ms.length - 1].content = [
-                { type: "text", text: prompt },
-                {
-                    type: "image_url",
-                    image_url: {
-                        "url": selectedFile,
+                ms[ms.length - 1].content = [
+                    {type: "text", text: prompt},
+                    {
+                        type: "image_url",
+                        image_url: {
+                            "url": selectedFile,
+                        }
+                    }
+                ]
+
+                const chatCompletion = await openai.chat.completions.create({
+                    messages: ms,
+                    model: "gpt-4-vision-preview",
+                    stream: true,
+                });
+
+                const m = conversation;
+
+                m.push({
+                    message: "",
+                    isBot: true
+                });
+
+                // setSelectedFile(null)
+
+                setConversation([...m]);
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+                for await (const chunk of chatCompletion) {
+                    const r = chunk.choices[0].delta;
+
+                    const m = conversation;
+
+                    if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
+                        m[m.length - 1].message += r.content;
+
+                        setConversation([...m]);
                     }
                 }
-            ]
 
-            const chatCompletion = await openai.chat.completions.create({
-                messages: ms,
-                model: "gpt-4-vision-preview",
-                stream: true,
-            });
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
 
-            const m = conversation;
+                return "";
+            } else {
+                let ms = messages;
 
-            m.push({
-                message: "",
-                isBot: true
-            });
-
-            // setSelectedFile(null)
-
-            setConversation([...m]);
-            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
-            for await (const chunk of chatCompletion) {
-                const r = chunk.choices[0].delta;
-
-                const m = conversation;
-
-                if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
-                    m[m.length - 1].message += r.content;
-
-                    setConversation([...m]);
+                if (getSystemMessage(id) !== "") {
+                    ms.push({
+                        content: getSystemMessage(id),
+                        role: "system"
+                    });
                 }
-            }
 
-            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
-            return "";
-        } else {
-            let ms = messages;
-
-            if (getSystemMessage(id) !== "") {
-                ms.push({
-                    content: getSystemMessage(id),
-                    role: "system"
+                const chatCompletion = await openai.chat.completions.create({
+                    messages: ms,
+                    model: getModel(id),
+                    stream: true,
                 });
-            }
-
-            const chatCompletion = await openai.chat.completions.create({
-                messages: ms,
-                model: getModel(id),
-                stream: true,
-            });
-
-            const m = conversation;
-
-            m.push({
-                message: "",
-                isBot: true
-            });
-
-            setConversation([...m]);
-            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
-            for await (const chunk of chatCompletion) {
-                const r = chunk.choices[0].delta;
 
                 const m = conversation;
 
-                if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
-                    m[m.length - 1].message += r.content;
+                m.push({
+                    message: "",
+                    isBot: true
+                });
 
-                    setConversation([...m]);
+                setConversation([...m]);
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+                for await (const chunk of chatCompletion) {
+                    const r = chunk.choices[0].delta;
+
+                    const m = conversation;
+
+                    if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
+                        m[m.length - 1].message += r.content;
+
+                        setConversation([...m]);
+                    }
                 }
+
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+                return "";
             }
+        } catch (e) {
+            setSelectedFile(null)
+            if (e.message.includes("401 Incorrect API key")) {
+                let c = conversation;
+                c.push({
+                    message: "This feature requires a valid API key. API key is invalid or is not set. Please set it in chat settings.",
+                    isBot: true
+                });
 
-            saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+                setConversation(c)
 
-            return "";
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            } else {
+                let c = conversation;
+                c.push({
+                    message: "An error occurred while performing request. Please check your connection and try again later.",
+                    isBot: true
+                });
+
+                setConversation(c)
+
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            }
         }
     }
 

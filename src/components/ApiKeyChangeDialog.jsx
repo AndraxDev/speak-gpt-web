@@ -23,6 +23,7 @@ function ApiKeyChangeDialog(props) {
 
     const saveApiKey = () => {
         if (apiKey !== "") {
+            localStorage.removeItem('skipApiKeyCheck');
             localStorage.setItem('apiKey', apiKey);
             props.setIsOpen(false);
         }
@@ -36,7 +37,10 @@ function ApiKeyChangeDialog(props) {
                 e.stopPropagation()
             }}>
                 <h3 className={"dialog-title"}>Change API Key</h3>
-                <MaterialEditText label="API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} />
+                <div className={"dialog-content"}>
+                    <MaterialEditText label="API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)}/>
+                    <p className={"warning"}>You can revoke API key <a href={"https://platform.openai.com/api-keys"} target={"_blank"}>here</a> and unset it. When you unset an API key your chats will not be removed.</p>
+                </div>
                 <div className={"dialog-actions"}>
                     <MaterialButtonOutlined24 onClick={() => {
                         props.setIsOpen(false);
@@ -44,7 +48,8 @@ function ApiKeyChangeDialog(props) {
                     &nbsp;&nbsp;&nbsp;
                     <MaterialButtonError onClick={() => {
                         localStorage.removeItem('apiKey');
-                    }}>Delete OpenAI key</MaterialButtonError>
+                        window.location.reload();
+                    }}>Unset API key</MaterialButtonError>
                     &nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                 </div>
