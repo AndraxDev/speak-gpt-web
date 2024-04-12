@@ -1,3 +1,19 @@
+/****************************************************************
+ * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *****************************************************************/
+
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import './../theme/colors.css'
@@ -32,7 +48,8 @@ export const MaterialButton16 = styled(Button)(({ theme }) => ({
     backgroundColor: "var(--color-accent-800)",
     textTransform: "none",
     borderRadius: "16px",
-
+    paddingLeft: "12px",
+    paddingRight: "12px",
     '&:hover': {
         backgroundColor: "var(--color-accent-900)",
     },
@@ -44,6 +61,8 @@ export const MaterialButtonTonal = styled(Button)(({ theme }) => ({
     textTransform: "none",
     boxShadow: "none",
     borderRadius: "12px",
+    paddingLeft: "12px",
+    paddingRight: "12px",
     '&:hover': {
         backgroundColor: "var(--color-accent-400)",
         boxShadow: "none",
@@ -57,6 +76,8 @@ export const MaterialButtonTonal24 = styled(Button)(({ theme }) => ({
     boxShadow: "none",
     borderRadius: "24px",
     border: "1px solid var(--color-accent-300)",
+    paddingLeft: "12px",
+    paddingRight: "12px",
     '&:hover': {
         backgroundColor: "var(--color-accent-400)",
         boxShadow: "none",
@@ -81,6 +102,8 @@ export const MaterialButtonError = styled(Button)(({ theme }) => ({
     backgroundColor: "var(--color-warn-transparent)",
     textTransform: "none",
     borderRadius: "24px",
+    paddingLeft: "12px",
+    paddingRight: "12px",
     // border: "1px solid var(--color-warn-transparent)",
     '&:hover': {
         backgroundColor: "var(--color-warn-transparent-hover)",

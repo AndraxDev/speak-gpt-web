@@ -1,5 +1,0 @@
-
-javascript:S1481J"8Remove the declaration of the unused 'prompts' variable.(îµ†8²íÑŒí1J$c5e53e27-fe68-467f-82af-0a58647035b8
-~javascript:S1854J"5Remove this useless assignment to variable "prompts".(îµ†8³íÑŒí1J$70a5625c-8b4d-439c-b329-e2b5ef6ee08f
-ëjavascript:S6848e"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(ŞæƒËùÿÿÿÿ8Ôı„í1
-‡javascript:S1082e"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ŞæƒËùÿÿÿÿ8Ôı„í1

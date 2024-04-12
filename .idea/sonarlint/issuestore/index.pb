@@ -86,3 +86,13 @@ D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
 I
 src/components/ProTip.jsx,e\3\e35090b773ac8045f534f6515c3934d79dc6c6cb
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+L
+src/theme/AppWidgetTheme.jsx,2\6\260ca0f519fb767c556d2e9ed59ec675f8eaad33
+G
+src/theme/BaseTheme.css,e\7\e73a4bbbf067e85a823bc09593c249332c978db0
+C
+src/theme/Theme.jsx,7\2\72521f372286ea1c971dee0ca5054564542edf28
+;
+src/App.css,a\a\aa7165aefcf8ee3d73539e99ab007daf1aa18d8d

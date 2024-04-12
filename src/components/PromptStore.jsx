@@ -1,5 +1,21 @@
+/****************************************************************
+ * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *****************************************************************/
+
 import React, {useEffect} from 'react';
-import {MaterialButton16} from "../widgets/MaterialButton";
+import {MaterialButton16, MaterialButton24, MaterialButtonTonal24} from "../widgets/MaterialButton";
 import {sha256} from "js-sha256";
 
 const categories = [
@@ -73,6 +89,8 @@ function PromptStore(props) {
 
     const [prompts, setPrompts] = React.useState([]);
     const [selectedCategory, setSelectedCategory] = React.useState("all");
+    const [selectedType, setSelectedType] = React.useState("all");
+    const [searchQuery, setSearchQuery] = React.useState("");
 
     useEffect(() => {
         fetch("https://gpt.teslasoft.org/api/v1//search.php?api_key=16790f7ac03237764a8a0ad36eede490&query=", {
@@ -91,7 +109,9 @@ function PromptStore(props) {
             <div className={"prompt-list"}>
                 <h2 className={"page-title"}>Prompts Store</h2>
                 <div className={"search-box"}>
-                    <input className={"search-input"} type={"text"} placeholder={"Search prompts..."}/>
+                    <input className={"search-input"} type={"text"} placeholder={"Search prompts..."} onChange={(e) => {
+                        setSearchQuery(e.target.value)
+                    }}/>
                     <span className={"search-icon material-symbols-outlined"}>search</span>
                 </div>
                 <br/>
@@ -106,7 +126,48 @@ function PromptStore(props) {
                         ))
                     }
                 </div>
-                <br/>
+                <div style={{
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "alignItems": "center",
+                    marginLeft: "20px",
+                    width: "344px",
+                    userSelect: "none"
+                }}>
+                    {
+                        selectedType === "all" ? <MaterialButton24 style={{
+                            width: "140px",
+                        }}>All</MaterialButton24> : <MaterialButtonTonal24 style={{
+                            width: "140px"
+                        }} onClick={() => {
+                            setSelectedType("all");
+                        }}>All</MaterialButtonTonal24>
+                    }
+                    {
+                        selectedType === "gpt" ? <MaterialButton24 style={{
+                            width: "140px",
+                            marginLeft: "11px",
+                            marginRight: "11px",
+                        }}>GPT</MaterialButton24> : <MaterialButtonTonal24 style={{
+                            width: "140px",
+                            marginLeft: "11px",
+                            marginRight: "11px"
+                        }} onClick={() => {
+                            setSelectedType("gpt");
+                        }}>GPT</MaterialButtonTonal24>
+                    }
+                    {
+                        selectedType === "dalle" ? <MaterialButton24 style={{
+                            width: "140px",
+                        }}>DALL-e</MaterialButton24> : <MaterialButtonTonal24 style={{
+                            width: "140px"
+                        }} onClick={() => {
+                            setSelectedType("dalle");
+
+                        }}>DALL-e</MaterialButtonTonal24>
+                    }
+                </div>
                 <div className={"fw"}>
                     <MaterialButton16 className={"fab"} style={{
                         marginLeft: "16px",

@@ -1,16 +1,0 @@
-
-javascript:S1128"3Remove this unused import of 'VisuallyHiddenInput'.(ÀÔÁ‰ùÿÿÿÿ8ú²òîì1J$47e4caba-5a1c-4998-8035-b9052fba5659
-njavascript:S6774"&'chats' is missing in props validation(€üi8û²òîì1J$fccfdb3e-9ad4-4e5d-8c12-2a98dfb51e2b
-kjavascript:S6774"#'id' is missing in props validation(€üi8û²òîì1J$20114d89-995b-42c3-b3af-6d8c95def623
-qjavascript:S6774")'chatName' is missing in props validation(€üi8ü²òîì1J$2e2835bf-bbcc-421e-9f33-0b1a39e0e3d5
-tjavascript:S6774",'updateChats' is missing in props validation(€üi8ü²òîì1J$aec55ad7-5aa3-4995-8791-e927da4330e4
-ƒjavascript:S6754":useState call is not destructured into value + setter pair(„ šñ8ü²òîì1J$03c0ac98-681b-48bb-8d9c-bd97400529a7
-gjavascript:S125!"Remove this commented out code.(Ÿ‡İ†8ı²òîì1J$721a93fc-e30d-48d4-85ee-8add03f29257
-wjavascript:S6774+".'chats.forEach' is missing in props validation(„Ìš³8ı²òîì1J$31d57794-530d-4b47-be8b-ab2488d1d841
-wjavascript:S6774c".'chats.forEach' is missing in props validation(„Ìš³8ı²òîì1J$0149e385-1362-44bd-9c76-0cdeb932fbff
-gjavascript:S125x"Remove this commented out code.(ëşæî8ı²òîì1J$2112b65d-fa0d-4e80-997f-d9af9687b456
-£javascript:S3776Æ"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(ôæäµıÿÿÿÿ8ş²òîì1J$7c5b42d0-b183-44a7-82d1-d6bb9348c14a
-Šjavascript:S3516Æ";Refactor this function to not always return the same value.(ôæäµıÿÿÿÿ8ÿ²òîì1J$e31370d1-dc1e-4c13-956b-6929f218e867
-mjavascript:S6479Ó"Do not use Array index in keys(á†ñûÿÿÿÿ8ÿ²òîì1J$e5e1f707-e0db-43e1-b5f7-a4e27810d0c1
-’javascript:S6848ß"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ÿ²òîì1J$0d06ef74-559c-49cf-86ad-043df3bd9567
-®javascript:S1082ß"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8€³òîì1J$951fb568-e879-4551-9e6d-c421e34f1823
