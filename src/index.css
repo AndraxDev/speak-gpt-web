@@ -910,3 +910,253 @@ td {
     font-size: 24px;
     margin-right: 8px;
 }
+
+.categories {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    width: 342px;
+    margin-left: 20px;
+
+}
+
+.category-tile {
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.15s;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-right: 8px;
+    border-radius: 48px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.category-tile:hover {
+    transition: 0.15s;
+}
+
+.cat-all {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.cat-development {
+    background-color: rgba(255, 221, 173, 0.1);
+    color: rgba(255, 221, 173, 1);
+}
+
+.cat-music {
+    background-color: rgba(255, 173, 173, 0.1);
+    color: rgba(255, 173, 173, 1);
+}
+
+.cat-art {
+    background-color: rgba(181, 193, 255, 0.1);
+    color: rgba(181, 193, 255, 1);
+}
+
+.cat-culture {
+    background-color: rgba(185, 256, 193, 0.1);
+    color: rgba(185, 256, 193, 1);
+}
+
+.cat-business {
+    background-color: rgba(224, 195, 250, 0.1);
+    color: rgba(224, 195, 250, 1);
+}
+
+.cat-gaming {
+    background-color: rgba(218, 255, 204, 0.1);
+    color: rgba(218, 255, 204, 1);
+}
+
+.cat-education {
+    background-color: rgba(202, 249, 252, 0.1);
+    color: rgba(202, 249, 252, 1);
+}
+
+.cat-history {
+    background-color: rgba(202, 252, 226, 0.1);
+    color: rgba(202, 252, 226, 1);
+}
+
+.cat-food {
+    background-color: rgba(252, 202, 241, 0.1);
+    color: rgba(252, 202, 241, 1);
+}
+
+.cat-tourism {
+    background-color: rgba(255, 171, 198, 0.1);
+    color: rgba(255, 171, 198, 1);
+}
+
+.cat-productivity {
+    background-color: rgba(250, 255, 204, 0.1);
+    color: rgba(250, 255, 204, 1);
+}
+
+.cat-tools {
+    background-color: rgba(204, 221, 255, 0.1);
+    color: rgba(204, 221, 255, 1);
+}
+
+.cat-entertainment {
+    background-color: rgba(255, 230, 204, 0.1);
+    color: rgba(255, 230, 204, 1);
+}
+
+.cat-sport {
+    background-color: rgba(213, 255, 204, 0.1);
+    color: rgba(213, 255, 204, 1);
+}
+
+.cat-health {
+    background-color: rgba(204, 255, 209, 0.1);
+    color: rgba(204, 255, 209, 1);
+}
+
+.cat-all:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.cat-development:hover {
+    background-color: rgba(255, 221, 173, 0.3);
+}
+
+.cat-music:hover {
+    background-color: rgba(255, 173, 173, 0.3);
+}
+
+.cat-art:hover {
+    background-color: rgba(181, 193, 255, 0.3);
+}
+
+.cat-culture:hover {
+    background-color: rgba(185, 256, 193, 0.3);
+}
+
+.cat-business:hover {
+    background-color: rgba(224, 195, 250, 0.3);
+}
+
+.cat-gaming:hover {
+    background-color: rgba(218, 255, 204, 0.3);
+}
+
+.cat-education:hover {
+    background-color: rgba(202, 249, 252, 0.3);
+}
+
+.cat-history:hover {
+    background-color: rgba(202, 252, 226, 0.3);
+}
+
+.cat-food:hover {
+    background-color: rgba(252, 202, 241, 0.3);
+}
+
+.cat-tourism:hover {
+    background-color: rgba(255, 171, 198, 0.3);
+}
+
+.cat-productivity:hover {
+    background-color: rgba(250, 255, 204, 0.3);
+}
+
+.cat-tools:hover {
+    background-color: rgba(204, 221, 255, 0.3);
+}
+
+.cat-entertainment:hover {
+    background-color: rgba(255, 230, 204, 0.3);
+}
+
+.cat-sport:hover {
+    background-color: rgba(213, 255, 204, 0.3);
+}
+
+.cat-health:hover {
+    background-color: rgba(204, 255, 209, 0.3);
+}
+
+.cat-active-all {
+    background-color: #ffffff;
+}
+
+.cat-active-development {
+    background-color: rgba(255, 221, 173, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-music {
+    background-color: rgba(255, 173, 173, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-art {
+    background-color: rgba(181, 193, 255, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-culture {
+    background-color: rgba(185, 256, 193, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-business {
+    background-color: rgba(224, 195, 250, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-gaming {
+    background-color: rgba(218, 255, 204, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-education {
+    background-color: rgba(202, 249, 252, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-history {
+    background-color: rgba(202, 252, 226, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-food {
+    background-color: rgba(252, 202, 241, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-tourism {
+    background-color: rgba(255, 171, 198, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-productivity {
+    background-color: rgba(250, 255, 204, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-tools {
+    background-color: rgba(204, 221, 255, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-entertainment {
+    background-color: rgba(255, 230, 204, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-sport {
+    background-color: rgba(213, 255, 204, 1);
+    color: var(--color-accent-50);
+}
+
+.cat-active-health {
+    background-color: rgba(204, 255, 209, 1);
+    color: var(--color-accent-50);
+}
