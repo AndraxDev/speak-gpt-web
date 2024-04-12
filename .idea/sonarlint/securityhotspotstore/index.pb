@@ -84,3 +84,5 @@ Z
 *src/components/SystemMessageEditDialog.jsx,8\f\8fe0b561aa0163ca4612c341d8ea044b40c575d5
 D
 public/manifest.json,4\2\42e89cd2213b9d5dfae4f63522702c623170d792
+I
+src/components/ProTip.jsx,e\3\e35090b773ac8045f534f6515c3934d79dc6c6cb

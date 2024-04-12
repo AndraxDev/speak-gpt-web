@@ -1,15 +1,14 @@
 import React, {useEffect} from 'react';
 import Chats from "./Chats";
 import CurrentChat from "./CurrentChat";
-import {useParams} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import ChatNotSelected from "./ChatNotSelected";
 import {MaterialButton16} from "../widgets/MaterialButton";
 import NewChatDialog from "./NewChatDialog";
 import {modelToType} from "../util/ModelTypeConverter";
 import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
-import { useNavigate } from "react-router-dom";
-import {copySettings, getSettingsJSON} from "../util/Settings";
+import {copySettings, getModel, getSettingsJSON} from "../util/Settings";
 
 function ChatList() {
     const [selectedChat, setSelectedChat] = React.useState("");
@@ -17,13 +16,14 @@ function ChatList() {
     const [newChatName, setNewChatName] = React.useState("");
     const [chatNameInvalid, setChatNameInvalid] = React.useState(false);
     const [invalidMessage, setInvalidMessage] = React.useState("");
-    const [chatModel, setChatModel] = React.useState(localStorage.getItem("globalSettings") === null ? "gpt-4-turbo-preview" : JSON.parse(localStorage.getItem("globalSettings")).model);
+    const [chatModel, setChatModel] = React.useState(localStorage.getItem("globalSettings") === null ? "gpt-3.5-turbo" : JSON.parse(localStorage.getItem("globalSettings")).model);
     const [selectedChatForDeletion, setSelectedChatForDeletion] = React.useState("");
     const [selectedChatForEdit, setSelectedChatForEdit] = React.useState("");
     const [isEditing, setIsEditing] = React.useState(false);
     const [deletionDialogOpen, setDeletionDialogOpen] = React.useState(false);
     const [deleteChatName, setDeleteChatName] = React.useState("");
     const [db, setDb] = React.useState(null);
+    const [searchTerm, setSearchTerm] = React.useState("");
 
     let { id } = useParams();
 
@@ -32,6 +32,55 @@ function ChatList() {
     useEffect(() => {
         getDatabase()
     }, []);
+
+    const getChatsList = () => {
+        let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
+        let cc = [];
+        c.forEach((e) => {
+            cc.push({
+                title: e.title,
+                model: getModel(sha256(e.title)),
+                type: modelToType(getModel(sha256(e.title)))
+            });
+        })
+
+        return cc;
+    }
+
+    const getChatsListWithModels = (chatList) => {
+        if (chatList === undefined || chatList === null) return [];
+
+        let cc = [];
+
+        chatList.forEach((e) => {
+            cc.push({
+                title: e.title,
+                model: getModel(sha256(e.title)),
+                type: modelToType(getModel(sha256(e.title)))
+            });
+        })
+
+        return cc;
+    }
+
+    useEffect(() => {
+        let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
+
+        if (c === undefined || c === null) {
+            setChats([]);
+            return;
+        }
+
+        if (searchTerm !== "" && chats !== null) {
+            c = chats.filter((e) => {
+                return e.title.toLowerCase().includes(searchTerm.toLowerCase());
+            });
+
+            setChats(getChatsListWithModels(c));
+        } else {
+            setChats(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
+        }
+    }, [searchTerm]);
 
     const getDatabase = () => {
         let db;
@@ -85,7 +134,6 @@ function ChatList() {
             setSelectedChat("");
             navigate("/chat");
         } else if (id === undefined) {
-            console.log("HUI BUMAZHNYI")
             setSelectedChat("");
         }
     }, [id]);
@@ -100,13 +148,16 @@ function ChatList() {
         setIsEditing(false);
     }
 
-    const [chats, setChats] = React.useState(localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : []);
+    const [chats, setChats] = React.useState(getChatsList());
 
     const receiveLatestAvailableChatName = () => {
+        if (chats === undefined || chats === null) return "New chat 1";
         let chatName = "New chat ";
         let chatNumber = 1;
 
-        chats.forEach((e) => {
+        let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
+
+        c.forEach((e) => {
             if (e.title === chatName + chatNumber.toString()) {
                 chatNumber++;
             }
@@ -126,24 +177,35 @@ function ChatList() {
             if (newChatName !== "" && newChatDialogOpen) {
                 let isFoundChat = false;
 
-                chats.forEach((e) => {
-                    if (e.title === newChatName) {
-                        isFoundChat = true;
-                    }
-                });
+                if (chats !== null) {
+                    chats.forEach((e) => {
+                        if (e.title === newChatName) {
+                            isFoundChat = true;
+                        }
+                    });
+                }
 
                 if (!isFoundChat) {
-                    setChats([...chats, {
-                        title: newChatName,
-                        model: chatModel,
-                        type: modelToType(chatModel)
-                    }])
+                    if (localStorage.getItem("chats") === null || localStorage.getItem("chats") === undefined) {
+                        localStorage.setItem("chats", JSON.stringify([{
+                            title: newChatName,
+                            model: getModel(sha256(newChatName)),
+                            type: modelToType(getModel(sha256(newChatName)))
+                        }]));
+                    } else {
+                        localStorage.setItem("chats", JSON.stringify([...JSON.parse(localStorage.getItem("chats")), {
+                            title: newChatName,
+                            model: getModel(sha256(newChatName)),
+                            type: modelToType(getModel(sha256(newChatName)))
+                        }]));
+                    }
 
                     setNewChatDialogOpen(false);
                     setNewChatName("");
                     setInvalidMessage("");
                     setChatNameInvalid(false);
                     localStorage.setItem(sha256(newChatName) + ".settings", JSON.stringify(getSettingsJSON("")));
+                    updateSearchResults()
                     navigate("/chat/" + sha256(newChatName));
                 } else {
                     setChatNameInvalid(true);
@@ -157,14 +219,16 @@ function ChatList() {
     }, [chats, newChatName, newChatDialogOpen]);
 
     const deleteChat = (chatName) => {
-        let newChats = chats.filter((e) => {
+        let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
+        let newChats = c.filter((e) => {
             return e.title !== chatName;
         });
 
-        setChats(newChats);
         localStorage.setItem("chats", JSON.stringify(newChats));
         deleteConversation(sha256(chatName));
         localStorage.removeItem(sha256(chatName) + ".settings");
+
+        updateSearchResults()
 
         setDeletionDialogOpen(false);
         setSelectedChatForEdit("");
@@ -189,19 +253,19 @@ function ChatList() {
             });
 
             if (!isFoundChat) {
-                let newChats = chats
+                let newChats = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
 
                 newChats.push({
                     title: newChatName,
-                    model: chatModel,
-                    type: modelToType(chatModel)
+                    model: getModel(sha256(newChatName)),
+                    type: modelToType(getModel(sha256(newChatName)))
                 })
 
                 newChats = newChats.filter((e) => {
                     return e.title !== chatName;
                 });
 
-                setChats(newChats)
+                localStorage.setItem("chats", JSON.stringify(newChats));
 
                 const transaction = db.transaction(['chats'], 'readonly');
                 const objectStore = transaction.objectStore('chats');
@@ -214,6 +278,7 @@ function ChatList() {
                         if (e.chatId === sha256(chatName)) {
                             isFound = true;
                             copySettings(sha256(chatName), sha256(newChatName));
+                            updateSearchResults()
                             saveConversation(sha256(newChatName), e.content, id, chatName, false);
                         }
                     });
@@ -227,6 +292,20 @@ function ChatList() {
                     console.log("Error getting conversation", event.target.errorCode);
                 }
             }
+        }
+    }
+
+    const updateSearchResults = () => {
+        if (searchTerm !== "") {
+            let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
+
+            c = c.filter((e) => {
+                return e.title.toLowerCase().includes(searchTerm.toLowerCase());
+            });
+
+            setChats(getChatsListWithModels(c));
+        } else {
+            setChats(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
         }
     }
 
@@ -245,10 +324,6 @@ function ChatList() {
             renameChat(selectedChatForEdit, newChatName);
         }
     }, [selectedChatForEdit, newChatName]);
-
-    useEffect(() => {
-        localStorage.setItem("chats", JSON.stringify(chats));
-    }, [chats]);
 
     useEffect(() => {
         if (selectedChatForDeletion !== "") {
@@ -293,19 +368,32 @@ function ChatList() {
             }
             <div className={"chat-list"}>
                 <h2 className={"page-title"}>SpeakGPT</h2>
+                <div className={"search-box"}>
+                    <input className={"search-input"} type={"text"} placeholder={"Search chats..."} onChange={(e) => {
+                        setSearchTerm(e.target.value)
+                    }}/>
+                    <span className={"search-icon material-symbols-outlined"}>search</span>
+                </div>
+                <br/>
                 <div className={"fw"}>
                     <MaterialButton16 className={"fab"} style={{
                         marginLeft: "16px",
                         marginRight: "16px"
                     }} onClick={() => {
                         setNewChatDialogOpen(true)
-                    }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;<span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
+                    }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                        <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
-                {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>
-                    : <Chats chats={chats} id={id} setSelected={setSelectedChat} selectedChat={selectedChat} setSelectedChatForDeletion={setSelectedChatForDeletion} setSelectedChatForEdit={setSelectedChatForEdit}/>}
+                {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""}
+                                           setSelectedChatForDeletion={setSelectedChatForDeletion}
+                                           setSelectedChatForEdit={setSelectedChatForEdit}/>
+                    : <Chats chats={chats} id={id} setSelected={setSelectedChat} selectedChat={selectedChat}
+                             setSelectedChatForDeletion={setSelectedChatForDeletion}
+                             setSelectedChatForEdit={setSelectedChatForEdit}/>}
             </div>
             <div className={"chat-content"}>
-                {id === undefined ? <ChatNotSelected/> : <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
+                {id === undefined ? <ChatNotSelected/> :
+                    <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>
         </div>
     );

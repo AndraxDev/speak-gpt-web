@@ -112,11 +112,20 @@ html, body {
     left: 100px;
     width: calc(100vw - 100px);
     height: 100%;
+    transition: 0.2s;
 }
 
 .chat-window {
     display: flex;
     flex-direction: row;
+    transition: 0.2s;
+}
+
+.prompt-window {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    transition: 0.2s;
 }
 
 .chat-list {
@@ -129,6 +138,20 @@ html, body {
     align-items: center;
     padding-left: 4px;
     user-select: none;
+    transition: 0.2s;
+}
+
+.prompt-list {
+    width: 400px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 4px;
+    user-select: none;
+    transition: 0.2s;
 }
 
 .chat-content {
@@ -139,6 +162,18 @@ html, body {
     overflow-y: auto;
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
+    transition: 0.2s;
+}
+
+.prompt-content {
+    background-color: var(--color-accent-50);
+    width: calc(100vw - 500px);
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    transition: 0.2s;
 }
 
 .chat-item {
@@ -303,6 +338,8 @@ html, body {
 
 .page-title {
     color: var(--color-accent-900);
+    width: 100%;
+    text-align: center;
 }
 
 .write-bar {
@@ -520,6 +557,8 @@ html, body {
     color: #c8e3a4;
     padding: 16px;
     border-radius: 16px;
+    white-space: pre-wrap;
+    transition: 0.2s;
 }
 
 .title {
@@ -831,4 +870,43 @@ td {
 
 .selected-image {
     border-radius: 8px;
+}
+
+.tips {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 8px;
+    transition: 0.2s;
+}
+
+.search-box {
+    width: 330px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: var(--color-accent-200);
+    margin-left: 20px;
+    height: 36px;
+    border-radius: 36px;
+}
+
+.search-input {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-accent-200);
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 36px;
+    font-size: 16px;
+    color: var(--color-accent-900);
+}
+
+.search-icon {
+    color: var(--color-accent-900);
+    font-size: 24px;
+    margin-right: 8px;
 }

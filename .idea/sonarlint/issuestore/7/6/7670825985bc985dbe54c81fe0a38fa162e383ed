@@ -1,0 +1,5 @@
+
+†javascript:S1481"=Remove the declaration of the unused 'setChatModel' variable.(´‚Ä§8ÄÂî‹í1J$cd13c634-d5c4-4c45-92fc-f2998a583d40
+ƒjavascript:S1854":Remove this useless assignment to variable "setChatModel".(´‚Ä§8ÄÂî‹í1J$e02eb021-d53d-4698-9636-42e382f4fa37
+ˆjavascript:S6660y"?'If' statement should not be the only statement in 'else' block(™î‹î8ÌÂî‹í1J$7ee29ae1-4b3c-45dd-9810-166493eb9132
+£javascript:S3776¯"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùëİ¯ùÿÿÿÿ8ÜÂî‹í1J$bef0df50-2b6d-498a-8366-6068e1450605

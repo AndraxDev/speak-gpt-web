@@ -1,11 +1,11 @@
 
-Pjavascript:S6774"-'selectedChat' is missing in props validation(ÀæÁü8¦Ä±Ïì1
-Fjavascript:S6774"#'id' is missing in props validation(ÀæÁü8§Ä±Ïì1
-Ijavascript:S6774"&'chats' is missing in props validation(ÀæÁü8§Ä±Ïì1
-^javascript:S6774";'setSelectedChatForDeletion' is missing in props validation(ÀæÁü8§Ä±Ïì1
-Zjavascript:S6774"7'setSelectedChatForEdit' is missing in props validation(ÀæÁü8§Ä±Ïì1
-Qjavascript:S6774".'chats.forEach' is missing in props validation(„Ìš³8§Ä±Ïì1
-Rjavascript:S6774+"*'chats.map' is missing in props validation(€™Ùëøÿÿÿÿ8§Ä±Ïì1
-ëjavascript:S6848-"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(àœ»ÿÿÿÿÿ8¨Ä±Ïì1
-‡javascript:S1082-"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(àœ»ÿÿÿÿÿ8©Ä±Ïì1
-Tjavascript:S6774.",'setSelected' is missing in props validation(Öµ¯¦şÿÿÿÿ8©Ä±Ïì1
+Pjavascript:S6774"-'selectedChat' is missing in props validation(ÀæÁü8·ß½Ší1
+Fjavascript:S6774"#'id' is missing in props validation(ÀæÁü8·ß½Ší1
+Ijavascript:S6774"&'chats' is missing in props validation(ÀæÁü8·ß½Ší1
+^javascript:S6774";'setSelectedChatForDeletion' is missing in props validation(ÀæÁü8·ß½Ší1
+Zjavascript:S6774"7'setSelectedChatForEdit' is missing in props validation(ÀæÁü8·ß½Ší1
+Qjavascript:S6774".'chats.forEach' is missing in props validation(„Ìš³8·ß½Ší1
+Rjavascript:S6774."*'chats.map' is missing in props validation(€™Ùëøÿÿÿÿ8·ß½Ší1
+ëjavascript:S68480"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(àœ»ÿÿÿÿÿ8¸ß½Ší1
+‡javascript:S10820"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(àœ»ÿÿÿÿÿ8¸ß½Ší1
+Tjavascript:S67741",'setSelected' is missing in props validation(Öµ¯¦şÿÿÿÿ8¸ß½Ší1

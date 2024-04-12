@@ -95,6 +95,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     }, [confirmClear])
 
     useEffect(() => {
+        if (chats === null) return;
         chats.forEach((e) => {
             if (sha256(e.title) === id) {
                 setStateSelectedChat(e.title);
@@ -228,7 +229,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 isBot: true
             });
 
-            setSelectedFile(null)
+            // setSelectedFile(null)
 
             setConversation([...m]);
             saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
@@ -317,6 +318,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         } else {
             sendAIRequest(prepareConversation(messages)).then(r => {
                 setLockedState(false);
+                setSelectedFile(null)
             });
         }
 
@@ -470,7 +472,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     <div id={"bottom"}></div>
                 </div>
                 {
-                    selectedFile !== null ? <div className={"selected-image-frame"}>
+                    selectedFile !== null && !lockedState ? <div className={"selected-image-frame"}>
                         <img className={"selected-image"} src={selectedFile} alt={"Selected file"} style={{
                             width: "100%"
                         }}/>

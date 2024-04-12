@@ -11,6 +11,8 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
     const [isDeleteTemp, setIsDeleteTemp] = React.useState(false);
 
     useEffect(() => {
+        if (chats === null) return;
+
         chats.forEach((e) => {
             if (sha256(e.title) === id) {
                 setStateSelectedChat(e.title);
@@ -40,6 +42,7 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
     return (
         <div>
             {
+                chats !== null ?
                 chats.map((e) => {
                     return (
                         <div key={sha256(e.title)} onClick={() => {
@@ -48,7 +51,7 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
                             <ChatItem isActive={e.title === stateSelectedChat} name={e.title} model={e.model} type={e.type} id={sha256(e.title)} setDeleteChat={setSelectedChatForDeletionTemp} setEditChat={setSelectedChatForEditTemp} setIsDelete={setIsDeleteTemp} setIsEdit={setIsEditTemp}/>
                         </div>
                     )
-                })
+                }) : null
             }
             <div style={{
                 height: '100px'
