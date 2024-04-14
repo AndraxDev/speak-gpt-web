@@ -1,0 +1,8 @@
+
+Šjavascript:S1481_"<Remove the declaration of the unused 'searchQuery' variable.(É‰¸Æüÿÿÿÿ8ÌŽîñí1J$5c348066-7b24-4eca-aba1-0aadcecec399
+‡javascript:S1854_"9Remove this useless assignment to variable "searchQuery".(É‰¸Æüÿÿÿÿ8ÍŽîñí1J$8a22c7f8-273b-4fb7-b7f4-58bd88cadeeb
+‡javascript:S1481`"?Remove the declaration of the unused 'selectedPrompt' variable.(£ƒŸ%8ÍŽîñí1J$0db161fe-781d-4c58-b24f-fde856ca02b8
+„javascript:S1854`"<Remove this useless assignment to variable "selectedPrompt".(£ƒŸ%8ÍŽîñí1J$e8432d78-df1c-4ec2-aa35-262799b9811f
+‘javascript:S6848~"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(ÞæƒËùÿÿÿÿ8ÎŽîñí1J$7959b1e3-85f3-42f0-85f6-2a78de249733
+­javascript:S1082~"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ÞæƒËùÿÿÿÿ8ÏŽîñí1J$2a894979-805f-486c-9464-37db0db8c351
+javascript:S905Ç"FExpected an assignment or function call and instead saw an expression.(·ö‹¬8ÐŽîñí1J$0541e10b-fe67-4429-85a4-577072510c48

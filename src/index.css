@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,8 +38,14 @@ code {
             'opsz' 24
 }
 
+a, div {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
 html, body {
     background-color: var(--color-accent-0);
+    overscroll-behavior: none;
 }
 
 ::-webkit-scrollbar {
@@ -66,7 +72,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
+    width: 88px;
     height: calc(100vh - 24px);
     background-color: var(--color-accent-200);
     padding-top: 24px;
@@ -82,51 +88,64 @@ html, body {
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 88px;
+    height: 56px;
     justify-content: center;
     align-items: center;
     color: var(--color-accent-900);
+    margin-bottom: 12px;
 }
 
 .nav-item-selected {
     background-color: var(--color-accent-400);
     color: #ffffff;
     border-radius: 24px;
-    width: 60px;
-    height: 35px;
+    width: 56px;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.15s;
+    transition: 0.5s;
 }
 
 .nav-item-unselected {
     border-radius: 24px;
-    width: 60px;
-    height: 35px;
+    width: 0;
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.15s;
+    transition: 0.5s;
 }
 
-.nav-item:hover > .nav-item-unselected {
+.nav-item-unselected-container, .nav-item-selected-container {
+    border-radius: 24px;
+    width: 56px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.nav-item:hover > .nav-item-unselected-container, .nav-item:focus > .nav-item-unselected-container {
     background-color: var(--color-accent-300);
     color: #ffffff;
-    transition: 0.15s;
+    transition: 0.5s;
 }
 
 .nav-item-title {
     margin-top: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    font-size: 14px;
     padding: 0;
 }
 
 .content {
     position: fixed;
     top: 0;
-    left: 100px;
-    width: calc(100vw - 100px);
+    left: 88px;
+    width: calc(100vw - 88px);
     height: 100%;
     transition: 0.2s;
 }
@@ -145,8 +164,7 @@ html, body {
 }
 
 .chat-list {
-    width: 400px;
-    height: 100vh;
+    height: calc(100vh - 146px);
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
@@ -159,7 +177,7 @@ html, body {
 
 .prompt-list {
     width: 400px;
-    height: 100vh;
+    height: calc(100vh - 276px);
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
@@ -172,7 +190,7 @@ html, body {
 
 .chat-content {
     background-color: var(--color-accent-50);
-    width: calc(100vw - 500px);
+    width: calc(100vw - 388px);
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -183,7 +201,7 @@ html, body {
 
 .prompt-content {
     background-color: var(--color-accent-50);
-    width: calc(100vw - 500px);
+    width: calc(100vw - 488px);
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -200,7 +218,7 @@ html, body {
     align-content: center;
     border-radius: 12px;
     padding: 8px;
-    width: 328px;
+    width: 228px;
     justify-content: space-between;
     margin-left: 36px;
     margin-right: 16px;
@@ -362,7 +380,7 @@ html, body {
     width: calc(100% - 24px);
     background-color: var(--color-accent-100);
     margin-bottom: 16px;
-    border-radius: 16px;
+    border-radius: 48px;
     bottom: 0;
     display: flex;
     flex-direction: row;
@@ -370,19 +388,20 @@ html, body {
 }
 
 .chat-textarea {
-    width: calc(100% - 178px);
-    max-width: calc(100% - 178px);
-    min-width: calc(100% - 178px);
-    height: 32px;
-    border-radius: 12px;
-    padding: 12px;
+    width: calc(100% - 184px);
+    max-width: calc(100% - 184px);
+    min-width: calc(100% - 184px);
+    height: 16px;
+    border-radius: 24px;
+    padding: 16px;
     margin-right: 12px;
-    max-height: 32px;
-    min-height: 32px;
+    max-height: 16px;
+    min-height: 16px;
     outline: none;
     border: none;
     background-color: var(--color-accent-200);
     color: var(--color-accent-900);
+    resize: none;
 }
 
 .message {
@@ -390,8 +409,8 @@ html, body {
 }
 
 .chat-send {
-    width: 48px;
-    height: 100%;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -417,7 +436,7 @@ html, body {
     margin-left: 40px;
     color: rgba(255, 255, 255, 0.7);
     white-space: pre-wrap;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .message-icon {
@@ -440,6 +459,10 @@ html, body {
     white-space: nowrap;
     text-overflow: ellipsis;
     user-select: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .chat-frame {
@@ -462,8 +485,19 @@ html, body {
 .fw {
     position: fixed;
     bottom: 24px;
+    width: 288px;
+    left: 88px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    z-index: 50;
+}
+
+.fw-2 {
+    position: fixed;
+    bottom: 24px;
     width: 388px;
-    left: 100px;
+    left: 88px;
     display: flex;
     flex-direction: row;
     justify-content: end;
@@ -620,6 +654,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    font-size: 12px;
 }
 
 .unknown-code-block {
@@ -660,19 +695,20 @@ td {
 .chat-ab-actions-container {
     position: absolute;
     left: 424px;
-    top: 20px;
+    top: 16px;
     z-index: 70;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: calc(100vw - 524px);
+    width: calc(100vw - 624px);
     user-select: none;
 }
 
 .chat-ab-actions {
     border-radius: 48px;
-    padding: 12px;
-    background-color: var(--color-accent-100);
+    padding: 8px;
+    background-color: var(--color-accent-overlay);
+    backdrop-filter: blur(16px);
     display: flex;
     flex-direction: row;
 }
@@ -834,14 +870,15 @@ td {
 }
 
 .placeholder-icon {
-    color: var(--color-accent-900);
+    color: var(--color-accent-300);
     font-size: 120px;
 }
 
 .placeholder-text {
     color: var(--color-accent-900);
-    font-size: 24px;
-    margin-top: 16px;
+    font-size: 20px;
+    margin: 24px;
+    text-align: center;
 }
 
 .visually-hidden-input {
@@ -891,9 +928,25 @@ td {
     flex-wrap: wrap;
     margin: 8px;
     transition: 0.2s;
+    justify-content: center;
+    overflow: auto;
+    max-height: calc(100vh - 72px);
 }
 
 .search-box {
+    width: 230px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: var(--color-accent-200);
+    margin-left: 20px;
+    height: 36px;
+    border-radius: 36px;
+}
+
+.search-box-2 {
     width: 330px;
     display: flex;
     flex-direction: row;
@@ -928,7 +981,7 @@ td {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    width: 342px;
+    width: 344px;
     margin-left: 20px;
 
 }
@@ -1172,4 +1225,29 @@ td {
 .cat-active-health {
     background-color: rgba(204, 255, 209, 1);
     color: var(--color-accent-50);
+}
+
+.prompt-loader {
+    height: calc(100vh - 276px);
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prompt-list-container {
+    width: 400px;
+}
+
+.prompts-filter {
+    margin-left: 7px;
+}
+
+.chat-list-container {
+    width: 300px;
+}
+
+.chat-list-filter {
+    margin-left: 7px;
+
 }

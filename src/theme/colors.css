@@ -27,6 +27,7 @@
     /*--color-accent-800: #99ffbb;*/
     /*--color-accent-900: #d2ffdf;*/
 
+    --color-accent-overlay: rgba(32, 36, 43, 0.8);
     --color-accent-0: #20242b;
     --color-accent-50: #191c20;
     --color-accent-100: #20242b;

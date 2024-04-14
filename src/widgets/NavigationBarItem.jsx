@@ -20,12 +20,14 @@ import {Link} from "react-router-dom";
 function NavigationBarItem({name, icon, isActive, page}) {
     return (
         <Link className={"nav-item"} to={page}>
-            <div className={isActive ? "nav-item-selected" : "nav-item-unselected"}>
-                <span className="material-symbols-outlined">{icon}</span>
+            <div className={isActive ? "nav-item-selected-container" : "nav-item-unselected-container"}>
+                <div className={isActive ? "nav-item-selected" : "nav-item-unselected"}>
+                    <span className="material-symbols-outlined">{icon}</span>
+                </div>
             </div>
             <p className={"nav-item-title"}>{name}</p>
         </Link>
-    );
+);
 }
 
 export default NavigationBarItem;

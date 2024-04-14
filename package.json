@@ -1,6 +1,6 @@
 {
   "name": "speakgpt-web",
-  "version": "0.0.11-alpha11",
+  "version": "0.0.13-alpha13",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
@@ -17,6 +17,7 @@
     "openai": "^4.33.0",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.22.3",
@@ -60,6 +61,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.24.1"
+    "@babel/preset-react": "^7.24.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-regexp": "^2.5.0"
   }
 }

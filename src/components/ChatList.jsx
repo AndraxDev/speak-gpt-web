@@ -382,15 +382,17 @@ function ChatList() {
             {
                 deletionDialogOpen ? <DeleteChatDialog setOpenState={setDeletionDialogOpen} chatName={selectedChatForDeletion} setChatName={setDeleteChatName} /> : null
             }
-            <div className={"chat-list"}>
-                <h2 className={"page-title"}>SpeakGPT</h2>
-                <div className={"search-box"}>
-                    <input className={"search-input"} type={"text"} placeholder={"Search chats..."} onChange={(e) => {
-                        setSearchTerm(e.target.value)
-                    }}/>
-                    <span className={"search-icon material-symbols-outlined"}>search</span>
+            <div className={"chat-list-container"}>
+                <div className={"chat-list-filter"}>
+                    <h2 className={"page-title"}>SpeakGPT</h2>
+                    <div className={"search-box"}>
+                        <input className={"search-input"} type={"text"} placeholder={"Search chats..."} onChange={(e) => {
+                            setSearchTerm(e.target.value)
+                        }}/>
+                        <span className={"search-icon material-symbols-outlined"}>search</span>
+                    </div>
+                    <br/>
                 </div>
-                <br/>
                 <div className={"fw"}>
                     <MaterialButton16 className={"fab"} style={{
                         marginLeft: "16px",
@@ -400,12 +402,14 @@ function ChatList() {
                     }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
                         <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
-                {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""}
-                                           setSelectedChatForDeletion={setSelectedChatForDeletion}
-                                           setSelectedChatForEdit={setSelectedChatForEdit}/>
-                    : <Chats chats={chats} id={id} setSelected={setSelectedChat} selectedChat={selectedChat}
-                             setSelectedChatForDeletion={setSelectedChatForDeletion}
-                             setSelectedChatForEdit={setSelectedChatForEdit}/>}
+                <div className={"chat-list"}>
+                    {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""}
+                                               setSelectedChatForDeletion={setSelectedChatForDeletion}
+                                               setSelectedChatForEdit={setSelectedChatForEdit}/>
+                        : <Chats chats={chats} id={id} setSelected={setSelectedChat} selectedChat={selectedChat}
+                                 setSelectedChatForDeletion={setSelectedChatForDeletion}
+                                 setSelectedChatForEdit={setSelectedChatForEdit}/>}
+                </div>
             </div>
             <div className={"chat-content"}>
                 {id === undefined ? <ChatNotSelected/> :

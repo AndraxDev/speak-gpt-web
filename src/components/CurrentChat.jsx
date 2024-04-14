@@ -17,8 +17,7 @@
 import React, {useEffect} from 'react';
 import {
     MaterialButtonError,
-    MaterialButtonTonal,
-    MaterialButtonTonal24
+    MaterialButtonTonal24, MaterialButtonTonalIcon
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -32,6 +31,7 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import {modelToType} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
+import {isMobile} from 'react-device-detect';
 
 function CurrentChat({chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
@@ -85,9 +85,15 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         setSystemMessage(id, systemMessage)
     }, [currentModel, useDalle3, currentImageResolution, systemMessage, id]);
 
+    const getAndroidOS = () => {
+        return navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Linux x86_64") > -1;
+    }
+
     const handleKeyDown = (event) => {
+        let isMsAndroid = getAndroidOS()
+
         // Check if Enter key is pressed without Shift key
-        if (event.key === 'Enter' && !event.shiftKey) {
+        if (event.key === 'Enter' && !event.shiftKey && !isMobile && !isMsAndroid) {
             // Prevent default action to avoid adding a new line
             event.preventDefault();
 
@@ -550,25 +556,25 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 <div className={"write-bar"}>
                     <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
                     <div>
-                        <MaterialButtonTonal className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
+                        <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
                             if (e.target.files.length !== 0) {
                                 processFile(e.target.files[0])
                             }
-                        }} type="file" /></MaterialButtonTonal>
+                        }} type="file" /></MaterialButtonTonalIcon>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div>
                         {
-                            lockedState ? <MaterialButtonTonal className={"chat-send"} onClick={() => {
+                            lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                                 processRequest();
                             }}><CircularProgress style={{
                                     color: "var(--color-accent-900)",
-                                }}/></MaterialButtonTonal>
+                                }}/></MaterialButtonTonalIcon>
                                 :
-                                <MaterialButtonTonal className={"chat-send"} onClick={() => {
+                                <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                                     processRequest();
                                 }}><span
-                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonal>
+                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
                         }
                     </div>
                 </div>
