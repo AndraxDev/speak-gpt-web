@@ -17,7 +17,7 @@
 import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 
-function SelectResolutionDialog({setIsOpen, setResolution, resolution}) {
+function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssistant}) {
     const availableResolutions = [
         "256x256",
         "512x512",
@@ -26,14 +26,14 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution}) {
 
     const [selectedResolution, setSelectedResolution] = React.useState(resolution);
     return (
-        <div className={"dialog-backdrop"} onMouseDown={() => {
+        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
         }}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
                 <h3 className={"dialog-title"}>Select images resolution</h3>
-                <div className={"dialog-content"}>
+                <div className={isAssistant ? "dialog-content-assistant" : "dialog-content"}>
                     {
                         availableResolutions.map((res, index) => {
                             return (

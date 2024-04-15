@@ -33,7 +33,7 @@ function ConfirmChatClear({setOpenState, confirm}) {
                         confirm(false);
                         setOpenState(false);
                     }}>Cancel</MaterialButtonOutlined24>
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={() => {
                         confirm(true);
                         setOpenState(false);

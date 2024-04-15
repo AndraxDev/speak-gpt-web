@@ -19,7 +19,7 @@ import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialBut
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {CircularProgress} from "@mui/material";
 
-function SelectModelDialog({setIsOpen, setModel, model}) {
+function SelectModelDialog({setIsOpen, setModel, model, isAssistant}) {
 
     const availableModels = [
         {
@@ -78,14 +78,14 @@ function SelectModelDialog({setIsOpen, setModel, model}) {
     }, []);
 
     return (
-        <div className={"dialog-backdrop"} onMouseDown={() => {
+        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
         }}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
                 <h3 className={"dialog-title"}>Select AI model</h3>
-                <div className={"dialog-content"}>
+                <div className={isAssistant ? "dialog-content-assistant" : "dialog-content"}>
                     {
                         availableModels.map((m, index) => {
                             return (

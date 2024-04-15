@@ -115,7 +115,6 @@ function PromptStore() {
 
     useEffect(() => {
         if (id !== undefined && id !== null && id !== "") {
-            console.log(id)
             setLoading(true)
             fetch("https://gpt.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+id, {
                 method: "GET",
@@ -128,10 +127,6 @@ function PromptStore() {
             })
         }
     }, [id]);
-
-    useEffect(() => {
-        console.log(selectedPrompt)
-    }, [selectedPrompt]);
 
     useEffect(() => {
         setPrompts([]);

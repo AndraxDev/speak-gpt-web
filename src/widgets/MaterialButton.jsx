@@ -88,6 +88,22 @@ export const MaterialButtonTonalIcon = styled(Button)(({ theme }) => ({
     },
 }));
 
+export const MaterialButtonTonalIconV2 = styled(Button)(({ theme }) => ({
+    color: "var(--color-accent-800)",
+    backgroundColor: "transparent",
+    textTransform: "none",
+    boxShadow: "none",
+    borderRadius: "64px",
+    paddingLeft: "0",
+    paddingRight: "0",
+    width: "64px",
+    height: "64px",
+    '&:hover': {
+        backgroundColor: "var(--color-accent-100)",
+        boxShadow: "none",
+    },
+}));
+
 export const MaterialButtonTonal24 = styled(Button)(({ theme }) => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-300)",

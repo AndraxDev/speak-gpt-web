@@ -30,14 +30,14 @@ function ApiKeyChangeDialog(props) {
     }
 
     return (
-        <div className={"dialog-backdrop"} onMouseDown={() => {
+        <div className={props.isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             props.setIsOpen(false);
         }}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
                 <h3 className={"dialog-title"}>Change API Key</h3>
-                <div className={"dialog-content"}>
+                <div className={props.isAssistant ? "dialog-content-assistant" : "dialog-content"}>
                     <MaterialEditText label="API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)}/>
                     <p className={"warning"}>You can revoke API key <a href={"https://platform.openai.com/api-keys"} target={"_blank"}>here</a> and unset it. When you unset an API key your chats will not be removed.</p>
                 </div>

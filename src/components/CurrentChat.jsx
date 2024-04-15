@@ -473,17 +473,22 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     }
 
     const processFile = (file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            let srcData = e.target.result;
-            let fileType = file.type;
+        try {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                let srcData = e.target.result;
+                let fileType = file.type;
 
-            if (fileType.startsWith("image")) {
-                setSelectedFile(srcData);
+                if (fileType.startsWith("image")) {
+                    document.querySelector(".chat-textarea").focus();
+                    setSelectedFile(srcData);
+                }
             }
-        }
 
-        reader.readAsDataURL(file);
+            reader.readAsDataURL(file);
+        } catch (e) {
+            console.error("Error processing file", e);
+        }
     }
 
     function autoresize(textarea) {
@@ -511,6 +516,84 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         }
     }
 
+    function preventDefaults (e) {
+        e.preventDefault();
+        // e.stopPropagation();
+    }
+
+    function highlight(e, e2) {
+        e.classList.add('highlight');
+        e2.classList.add('highlight2');
+        e2.classList.add('unhighlighted')
+    }
+
+    function unhighlight(e, e2) {
+        e.classList.remove('highlight');
+        e2.classList.remove('highlight2');
+        e2.classList.remove('unhighlighted')
+    }
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer;
+        let files = dt.files;
+
+        handleFiles(files);
+    }
+
+    function handleFiles(files) {
+        processFile(files[0])
+    }
+
+    useEffect(() => {
+        let dropArea = document.getElementById('drop-area');
+        let dropArea2 = document.getElementById('drop-area-2');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+            // dropArea2.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop area when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {highlight(dropArea, dropArea2)}, false);
+            // dropArea2.addEventListener(eventName, () => {highlight(dropArea)}, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            // dropArea.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
+            dropArea2.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
+        });
+
+        dropArea.addEventListener('drop', handleDrop, false);
+        // dropArea2.addEventListener('drop', handleDrop, false);
+
+        document.querySelector('[contenteditable]').addEventListener('paste', function(e) {
+            e.preventDefault();
+            const items = (e.clipboardData || window.clipboardData).items;
+            let containsImage = false;
+            for (const item of items) {
+                if (item.type.indexOf("image") === 0) {
+                    const blob = item.getAsFile();
+                    document.querySelector(".chat-textarea").value = ''
+                    document.querySelector(".chat-textarea").innerHTML = ''
+                    processFile(blob);
+                    containsImage = true;
+                } else if (item.kind === 'string' && !containsImage) {
+                    // Handle non-image content like plain text
+                    item.getAsString(function(s) {
+                        document.execCommand('insertHTML', false, s);
+                    });
+                }
+            }
+
+            if (containsImage) {
+                document.querySelector(".chat-textarea").value = ''
+                document.querySelector(".chat-textarea").innerHTML = ''
+            }
+        });
+    }, [])
+
     return (
         <div className={"chat-frame"}>
             {
@@ -529,25 +612,30 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     openResolutionDialog={setResolutionDialogOpened}
                     systemMessage={systemMessage}
                     openSystemMessageDialog={setSystemMessageDialogOpened}
+                    isAssistant={false}
                 /> : null
             }
             {
-                openAIKeyChangeDialogIsOpened ? <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} /> : null
+                openAIKeyChangeDialogIsOpened ? <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} isAssistant={false} /> : null
             }
             {
-                resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} /> : null
+                resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={false} /> : null
             }
             {
-                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} /> : null
+                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={false} /> : null
             }
             {
-                systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} /> : null
+                systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={false} /> : null
             }
             <div className={"chat-area"}>
-                <div className={"chat-history"}>
+                <div className={"chat-history"} id={"drop-area"}>
+                    <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
+                        <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                        <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
+                    </div>
                     <div className={"chat-ab-actions-container"}>
                         <div className={"chat-ab-actions"}>
-                            <MaterialButtonError onClick={() => {
+                        <MaterialButtonError onClick={() => {
                                 setConfirmClear(false);
                                 setClearDialogOpen(true);
                             }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonError>
@@ -566,7 +654,8 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                         {
                             conversation.map((e, i) => {
                                 return (
-                                    <Message key={i} isBot={e.isBot} message={e.message} image={e.image === null || e.image === undefined ? null : e.image}/>
+                                    <Message key={i} isBot={e.isBot} message={e.message}
+                                             image={e.image === null || e.image === undefined ? null : e.image}/>
                                 )
                             })
                         }
@@ -584,7 +673,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     </div>: null
                 }
                 <div className={"write-bar"}>
-                    <textarea onInput={() => {
+                    <textarea contentEditable="true" onInput={() => {
                         autoresize(document.querySelector(".chat-textarea"))
                     }} onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
                     <div>

@@ -30,6 +30,10 @@ function WelcomePage() {
             <br/><br/>
             <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
             <h3 className={"title"}>Changelog:</h3>
+            <code className={"title"}>0.1.0-beta01</code><br/>
+            <code className={"text"}>- First public beta release.</code><br/>
+            <code className={"text"}>- Improved images upload.</code><br/>
+            <br/>
             <code className={"title"}>0.0.14-alpha14</code><br/>
             <code className={"text"}>- Finished Prompts Store.</code><br/>
             <code className={"text"}>- Added Quick Assistant.</code><br/>

@@ -18,9 +18,9 @@ import React from 'react';
 import Tile from "./Tile"
 import packageJson from '../../package.json';
 
-function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution}) {
+function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
     return (
-        <div className={"dialog-backdrop"} onMouseDown={() => {
+        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
         }}>
 

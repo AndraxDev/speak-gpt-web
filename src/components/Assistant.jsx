@@ -16,8 +16,7 @@
 
 import React, {useEffect} from 'react';
 import {
-    MaterialButtonError,
-    MaterialButtonTonal24, MaterialButtonTonalIcon
+    MaterialButtonTonalIcon, MaterialButtonTonalIconV2
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -351,18 +350,101 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     }
 
     const processFile = (file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            let srcData = e.target.result;
-            let fileType = file.type;
+        try {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                let srcData = e.target.result;
+                let fileType = file.type;
 
-            if (fileType.startsWith("image")) {
-                setSelectedFile(srcData);
+                if (fileType.startsWith("image")) {
+                    document.querySelector(".chat-textarea").focus();
+                    setSelectedFile(srcData);
+                }
             }
-        }
 
-        reader.readAsDataURL(file);
+            reader.readAsDataURL(file);
+        } catch (e) {
+            console.error("Error processing file: " + e)
+        }
     }
+
+    function preventDefaults (e) {
+        e.preventDefault();
+        // e.stopPropagation();
+    }
+
+    function highlight(e, e2) {
+        e.classList.add('highlight-a');
+        e2.classList.add('highlight2-a');
+        e2.classList.add('unhighlighted')
+    }
+
+    function unhighlight(e, e2) {
+        e.classList.remove('highlight-a');
+        e2.classList.remove('highlight2-a');
+        e2.classList.remove('unhighlighted')
+    }
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer;
+        let files = dt.files;
+
+        handleFiles(files);
+    }
+
+    function handleFiles(files) {
+        processFile(files[0])
+    }
+
+    useEffect(() => {
+        let dropArea = document.getElementById('drop-area');
+        let dropArea2 = document.getElementById('drop-area-2');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+            // dropArea2.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop area when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {highlight(dropArea, dropArea2)}, false);
+            // dropArea2.addEventListener(eventName, () => {highlight(dropArea)}, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            // dropArea.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
+            dropArea2.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
+        });
+
+        dropArea.addEventListener('drop', handleDrop, false);
+        // dropArea2.addEventListener('drop', handleDrop, false);
+
+        document.querySelector('[contenteditable]').addEventListener('paste', function(e) {
+            e.preventDefault();
+            const items = (e.clipboardData || window.clipboardData).items;
+            let containsImage = false;
+            for (const item of items) {
+                if (item.type.indexOf("image") === 0) {
+                    const blob = item.getAsFile();
+                    document.querySelector(".chat-textarea").value = ''
+                    document.querySelector(".chat-textarea").innerHTML = ''
+                    processFile(blob);
+                    containsImage = true;
+                } else if (item.kind === 'string' && !containsImage) {
+                    // Handle non-image content like plain text
+                    item.getAsString(function(s) {
+                        document.execCommand('insertHTML', false, s);
+                    });
+                }
+            }
+
+            if (containsImage) {
+                document.querySelector(".chat-textarea").value = ''
+                document.querySelector(".chat-textarea").innerHTML = ''
+            }
+        });
+    }, [])
 
     return (
         <div className={"chat-frame"}>
@@ -382,43 +464,49 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     openResolutionDialog={setResolutionDialogOpened}
                     systemMessage={systemMessage}
                     openSystemMessageDialog={setSystemMessageDialogOpened}
+                    isAssistant={true}
                 /> : null
             }
             {
-                openAIKeyChangeDialogIsOpened ? <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} /> : null
+                openAIKeyChangeDialogIsOpened ? <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} isAssistant={true} /> : null
             }
             {
-                resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} /> : null
+                resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={true} /> : null
             }
             {
-                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} /> : null
+                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={true} /> : null
             }
             {
-                systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} /> : null
+                systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={true} /> : null
             }
             <div className={"chat-area-assistant"}>
-                <div className={"chat-history-assistant"}>
+                <div className={"chat-history-assistant"} id={"drop-area"}>
+                    <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
+                        <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                        <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
+                    </div>
                     <div className={"chat-ab-actions-container-assistant"}>
                         <div className={"chat-ab-actions-assistant"}>
-                            <MaterialButtonError onClick={() => {
+                            <MaterialButtonTonalIconV2 onClick={() => {
                                 closeWindow(false);
-                            }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonError>
+                            }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
                             &nbsp;&nbsp;&nbsp;
                             <h3 className={"chat-title"}>{"SpeakGPT Quick Assistant"}</h3>
                             &nbsp;&nbsp;&nbsp;
-                            <MaterialButtonTonal24 onClick={() => {
+                            <MaterialButtonTonalIconV2 onClick={() => {
                                 setSettingsOpen(true);
-                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonal24>
+                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonalIconV2>
                         </div>
                     </div>
                     <div style={{
-                        height: '120px'
+                        height: '16px'
                     }}/>
                     <div>
                         {
                             conversation.map((e, i) => {
                                 return (
-                                    <Message key={i} isBot={e.isBot} message={e.message} image={e.image === null || e.image === undefined ? null : e.image}/>
+                                    <Message key={i} isBot={e.isBot} message={e.message}
+                                             image={e.image === null || e.image === undefined ? null : e.image}/>
                                 )
                             })
                         }
@@ -436,7 +524,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     </div>: null
                 }
                 <div className={"write-bar-assistant"}>
-                    <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} id={"assistant-textarea"} placeholder={"Start typing here..."}/>
+                    <textarea contentEditable={"true"} onKeyDown={handleKeyDown} className={"chat-textarea"} id={"assistant-textarea"} placeholder={"Start typing here..."}/>
                     <div>
                         <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
                             if (e.target.files.length !== 0) {

@@ -22,6 +22,7 @@ import {CircularProgress} from "@mui/material";
 
 function PromptView({prompt, updatePrompts}) {
     const [assistantIsOpened, setAssistantIsOpened] = React.useState(false);
+    const [assistantIsOpened2, setAssistantIsOpened2] = React.useState(false);
     const [currentPrompt, setCurrentPrompt] = React.useState(prompt.prompt);
     const [modifiedPrompt, setModifiedPrompt] = React.useState(prompt.prompt);
     const [likeRequest, setLikeRequest] = React.useState(false);
@@ -86,33 +87,47 @@ function PromptView({prompt, updatePrompts}) {
                     <MaterialButton24 onClick={() => {
                         setAssistantIsOpened(true)
                     }} sx={{
-                        width: "150px",
+                        width: "100px",
                         height: "64px",
                         borderRadius: "16px",
-                    }}><span className={"material-symbols-outlined"}>play_arrow</span>&nbsp;<span>Try it</span></MaterialButton24>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    }}><span className={"material-symbols-outlined"}>play_arrow</span>&nbsp;&nbsp;<span>Try it</span></MaterialButton24>
+
                     {
                         likeRequest ? <MaterialButtonTonal24 sx={{
-                            width: "150px",
+                            width: "100px",
                             height: "64px",
                             borderRadius: "16px",
                         }}><CircularProgress sx={{
                             color: "var(--color-accent-800)",
                             }}/></MaterialButtonTonal24> :
                             <MaterialButtonTonal24 sx={{
-                                width: "150px",
+                                width: "100px",
                                 height: "64px",
                                 borderRadius: "16px",
                             }} onClick={() => {
                                 setLikeRequest(true);
                                 likePrompt();
-                            }}><span className={"material-symbols-outlined"}>thumb_up</span>&nbsp;<span>{prompt.likes}</span></MaterialButtonTonal24>
+                            }}><span className={"material-symbols-outlined"}>thumb_up</span>&nbsp;&nbsp;<span>{prompt.likes}</span></MaterialButtonTonal24>
                     }
+
+                    <MaterialButtonTonal24 onClick={() => {
+                        setAssistantIsOpened2(true)
+                    }} sx={{
+                        width: "180px",
+                        height: "64px",
+                        borderRadius: "16px",
+                    }}><span className={"material-symbols-outlined"}>smart_toy</span>&nbsp;&nbsp;<span>Launch Assistant</span></MaterialButtonTonal24>
                 </div>
             </div>
             {
                 assistantIsOpened ? <div className={"assistant-container"}>
                     <Assistant runtimePrompt={modifiedPrompt} type={prompt.type.toLowerCase()} closeWindow={setAssistantIsOpened} />
+                </div> : null
+            }
+
+            {
+                assistantIsOpened2 ? <div className={"assistant-container"}>
+                    <Assistant runtimePrompt={""} type={""} closeWindow={setAssistantIsOpened2} />
                 </div> : null
             }
         </div>

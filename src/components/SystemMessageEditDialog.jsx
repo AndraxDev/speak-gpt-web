@@ -18,12 +18,12 @@ import React from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 
-function SystemMessageEditDialog({setIsOpen, message, setMessage}) {
+function SystemMessageEditDialog({setIsOpen, message, setMessage, isAssistant}) {
 
     const [currentMessage, setCurrentMessage] = React.useState(message);
 
     return (
-        <div className={"dialog-backdrop"} onMouseDown={() => {
+        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
         }}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
