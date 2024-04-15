@@ -12,7 +12,7 @@ This is a desktop version of SpeakGPT created using ReactJS and Google Material 
 
 [Launch SpeakGPT Desktop](https://assistant.teslasoft.org/chat)
 
-Mobile version can be found [here](https://github.com/AndraxDev/speak-gpt).
+Mobile app can be found [here](https://github.com/AndraxDev/speak-gpt).
 
 ## Screenshots
 
@@ -33,6 +33,7 @@ Mobile version can be found [here](https://github.com/AndraxDev/speak-gpt).
 - [x] GPT 4 Vision (use your images and photos with ChatGPT)
 - [x] System message
 - [x] Prompts store
+- [x] Quick assistant
 - [x] A lot of different models
 - [x] No captcha
 - [x] Pay as you go system
