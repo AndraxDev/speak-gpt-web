@@ -1502,8 +1502,8 @@ td {
     position: fixed;
     width: 500px;
     height: calc(100vh - 48px);
-    right: 24px;
-    top: 24px;
+    right: 0;
+    top: 0;
     transition: 0s;
     box-sizing: border-box;
     border: dashed 2px rgb(72, 137, 255);

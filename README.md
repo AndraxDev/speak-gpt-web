@@ -16,10 +16,15 @@ Mobile version can be found [here](https://github.com/AndraxDev/speak-gpt).
 
 ## Screenshots
 
-<img src="https://gpt.teslasoft.org/d/1.png"/>
-<img src="https://gpt.teslasoft.org/d/2.png"/>
-<img src="https://gpt.teslasoft.org/d/3.png"/>
-<img src="https://gpt.teslasoft.org/d/4.png"/>
+<img src="https://gpt.teslasoft.org/d/1.png" style="max-height: 300px"/>
+<img src="https://gpt.teslasoft.org/d/2.png" style="max-height: 300px"/>
+<img src="https://gpt.teslasoft.org/d/3.png" style="max-height: 300px"/>
+<img src="https://gpt.teslasoft.org/d/4.png" style="max-height: 300px"/>
+<img src="https://gpt.teslasoft.org/d/5.png" style="max-height: 300px"/>
+<img src="https://gpt.teslasoft.org/d/6.png" style="max-height: 300px"/>
+<img src="https://gpt.teslasoft.org/d/7.png" style="max-height: 300px"/>
+<br/>
+<img src="https://gpt.teslasoft.org/d/8.png" style="max-height: 300px"/>
 
 ## Features
 
