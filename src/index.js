@@ -21,6 +21,7 @@ import App from './App';
 
 import { LicenseInfo } from '@mui/x-license';
 import {LICENSE_KEY} from "./LicenseKey";
+import {setMaxSettings, setMinSettings} from "./util/Settings";
 
 LicenseInfo.setLicenseKey(LICENSE_KEY);
 
@@ -30,3 +31,14 @@ root.render(
     <App />
   // </React.StrictMode>
 );
+
+
+/* Set max global settings */
+window._debug_setMaxSettings = () => {
+    setMaxSettings()
+}
+
+/* Set min global settings */
+window._debug_setMinSettings = () => {
+    setMinSettings()
+}

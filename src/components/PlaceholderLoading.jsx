@@ -15,14 +15,18 @@
  *****************************************************************/
 
 import React from 'react';
+import {CircularProgress} from "@mui/material";
 
-function ChatNotSelected(props) {
+function Placeholder() {
     return (
         <div className={"placeholder-bg"}>
-            <span className={"placeholder-icon material-symbols-outlined"}>chat</span>
-            <p className={"placeholder-text"}>Create or select a chat to start conversation.</p>
+            <CircularProgress sx={{
+                color: "var(--color-accent-800)",
+                width: "72px !important",
+                height: "72px !important",
+            }}/>
         </div>
     );
 }
 
-export default ChatNotSelected;
+export default Placeholder;

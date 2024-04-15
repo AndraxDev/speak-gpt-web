@@ -39,7 +39,7 @@ export const MaterialButton24 = styled(Button)(({ theme }) => ({
     fontSize: "12px",
     height: "40px",
     boxSizing: "border-box",
-    border: "1px solid var(--color-accent-900)",
+    border: "1px solid var(--color-accent-800)",
     '&:hover': {
         backgroundColor: "var(--color-accent-900)",
         border: "1px solid var(--color-accent-900)",
@@ -74,7 +74,7 @@ export const MaterialButtonTonal = styled(Button)(({ theme }) => ({
 
 export const MaterialButtonTonalIcon = styled(Button)(({ theme }) => ({
     color: "var(--color-accent-800)",
-    backgroundColor: "var(--color-accent-300)",
+    backgroundColor: "var(--color-accent-200)",
     textTransform: "none",
     boxShadow: "none",
     borderRadius: "24px",
@@ -83,7 +83,7 @@ export const MaterialButtonTonalIcon = styled(Button)(({ theme }) => ({
     width: "48px",
     height: "48px",
     '&:hover': {
-        backgroundColor: "var(--color-accent-400)",
+        backgroundColor: "var(--color-accent-300)",
         boxShadow: "none",
     },
 }));
@@ -169,6 +169,9 @@ export const MaterialButtonOutlined24 = styled(Button)(({ theme }) => ({
     border: "1px solid var(--color-accent-800)",
     paddingLeft: "12px",
     paddingRight: "12px",
+    fontSize: "12px",
+    height: "40px",
+    boxSizing: "border-box",
     '&:hover': {
         backgroundColor: "var(--color-primary-accent-transparent)",
         borderColor: "var(--color-accent-900)",

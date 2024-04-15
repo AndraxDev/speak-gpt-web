@@ -45,12 +45,12 @@ function ApiKeyChangeDialog(props) {
                     <MaterialButtonOutlined24 onClick={() => {
                         props.setIsOpen(false);
                     }}>Cancel</MaterialButtonOutlined24>
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButtonError onClick={() => {
                         localStorage.removeItem('apiKey');
                         window.location.reload();
                     }}>Unset API key</MaterialButtonError>
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                 </div>
             </div>

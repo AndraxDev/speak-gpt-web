@@ -15,21 +15,14 @@
  *****************************************************************/
 
 import React from 'react';
-import Placeholder from "./Placeholder";
-import Chats from "./Chats";
 
-function Chat(props) {
+function Placeholder({icon, message}) {
     return (
-        <div className={"chat-window"}>
-            <div className={"chat-list"}>
-                <h2 className={"page-title"}>SpeakGPT</h2>
-                <Chats/>
-            </div>
-            <div className={"chat-content"}>
-                <Placeholder/>
-            </div>
+        <div className={"placeholder-bg"}>
+            <span className={"placeholder-icon material-symbols-outlined"}>{icon}</span>
+            <p className={"placeholder-text"}>{message}</p>
         </div>
     );
 }
 
-export default Chat;
+export default Placeholder;

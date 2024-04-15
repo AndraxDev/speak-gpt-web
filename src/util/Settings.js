@@ -14,6 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
+/* Default settings templates. Do not import it directly */
 const defaultSettings = {
     model: "gpt-3.5-turbo",
     dalleVersion: "2",
@@ -21,8 +22,19 @@ const defaultSettings = {
     systemMessage: ""
 }
 
+const defaultSettingsMax = {
+    model: "gpt-4-turbo-2024-04-09",
+    dalleVersion: "3",
+    resolution: "1024x1024",
+    systemMessage: ""
+}
+
+const getDefaultSettings = () => {
+    return localStorage.getItem("globalSettings") === null ? defaultSettings : JSON.parse(localStorage.getItem("globalSettings"));
+}
+
 const getSettingsString = (chatId) => {
-    if (chatId === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") return JSON.stringify(defaultSettings);
+    if (chatId === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") return JSON.stringify(getDefaultSettings());
     return chatId === "" ? window.localStorage.getItem("globalSettings") : window.localStorage.getItem(chatId + ".settings");
 }
 
@@ -34,20 +46,30 @@ const setSettingsString = (chatId, settings) => {
     }
 }
 
-export const copySettings = (chatId, newChatId) => {
-    setSettingsString(newChatId, getSettingsString(chatId));
-}
-
 export const getSettingsJSON = (chatId) => {
-    return getSettingsString(chatId) !== undefined && getSettingsString(chatId) !== null ? JSON.parse(getSettingsString(chatId)) : defaultSettings;
+    return getSettingsString(chatId) !== undefined && getSettingsString(chatId) !== null ? JSON.parse(getSettingsString(chatId)) : getDefaultSettings();
 }
 
 export const setSettingsJSON = (chatId, settings) => {
     setSettingsString(chatId, JSON.stringify(settings));
 }
 
+/* Set max global settings */
+export const setMaxSettings = () => {
+    window.localStorage.setItem("globalSettings", JSON.stringify(defaultSettingsMax));
+}
+
+/* Set min global settings */
+export const setMinSettings = () => {
+    window.localStorage.setItem("globalSettings", JSON.stringify(defaultSettings));
+}
+
+export const copySettings = (chatId, newChatId) => {
+    setSettingsString(newChatId, getSettingsString(chatId));
+}
+
 export const getModel = (chatId) => {
-    return getSettingsJSON(chatId).model ? getSettingsJSON(chatId).model : defaultSettings.model;
+    return getSettingsJSON(chatId).model ? getSettingsJSON(chatId).model : getDefaultSettings().model;
 }
 
 export const setModel = (chatId, model) => {
@@ -56,8 +78,18 @@ export const setModel = (chatId, model) => {
     setSettingsJSON(chatId, settings);
 }
 
+export const getGlobalModel = () => {
+    return getDefaultSettings().model;
+}
+
+export const setGlobalModel = (model) => {
+    let settings = getDefaultSettings();
+    settings.model = model;
+    window.localStorage.setItem("globalSettings", JSON.stringify(settings));
+}
+
 export const getDalleVersion = (chatId) => {
-    return getSettingsJSON(chatId).dalleVersion ? getSettingsJSON(chatId).dalleVersion : defaultSettings.dalleVersion;
+    return getSettingsJSON(chatId).dalleVersion ? getSettingsJSON(chatId).dalleVersion : getDefaultSettings().dalleVersion;
 }
 
 export const setDalleVersion = (chatId, dalleVersion) => {
@@ -66,8 +98,18 @@ export const setDalleVersion = (chatId, dalleVersion) => {
     setSettingsJSON(chatId, settings);
 }
 
+export const getGlobalDalleVersion = () => {
+    return getDefaultSettings().dalleVersion;
+}
+
+export const setGlobalDalleVersion = (dalleVersion) => {
+    let settings = getDefaultSettings();
+    settings.dalleVersion = dalleVersion;
+    window.localStorage.setItem("globalSettings", JSON.stringify(settings));
+}
+
 export const getResolution = (chatId) => {
-    return getSettingsJSON(chatId).resolution ? getSettingsJSON(chatId).resolution : defaultSettings.resolution;
+    return getSettingsJSON(chatId).resolution ? getSettingsJSON(chatId).resolution : getDefaultSettings().resolution;
 }
 
 export const setResolution = (chatId, resolution) => {
@@ -76,12 +118,32 @@ export const setResolution = (chatId, resolution) => {
     setSettingsJSON(chatId, settings);
 }
 
+export const getGlobalResolution = () => {
+    return getDefaultSettings().resolution;
+}
+
+export const setGlobalResolution = (resolution) => {
+    let settings = getDefaultSettings();
+    settings.resolution = resolution;
+    window.localStorage.setItem("globalSettings", JSON.stringify(settings));
+}
+
 export const getSystemMessage = (chatId) => {
-    return getSettingsJSON(chatId).systemMessage ? getSettingsJSON(chatId).systemMessage : defaultSettings.systemMessage;
+    return getSettingsJSON(chatId).systemMessage ? getSettingsJSON(chatId).systemMessage : getDefaultSettings().systemMessage;
 }
 
 export const setSystemMessage = (chatId, systemMessage) => {
     let settings = getSettingsJSON(chatId);
     settings.systemMessage = systemMessage;
     setSettingsJSON(chatId, settings);
+}
+
+export const getGlobalSystemMessage = () => {
+    return getDefaultSettings().systemMessage;
+}
+
+export const setGlobalSystemMessage = (systemMessage) => {
+    let settings = getDefaultSettings();
+    settings.systemMessage = systemMessage;
+    window.localStorage.setItem("globalSettings", JSON.stringify(settings));
 }

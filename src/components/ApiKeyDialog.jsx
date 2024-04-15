@@ -52,7 +52,7 @@ function ApiKeyDialog(props) {
                                     localStorage.setItem('skipApiKeyCheck', 'true');
                                     window.location.reload();
                                 }}>Skip</MaterialButtonOutlined24>
-                                &nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                             </div>
                         </div>

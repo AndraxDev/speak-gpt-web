@@ -39,6 +39,11 @@ function BaseRoutes(props) {
                     <PromptStore/>
                 </MaterialWindow>
             } exact />
+            <Route path="/prompts/:id" element={
+                <MaterialWindow page={"prompts"}>
+                    <PromptStore/>
+                </MaterialWindow>
+            } exact />
             <Route path="/tips" element={
                 <MaterialWindow page={"tips"}>
                     <Tips/>

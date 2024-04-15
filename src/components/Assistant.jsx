@@ -21,31 +21,33 @@ import {
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
-import {sha256} from "js-sha256";
 import ConfirmChatClear from "./ConfirmChatClear";
 import {CircularProgress} from "@mui/material";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
-import {getModel, setModel, getSystemMessage, setSystemMessage, getDalleVersion, setDalleVersion, getResolution, setResolution} from "../util/Settings";
+import {
+    setGlobalModel,
+    setGlobalDalleVersion,
+    getGlobalModel,
+    getGlobalDalleVersion,
+    getGlobalResolution,
+    getGlobalSystemMessage, setGlobalResolution, setGlobalSystemMessage
+} from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
-import {modelToType} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 
-function CurrentChat({chats, id, chatName, updateChats}) {
+function Assistant({runtimePrompt, type, closeWindow}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
-    const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
-    const [db, setDb] = React.useState(null);
-    const [currentModel, setCurrentModel] = React.useState(getModel(id));
     const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
-    const [useDalle3, setUseDalle3] = React.useState(getDalleVersion(id) === "3");
-    const [currentImageResolution, setCurrentImageResolution] = React.useState(getResolution(id));
+    const [currentModel, setCurrentModel] = React.useState(getGlobalModel());
+    const [useDalle3, setUseDalle3] = React.useState(getGlobalDalleVersion() === "3");
+    const [currentImageResolution, setCurrentImageResolution] = React.useState(getGlobalResolution());
     const [resolutionDialogOpened, setResolutionDialogOpened] = React.useState(false);
-    const [systemMessage, setSystemMessageX] = React.useState(getSystemMessage(id));
+    const [systemMessage, setSystemMessageX] = React.useState(getGlobalSystemMessage());
     const [systemMessageDialogOpened, setSystemMessageDialogOpened] = React.useState(false);
-    // const [slashCommands, setSlashCommands] = React.useState(true);
     const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = React.useState(false);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
@@ -53,37 +55,11 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     const [selectedFile, setSelectedFile] = React.useState(null);
 
     useEffect(() => {
-        let c = [];
-
-        chats.forEach((e) => {
-            if (sha256(e.title) === id) {
-                c.push({
-                    title: e.title,
-                    model: currentModel,
-                    type: modelToType(currentModel)
-                })
-            } else {
-                c.push(e);
-            }
-        })
-
-        updateChats(c);
-    }, [currentModel, modelDialogOpened])
-
-    // Load settings
-    useEffect(() => {
-        setCurrentModel(getModel(id))
-        setCurrentImageResolution(getResolution(id))
-        setUseDalle3(getDalleVersion(id) === "3")
-        setSystemMessageX(getSystemMessage(id))
-    }, [id]);
-    
-    useEffect(() => {
-        setModel(id, currentModel)
-        setDalleVersion(id, useDalle3 ? "3" : "2")
-        setResolution(id, currentImageResolution)
-        setSystemMessage(id, systemMessage)
-    }, [currentModel, useDalle3, currentImageResolution, systemMessage, id]);
+        setGlobalModel(currentModel)
+        setGlobalDalleVersion(useDalle3 ? "3" : "2")
+        setGlobalResolution(currentImageResolution)
+        setGlobalSystemMessage(systemMessage)
+    }, [useDalle3, currentImageResolution, systemMessage]);
 
     const getAndroidOS = () => {
         return navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Linux x86_64") > -1;
@@ -104,8 +80,17 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     };
 
     useEffect(() => {
-        getDatabase()
-    }, []);
+        console.log("Runtime prompt: " + runtimePrompt)
+        if (runtimePrompt !== "" && runtimePrompt !== undefined) {
+            document.querySelector(".chat-textarea").value = runtimePrompt;
+
+            if (type === "dall-e") {
+                document.querySelector(".chat-textarea").value = "/imagine " + runtimePrompt
+            }
+
+            processRequest();
+        }
+    }, [runtimePrompt, type]);
 
     useEffect(() => {
         if (confirmClear) {
@@ -114,30 +99,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             setClearDialogOpen(false);
         }
     }, [confirmClear])
-
-    useEffect(() => {
-        if (chats === null) return;
-        chats.forEach((e) => {
-            if (sha256(e.title) === id) {
-                setStateSelectedChat(e.title);
-            }
-        });
-
-        if (id === undefined) {
-            setStateSelectedChat("");
-        }
-    }, [chats, id, chatName]);
-
-    useEffect(() => {
-        if (stateSelectedChat === "") {
-            setConversation([]);
-            return;
-        }
-
-        if (db !== undefined && db !== null) {
-            getConversation(sha256(stateSelectedChat));
-        }
-    }, [db, stateSelectedChat]);
 
     useEffect(() => {
         document.getElementById("bottom").scrollIntoView();
@@ -194,10 +155,10 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             });
 
             const response = await openai.images.generate({
-                model: "dall-e-" + getDalleVersion(id),
+                model: "dall-e-" + getGlobalDalleVersion(),
                 prompt: prompt,
                 n: 1,
-                size: getResolution(id),
+                size: getGlobalResolution(),
             });
             let image = response.data[0].url;
 
@@ -213,7 +174,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
 
             setConversation(c)
 
-            saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
         } catch (e) {
             setSelectedFile(null)
             if (e.message.includes("401 Incorrect API key")) {
@@ -224,8 +184,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 });
 
                 setConversation(c)
-
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
             } else {
                 let c = conversation;
                 c.push({
@@ -234,8 +192,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 });
 
                 setConversation(c)
-
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
             }
         }
     }
@@ -275,10 +231,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     isBot: true
                 });
 
-                // setSelectedFile(null)
-
                 setConversation([...m]);
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
 
                 for await (const chunk of chatCompletion) {
                     const r = chunk.choices[0].delta;
@@ -292,22 +245,20 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     }
                 }
 
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
                 return "";
             } else {
                 let ms = messages;
 
-                if (getSystemMessage(id) !== "") {
+                if (getGlobalSystemMessage() !== "") {
                     ms.push({
-                        content: getSystemMessage(id),
+                        content: getGlobalSystemMessage(),
                         role: "system"
                     });
                 }
 
                 const chatCompletion = await openai.chat.completions.create({
                     messages: ms,
-                    model: getModel(id),
+                    model: getGlobalModel(),
                     stream: true,
                 });
 
@@ -319,7 +270,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 });
 
                 setConversation([...m]);
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
 
                 for await (const chunk of chatCompletion) {
                     const r = chunk.choices[0].delta;
@@ -332,8 +282,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                         setConversation([...m]);
                     }
                 }
-
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
 
                 return "";
             }
@@ -347,8 +295,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 });
 
                 setConversation(c)
-
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
             } else {
                 let c = conversation;
                 c.push({
@@ -357,8 +303,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 });
 
                 setConversation(c)
-
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
             }
         }
     }
@@ -379,12 +323,12 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         });
 
         setConversation([...messages]);
-        saveConversation(sha256(stateSelectedChat), JSON.stringify(messages));
 
         let mx = document.querySelector(".chat-textarea").value
         if (mx.includes("/imagine ")) {
             generateImage(mx.replace("/imagine ", "")).then(r => {
                 setLockedState(false);
+
                 if (!getAndroidOS()) {
                     document.querySelector(".chat-textarea").focus();
                 }
@@ -395,81 +339,15 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 if (!getAndroidOS()) {
                     document.querySelector(".chat-textarea").focus();
                 }
-                setSelectedFile(null);
+                setSelectedFile(null)
             });
         }
 
         document.querySelector(".chat-textarea").value = "";
     }
 
-    const getDatabase = () => {
-        let db;
-
-        const request = indexedDB.open("chats", 1);
-
-        request.onupgradeneeded = function(event) {
-            // Save the IDBDatabase interface
-            db = event.target.result;
-
-            // Create an objectStore for this database
-            if (!db.objectStoreNames.contains('chats')) {
-                db.createObjectStore('chats', { keyPath: 'chatId'});
-            }
-        };
-
-        request.onsuccess = function(event) {
-            db = event.target.result;
-            setDb(db)
-            console.log("Database opened successfully");
-        };
-
-        request.onerror = function(event) {
-            console.log("Error opening database", event.target.errorCode);
-        };
-    }
-
-    const getConversation = (chatId) => {
-        const transaction = db.transaction(['chats'], 'readonly');
-        const objectStore = transaction.objectStore('chats');
-        const request = objectStore.getAll();
-
-        request.onsuccess = function() {
-            let isFound = false;
-
-            request.result.forEach((e) => {
-                if (e.chatId === chatId) {
-                    isFound = true;
-                    setConversation(JSON.parse(e.content));
-                }
-            });
-
-            if (!isFound) {
-                setConversation([]);
-            }
-        };
-
-        request.onerror = function(event) {
-            console.log("Error getting conversation", event.target.errorCode);
-        }
-    }
-
-    const saveConversation = (chatId, conversation) => {
-        const transaction = db.transaction(['chats'], 'readwrite');
-        const objectStore = transaction.objectStore('chats');
-        const request = objectStore.put({ chatId: chatId, content: conversation });
-
-        request.onsuccess = function() {
-            console.log("Conversation saved successfully");
-        };
-
-        request.onerror = function(event) {
-            console.log("Error saving conversation", event);
-        }
-    }
-
     const clearConversation = () => {
         setConversation([]);
-        saveConversation(sha256(stateSelectedChat), JSON.stringify([]));
     }
 
     const processFile = (file) => {
@@ -486,31 +364,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         reader.readAsDataURL(file);
     }
 
-    function autoresize(textarea) {
-        // Initial setup
-        const singleLineHeight = 16;  // This should match line-height in your CSS
-        const maxLines = 4;
-        const minHeight = 16;
-
-        // Ensure that we calculate based on a minimal state
-        textarea.style.height = 'auto';  // Temporarily make height auto
-
-        const lines = textarea.value.split('\n').length;
-
-        // Check if the current content is less than the minimum height
-        if (lines === 0) {
-            textarea.style.height = `${minHeight}px`;
-        } else if (lines < maxLines) {
-            textarea.style.height = `${minHeight*lines}px`;
-        } else if (lines > maxLines) {
-            textarea.style.overflowY = 'auto';  // Enable scrolling when content exceeds max height
-            textarea.style.height = `${singleLineHeight*maxLines}px`;
-        } else {
-            textarea.style.overflowY = 'hidden';  // Hide scrollbar when content is below max height
-            textarea.style.height = `${singleLineHeight*lines}px`;
-        }
-    }
-
     return (
         <div className={"chat-frame"}>
             {
@@ -518,7 +371,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             }
             {
                 settingsOpen ? <ChatSettings
-                    chatId={stateSelectedChat}
+                    chatId={null}
                     setIsOpen={setSettingsOpen}
                     apiDialogOpen={setOpenAIKeyChangeDialogIsOpened}
                     setDalleVersion={setUseDalle3}
@@ -543,16 +396,15 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} /> : null
             }
-            <div className={"chat-area"}>
-                <div className={"chat-history"}>
-                    <div className={"chat-ab-actions-container"}>
-                        <div className={"chat-ab-actions"}>
+            <div className={"chat-area-assistant"}>
+                <div className={"chat-history-assistant"}>
+                    <div className={"chat-ab-actions-container-assistant"}>
+                        <div className={"chat-ab-actions-assistant"}>
                             <MaterialButtonError onClick={() => {
-                                setConfirmClear(false);
-                                setClearDialogOpen(true);
+                                closeWindow(false);
                             }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonError>
                             &nbsp;&nbsp;&nbsp;
-                            <h3 className={"chat-title"}>{stateSelectedChat}</h3>
+                            <h3 className={"chat-title"}>{"SpeakGPT Quick Assistant"}</h3>
                             &nbsp;&nbsp;&nbsp;
                             <MaterialButtonTonal24 onClick={() => {
                                 setSettingsOpen(true);
@@ -583,10 +435,8 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                         }}><span className={"material-symbols-outlined"}>cancel</span></div>
                     </div>: null
                 }
-                <div className={"write-bar"}>
-                    <textarea onInput={() => {
-                        autoresize(document.querySelector(".chat-textarea"))
-                    }} onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
+                <div className={"write-bar-assistant"}>
+                    <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} id={"assistant-textarea"} placeholder={"Start typing here..."}/>
                     <div>
                         <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
                             if (e.target.files.length !== 0) {
@@ -598,8 +448,8 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     <div>
                         {
                             lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                processRequest();
-                            }}><CircularProgress style={{
+                                    processRequest();
+                                }}><CircularProgress style={{
                                     color: "var(--color-accent-900)",
                                 }}/></MaterialButtonTonalIcon>
                                 :
@@ -615,4 +465,4 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     );
 }
 
-export default CurrentChat;
+export default Assistant;

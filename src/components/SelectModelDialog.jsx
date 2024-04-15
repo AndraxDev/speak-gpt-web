@@ -158,7 +158,7 @@ function SelectModelDialog({setIsOpen, setModel, model}) {
                     <MaterialButtonOutlined24 onClick={() => {
                         setIsOpen(false);
                     }}>Cancel</MaterialButtonOutlined24>
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={() => {
                         if (selectedModel !== "") {
                             setModel(selectedModel)

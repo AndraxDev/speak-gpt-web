@@ -40,7 +40,7 @@ function NewChatDialog({chatName, setChatName, invalidState, invalidMessage, set
                     <MaterialButtonOutlined24 onClick={() => {
                         setChatDialogOpen(false);
                     }}>Cancel</MaterialButtonOutlined24>
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={() => {
                         setIsEditing(isEdit);
                         setChatName(tempChatName);

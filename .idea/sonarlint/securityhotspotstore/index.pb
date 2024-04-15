@@ -100,3 +100,9 @@ C
 src/prism.js,e\7\e7f2bdc0d4b1ede0918ab7c3f1f9abf045a90f90
 M
 src/components/PromptCard.jsx,d\8\d86047b54f4c1d937e1d9145a42a25c73126cd9f
+N
+src/components/Placeholder.jsx,b\e\be7ae2abd27972f72bbf84392d9587967a44e5ae
+L
+src/components/Assistant.jsx,1\2\12f548fe0be5185bfe9c5dd51ea08907191e544b
+U
+%src/components/PlaceholderLoading.jsx,3\3\336d67865e90e40d7b427b812380caf35b87cafb

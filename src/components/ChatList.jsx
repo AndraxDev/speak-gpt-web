@@ -18,7 +18,7 @@ import React, {useEffect} from 'react';
 import Chats from "./Chats";
 import CurrentChat from "./CurrentChat";
 import {useParams, useNavigate} from "react-router-dom";
-import ChatNotSelected from "./ChatNotSelected";
+import Placeholder from "./Placeholder";
 import {MaterialButton16} from "../widgets/MaterialButton";
 import NewChatDialog from "./NewChatDialog";
 import {modelToType} from "../util/ModelTypeConverter";
@@ -391,7 +391,6 @@ function ChatList() {
                         }}/>
                         <span className={"search-icon material-symbols-outlined"}>search</span>
                     </div>
-                    <br/>
                 </div>
                 <div className={"fw"}>
                     <MaterialButton16 className={"fab"} style={{
@@ -412,7 +411,7 @@ function ChatList() {
                 </div>
             </div>
             <div className={"chat-content"}>
-                {id === undefined ? <ChatNotSelected/> :
+                {id === undefined ? <Placeholder icon={"chat"} message={"Create or select a chat to start conversation."}/> :
                     <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>
         </div>

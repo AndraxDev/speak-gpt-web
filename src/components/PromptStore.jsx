@@ -19,6 +19,10 @@ import {MaterialButton16, MaterialButton24, MaterialButtonTonal24} from "../widg
 import {sha256} from "js-sha256";
 import PromptCard from "./PromptCard";
 import {CircularProgress} from "@mui/material";
+import PromptView from "./PromptView";
+import Placeholder from "./Placeholder";
+import {useNavigate, useParams} from "react-router-dom";
+import PlaceholderLoading from "./PlaceholderLoading";
 
 const categories = [
     {
@@ -94,18 +98,74 @@ function PromptStore() {
     const [selectedType, setSelectedType] = React.useState("all");
     const [searchQuery, setSearchQuery] = React.useState("");
     const [selectedPrompt, setSelectedPrompt] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
 
-    useEffect(() => {
-        fetch("https://gpt.teslasoft.org/api/v1//search.php?api_key=16790f7ac03237764a8a0ad36eede490&query=", {
-            method: "POST",
+    let { id } = useParams();
+
+    const fetchData = (query) => {
+        fetch("https://gpt.teslasoft.org/api/v1/search?api_key=16790f7ac03237764a8a0ad36eede490&query="+query, {
+            method: "GET",
         }).then(r => r.json())
         .then(r => {
-            console.log("Prompts fetched", r);
             setPrompts(r);
         }).catch((error) => {
             console.error("Error fetching prompts", error);
         })
-    }, []);
+    }
+
+    useEffect(() => {
+        if (id !== undefined && id !== null && id !== "") {
+            console.log(id)
+            setLoading(true)
+            fetch("https://gpt.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+id, {
+                method: "GET",
+            }).then(r => r.json())
+            .then(r => {
+                setLoading(false)
+                setSelectedPrompt(r);
+            }).catch((error) => {
+                console.error("Error fetching prompts", error);
+            })
+        }
+    }, [id]);
+
+    useEffect(() => {
+        console.log(selectedPrompt)
+    }, [selectedPrompt]);
+
+    useEffect(() => {
+        setPrompts([]);
+        fetchData(searchQuery);
+    }, [searchQuery]);
+
+    useEffect(() => {
+        setPrompts([]);
+
+        if (selectedCategory === "all") {
+            fetchData("");
+        } else {
+            fetchData("cat:"+selectedCategory);
+        }
+    }, [selectedCategory]);
+
+    const forceUpdate = () => {
+        fetchData(searchQuery);
+
+        if (selectedPrompt !== null) {
+            setLoading(true)
+            fetch("https://gpt.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+selectedPrompt.id, {
+                method: "GET",
+            }).then(r => r.json())
+            .then(r => {
+                setLoading(false)
+                setSelectedPrompt(r);
+            }).catch((error) => {
+                console.error("Error fetching prompts", error);
+            })
+        }
+    }
+
+    const navigate = useNavigate()
 
     return (
         <div className={"prompt-window"}>
@@ -124,7 +184,7 @@ function PromptStore() {
                         {
                             categories.map((e) => (
                                 <div onClick={() => {
-                                    setSelectedCategory(e.cat);
+                                    setSelectedCategory(e.cat === "" ? "uncategorized" : e.cat);
                                 }}
                                      className={e.cat === selectedCategory ? "category-tile cat-active-" + e.cat : "category-tile cat-" + e.cat}
                                      key={sha256(e.icon)}>
@@ -148,6 +208,7 @@ function PromptStore() {
                             }}>All</MaterialButton24> : <MaterialButtonTonal24 style={{
                                 width: "140px"
                             }} onClick={() => {
+                                setSearchQuery("");
                                 setSelectedType("all");
                             }}>All</MaterialButtonTonal24>
                         }
@@ -161,6 +222,7 @@ function PromptStore() {
                                 marginLeft: "12px",
                                 marginRight: "12px"
                             }} onClick={() => {
+                                setSearchQuery("type:gpt");
                                 setSelectedType("gpt");
                             }}>GPT</MaterialButtonTonal24>
                         }
@@ -170,8 +232,8 @@ function PromptStore() {
                             }}>DALL-e</MaterialButton24> : <MaterialButtonTonal24 style={{
                                 width: "140px"
                             }} onClick={() => {
+                                setSearchQuery("type:dall-e");
                                 setSelectedType("dalle");
-
                             }}>DALL-e</MaterialButtonTonal24>
                         }
                     </div>
@@ -193,18 +255,27 @@ function PromptStore() {
                             width: "64px",
                             height: "64px"
                         }}/>
-                    </div> : <div className={"prompt-list-container"}>
+                    </div> : <div className={"prompt-list"}>
                         {
-                            prompts.map((e) => {
+                            prompts.map((e) =>
                                 <PromptCard key={e.id} prompt={e} onPromptClick={() => {
-                                    setSelectedPrompt(e);
-                                }}/>
-                            })}
+                                    navigate("/prompts/"+e.id)
+                                }} selected={selectedPrompt}/>
+                            )}
+                        <div style={{
+                            height: '100px'
+                        }}></div>
                     </div>
                 }
             </div>
             <div className={"prompt-content"}>
-
+                {
+                    loading ? <PlaceholderLoading/> : <>
+                        {selectedPrompt !== null && selectedPrompt !== undefined ? <PromptView prompt={selectedPrompt} updatePrompts={() => {
+                            forceUpdate()
+                        }}/> : <Placeholder icon={"cards"} message={"Please select a prompt to view more info."}/>}
+                    </>
+                }
             </div>
         </div>
     );
