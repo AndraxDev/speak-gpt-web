@@ -132,7 +132,11 @@ export default MyComponent;
 ## Customize assistant:
 
 Assistant can be customized with a payload. Payload is a base64-encoded JSON string that contains params.
-Payload goes after /embedded/ in the URL. Example: https://assistant.teslasoft.org/embedded/eyJuYW1lIjoiRXhhbXBsZSBDaGF0IiwiaW5pdGlhbE1lc3NhZ2UiOiJIZWxsbywgaG93IGFyZSB5b3U%2FIiwiaW5pdGlhbFJlc3BvbnNlIjoiSSdtIGZpbmUsIHRoYW5rIHlvdS4iLCJzeXN0ZW1NZXNzYWdlIjoiVGhpcyBpcyBhbiBleGFtcGxlIGNoYXQuIFBsZWFzZSBiZSBwb2xpdGUuIiwiY2hhdExvY2F0aW9uIjoiZXhhbXBsZUNoYXQifQ%3D%3D
+Payload goes after /embedded/ in the URL. Example: 
+
+```html
+<iframe src="https://assistant.teslasoft.org/embedded/eyJuYW1lIjoiRXhhbXBsZSBDaGF0IiwiaW5pdGlhbE1lc3NhZ2UiOiJIZWxsbywgaG93IGFyZSB5b3U%2FIiwiaW5pdGlhbFJlc3BvbnNlIjoiSSdtIGZpbmUsIHRoYW5rIHlvdS4iLCJzeXN0ZW1NZXNzYWdlIjoiVGhpcyBpcyBhbiBleGFtcGxlIGNoYXQuIFBsZWFzZSBiZSBwb2xpdGUuIiwiY2hhdExvY2F0aW9uIjoiZXhhbXBsZUNoYXQifQ%3D%3D"></iframe>
+```
 
 To make assistant working properly you must URL encode your payload.
 
