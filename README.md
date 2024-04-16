@@ -39,6 +39,95 @@ Mobile app can be found [here](https://github.com/AndraxDev/speak-gpt).
 - [x] Pay as you go system
 - [x] Tips for newbies
 - [x] Custom fine-tuned models are supported
+- [x] Embedded assistant
+
+## Embedded assistant
+
+You can embed SpeakGPT into your website or app. Just use the following code:
+
+```html
+<style>
+    /* Can be customized depending on your needs */
+    .assistant-embedded {
+        width: 500px;
+        height: calc(100vh - 128px);
+        background-color: rgba(50, 50, 50, 0.4);
+        position: fixed;
+        right: 24px;
+        top: 100px;
+        z-index: 100000;
+        border-radius: 48px;
+    }
+
+    .assistant-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: transparent;
+    }
+</style>
+
+...
+
+<div class="assistant-embedded" id="speakgpt" style="display: none;">
+    <iframe src="https://assistant.teslasoft.org/embedded" class="assistant-iframe"></iframe>
+</div>
+
+...
+
+<script>
+    function switchAssistant() {
+        if (localStorage.getItem("assistantOpened") === "true") {
+            document.getElementById("speakgpt").style.display = "none";
+            localStorage.setItem("assistantOpened", "false")
+        } else {
+            document.getElementById("speakgpt").style.display = "block";
+            localStorage.setItem("assistantOpened", "true")
+        }
+    }
+
+    function loadAssistant() {
+        if (localStorage.getItem("assistantOpened") === "true") {
+            document.getElementById("speakgpt").style.display = "block";
+        } else {
+            document.getElementById("speakgpt").style.display = "none";
+        }
+    }
+
+    loadAssistant();
+</script>
+```
+
+React implementation:
+
+```jsx
+import React, {useState} from "react";
+
+function MyComponent() {
+    const [assistantIsOpened, setAssistantIsOpened] = useState(false);
+    
+    return (
+        <div>
+            <button className={"btn"} onClick={() => {
+                        if (assistantIsOpened) {
+                            setAssistantIsOpened(false);
+                        } else {
+                            setAssistantIsOpened(true);
+                        }
+                    }}>{assistantIsOpened ? "Close Assistant" : "Open Assistant"}
+                    </button>
+            
+            {
+                assistantIsOpened ? <div className={"assistant-embedded"}>
+                    <iframe src={"https://assistant.teslasoft.org/embedded"} className={"assistant-iframe"} title={"SpeakGPT"}/>
+                </div> : null
+            }
+        </div>
+    );
+}
+
+export default MyComponent;
+```
 
 ## API key safety:
 
