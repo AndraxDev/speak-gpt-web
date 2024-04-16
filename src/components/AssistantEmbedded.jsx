@@ -36,7 +36,7 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
-import {sha256} from "js-sha256";
+import {useParams} from "react-router-dom";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -46,11 +46,24 @@ function setFullHeight() {
 // Set the height initially
 setFullHeight();
 
+const examplePayload = {
+    name: "Example Chat",
+    initialMessage: "Hello, how are you?",
+    initialResponse: "I'm fine, thank you.",
+    systemMessage: "This is an example chat. Please be polite.",
+    chatLocation: "exampleChat"
+}
+
+console.log("AssistantEmbedded.jsx: Example payload: " + encodeURIComponent(btoa(JSON.stringify(examplePayload))));
+
 // Re-calculate on resize or orientation change
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
+
+    const { payload } = useParams();
+
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
@@ -66,6 +79,12 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     const [confirmClear, setConfirmClear] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [db, setDb] = React.useState(null);
+    const [payloadDecoded, setPayloadDecoded] = React.useState(null);
+    const [chatName, setChatName] = React.useState("SpeakGPT");
+    const [initialMessage, setInitialMessage] = React.useState("");
+    const [initialResponse, setInitialResponse] = React.useState("");
+    const [initialSystemMessage, setInitialSystemMessage] = React.useState("");
+    const [customChatLocation, setCustomChatLocation] = React.useState(chatLocation);
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -73,6 +92,49 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         setGlobalResolution(currentImageResolution)
         setGlobalSystemMessage(systemMessage)
     }, [useDalle3, currentImageResolution, systemMessage]);
+
+    useEffect(() => {
+        if (payload !== null && payload !== undefined && payload !== "") {
+            try {
+                let decoded = atob(payload);
+                setPayloadDecoded(JSON.parse(decoded));
+            } catch (e) {
+                console.error("Error decoding payload: " + e);
+                getDatabase()
+            }
+        } else {
+            getDatabase()
+        }
+    }, [payload]);
+
+    useEffect(() => {
+        if (payloadDecoded !== null && payloadDecoded !== undefined) {
+            if (payloadDecoded.name !== undefined) {
+                setChatName(payloadDecoded.name);
+            }
+
+            if (payloadDecoded.initialMessage !== undefined && payloadDecoded.initialResponse !== undefined) {
+                setInitialMessage(payloadDecoded.initialMessage);
+                setInitialResponse(payloadDecoded.initialResponse);
+            }
+
+            if (payloadDecoded.systemMessage !== undefined) {
+                setInitialSystemMessage(payloadDecoded.systemMessage);
+            }
+
+            if (payloadDecoded.chatLocation !== undefined) {
+                setCustomChatLocation(payloadDecoded.chatLocation);
+            }
+
+            getDatabase()
+        }
+    }, [payloadDecoded])
+
+    useEffect(() => {
+        if (db !== undefined && db !== null) {
+            getConversation(customChatLocation);
+        }
+    }, [db]);
 
     const getDatabase = () => {
         let db;
@@ -100,10 +162,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         };
     }
 
-    useEffect(() => {
-        getDatabase();
-    }, [])
-
     const getConversation = (chatId) => {
         const transaction = db.transaction(['chats'], 'readonly');
         const objectStore = transaction.objectStore('chats');
@@ -128,12 +186,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
             console.log("Error getting conversation", event.target.errorCode);
         }
     }
-
-    useEffect(() => {
-        if (db !== undefined && db !== null) {
-            getConversation(chatLocation);
-        }
-    }, [db]);
 
     const saveConversation = (chatId, conversation) => {
         const transaction = db.transaction(['chats'], 'readwrite');
@@ -248,7 +300,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
             setConversation(c)
 
-            saveConversation(chatLocation, JSON.stringify(c));
+            saveConversation(customChatLocation, JSON.stringify(c));
         } catch (e) {
             setSelectedFile(null)
             if (e.message.includes("401 Incorrect API key")) {
@@ -260,7 +312,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
                 setConversation(c)
 
-                saveConversation(chatLocation, JSON.stringify(c));
+                saveConversation(customChatLocation, JSON.stringify(c));
             } else {
                 let c = conversation;
                 c.push({
@@ -270,7 +322,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
                 setConversation(c)
 
-                saveConversation(chatLocation, JSON.stringify(c));
+                saveConversation(customChatLocation, JSON.stringify(c));
             }
         }
     }
@@ -311,7 +363,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 });
 
                 setConversation([...m]);
-                saveConversation(chatLocation, JSON.stringify(m));
+                saveConversation(customChatLocation, JSON.stringify(m));
 
                 for await (const chunk of chatCompletion) {
                     const r = chunk.choices[0].delta;
@@ -325,15 +377,39 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                     }
                 }
 
-                saveConversation(chatLocation, JSON.stringify(m));
+                saveConversation(customChatLocation, JSON.stringify(m));
 
                 return "";
             } else {
-                let ms = messages;
+                let ms = [];
+
+                if (initialMessage !== "" && initialResponse !== "") {
+                    ms.push({
+                        role: "user",
+                        content: initialMessage
+                    });
+
+                    ms.push({
+                        role: "assistant",
+                        content: initialResponse
+                    });
+                }
+
+                messages.forEach((e) => {
+                    ms.push({
+                        role: e.role,
+                        content: e.content
+                    });
+                })
 
                 if (getGlobalSystemMessage() !== "") {
                     ms.push({
                         content: getGlobalSystemMessage(),
+                        role: "system"
+                    });
+                } else if (initialSystemMessage !== "") {
+                    ms.push({
+                        content: initialSystemMessage,
                         role: "system"
                     });
                 }
@@ -352,7 +428,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 });
 
                 setConversation([...m]);
-                saveConversation(chatLocation, JSON.stringify(m));
+                saveConversation(customChatLocation, JSON.stringify(m));
 
                 for await (const chunk of chatCompletion) {
                     const r = chunk.choices[0].delta;
@@ -366,7 +442,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                     }
                 }
 
-                saveConversation(chatLocation, JSON.stringify(m));
+                saveConversation(customChatLocation, JSON.stringify(m));
 
                 return "";
             }
@@ -380,7 +456,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 });
 
                 setConversation(c)
-                saveConversation(chatLocation, JSON.stringify(c));
+                saveConversation(customChatLocation, JSON.stringify(c));
             } else {
                 let c = conversation;
                 c.push({
@@ -389,7 +465,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 });
 
                 setConversation(c)
-                saveConversation(chatLocation, JSON.stringify(c));
+                saveConversation(customChatLocation, JSON.stringify(c));
             }
         }
     }
@@ -410,7 +486,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         });
 
         setConversation([...messages]);
-        saveConversation(chatLocation, JSON.stringify(messages));
+        saveConversation(customChatLocation, JSON.stringify(messages));
 
         let mx = document.querySelector(".chat-textarea").value
         if (mx.includes("/imagine ")) {
@@ -437,7 +513,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     const clearConversation = () => {
         setConversation([]);
 
-        saveConversation(chatLocation, JSON.stringify([]));
+        saveConversation(customChatLocation, JSON.stringify([]));
     }
 
     const processFile = (file) => {
@@ -593,7 +669,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                                 }}><span
                                     className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
                                 &nbsp;&nbsp;&nbsp;
-                                <h3 className={"chat-title"}>SpeakGPT</h3>
+                                <h3 className={"chat-title"}>{chatName}</h3>
                                 &nbsp;&nbsp;&nbsp;
                                 <MaterialButtonTonalIconV2 onClick={() => {
                                     setSettingsOpen(true);

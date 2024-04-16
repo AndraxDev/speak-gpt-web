@@ -129,6 +129,36 @@ function MyComponent() {
 export default MyComponent;
 ```
 
+## Customize assistant:
+
+Assistant can be customized with a payload. Payload is a base64-encoded JSON string that contains params.
+Payload goes after /embedded/ in the URL. Example: https://assistant.teslasoft.org/embedded/eyJuYW1lIjoiRXhhbXBsZSBDaGF0IiwiaW5pdGlhbE1lc3NhZ2UiOiJIZWxsbywgaG93IGFyZSB5b3U%2FIiwiaW5pdGlhbFJlc3BvbnNlIjoiSSdtIGZpbmUsIHRoYW5rIHlvdS4iLCJzeXN0ZW1NZXNzYWdlIjoiVGhpcyBpcyBhbiBleGFtcGxlIGNoYXQuIFBsZWFzZSBiZSBwb2xpdGUuIiwiY2hhdExvY2F0aW9uIjoiZXhhbXBsZUNoYXQifQ%3D%3D
+
+To make assistant working properly you must URL encode your payload.
+
+```javascript
+let encodedPayload = encodeURIComponent(btoa(json));
+```
+
+Example of payload:
+
+```json
+{
+  "name": "Example Chat",
+  "initialMessage": "Hello, how are you?",
+  "initialResponse": "I'm fine, thank you.",
+  "styleMessage": "This is an example chat. Please be polite.",
+  "chatLocation": "I'm fine, thank you.",
+}
+```
+
+- `initialMessage` - message that will be sent to the assistant when it's loaded
+- `initialResponse` - response of assistant to make conversation work properly
+- `styleMessage` - message with additional content that are not shown in the chat and appended to the end of the chat history.
+- `chatLocation` - location of the chat in the indexed database
+
+More params will be added in the future.
+
 ## API key safety:
 
 SpeakGPT uses OpenAI API to provide you with the best experience. Using API-keys is more secure than using your username/password. Your personal info can't be obtained using API key. OpenAI provides cheap API access to their services. Your API key is stored locally on your device and is not shared with anyone. SpeakGPT does not collect any personal data. SpeakGPT is open-source and you can check the code yourself. Each release of SpeakGPT is checked on VirusTotal.

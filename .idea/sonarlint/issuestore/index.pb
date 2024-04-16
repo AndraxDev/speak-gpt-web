@@ -108,3 +108,5 @@ R
 "src/components/AssistantMobile.jsx,0\3\03b401ed48960060633d9a762924fd031e5ab516
 A
 public/robots.txt,d\a\dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9
+K
+src/components/NotFound.jsx,5\a\5ae663b583904677397b1fcfc9ae61f0d17a5704

@@ -21,11 +21,11 @@ import ChatList from "./components/ChatList";
 import WelcomePage from "./components/WelcomePage";
 import PromptStore from "./components/PromptStore";
 import Tips from "./components/Tips";
-import PromptView from "./components/PromptView";
 import AssistantEmbedded from "./components/AssistantEmbedded";
 import AssistantMobile from "./components/AssistantMobile";
+import NotFound from "./components/NotFound";
 
-function BaseRoutes(props) {
+function BaseRoutes() {
     return (
         <Routes>
             <Route path="/" element={
@@ -41,6 +41,7 @@ function BaseRoutes(props) {
             <Route path="/assistant/mobile" element={
                 <AssistantMobile/>
             } exact />
+
             <Route path="/embedded" element={
                 <AssistantEmbedded/>
             } exact />
@@ -64,9 +65,12 @@ function BaseRoutes(props) {
                     <ChatList/>
                 </MaterialWindow>
             } />
-            <Route path="/prompts/:id" element={
-                <MaterialWindow page={"prompts"}>
-                    <PromptView/>
+            <Route path="/embedded/:payload" element={
+                <AssistantEmbedded/>
+            } />
+            <Route path="*" element={
+                <MaterialWindow page={"not_found"}>
+                    <NotFound/>
                 </MaterialWindow>
             } />
         </Routes>

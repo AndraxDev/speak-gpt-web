@@ -34,6 +34,9 @@ function WelcomePage() {
                 <br/><br/>
                 <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
                 <h3 className={"title"}>Changelog:</h3>
+                <code className={"title"}>0.8.0-beta08</code><br/>
+                <code className={"text"}>- Customize embedded assistants with payload</code><br/>
+                <br/>
                 <code className={"title"}>0.7.0-beta07</code><br/>
                 <code className={"text"}>- Embedded assistant chats are now saved</code><br/>
                 <br/>
