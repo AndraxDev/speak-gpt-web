@@ -148,14 +148,14 @@ Example of payload:
   "initialMessage": "Hello, how are you?",
   "initialResponse": "I'm fine, thank you.",
   "styleMessage": "This is an example chat. Please be polite.",
-  "chatLocation": "I'm fine, thank you."
+  "chatLocation": "exampleLocation"
 }
 ```
 - `name` - name that will be displayed on the top of the assistant window
 - `initialMessage` - message that will be sent to the assistant when it's loaded
 - `initialResponse` - response of assistant to make conversation work properly
 - `styleMessage` - message with additional content that are not shown in the chat and appended to the end of the chat history.
-- `chatLocation` - location of the chat in the indexed database
+- `chatLocation` - location of the chat in the indexed database, don't use whitespaces or special characters
 
 More params will be added in the future.
 
