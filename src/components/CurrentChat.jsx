@@ -92,15 +92,10 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     const handleKeyDown = (event) => {
         let isMsAndroid = getAndroidOS()
 
-        // Check if Enter key is pressed without Shift key
         if (event.key === 'Enter' && !event.shiftKey && !isMobile && !isMsAndroid) {
-            // Prevent default action to avoid adding a new line
             event.preventDefault();
-
-            // Perform your action here (e.g., submit the text)
             processRequest()
         }
-        // Optional: handle other key events or conditions, if necessary
     };
 
     useEffect(() => {
@@ -518,7 +513,6 @@ function CurrentChat({chats, id, chatName, updateChats}) {
 
     function preventDefaults (e) {
         e.preventDefault();
-        // e.stopPropagation();
     }
 
     function highlight(e, e2) {
@@ -551,24 +545,20 @@ function CurrentChat({chats, id, chatName, updateChats}) {
         // Prevent default drag behaviors
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, preventDefaults, false);
-            // dropArea2.addEventListener(eventName, preventDefaults, false);
         });
 
         // Highlight drop area when item is dragged over it
         ['dragenter', 'dragover'].forEach(eventName => {
             dropArea.addEventListener(eventName, () => {highlight(dropArea, dropArea2)}, false);
-            // dropArea2.addEventListener(eventName, () => {highlight(dropArea)}, false);
         });
 
         ['dragleave', 'drop'].forEach(eventName => {
-            // dropArea.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
             dropArea2.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
         });
 
         dropArea.addEventListener('drop', handleDrop, false);
-        // dropArea2.addEventListener('drop', handleDrop, false);
 
-        document.querySelector('[contenteditable]').addEventListener('paste', function(e) {
+        document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
             e.preventDefault();
             const items = (e.clipboardData || window.clipboardData).items;
             let containsImage = false;
@@ -673,7 +663,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     </div>: null
                 }
                 <div className={"write-bar"}>
-                    <textarea contentEditable="true" onInput={() => {
+                    <textarea onInput={() => {
                         autoresize(document.querySelector(".chat-textarea"))
                     }} onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
                     <div>

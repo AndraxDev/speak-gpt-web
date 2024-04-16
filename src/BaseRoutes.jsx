@@ -23,6 +23,7 @@ import PromptStore from "./components/PromptStore";
 import Tips from "./components/Tips";
 import PromptView from "./components/PromptView";
 import AssistantEmbedded from "./components/AssistantEmbedded";
+import AssistantMobile from "./components/AssistantMobile";
 
 function BaseRoutes(props) {
     return (
@@ -36,6 +37,9 @@ function BaseRoutes(props) {
                 <MaterialWindow page={"chat"}>
                     <ChatList/>
                 </MaterialWindow>
+            } exact />
+            <Route path="/assistant/mobile" element={
+                <AssistantMobile/>
             } exact />
             <Route path="/embedded" element={
                 <AssistantEmbedded/>

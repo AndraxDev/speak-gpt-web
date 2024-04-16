@@ -16,10 +16,22 @@
 
 import React from 'react';
 import NavigationBarItem from "./NavigationBarItem";
+import {MaterialButton16} from "./MaterialButton";
+import {Tooltip} from "@mui/material";
 
-function NavigationBar({page}) {
+function NavigationBar({page, openAssistant}) {
     return (
         <div className={"nav-bar"}>
+            <Tooltip title="Launch Quick Assistant" placement="right">
+                <MaterialButton16 sx={{
+                    height: "64px",
+                    width: "64px",
+                    padding: "0",
+                }} className={"fab"} onClick={() => {
+                    openAssistant();
+                }}><span className={"material-symbols-outlined"}>group_work</span></MaterialButton16>
+            </Tooltip>
+            <br/>
             <NavigationBarItem name="Chat" icon="chat" isActive={page === "chat"} page={"/chat"}/>
             <NavigationBarItem name="Prompts" icon="apps" isActive={page === "prompts"} page={"/prompts"}/>
             <NavigationBarItem name="Tips" icon="lightbulb" isActive={page === "tips"} page={"/tips"}/>

@@ -84,9 +84,9 @@ html, body {
     flex-direction: column;
     align-items: center;
     width: 88px;
-    height: calc(100vh - 24px);
+    height: calc(100vh - 12px);
     background-color: var(--color-accent-200);
-    padding-top: 24px;
+    padding-top: 12px;
     position: fixed;
     top: 0;
     left: 0;
@@ -406,7 +406,7 @@ html, body {
 
 .write-bar-assistant {
     width: calc(100% - 24px);
-    background-color: var(--color-accent-50);
+    background-color: #191919;
     margin-bottom: 16px;
     border-radius: 40px;
     bottom: 0;
@@ -424,7 +424,6 @@ html, body {
     border-radius: 48px;
     padding: 16px;
     margin-right: 12px;
-    /*max-height: 16px;*/
     min-height: 16px;
     outline: none;
     border: none;
@@ -488,7 +487,7 @@ html, body {
 .chat-title {
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 18px;
+    font-size: 20px;
     padding: 0;
     margin: 0;
     max-width: 300px;
@@ -513,7 +512,6 @@ html, body {
     position: fixed;
     width: 500px;
     height: calc(100vh - 48px);
-    /*background-color: var(--color-accent-overlay);*/
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(16px);
     top: 24px;
@@ -526,9 +524,6 @@ html, body {
     position: fixed;
     width: 100%;
     height: 100%;
-    /*background-color: var(--color-accent-overlay);*/
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(16px);
     top: 0;
     border-radius: 48px;
     left: 0;
@@ -560,7 +555,6 @@ html, body {
 
 .chat-history-assistant-embedded {
     margin-top: 72px;
-    height: calc(100vh - 158px);
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -843,8 +837,7 @@ td {
 
 .chat-ab-actions-assistant {
     border-radius: 48px;
-    background-color: var(--color-accent-50);
-    backdrop-filter: blur(16px);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1542,6 +1535,7 @@ td {
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
     z-index: 80;
+    user-select: none;
 }
 
 .highlight-a > .drop-frame, .highlight2-a {
@@ -1560,8 +1554,18 @@ td {
     border: dashed 2px rgb(72, 137, 255);
     border-radius: 48px;
     z-index: 80;
+    user-select: none;
 }
 
 .unhiglighted {
     display: none;
+}
+
+.assistant-mobile {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    overflow: hidden;
 }

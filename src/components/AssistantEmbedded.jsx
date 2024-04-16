@@ -16,7 +16,7 @@
 
 import React, {useEffect} from 'react';
 import {
-    MaterialButtonTonalIcon, MaterialButtonTonalIconV2
+    MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -36,9 +36,21 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
-import confirmChatClear from "./ConfirmChatClear";
+import {sha256} from "js-sha256";
 
-function AssistantEmbedded() {
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
+
+function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
@@ -53,6 +65,7 @@ function AssistantEmbedded() {
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
     const [confirmClear, setConfirmClear] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState(null);
+    const [db, setDb] = React.useState(null);
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -60,6 +73,81 @@ function AssistantEmbedded() {
         setGlobalResolution(currentImageResolution)
         setGlobalSystemMessage(systemMessage)
     }, [useDalle3, currentImageResolution, systemMessage]);
+
+    const getDatabase = () => {
+        let db;
+
+        const request = indexedDB.open("chats", 1);
+
+        request.onupgradeneeded = function(event) {
+            // Save the IDBDatabase interface
+            db = event.target.result;
+
+            // Create an objectStore for this database
+            if (!db.objectStoreNames.contains('chats')) {
+                db.createObjectStore('chats', { keyPath: 'chatId'});
+            }
+        };
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+            setDb(db)
+            console.log("Database opened successfully");
+        };
+
+        request.onerror = function(event) {
+            console.log("Error opening database", event.target.errorCode);
+        };
+    }
+
+    useEffect(() => {
+        getDatabase();
+    }, [])
+
+    const getConversation = (chatId) => {
+        const transaction = db.transaction(['chats'], 'readonly');
+        const objectStore = transaction.objectStore('chats');
+        const request = objectStore.getAll();
+
+        request.onsuccess = function() {
+            let isFound = false;
+
+            request.result.forEach((e) => {
+                if (e.chatId === chatId) {
+                    isFound = true;
+                    setConversation(JSON.parse(e.content));
+                }
+            });
+
+            if (!isFound) {
+                setConversation([]);
+            }
+        };
+
+        request.onerror = function(event) {
+            console.log("Error getting conversation", event.target.errorCode);
+        }
+    }
+
+    useEffect(() => {
+        if (db !== undefined && db !== null) {
+            getConversation(chatLocation);
+        }
+    }, [db]);
+
+    const saveConversation = (chatId, conversation) => {
+        const transaction = db.transaction(['chats'], 'readwrite');
+        const objectStore = transaction.objectStore('chats');
+        const request = objectStore.put({ chatId: chatId, content: conversation });
+
+        request.onsuccess = function() {
+            console.log("Conversation saved successfully");
+        };
+
+        request.onerror = function(event) {
+            console.log("Error saving conversation", event);
+        }
+    }
 
     const getAndroidOS = () => {
         return navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Linux x86_64") > -1;
@@ -160,6 +248,7 @@ function AssistantEmbedded() {
 
             setConversation(c)
 
+            saveConversation(chatLocation, JSON.stringify(c));
         } catch (e) {
             setSelectedFile(null)
             if (e.message.includes("401 Incorrect API key")) {
@@ -170,6 +259,8 @@ function AssistantEmbedded() {
                 });
 
                 setConversation(c)
+
+                saveConversation(chatLocation, JSON.stringify(c));
             } else {
                 let c = conversation;
                 c.push({
@@ -178,6 +269,8 @@ function AssistantEmbedded() {
                 });
 
                 setConversation(c)
+
+                saveConversation(chatLocation, JSON.stringify(c));
             }
         }
     }
@@ -218,6 +311,7 @@ function AssistantEmbedded() {
                 });
 
                 setConversation([...m]);
+                saveConversation(chatLocation, JSON.stringify(m));
 
                 for await (const chunk of chatCompletion) {
                     const r = chunk.choices[0].delta;
@@ -230,6 +324,8 @@ function AssistantEmbedded() {
                         setConversation([...m]);
                     }
                 }
+
+                saveConversation(chatLocation, JSON.stringify(m));
 
                 return "";
             } else {
@@ -256,6 +352,7 @@ function AssistantEmbedded() {
                 });
 
                 setConversation([...m]);
+                saveConversation(chatLocation, JSON.stringify(m));
 
                 for await (const chunk of chatCompletion) {
                     const r = chunk.choices[0].delta;
@@ -269,6 +366,8 @@ function AssistantEmbedded() {
                     }
                 }
 
+                saveConversation(chatLocation, JSON.stringify(m));
+
                 return "";
             }
         } catch (e) {
@@ -281,6 +380,7 @@ function AssistantEmbedded() {
                 });
 
                 setConversation(c)
+                saveConversation(chatLocation, JSON.stringify(c));
             } else {
                 let c = conversation;
                 c.push({
@@ -289,6 +389,7 @@ function AssistantEmbedded() {
                 });
 
                 setConversation(c)
+                saveConversation(chatLocation, JSON.stringify(c));
             }
         }
     }
@@ -309,6 +410,7 @@ function AssistantEmbedded() {
         });
 
         setConversation([...messages]);
+        saveConversation(chatLocation, JSON.stringify(messages));
 
         let mx = document.querySelector(".chat-textarea").value
         if (mx.includes("/imagine ")) {
@@ -334,6 +436,8 @@ function AssistantEmbedded() {
 
     const clearConversation = () => {
         setConversation([]);
+
+        saveConversation(chatLocation, JSON.stringify([]));
     }
 
     const processFile = (file) => {
@@ -357,7 +461,6 @@ function AssistantEmbedded() {
 
     function preventDefaults (e) {
         e.preventDefault();
-        // e.stopPropagation();
     }
 
     function highlight(e, e2) {
@@ -390,24 +493,20 @@ function AssistantEmbedded() {
         // Prevent default drag behaviors
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, preventDefaults, false);
-            // dropArea2.addEventListener(eventName, preventDefaults, false);
         });
 
         // Highlight drop area when item is dragged over it
         ['dragenter', 'dragover'].forEach(eventName => {
             dropArea.addEventListener(eventName, () => {highlight(dropArea, dropArea2)}, false);
-            // dropArea2.addEventListener(eventName, () => {highlight(dropArea)}, false);
         });
 
         ['dragleave', 'drop'].forEach(eventName => {
-            // dropArea.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
             dropArea2.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
         });
 
         dropArea.addEventListener('drop', handleDrop, false);
-        // dropArea2.addEventListener('drop', handleDrop, false);
 
-        document.querySelector('[contenteditable]').addEventListener('paste', function(e) {
+        document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
             e.preventDefault();
             const items = (e.clipboardData || window.clipboardData).items;
             let containsImage = false;
@@ -431,6 +530,10 @@ function AssistantEmbedded() {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+    }, [])
+
+    useEffect(() => {
+        document.querySelector(".chat-textarea").focus();
     }, [])
 
     return (
@@ -476,7 +579,9 @@ function AssistantEmbedded() {
                                                  setMessage={setSystemMessageX} isAssistant={true}/> : null
                 }
                 <div className={"chat-area-assistant"}>
-                    <div className={"chat-history-assistant-embedded"} id={"drop-area"}>
+                    <div className={"chat-history-assistant-embedded"} style={{
+                        height: "calc(calc(var(--vh, 1vh) * 100) - 158px)"
+                    }} id={"drop-area"}>
                         <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                             <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
                             <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
@@ -522,30 +627,30 @@ function AssistantEmbedded() {
                         </div> : null
                     }
                     <div className={"write-bar-assistant"}>
-                        <textarea contentEditable={"true"} onKeyDown={handleKeyDown} className={"chat-textarea"}
+                        <textarea onKeyDown={handleKeyDown} className={"chat-textarea"}
                                   id={"assistant-textarea"} placeholder={"Start typing here..."}/>
                         <div>
-                            <MaterialButtonTonalIcon className={"chat-send"}><span
+                            <MaterialButtonTonalIconV3 className={"chat-send"}><span
                                 className={"material-symbols-outlined"}>photo</span><input
                                 className={"visually-hidden-input"} onChange={(e) => {
                                 if (e.target.files.length !== 0) {
                                     processFile(e.target.files[0])
                                 }
-                            }} type="file"/></MaterialButtonTonalIcon>
+                            }} type="file"/></MaterialButtonTonalIconV3>
                         </div>
                         &nbsp;&nbsp;&nbsp;
                         <div>
                             {
-                                lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                         processRequest();
                                     }}><CircularProgress style={{
                                         color: "var(--color-accent-900)",
-                                    }}/></MaterialButtonTonalIcon>
+                                    }}/></MaterialButtonTonalIconV3>
                                     :
-                                    <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                    <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                         processRequest();
                                     }}><span
-                                        className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
+                                        className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
                             }
                         </div>
                     </div>

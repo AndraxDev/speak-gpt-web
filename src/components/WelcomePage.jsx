@@ -34,6 +34,18 @@ function WelcomePage() {
                 <br/><br/>
                 <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
                 <h3 className={"title"}>Changelog:</h3>
+                <code className={"title"}>0.7.0-beta07</code><br/>
+                <code className={"text"}>- Embedded assistant chats are now saved</code><br/>
+                <br/>
+                <code className={"title"}>0.6.0-beta06</code><br/>
+                <code className={"text"}>- Assistant message bar autofocus</code><br/>
+                <br/>
+                <code className={"title"}>0.5.0-beta05</code><br/>
+                <code className={"text"}>- Small fixes</code><br/>
+                <br/>
+                <code className={"title"}>0.4.0-beta04</code><br/>
+                <code className={"text"}>- Added mobile assistant</code><br/>
+                <br/>
                 <code className={"title"}>0.3.0-beta03</code><br/>
                 <code className={"text"}>- Minor fixes</code><br/>
                 <br/>

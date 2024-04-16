@@ -87,21 +87,21 @@ function PromptView({prompt, updatePrompts}) {
                     <MaterialButton24 onClick={() => {
                         setAssistantIsOpened(true)
                     }} sx={{
-                        width: "100px",
+                        width: "110px",
                         height: "64px",
                         borderRadius: "16px",
                     }}><span className={"material-symbols-outlined"}>play_arrow</span>&nbsp;&nbsp;<span>Try it</span></MaterialButton24>
 
                     {
                         likeRequest ? <MaterialButtonTonal24 sx={{
-                            width: "100px",
+                            width: "110px",
                             height: "64px",
                             borderRadius: "16px",
                         }}><CircularProgress sx={{
                             color: "var(--color-accent-800)",
                             }}/></MaterialButtonTonal24> :
                             <MaterialButtonTonal24 sx={{
-                                width: "100px",
+                                width: "110px",
                                 height: "64px",
                                 borderRadius: "16px",
                             }} onClick={() => {
@@ -109,14 +109,6 @@ function PromptView({prompt, updatePrompts}) {
                                 likePrompt();
                             }}><span className={"material-symbols-outlined"}>thumb_up</span>&nbsp;&nbsp;<span>{prompt.likes}</span></MaterialButtonTonal24>
                     }
-
-                    <MaterialButtonTonal24 onClick={() => {
-                        setAssistantIsOpened2(true)
-                    }} sx={{
-                        width: "180px",
-                        height: "64px",
-                        borderRadius: "16px",
-                    }}><span className={"material-symbols-outlined"}>smart_toy</span>&nbsp;&nbsp;<span>Launch Assistant</span></MaterialButtonTonal24>
                 </div>
             </div>
             {

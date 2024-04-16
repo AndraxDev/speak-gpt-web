@@ -41,8 +41,6 @@ A
 src/index.css,c\5\c5d38a62d1faae90a2acaa34b79a7ef365c917e4
 H
 src/components/Chats.jsx,a\b\ab78ecad692748fc70bf0efd8ff1ab7dcac6f260
-R
-"src/components/ChatNotSelected.jsx,c\a\cab39c2b276b440a117e2926b1a9b5753a2caae7
 K
 src/components/ChatItem.jsx,b\c\bc3fce27f7f083ef4c110505e36f5f169d86f4fb
 <
@@ -94,8 +92,6 @@ G
 src/theme/BaseTheme.css,e\7\e73a4bbbf067e85a823bc09593c249332c978db0
 C
 src/theme/Theme.jsx,7\2\72521f372286ea1c971dee0ca5054564542edf28
-;
-src/App.css,a\a\aa7165aefcf8ee3d73539e99ab007daf1aa18d8d
 <
 src/prism.js,e\7\e7f2bdc0d4b1ede0918ab7c3f1f9abf045a90f90
 M
@@ -106,7 +102,9 @@ L
 src/components/Assistant.jsx,1\2\12f548fe0be5185bfe9c5dd51ea08907191e544b
 U
 %src/components/PlaceholderLoading.jsx,3\3\336d67865e90e40d7b427b812380caf35b87cafb
-S
-#src/components/AssistantEmbeded.jsx,c\e\ce2269e3b96588bfea1250772f3d7a546ce6c1ab
 T
 $src/components/AssistantEmbedded.jsx,f\a\fa20ac7d551abb86658fdb330893c0e44b15f174
+R
+"src/components/AssistantMobile.jsx,0\3\03b401ed48960060633d9a762924fd031e5ab516
+A
+public/robots.txt,d\a\dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9

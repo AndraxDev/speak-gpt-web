@@ -16,7 +16,7 @@
 
 import React, {useEffect} from 'react';
 import {
-    MaterialButtonTonalIcon, MaterialButtonTonalIconV2
+    MaterialButtonTonalIcon, MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -79,7 +79,6 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     };
 
     useEffect(() => {
-        console.log("Runtime prompt: " + runtimePrompt)
         if (runtimePrompt !== "" && runtimePrompt !== undefined) {
             document.querySelector(".chat-textarea").value = runtimePrompt;
 
@@ -370,7 +369,6 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
     function preventDefaults (e) {
         e.preventDefault();
-        // e.stopPropagation();
     }
 
     function highlight(e, e2) {
@@ -403,24 +401,20 @@ function Assistant({runtimePrompt, type, closeWindow}) {
         // Prevent default drag behaviors
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, preventDefaults, false);
-            // dropArea2.addEventListener(eventName, preventDefaults, false);
         });
 
         // Highlight drop area when item is dragged over it
         ['dragenter', 'dragover'].forEach(eventName => {
             dropArea.addEventListener(eventName, () => {highlight(dropArea, dropArea2)}, false);
-            // dropArea2.addEventListener(eventName, () => {highlight(dropArea)}, false);
         });
 
         ['dragleave', 'drop'].forEach(eventName => {
-            // dropArea.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
             dropArea2.addEventListener(eventName, () => {unhighlight(dropArea, dropArea2)}, false);
         });
 
         dropArea.addEventListener('drop', handleDrop, false);
-        // dropArea2.addEventListener('drop', handleDrop, false);
 
-        document.querySelector('[contenteditable]').addEventListener('paste', function(e) {
+        document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
             e.preventDefault();
             const items = (e.clipboardData || window.clipboardData).items;
             let containsImage = false;
@@ -444,6 +438,10 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+    }, [])
+
+    useEffect(() => {
+        document.querySelector(".chat-textarea").focus();
     }, [])
 
     return (
@@ -524,27 +522,27 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     </div>: null
                 }
                 <div className={"write-bar-assistant"}>
-                    <textarea contentEditable={"true"} onKeyDown={handleKeyDown} className={"chat-textarea"} id={"assistant-textarea"} placeholder={"Start typing here..."}/>
+                    <textarea onKeyDown={handleKeyDown} className={"chat-textarea"} id={"assistant-textarea"} placeholder={"Start typing here..."}/>
                     <div>
-                        <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
+                        <MaterialButtonTonalIconV3 className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
                             if (e.target.files.length !== 0) {
                                 processFile(e.target.files[0])
                             }
-                        }} type="file" /></MaterialButtonTonalIcon>
+                        }} type="file" /></MaterialButtonTonalIconV3>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div>
                         {
-                            lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                            lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                     processRequest();
                                 }}><CircularProgress style={{
                                     color: "var(--color-accent-900)",
-                                }}/></MaterialButtonTonalIcon>
+                                }}/></MaterialButtonTonalIconV3>
                                 :
-                                <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                     processRequest();
                                 }}><span
-                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
+                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
                         }
                     </div>
                 </div>

@@ -15,10 +15,7 @@
  *****************************************************************/
 
 import React from 'react';
-import ApiKeyDialog from "./ApiKeyDialog";
-import NavigationBar from "../widgets/NavigationBar";
 import AssistantEmbedded from "./AssistantEmbedded";
-import Assistant from "./Assistant";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -32,35 +29,20 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function MaterialWindow({children, page, ...props}) {
-
-    const [assistantOpened, setAssistantOpened] = React.useState(false);
-
+function AssistantMobile() {
     return (
         <div style={{
             height: "100vh",
             backgroundColor: "#000",
         }}>
-            <div style={{
+            <div className={"assistant-mobile"} style={{
                 height: "calc(var(--vh, 1vh) * 100)",
                 overflow: "hidden"
-            }} className={"material-window-background"}>
-                {
-                    assistantOpened ?
-                        <div className={"assistant-container"}>
-                            <Assistant runtimePrompt={""} type={""} closeWindow={setAssistantOpened} />
-                        </div> : null
-                }
-                <NavigationBar page={page} openAssistant={() => {
-                    setAssistantOpened(true);
-                }}/>
-                <div className={"content"}>
-                    {children}
-                </div>
-                <ApiKeyDialog/>
+            }}>
+                <AssistantEmbedded chatLocation={"assistantMobile"}/>
             </div>
         </div>
     );
 }
 
-export default MaterialWindow;
+export default AssistantMobile;
