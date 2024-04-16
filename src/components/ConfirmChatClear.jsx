@@ -17,9 +17,9 @@
 import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 
-function ConfirmChatClear({setOpenState, confirm}) {
+function ConfirmChatClear({setOpenState, confirm, isAssistant}) {
     return (
-        <div className={"dialog-backdrop"} onMouseDown={() => {
+        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             confirm(false);
             setOpenState(false);
         }}>

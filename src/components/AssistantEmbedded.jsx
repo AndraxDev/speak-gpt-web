@@ -438,7 +438,7 @@ function AssistantEmbedded() {
             <div className={"chat-frame"}>
                 {
                     clearDialogOpen ?
-                        <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
+                        <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear} isAssistant={true}/> : null
                 }
                 {
                     settingsOpen ? <ChatSettings
@@ -504,7 +504,7 @@ function AssistantEmbedded() {
                                 conversation.map((e, i) => {
                                     return (
                                         <Message key={i} isBot={e.isBot} message={e.message}
-                                                 image={e.image === null || e.image === undefined ? null : e.image}/>
+                                                 image={e.image === null || e.image === undefined ? null : e.image} isAssistant={true}/>
                                     )
                                 })
                             }

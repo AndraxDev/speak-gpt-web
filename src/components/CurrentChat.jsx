@@ -597,7 +597,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     return (
         <div className={"chat-frame"}>
             {
-                clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
+                clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear} isAssistant={false}/> : null
             }
             {
                 settingsOpen ? <ChatSettings
@@ -655,7 +655,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                             conversation.map((e, i) => {
                                 return (
                                     <Message key={i} isBot={e.isBot} message={e.message}
-                                             image={e.image === null || e.image === undefined ? null : e.image}/>
+                                             image={e.image === null || e.image === undefined ? null : e.image} isAssistant={false}/>
                                 )
                             })
                         }

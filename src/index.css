@@ -525,7 +525,7 @@ html, body {
 .assistant-container-embedded {
     position: fixed;
     width: 100%;
-    height: calc(100% - 2px);
+    height: 100%;
     /*background-color: var(--color-accent-overlay);*/
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(16px);
@@ -733,6 +733,15 @@ html, body {
 
 .chat-image {
     width: 400px;
+    border-radius: 16px;
+    margin-top: 16px;
+    margin-left: 40px;
+    background-color: var(--color-accent-100);
+    border: none;
+}
+
+.chat-image-assistant {
+    max-width: 80%;
     border-radius: 16px;
     margin-top: 16px;
     margin-left: 40px;
