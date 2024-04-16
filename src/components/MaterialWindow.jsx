@@ -20,7 +20,7 @@ import NavigationBar from "../widgets/NavigationBar";
 
 function MaterialWindow({children, page, ...props}) {
     return (
-        <div>
+        <div className={"material-window-background"}>
             <NavigationBar page={page}/>
             <div className={"content"}>
                 {children}

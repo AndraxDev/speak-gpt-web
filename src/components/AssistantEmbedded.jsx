@@ -36,8 +36,9 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
+import confirmChatClear from "./ConfirmChatClear";
 
-function Assistant({runtimePrompt, type, closeWindow}) {
+function AssistantEmbedded() {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
@@ -75,21 +76,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
             // Perform your action here (e.g., submit the text)
             processRequest()
         }
-        // Optional: handle other key events or conditions, if necessary
     };
-
-    useEffect(() => {
-        console.log("Runtime prompt: " + runtimePrompt)
-        if (runtimePrompt !== "" && runtimePrompt !== undefined) {
-            document.querySelector(".chat-textarea").value = runtimePrompt;
-
-            if (type === "dall-e") {
-                document.querySelector(".chat-textarea").value = "/imagine " + runtimePrompt
-            }
-
-            processRequest();
-        }
-    }, [runtimePrompt, type]);
 
     useEffect(() => {
         if (confirmClear) {
@@ -447,105 +434,120 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     }, [])
 
     return (
-        <div className={"chat-frame"}>
-            {
-                clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
-            }
-            {
-                settingsOpen ? <ChatSettings
-                    chatId={null}
-                    setIsOpen={setSettingsOpen}
-                    apiDialogOpen={setOpenAIKeyChangeDialogIsOpened}
-                    setDalleVersion={setUseDalle3}
-                    dalle3={useDalle3}
-                    model={currentModel}
-                    openModelDialog={setModelDialogOpened}
-                    resolution={currentImageResolution}
-                    openResolutionDialog={setResolutionDialogOpened}
-                    systemMessage={systemMessage}
-                    openSystemMessageDialog={setSystemMessageDialogOpened}
-                    isAssistant={true}
-                /> : null
-            }
-            {
-                openAIKeyChangeDialogIsOpened ? <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} isAssistant={true} /> : null
-            }
-            {
-                resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={true} /> : null
-            }
-            {
-                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={true} /> : null
-            }
-            {
-                systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={true} /> : null
-            }
-            <div className={"chat-area-assistant"}>
-                <div className={"chat-history-assistant"} id={"drop-area"}>
-                    <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
-                        <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
-                        <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
-                    </div>
-                    <div className={"chat-ab-actions-container-assistant"}>
-                        <div className={"chat-ab-actions-assistant"}>
-                            <MaterialButtonTonalIconV2 onClick={() => {
-                                closeWindow(false);
-                            }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
-                            &nbsp;&nbsp;&nbsp;
-                            <h3 className={"chat-title"}>SpeakGPT Quick Assistant</h3>
-                            &nbsp;&nbsp;&nbsp;
-                            <MaterialButtonTonalIconV2 onClick={() => {
-                                setSettingsOpen(true);
-                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonalIconV2>
-                        </div>
-                    </div>
-                    <div style={{
-                        height: '16px'
-                    }}/>
-                    <div>
-                        {
-                            conversation.map((e, i) => {
-                                return (
-                                    <Message key={i} isBot={e.isBot} message={e.message}
-                                             image={e.image === null || e.image === undefined ? null : e.image}/>
-                                )
-                            })
-                        }
-                    </div>
-                    <div id={"bottom"}></div>
-                </div>
+        <div className={"assistant-container-embedded"}>
+            <div className={"chat-frame"}>
                 {
-                    selectedFile !== null && !lockedState ? <div className={"selected-image-frame-assistant"}>
-                        <img className={"selected-image"} src={selectedFile} alt={"Selected file"} style={{
-                            width: "100%"
-                        }}/>
-                        <div className={"discard-image"} onClick={() => {
-                            setSelectedFile(null);
-                        }}><span className={"material-symbols-outlined"}>cancel</span></div>
-                    </div>: null
+                    clearDialogOpen ?
+                        <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear}/> : null
                 }
-                <div className={"write-bar-assistant"}>
-                    <textarea contentEditable={"true"} onKeyDown={handleKeyDown} className={"chat-textarea"} id={"assistant-textarea"} placeholder={"Start typing here..."}/>
-                    <div>
-                        <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
-                            if (e.target.files.length !== 0) {
-                                processFile(e.target.files[0])
-                            }
-                        }} type="file" /></MaterialButtonTonalIcon>
-                    </div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div>
-                        {
-                            lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                    processRequest();
-                                }}><CircularProgress style={{
-                                    color: "var(--color-accent-900)",
-                                }}/></MaterialButtonTonalIcon>
-                                :
-                                <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                    processRequest();
+                {
+                    settingsOpen ? <ChatSettings
+                        chatId={null}
+                        setIsOpen={setSettingsOpen}
+                        apiDialogOpen={setOpenAIKeyChangeDialogIsOpened}
+                        setDalleVersion={setUseDalle3}
+                        dalle3={useDalle3}
+                        model={currentModel}
+                        openModelDialog={setModelDialogOpened}
+                        resolution={currentImageResolution}
+                        openResolutionDialog={setResolutionDialogOpened}
+                        systemMessage={systemMessage}
+                        openSystemMessageDialog={setSystemMessageDialogOpened}
+                        isAssistant={true}
+                    /> : null
+                }
+                {
+                    openAIKeyChangeDialogIsOpened ?
+                        <ApiKeyChangeDialog setIsOpen={setOpenAIKeyChangeDialogIsOpened} isAssistant={true}/> : null
+                }
+                {
+                    resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution}
+                                                                     resolution={currentImageResolution}
+                                                                     setIsOpen={setResolutionDialogOpened}
+                                                                     isAssistant={true}/> : null
+                }
+                {
+                    modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel}
+                                                           setIsOpen={setModelDialogOpened} isAssistant={true}/> : null
+                }
+                {
+                    systemMessageDialogOpened ?
+                        <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened}
+                                                 setMessage={setSystemMessageX} isAssistant={true}/> : null
+                }
+                <div className={"chat-area-assistant"}>
+                    <div className={"chat-history-assistant-embedded"} id={"drop-area"}>
+                        <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
+                            <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                            <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
+                        </div>
+                        <div className={"chat-ab-actions-container-assistant"}>
+                            <div className={"chat-ab-actions-assistant"}>
+                                <MaterialButtonTonalIconV2 onClick={() => {
+                                    setClearDialogOpen(true);
                                 }}><span
-                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
-                        }
+                                    className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
+                                &nbsp;&nbsp;&nbsp;
+                                <h3 className={"chat-title"}>SpeakGPT</h3>
+                                &nbsp;&nbsp;&nbsp;
+                                <MaterialButtonTonalIconV2 onClick={() => {
+                                    setSettingsOpen(true);
+                                }}><span
+                                    className={"material-symbols-outlined"}>settings</span></MaterialButtonTonalIconV2>
+                            </div>
+                        </div>
+                        <div style={{
+                            height: '16px'
+                        }}/>
+                        <div>
+                            {
+                                conversation.map((e, i) => {
+                                    return (
+                                        <Message key={i} isBot={e.isBot} message={e.message}
+                                                 image={e.image === null || e.image === undefined ? null : e.image}/>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div id={"bottom"}></div>
+                    </div>
+                    {
+                        selectedFile !== null && !lockedState ? <div className={"selected-image-frame-assistant"}>
+                            <img className={"selected-image"} src={selectedFile} alt={"Selected file"} style={{
+                                width: "100%"
+                            }}/>
+                            <div className={"discard-image"} onClick={() => {
+                                setSelectedFile(null);
+                            }}><span className={"material-symbols-outlined"}>cancel</span></div>
+                        </div> : null
+                    }
+                    <div className={"write-bar-assistant"}>
+                        <textarea contentEditable={"true"} onKeyDown={handleKeyDown} className={"chat-textarea"}
+                                  id={"assistant-textarea"} placeholder={"Start typing here..."}/>
+                        <div>
+                            <MaterialButtonTonalIcon className={"chat-send"}><span
+                                className={"material-symbols-outlined"}>photo</span><input
+                                className={"visually-hidden-input"} onChange={(e) => {
+                                if (e.target.files.length !== 0) {
+                                    processFile(e.target.files[0])
+                                }
+                            }} type="file"/></MaterialButtonTonalIcon>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;
+                        <div>
+                            {
+                                lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                        processRequest();
+                                    }}><CircularProgress style={{
+                                        color: "var(--color-accent-900)",
+                                    }}/></MaterialButtonTonalIcon>
+                                    :
+                                    <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                        processRequest();
+                                    }}><span
+                                        className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -553,4 +555,4 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     );
 }
 
-export default Assistant;
+export default AssistantEmbedded;

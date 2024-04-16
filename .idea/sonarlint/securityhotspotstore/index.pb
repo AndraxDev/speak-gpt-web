@@ -106,3 +106,7 @@ L
 src/components/Assistant.jsx,1\2\12f548fe0be5185bfe9c5dd51ea08907191e544b
 U
 %src/components/PlaceholderLoading.jsx,3\3\336d67865e90e40d7b427b812380caf35b87cafb
+S
+#src/components/AssistantEmbeded.jsx,c\e\ce2269e3b96588bfea1250772f3d7a546ce6c1ab
+T
+$src/components/AssistantEmbedded.jsx,f\a\fa20ac7d551abb86658fdb330893c0e44b15f174

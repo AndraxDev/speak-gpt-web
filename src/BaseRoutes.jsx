@@ -22,17 +22,23 @@ import WelcomePage from "./components/WelcomePage";
 import PromptStore from "./components/PromptStore";
 import Tips from "./components/Tips";
 import PromptView from "./components/PromptView";
+import AssistantEmbedded from "./components/AssistantEmbedded";
 
 function BaseRoutes(props) {
     return (
         <Routes>
             <Route path="/" element={
-                <WelcomePage/>
+                <MaterialWindow page={"welcome"}>
+                    <WelcomePage/>
+                </MaterialWindow>
             } exact />
             <Route path="/chat" element={
                 <MaterialWindow page={"chat"}>
                     <ChatList/>
                 </MaterialWindow>
+            } exact />
+            <Route path="/embedded" element={
+                <AssistantEmbedded/>
             } exact />
             <Route path="/prompts" element={
                 <MaterialWindow page={"prompts"}>

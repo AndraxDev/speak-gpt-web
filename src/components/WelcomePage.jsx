@@ -20,7 +20,11 @@ import {MaterialButton24} from "../widgets/MaterialButton";
 
 function WelcomePage() {
     return (
-        <div>
+        <div style={{
+                padding: "24px",
+                overflowY: "auto",
+                height: "calc(100vh - 48px)"
+        }}>
                 <h2 className={"title"}>SpeakGPT Desktop</h2>
                 <p className={"warning"}>This version of SpeakGPT is currently on alpha stage. You can try it before
                         official release. Be careful as some rough edges may appear.
@@ -30,6 +34,9 @@ function WelcomePage() {
                 <br/><br/>
                 <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
                 <h3 className={"title"}>Changelog:</h3>
+                <code className={"title"}>0.2.0-beta02</code><br/>
+                <code className={"text"}>- Added embedded assistant</code><br/>
+                <br/>
                 <code className={"title"}>0.1.1-beta01</code><br/>
                 <code className={"text"}>- Minor fixes</code><br/>
                 <br/>
