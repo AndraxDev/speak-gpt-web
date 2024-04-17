@@ -99,7 +99,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     const [initialResponse, setInitialResponse] = React.useState("");
     const [initialSystemMessage, setInitialSystemMessage] = React.useState("");
     const [customChatLocation, setCustomChatLocation] = React.useState(chatLocation);
-    const [assistantIcon, setAssistantIcon] = React.useState("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg==");
+    const [assistantIcon, setAssistantIcon] = React.useState("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=");
     const [assistantDescription, setAssistantDescription] = React.useState(getDefaultDescription());
 
     useEffect(() => {
@@ -153,6 +153,8 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
             }
 
             getDatabase()
+        } else {
+            setAssistantIcon("https://assistant.teslasoft.org/logo192.png");
         }
     }, [payloadDecoded])
 
