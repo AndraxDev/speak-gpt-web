@@ -714,7 +714,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                                     return (
                                         <Message key={i} isBot={e.isBot} message={e.message}
                                                  image={e.image === null || e.image === undefined ? null : e.image}
-                                                 isAssistant={true}/>
+                                                 isAssistant={true} assistantName={chatName} assistantIcon={assistantIcon}/>
                                     )
                                 }) : <div className={"empty-assistant"}>
                                     <img className={"empty-assistant-icon"} src={assistantIcon} alt={chatName}/>

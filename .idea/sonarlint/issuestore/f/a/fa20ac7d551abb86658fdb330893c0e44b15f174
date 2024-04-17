@@ -1,9 +1,9 @@
 
-vjavascript:S6774M"-'chatLocation' is missing in props validation(¾†Ÿ½8ÒïÃïî1J$76ab281a-72c2-485a-845c-27c203a42846
-ˆjavascript:S6754X":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8ÒïÃïî1J$9fa3eb74-93a9-441b-afc3-99599783ce56
-¢javascript:S3776~"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(ùëİ¯ùÿÿÿÿ8ÓïÃïî1J$e544cc9e-8afb-450f-8434-172d8a79d5f0
-£javascript:S3776æ"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(ôæäµıÿÿÿÿ8¸ì¹ğî1J$878e417b-7e7a-4c29-8162-180f0fc1fe20
-Ájavascript:S1874ó"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8ÔïÃïî1J$2cab83c5-dc5d-41f8-8036-f56eed29ba76
-mjavascript:S6479Ë"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ÔïÃïî1J$96f44e5b-f78e-46c3-bc01-16ba40af623b
-’javascript:S6848â"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ÔïÃïî1J$2a2e89dd-66e1-418f-9716-0f7dbedf654c
-®javascript:S1082â"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ÕïÃïî1J$1494faa4-eb87-4de5-8889-3fbea0258526
+vjavascript:S6774M"-'chatLocation' is missing in props validation(¾†Ÿ½8ÒïÃïî1J$165c8b10-f781-435a-a2f3-7eb324a13ea4
+ˆjavascript:S6754X":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8ÒïÃïî1J$28510f7a-9f81-46c6-b8ad-f847733f4f2a
+¢javascript:S3776~"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(ùëİ¯ùÿÿÿÿ8ÓïÃïî1J$20fa9e04-13ba-49a9-9524-9549befe2c76
+£javascript:S3776æ"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(ôæäµıÿÿÿÿ8¸ì¹ğî1J$439d6e73-dab9-42ba-ac5b-cc58be9bfce8
+Ájavascript:S1874ó"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8ÔïÃïî1J$edf2acf1-d6ae-41c7-aacf-4b3dfb4bb60e
+mjavascript:S6479Ë"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ÔïÃïî1J$7b061180-c596-46e5-9761-01360295400b
+’javascript:S6848â"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ÔïÃïî1J$13693686-c9bb-44c2-a358-054aedbcc8ec
+®javascript:S1082â"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ÕïÃïî1J$4dc1fe17-cf8e-4e46-a17c-5cc78839e9cf

@@ -482,6 +482,7 @@ html, body {
     font-size: 28px;
     color: var(--color-accent-900);
     user-select: none;
+    border-radius: 24px;
 }
 
 .chat-title {
