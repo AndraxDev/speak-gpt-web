@@ -1,8 +1,8 @@
 
-vjavascript:S6774M"-'chatLocation' is missing in props validation(¾†Ÿ½8ÒïÃïî1J$d88a13ab-801c-4dbf-9a2f-6849f92e08e5
-ˆjavascript:S6754X":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8ÒïÃïî1J$41270a3d-031c-4cdf-bfb0-1d893189f6d4
-£javascript:S3776â"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(ôæäµıÿÿÿÿ8ÓïÃïî1J$f23669e2-502c-4e35-b1df-f48e39cc5d46
-Ájavascript:S1874ï"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8ÔïÃïî1J$e70b67a9-a853-41c6-a6b6-d6541d8c0d7f
-mjavascript:S6479Ç"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ÔïÃïî1J$b8463256-1d1c-401a-a630-59547ce69ac1
-’javascript:S6848Ş"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ÔïÃïî1J$e59d4a91-4d21-457e-9e21-389cf680e76f
-®javascript:S1082Ş"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ÕïÃïî1J$cd467bdd-9dd4-442b-9777-c79c6e95ba47
+vjavascript:S6774M"-'chatLocation' is missing in props validation(¾†Ÿ½8ÒïÃïî1J$dff4bc9a-9cc6-4c55-88f9-34aed70ac05c
+ˆjavascript:S6754X":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8ÒïÃïî1J$d74f072a-0616-4293-a5c2-80d2364812b6
+£javascript:S3776â"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(ôæäµıÿÿÿÿ8ÓïÃïî1J$44540cb7-1bc3-4a39-b914-f585f453c3c0
+Ájavascript:S1874ï"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8ÔïÃïî1J$e837134f-6cd8-415e-b4ed-27c943cdc1bb
+mjavascript:S6479Ç"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ÔïÃïî1J$7d699e2f-7332-491f-8b4b-e37b62bdf55c
+’javascript:S6848Ş"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ÔïÃïî1J$2da92f74-c229-4202-8ee4-77ceae129e2f
+®javascript:S1082Ş"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ÕïÃïî1J$c5d5169e-b7db-4541-ac24-8abca7de438d

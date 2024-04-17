@@ -1,10 +1,10 @@
 
-wjavascript:S67744".'runtimePrompt' is missing in props validation(¤–ûô8è¶³ïî1J$c98276b5-71aa-4ff9-93d9-09b781b080ad
-njavascript:S67744"%'type' is missing in props validation(¤–ûô8è¶³ïî1J$5e2db956-79be-4a9f-a742-88002bd8594c
-ujavascript:S67744",'closeWindow' is missing in props validation(¤–ûô8è¶³ïî1J$4e739362-a83f-48b0-aac4-6d289b29a656
-ˆjavascript:S6754<":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8é¶³ïî1J$f55a7eca-2861-48f4-92dc-bcb00fde3817
-£javascript:S3776Ñ"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8é¶³ïî1J$bb9ca6b1-17d7-4f23-a280-00258ac381c0
-Ájavascript:S1874»"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8é¶³ïî1J$0f8eb901-18ed-47b6-b301-d95409d73b99
-mjavascript:S6479†"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ê¶³ïî1J$8257069d-19f9-46a1-8533-f54f7dc9f3e6
-’javascript:S6848›"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ê¶³ïî1J$3161fde8-e42d-4dd4-ae24-9d5a3e175ab5
-®javascript:S1082›"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ê¶³ïî1J$cbc7db43-2a0d-47c5-a0b7-7ff3f66f415b
+wjavascript:S67744".'runtimePrompt' is missing in props validation(¤–ûô8è¶³ïî1J$8339b8f6-c9ed-48bf-bdc5-8175236f4174
+njavascript:S67744"%'type' is missing in props validation(¤–ûô8è¶³ïî1J$48a5bb6e-db98-4d15-9f46-bab3c497ebd1
+ujavascript:S67744",'closeWindow' is missing in props validation(¤–ûô8è¶³ïî1J$e779bd3e-c441-46d1-9bed-5a7f89f28681
+ˆjavascript:S6754<":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8é¶³ïî1J$7ad7019a-c88e-4f9c-bb03-9df0c7dac47f
+£javascript:S3776Ñ"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8é¶³ïî1J$c3620ec0-f14e-4463-8e98-2f457d893208
+Ájavascript:S1874»"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8é¶³ïî1J$649fae97-19b6-4c6b-9272-8e77727019be
+mjavascript:S6479†"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ê¶³ïî1J$83e04e6d-d1de-4dd4-b25a-b9775b6f13f7
+’javascript:S6848›"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ê¶³ïî1J$c01bf274-a97c-4329-b48a-6c717fb0335d
+®javascript:S1082›"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ê¶³ïî1J$be8e44d1-a539-498b-86b3-204ba76afe2e

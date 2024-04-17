@@ -1572,8 +1572,9 @@ td {
 
 .empty-assistant {
     width: 100%;
-    height: calc(100vh - 250px);
-    overflow: hidden;
+    padding-top: 72px;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
