@@ -34,6 +34,9 @@ function WelcomePage() {
                 <br/><br/>
                 <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
                 <h3 className={"title"}>Changelog:</h3>
+                <code className={"title"}>0.9.0-beta09</code><br/>
+                <code className={"text"}>- Personalize embedded assistants with icon and description</code><br/>
+                <br/>
                 <code className={"title"}>0.8.0-beta08</code><br/>
                 <code className={"text"}>- Customize embedded assistants with payload</code><br/>
                 <br/>

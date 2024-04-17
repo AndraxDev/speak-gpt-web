@@ -156,6 +156,8 @@ Example of payload:
 }
 ```
 - `name` - name that will be displayed on the top of the assistant window
+- `icon` - URL to the icon that will be displayed on the top of the assistant window when conversation is empty
+- `description` - description that will be displayed on the top of the assistant window when conversation is empty. Supports HTML
 - `initialMessage` - message that will be sent to the assistant when it's loaded
 - `initialResponse` - response of assistant to make conversation work properly
 - `styleMessage` - message with additional content that are not shown in the chat and appended to the end of the chat history.

@@ -1,0 +1,10 @@
+
+wjavascript:S67744".'runtimePrompt' is missing in props validation(¤–ûô8è¶³ïî1J$7a3d83af-f121-4862-a6a6-1d5e3b422bfc
+njavascript:S67744"%'type' is missing in props validation(¤–ûô8è¶³ïî1J$76c3081c-1a36-4257-a952-b3b26351a4c1
+ujavascript:S67744",'closeWindow' is missing in props validation(¤–ûô8è¶³ïî1J$d689167b-1e2d-40ed-818b-e6355be4c5cf
+ˆjavascript:S6754<":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8é¶³ïî1J$23e0c8c1-1290-4adf-a4bd-ada6771d3428
+£javascript:S3776Ñ"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8é¶³ïî1J$4257a982-bc3e-477f-a234-175093ae3afd
+Ájavascript:S1874»"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8é¶³ïî1J$cd15667a-d780-4be5-aa71-5c1c652363f8
+mjavascript:S6479†"Do not use Array index in keys(Ë«„çşÿÿÿÿ8ê¶³ïî1J$09ae128e-4569-43bf-bc3c-7bbf094cd926
+’javascript:S6848›"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ê¶³ïî1J$608180c6-d4aa-465c-b1cc-3d5357d1fd41
+®javascript:S1082›"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ê¶³ïî1J$197fe951-289e-4d70-9d15-67e2de98c7da

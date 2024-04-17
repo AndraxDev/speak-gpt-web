@@ -51,7 +51,21 @@ const examplePayload = {
     initialMessage: "Hello, how are you?",
     initialResponse: "I'm fine, thank you.",
     systemMessage: "This is an example chat. Please be polite.",
-    chatLocation: "exampleChat"
+    chatLocation: "exampleChat",
+    icon: "https://teslasoft.org/res/logo.webp",
+    description: "This is an example chat. Please be polite.<br>You can use <b>HTML</b> in the description."
+}
+
+const getDefaultDescription = () => {
+    return (`
+        What can this assistant do:<br/><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Answer your question<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Generate code<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Solve math problems<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Translate text<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Generate images and artworks<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Process png/jpg images
+    `);
 }
 
 console.log("AssistantEmbedded.jsx: Example payload: " + encodeURIComponent(btoa(JSON.stringify(examplePayload))));
@@ -85,6 +99,8 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     const [initialResponse, setInitialResponse] = React.useState("");
     const [initialSystemMessage, setInitialSystemMessage] = React.useState("");
     const [customChatLocation, setCustomChatLocation] = React.useState(chatLocation);
+    const [assistantIcon, setAssistantIcon] = React.useState("https://assistant.teslasoft.org/logo512.png");
+    const [assistantDescription, setAssistantDescription] = React.useState(getDefaultDescription());
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -124,6 +140,14 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
             if (payloadDecoded.chatLocation !== undefined) {
                 setCustomChatLocation(payloadDecoded.chatLocation);
+            }
+
+            if (payloadDecoded.icon !== undefined) {
+                setAssistantIcon(payloadDecoded.icon);
+            }
+
+            if (payloadDecoded.description !== undefined) {
+                setAssistantDescription(payloadDecoded.description);
             }
 
             getDatabase()
@@ -660,7 +684,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                     }} id={"drop-area"}>
                         <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                             <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
-                            <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
+                            <p className={"placeholder-text"}>Drag your images here to use with assistant.</p>
                         </div>
                         <div className={"chat-ab-actions-container-assistant"}>
                             <div className={"chat-ab-actions-assistant"}>
@@ -682,12 +706,22 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                         }}/>
                         <div>
                             {
-                                conversation.map((e, i) => {
+                                conversation.length !== 0 ? conversation.map((e, i) => {
                                     return (
                                         <Message key={i} isBot={e.isBot} message={e.message}
-                                                 image={e.image === null || e.image === undefined ? null : e.image} isAssistant={true}/>
+                                                 image={e.image === null || e.image === undefined ? null : e.image}
+                                                 isAssistant={true}/>
                                     )
-                                })
+                                }) : <div className={"empty-assistant"}>
+                                    <img className={"empty-assistant-icon"} src={assistantIcon} alt={chatName}/>
+                                    <div>
+                                        <p className={"empty-assistant-description"}
+                                           dangerouslySetInnerHTML={{__html: assistantDescription}}></p>
+                                    </div>
+                                    <br/>
+                                    <p className={"empty-assistant-disclaimer"}>Generative AI is experimental. Sometimes
+                                        assistant may produce inaccurate or irrelevant results.</p>
+                                </div>
                             }
                         </div>
                         <div id={"bottom"}></div>

@@ -16,7 +16,7 @@
 
 import React, {useEffect} from 'react';
 import {
-    MaterialButtonTonalIcon, MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
+    MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -36,6 +36,18 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
+
+const getDefaultDescription = () => {
+    return (`
+        What can this assistant do:<br/><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Answer your question<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Generate code<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Solve math problems<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Translate text<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Generate images and artworks<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;Process png/jpg images
+    `);
+}
 
 function Assistant({runtimePrompt, type, closeWindow}) {
     const [conversation, setConversation] = React.useState([]);
@@ -501,12 +513,20 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     }}/>
                     <div>
                         {
-                            conversation.map((e, i) => {
+                            conversation.length !== 0 ? conversation.map((e, i) => {
                                 return (
                                     <Message key={i} isBot={e.isBot} message={e.message}
                                              image={e.image === null || e.image === undefined ? null : e.image} isAssistant={true}/>
                                 )
-                            })
+                            }) : <div className={"empty-assistant"}>
+                                <img className={"empty-assistant-icon"} src={"/logo512.png"} alt={"SpeakGPT"}/>
+                                <div>
+                                    <p className={"empty-assistant-description"} dangerouslySetInnerHTML={{__html: getDefaultDescription()}}></p>
+                                </div>
+                                <br/>
+                                <p className={"empty-assistant-disclaimer"}>Generative AI is experimental. Sometimes
+                                    assistant may produce inaccurate or irrelevant results.</p>
+                            </div>
                         }
                     </div>
                     <div id={"bottom"}></div>
