@@ -684,7 +684,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                     }} id={"drop-area"}>
                         <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                             <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
-                            <p className={"placeholder-text"}>Drag your images here to use with assistant.</p>
+                            <p className={"placeholder-text"}>Drag your images here to use it with assistant.</p>
                         </div>
                         <div className={"chat-ab-actions-container-assistant"}>
                             <div className={"chat-ab-actions-assistant"}>

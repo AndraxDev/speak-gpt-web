@@ -621,7 +621,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 <div className={"chat-history"} id={"drop-area"}>
                     <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                         <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
-                        <p className={"placeholder-text"}>Drag your images here to use with SpeakGPT.</p>
+                        <p className={"placeholder-text"}>Drag your images here to use it with SpeakGPT.</p>
                     </div>
                     <div className={"chat-ab-actions-container"}>
                         <div className={"chat-ab-actions"}>

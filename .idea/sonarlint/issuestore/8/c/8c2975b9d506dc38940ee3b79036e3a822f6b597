@@ -1,0 +1,14 @@
+
+Hjavascript:S6774$"&'chats' is missing in props validation(€üi8¡Şïî1
+Ejavascript:S6774$"#'id' is missing in props validation(€üi8¡Şïî1
+Kjavascript:S6774$")'chatName' is missing in props validation(€üi8¡Şïî1
+Njavascript:S6774$",'updateChats' is missing in props validation(€üi8¡Şïî1
+]javascript:S6754.":useState call is not destructured into value + setter pair(„ šñ8‘¡Şïî1
+Ajavascript:S1250"Remove this commented out code.(Ÿ‡İ†8‘¡Şïî1
+Qjavascript:S6774:".'chats.forEach' is missing in props validation(„Ìš³8‘¡Şïî1
+Qjavascript:S6774s".'chats.forEach' is missing in props validation(„Ìš³8‘¡Şïî1
+}javascript:S3776î"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8’¡Şïî1
+›javascript:S1874¿"wThe signature '(commandId: string, showUI?: boolean, value?: string): boolean' of 'document.execCommand' is deprecated.(ô¦©8’¡Şïî1
+Gjavascript:S6479‡"Do not use Array index in keys(Ë«„çşÿÿÿÿ8“¡Şïî1
+ìjavascript:S6848”"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8“¡Şïî1
+ˆjavascript:S1082”"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8”¡Şïî1
