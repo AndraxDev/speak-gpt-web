@@ -16,18 +16,33 @@
 
 import React from 'react';
 import {Link} from "react-router-dom";
+import {BrowserView, MobileView} from "react-device-detect";
 
 function NavigationBarItem({name, icon, isActive, page}) {
     return (
-        <Link className={"nav-item"} to={page}>
-            <div className={isActive ? "nav-item-selected-container" : "nav-item-unselected-container"}>
-                <div className={isActive ? "nav-item-selected" : "nav-item-unselected"}>
-                    <span className="material-symbols-outlined">{icon}</span>
+        <>
+            <MobileView>
+                <Link className={"nav-item-mob"} to={page}>
+                <div className={isActive ? "nav-item-selected-container-mob" : "nav-item-unselected-container-mob"}>
+                    <div className={isActive ? "nav-item-selected-mob" : "nav-item-unselected-mob"}>
+                        <span className="material-symbols-outlined">{icon}</span>
+                    </div>
                 </div>
-            </div>
-            <p className={"nav-item-title"}>{name}</p>
-        </Link>
-);
+                <p className={"nav-item-title-mob"}>{name}</p>
+                </Link>
+            </MobileView>
+            <BrowserView>
+                <Link className={"nav-item"} to={page}>
+                <div className={isActive ? "nav-item-selected-container" : "nav-item-unselected-container"}>
+                    <div className={isActive ? "nav-item-selected" : "nav-item-unselected"}>
+                        <span className="material-symbols-outlined">{icon}</span>
+                    </div>
+                </div>
+                <p className={"nav-item-title"}>{name}</p>
+                </Link>
+            </BrowserView>
+        </>
+    );
 }
 
 export default NavigationBarItem;

@@ -16,6 +16,8 @@
 
 import React from 'react';
 
+import {isMobile} from "react-device-detect";
+
 function Tile({clickAction, icon, title, subtitle, description, checkable, checked, setChecked}) {
     const [checkedState, setCheckedState] = React.useState(checked);
 
@@ -31,7 +33,7 @@ function Tile({clickAction, icon, title, subtitle, description, checkable, check
             <div className={"tile-icon-frame"}>
                 <span className={"tile-icon material-symbols-outlined"}>{icon}</span>
             </div>
-            <div className={"tile-content-frame"}>
+            <div className={isMobile ? "tile-content-frame-mob" : "tile-content-frame"}>
                 <p className={"tile-title"}> {title}</p>
                 <p className={"tile-subtitle"}>{subtitle}</p>
             </div>

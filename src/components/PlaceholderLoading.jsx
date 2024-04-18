@@ -16,10 +16,25 @@
 
 import React from 'react';
 import {CircularProgress} from "@mui/material";
+import {isMobile} from "react-device-detect";
+
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
 
 function Placeholder() {
     return (
-        <div className={"placeholder-bg"}>
+        <div style={isMobile ? {
+            height: "calc(var(--vh, 1vh) * 100)",
+        } : {}} className={isMobile ? "placeholder-bg-mob" : "placeholder-bg"}>
             <CircularProgress sx={{
                 color: "var(--color-accent-800)",
                 width: "72px !important",

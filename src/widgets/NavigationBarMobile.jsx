@@ -15,17 +15,16 @@
  *****************************************************************/
 
 import React from 'react';
+import NavigationBarItem from "./NavigationBarItem";
 
-import {isMobile} from "react-device-detect";
-
-function ProTip({text}) {
+function NavigationBar({page, openAssistant}) {
     return (
-        <div>
-            <p style={isMobile ? {} : {
-                minHeight: "50px",
-            }} className={isMobile ? "hint-mob" : "hint"}>{text}</p>
+        <div className={"nav-bar-mobile"}>
+            <NavigationBarItem name="Chat" icon="chat" isActive={page === "chat"} page={"/chat"}/>
+            <NavigationBarItem name="Prompts" icon="apps" isActive={page === "prompts"} page={"/prompts"}/>
+            <NavigationBarItem name="Tips" icon="lightbulb" isActive={page === "tips"} page={"/tips"}/>
         </div>
     );
 }
 
-export default ProTip;
+export default NavigationBar;

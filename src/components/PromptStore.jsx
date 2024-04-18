@@ -23,6 +23,7 @@ import PromptView from "./PromptView";
 import Placeholder from "./Placeholder";
 import {useNavigate, useParams} from "react-router-dom";
 import PlaceholderLoading from "./PlaceholderLoading";
+import {BrowserView, isMobile, MobileView} from 'react-device-detect';
 
 const categories = [
     {
@@ -91,16 +92,33 @@ const categories = [
     }
 ];
 
-function PromptStore() {
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
 
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
+
+function PromptStore() {
     const [prompts, setPrompts] = React.useState([]);
     const [selectedCategory, setSelectedCategory] = React.useState("all");
     const [selectedType, setSelectedType] = React.useState("all");
     const [searchQuery, setSearchQuery] = React.useState("");
     const [selectedPrompt, setSelectedPrompt] = React.useState(null);
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
+    const [uid, setUid] = React.useState(null);
 
     let { id } = useParams();
+
+    useEffect(() => {
+        setUid(id);
+        setLoading(false);
+    }, [id]);
 
     const fetchData = (query) => {
         fetch("https://gpt.teslasoft.org/api/v1/search?api_key=16790f7ac03237764a8a0ad36eede490&query="+query, {
@@ -163,11 +181,13 @@ function PromptStore() {
     const navigate = useNavigate()
 
     return (
-        <div className={"prompt-window"}>
-            <div className={"prompt-list-container"}>
+        <div style={isMobile ? {
+            height: "calc(calc(var(--vh, 1vh) * 100) - 80px)",
+        } : {}} className={"prompt-window"}>
+            <div className={isMobile ? "prompt-list-container-mob" : "prompt-list-container"}>
                 <div className={"prompts-filter"}>
                     <h2 className={"page-title"}>Prompts Store</h2>
-                    <div className={"search-box-2"}>
+                    <div className={isMobile ? "search-box-mob" : "search-box-2"}>
                         <input className={"search-input"} type={"text"} placeholder={"Search prompts..."}
                                onChange={(e) => {
                                    setSearchQuery(e.target.value)
@@ -175,7 +195,7 @@ function PromptStore() {
                         <span className={"search-icon material-symbols-outlined"}>search</span>
                     </div>
                     <br/>
-                    <div className={"categories"}>
+                    <div className={isMobile ? "categories-mob" : "categories"}>
                         {
                             categories.map((e) => (
                                 <div onClick={() => {
@@ -188,13 +208,12 @@ function PromptStore() {
                             ))
                         }
                     </div>
-                    <div style={{
+                    <div className={isMobile ? "filter-buttons-mob" : "filter-buttons"} style={{
                         "display": "flex",
                         "flexDirection": "row",
                         "justifyContent": "center",
                         "alignItems": "center",
                         marginLeft: "20px",
-                        width: "344px",
                         userSelect: "none"
                     }}>
                         {
@@ -234,7 +253,7 @@ function PromptStore() {
                     </div>
                     <br/>
                 </div>
-                <div className={"fw-2"}>
+                <div className={isMobile ? "fab-area-mob" : "fw-2"}>
                     <MaterialButton16 className={"fab"} style={{
                         marginLeft: "16px",
                         marginRight: "16px"
@@ -244,17 +263,19 @@ function PromptStore() {
                         <span>Post your prompt</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
                 {
-                    prompts.length === 0 ? <div className={"prompt-loader"}>
+                    prompts.length === 0 ? <div className={isMobile ? "prompt-loader-mob" : "prompt-loader"}>
                         <CircularProgress style={{
                             color: "var(--color-accent-800)",
                             width: "64px",
                             height: "64px"
                         }}/>
-                    </div> : <div className={"prompt-list"}>
+                    </div> : <div style={isMobile ? {
+                        height: "calc(calc(var(--vh, 1vh) * 100) - 80px - 270px)",
+                    } : {}} className={isMobile ? "prompt-list-mob" : "prompt-list"}>
                         {
                             prompts.map((e) =>
                                 <PromptCard key={e.id} prompt={e} onPromptClick={() => {
-                                    navigate("/prompts/"+e.id)
+                                    navigate("/prompts/" + e.id)
                                 }} selected={selectedPrompt}/>
                             )}
                         <div style={{
@@ -263,15 +284,26 @@ function PromptStore() {
                     </div>
                 }
             </div>
-            <div className={"prompt-content"}>
+            <MobileView>
                 {
-                    loading ? <PlaceholderLoading/> : <>
-                        {selectedPrompt !== null && selectedPrompt !== undefined ? <PromptView prompt={selectedPrompt} updatePrompts={() => {
-                            forceUpdate()
-                        }}/> : <Placeholder icon={"cards"} message={"Please select a prompt to view more info."}/>}
-                    </>
+                    loading ? <PlaceholderLoading/> : null
                 }
-            </div>
+            </MobileView>
+            {
+                id !== undefined && id !== null ? <div className={"prompt-content"}>
+                    {
+                        loading ? <PlaceholderLoading/> : <>
+                            {selectedPrompt !== null && selectedPrompt !== undefined ?
+                                <PromptView prompt={selectedPrompt} updatePrompts={() => {
+                                    forceUpdate()
+                                }}/> : <PlaceholderLoading/>}
+                        </>
+                    }
+                </div> : <BrowserView>
+                    <div className={"prompt-content"}>
+                        <Placeholder message={"Select a prompt to view more info."} icon={"view_cozy"}/>
+                    </div>
+                </BrowserView> }
         </div>
     );
 }

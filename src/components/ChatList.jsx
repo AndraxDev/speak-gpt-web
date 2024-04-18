@@ -25,6 +25,7 @@ import {modelToType} from "../util/ModelTypeConverter";
 import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
 import {copySettings, getModel, getSettingsJSON} from "../util/Settings";
+import {BrowserView, isMobile} from "react-device-detect";
 
 function ChatList() {
     const [selectedChat, setSelectedChat] = React.useState("");
@@ -382,17 +383,17 @@ function ChatList() {
             {
                 deletionDialogOpen ? <DeleteChatDialog setOpenState={setDeletionDialogOpen} chatName={selectedChatForDeletion} setChatName={setDeleteChatName} /> : null
             }
-            <div className={"chat-list-container"}>
+            <div className={isMobile ? "chat-list-container-mob" : "chat-list-container"}>
                 <div className={"chat-list-filter"}>
                     <h2 className={"page-title"}>SpeakGPT</h2>
-                    <div className={"search-box"}>
+                    <div className={isMobile ? "search-box-mob" : "search-box"}>
                         <input className={"search-input"} type={"text"} placeholder={"Search chats..."} onChange={(e) => {
                             setSearchTerm(e.target.value)
                         }}/>
                         <span className={"search-icon material-symbols-outlined"}>search</span>
                     </div>
                 </div>
-                <div className={"fw"}>
+                <div className={isMobile ? "fab-area-mob" : "fw"}>
                     <MaterialButton16 className={"fab"} style={{
                         marginLeft: "16px",
                         marginRight: "16px"
@@ -401,7 +402,9 @@ function ChatList() {
                     }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
                         <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
-                <div className={"chat-list"}>
+                <div style={isMobile ? {
+                    height: "calc(calc(var(--vh, 1vh) * 100) - 216px)",
+                } : {}} className={isMobile ? "chat-list-mob" : "chat-list"}>
                     {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""}
                                                setSelectedChatForDeletion={setSelectedChatForDeletion}
                                                setSelectedChatForEdit={setSelectedChatForEdit}/>
@@ -410,8 +413,10 @@ function ChatList() {
                                  setSelectedChatForEdit={setSelectedChatForEdit}/>}
                 </div>
             </div>
-            <div className={"chat-content"}>
-                {id === undefined ? <Placeholder icon={"chat"} message={"Create or select a chat to start conversation."}/> :
+            <div className={isMobile ? "" : "chat-content"}>
+                {id === undefined ? <>
+                    { isMobile ? null : <Placeholder icon={"chat"} message={"Create or select a chat to start conversation."}/> }
+                    </> :
                     <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>
         </div>

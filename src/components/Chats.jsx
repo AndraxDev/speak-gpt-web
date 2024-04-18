@@ -43,14 +43,11 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
     useEffect(() => {
         if (isDeleteTemp) {
             setIsDeleteTemp(false);
-            console.log("Deletion triggered");
-
             setSelectedChatForDeletion(selectedChatForDeletionTemp);
         }
 
         if (isEditTemp) {
             setIsEditTemp(false);
-
             setSelectedChatForEdit(selectedChatForEditTemp);
         }
     }, [isEditTemp, isDeleteTemp, setSelectedChatForDeletion, selectedChatForDeletionTemp, setSelectedChatForEdit, selectedChatForEditTemp]);

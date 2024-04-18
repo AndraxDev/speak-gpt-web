@@ -49,6 +49,18 @@ const getDefaultDescription = () => {
     `);
 }
 
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
+
 function Assistant({runtimePrompt, type, closeWindow}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
@@ -339,14 +351,14 @@ function Assistant({runtimePrompt, type, closeWindow}) {
             generateImage(mx.replace("/imagine ", "")).then(r => {
                 setLockedState(false);
 
-                if (!getAndroidOS()) {
+                if (!getAndroidOS() && !isMobile) {
                     document.querySelector(".chat-textarea").focus();
                 }
             })
         } else {
             sendAIRequest(prepareConversation(messages)).then(r => {
                 setLockedState(false);
-                if (!getAndroidOS()) {
+                if (!getAndroidOS() && !isMobile) {
                     document.querySelector(".chat-textarea").focus();
                 }
                 setSelectedFile(null)
@@ -368,7 +380,9 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 let fileType = file.type;
 
                 if (fileType.startsWith("image")) {
-                    document.querySelector(".chat-textarea").focus();
+                    if (!getAndroidOS() && !isMobile) {
+                        document.querySelector(".chat-textarea").focus();
+                    }
                     setSelectedFile(srcData);
                 }
             }
@@ -453,7 +467,9 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     }, [])
 
     useEffect(() => {
-        document.querySelector(".chat-textarea").focus();
+        if (!getAndroidOS() && !isMobile) {
+            document.querySelector(".chat-textarea").focus();
+        }
     }, [])
 
     return (
@@ -490,7 +506,9 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={true} /> : null
             }
             <div className={"chat-area-assistant"}>
-                <div className={"chat-history-assistant"} id={"drop-area"}>
+                <div className={"chat-history-assistant"} style={isMobile ? {
+                    height: "calc(calc(var(--vh, 1vh) * 100) - 158px)"
+                } : {}} id={"drop-area"}>
                     <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                         <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
                         <p className={"placeholder-text"}>Drag your images here to use it with SpeakGPT.</p>

@@ -139,6 +139,24 @@ export const MaterialButtonTonal24 = styled(Button)(({ theme }) => ({
     },
 }));
 
+export const MaterialButtonTonal24Icon = styled(Button)(({ theme }) => ({
+    color: "var(--color-accent-800)",
+    backgroundColor: "var(--color-accent-300)",
+    textTransform: "none",
+    boxShadow: "none",
+    borderRadius: "50pc",
+    border: "1px solid var(--color-accent-300)",
+    paddingLeft: "12px",
+    paddingRight: "12px",
+    fontSize: "12px",
+    boxSizing: "border-box",
+    '&:hover': {
+        backgroundColor: "var(--color-accent-400)",
+        boxShadow: "none",
+        border: "1px solid var(--color-accent-400)",
+    },
+}));
+
 export const MaterialButtonCard = styled(Button)(({ theme }) => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-200)",
@@ -155,7 +173,7 @@ export const MaterialButtonError = styled(Button)(({ theme }) => ({
     color: "var(--color-warn)",
     backgroundColor: "var(--color-warn-transparent)",
     textTransform: "none",
-    borderRadius: "24px",
+    borderRadius: "50pc",
     paddingLeft: "12px",
     paddingRight: "12px",
     // border: "1px solid var(--color-warn-transparent)",

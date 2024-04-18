@@ -683,9 +683,9 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                                                  setMessage={setSystemMessageX} isAssistant={true}/> : null
                 }
                 <div className={"chat-area-assistant"}>
-                    <div className={"chat-history-assistant-embedded"} style={{
+                    <div className={"chat-history-assistant-embedded"} style={isMobile ? {
                         height: "calc(calc(var(--vh, 1vh) * 100) - 158px)"
-                    }} id={"drop-area"}>
+                    } : {}} id={"drop-area"}>
                         <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                             <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
                             <p className={"placeholder-text"}>Drag your images here to use it with assistant.</p>

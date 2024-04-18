@@ -17,16 +17,33 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {MaterialButton24} from "../widgets/MaterialButton";
+import {isMobile} from "react-device-detect";
+
+function setFullHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
 
 function WelcomePage() {
     return (
-        <div style={{
+        <div style={isMobile ? {
+                padding: "24px",
+                overflowY: "auto",
+                height: "calc(calc(var(--vh, 1vh) * 100) - 140px)"
+        } : {
                 padding: "24px",
                 overflowY: "auto",
                 height: "calc(100vh - 48px)"
         }}>
-                <h2 className={"title"}>SpeakGPT Desktop</h2>
-                <p className={"warning"}>This version of SpeakGPT is currently on alpha stage. You can try it before
+                <h2 className={"title"}>SpeakGPT</h2>
+                <p className={"warning"}>This version of SpeakGPT is currently experimental. You can try it before
                         official release. Be careful as some rough edges may appear.
                         Click the button below
                         to launch SpeakGPT.</p>
@@ -34,6 +51,9 @@ function WelcomePage() {
                 <br/><br/>
                 <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
                 <h3 className={"title"}>Changelog:</h3>
+                <code className={"title"}>1.0.0-rc1</code><br/>
+                <code className={"text"}>- Mobile version</code><br/>
+                <br/>
                 <code className={"title"}>0.9.0-beta09</code><br/>
                 <code className={"text"}>- Personalize embedded assistants with icon and description</code><br/>
                 <br/>

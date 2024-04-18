@@ -17,7 +17,7 @@
 import React, {useEffect} from 'react';
 import {
     MaterialButtonError,
-    MaterialButtonTonal24, MaterialButtonTonalIcon
+    MaterialButtonTonal24, MaterialButtonTonal24Icon, MaterialButtonTonalIcon, MaterialButtonTonalIconV2
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -31,7 +31,20 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import {modelToType} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
-import {isMobile} from 'react-device-detect';
+import {isMobile, MobileView} from 'react-device-detect';
+import {Link} from "react-router-dom";
+
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
 
 function CurrentChat({chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
@@ -585,7 +598,14 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     }, [])
 
     return (
-        <div className={"chat-frame"}>
+        <div style={isMobile ? {
+            height: "calc(var(--vh, 1vh) * 100)"
+        } : {}} className={isMobile ? "chat-fixed chat-frame-mob" : "chat-frame"}>
+            <MobileView>
+                <Link to={"/chat"} className={"back-button"}>
+                    <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}>arrow_back</span></MaterialButtonTonalIconV2>
+                </Link>
+            </MobileView>
             {
                 clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear} isAssistant={false}/> : null
             }
@@ -617,24 +637,29 @@ function CurrentChat({chats, id, chatName, updateChats}) {
             {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={false} /> : null
             }
-            <div className={"chat-area"}>
-                <div className={"chat-history"} id={"drop-area"}>
-                    <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
+            <div className={isMobile ? "" : "chat-area"}>
+                <div style={isMobile ? {
+                    height: "calc(calc(var(--vh, 1vh) * 100) - 90px)"
+                } : {}} className={isMobile ? "chat-history-mob" : "chat-history"} id={"drop-area"}>
+                    <div className={isMobile ? "unhiglighted drop-frame-mob" : "unhiglighted drop-frame"} id={"drop-area-2"}>
                         <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
                         <p className={"placeholder-text"}>Drag your images here to use it with SpeakGPT.</p>
                     </div>
-                    <div className={"chat-ab-actions-container"}>
-                        <div className={"chat-ab-actions"}>
-                        <MaterialButtonError onClick={() => {
+                    <div className={isMobile ? "chat-ab-actions-container-mob" : "chat-ab-actions-container"}>
+                        <div style={isMobile ? {
+                            width: "calc(100% - 100px)",
+                            marginLeft: "72px",
+                        } : {}} className={"chat-ab-actions"}>
+                            <MaterialButtonError onClick={() => {
                                 setConfirmClear(false);
                                 setClearDialogOpen(true);
                             }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonError>
                             &nbsp;&nbsp;&nbsp;
-                            <h3 className={"chat-title"}>{stateSelectedChat}</h3>
+                            <h3 className={isMobile ? "chat-title-mob" : "chat-title"}>{stateSelectedChat}</h3>
                             &nbsp;&nbsp;&nbsp;
-                            <MaterialButtonTonal24 onClick={() => {
+                            <MaterialButtonTonal24Icon onClick={() => {
                                 setSettingsOpen(true);
-                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonal24>
+                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonal24Icon>
                         </div>
                     </div>
                     <div style={{
@@ -662,7 +687,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                         }}><span className={"material-symbols-outlined"}>cancel</span></div>
                     </div>: null
                 }
-                <div className={"write-bar"}>
+                <div className={isMobile ? "write-bar-mob" : "write-bar"}>
                     <textarea onInput={() => {
                         autoresize(document.querySelector(".chat-textarea"))
                     }} onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>

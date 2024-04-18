@@ -17,8 +17,9 @@
 import React from 'react';
 import ApiKeyDialog from "./ApiKeyDialog";
 import NavigationBar from "../widgets/NavigationBar";
-import AssistantEmbedded from "./AssistantEmbedded";
 import Assistant from "./Assistant";
+import {BrowserView, MobileView, isMobile} from "react-device-detect";
+import NavigationBarMobile from "../widgets/NavigationBarMobile";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -38,23 +39,31 @@ function MaterialWindow({children, page, ...props}) {
 
     return (
         <div style={{
-            height: "100vh",
+            height: "calc(var(--vh, 1vh) * 100)",
             backgroundColor: "#000",
         }}>
             <div style={{
-                height: "calc(var(--vh, 1vh) * 100)",
                 overflow: "hidden"
-            }} className={"material-window-background"}>
+            }} className={isMobile ? "material-window-background-mob" : "material-window-background"}>
                 {
                     assistantOpened ?
                         <div className={"assistant-container"}>
                             <Assistant runtimePrompt={""} type={""} closeWindow={setAssistantOpened} />
                         </div> : null
                 }
-                <NavigationBar page={page} openAssistant={() => {
-                    setAssistantOpened(true);
-                }}/>
-                <div className={"content"}>
+                <MobileView>
+                    <NavigationBarMobile page={page} openAssistant={() => {
+                        setAssistantOpened(true);
+                    }}/>
+                </MobileView>
+                <BrowserView>
+                    <NavigationBar page={page} openAssistant={() => {
+                        setAssistantOpened(true);
+                    }}/>
+                </BrowserView>
+                <div style={isMobile ? {
+                    height: "calc(calc(var(--vh, 1vh) * 100) - 80px)",
+                } : {}} className={isMobile ? "content-mob" : "content"}>
                     {children}
                 </div>
                 <ApiKeyDialog/>

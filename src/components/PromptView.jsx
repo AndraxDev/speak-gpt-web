@@ -17,8 +17,22 @@
 import React, {useEffect} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import Assistant from "./Assistant";
-import {MaterialButton24, MaterialButtonTonal24} from "../widgets/MaterialButton";
+import {MaterialButton24, MaterialButtonTonal24, MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
 import {CircularProgress} from "@mui/material";
+import {isMobile, MobileView} from "react-device-detect";
+import {Link} from "react-router-dom";
+
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
 
 function PromptView({prompt, updatePrompts}) {
     const [assistantIsOpened, setAssistantIsOpened] = React.useState(false);
@@ -69,38 +83,65 @@ function PromptView({prompt, updatePrompts}) {
     }
 
     return (
-        <div className={"prompt-cont"}>
+        <div style={isMobile ? {
+            height: "calc(var(--vh, 1vh) * 100)",
+        } : {}} className={isMobile ? "prompt-cont-mob" : "prompt-cont"}>
+            <MobileView>
+                <Link to={"/prompts"} className={"back-button-v2"}>
+                    <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}>arrow_back</span></MaterialButtonTonalIconV2>
+                </Link>
+            </MobileView>
             <div className={"prompt-frame"}>
-                <h3 style={{
+                <h3 style={isMobile ? {
+                    margin: "32px 0",
+                    width: "calc(100% - 64px)",
+                    whiteSpace: "normal",
+                    textAlign: "start",
+                } : {
                     margin: "24px",
                 }} className={"chat-title"}>{prompt.name}</h3>
                 <div className={"prompt-area"}>
                     <MaterialEditText multiline defaultValue={currentPrompt} rows={10} id={"prompt"} label={"Prompt"} onChange={(e) => {
                         setModifiedPrompt(e.target.value);
                     }} />
-                    <div className={"prompt-tags"}>
-                        <p className={"prompt-tag"}>Prompt by: {prompt.author}</p>
-                        <p className={"prompt-tag"}>Category: {prompt.category === "" ? "uncategorized" : prompt.category}</p>
+                    <div className={isMobile ? "prompt-tags-mob" : "prompt-tags"}>
+                        <p className={isMobile ? "prompt-tag-mob" : "prompt-tag"}>Prompt by: {prompt.author}</p>
+                        <p className={isMobile ? "prompt-tag-mob" : "prompt-tag"}>Category: {prompt.category === "" ? "uncategorized" : prompt.category}</p>
                     </div>
                 </div>
-                <div className={"prompt-actions"}>
+                <div className={isMobile ? "prompt-actions-mob" : "prompt-actions"}>
                     <MaterialButton24 onClick={() => {
                         setAssistantIsOpened(true)
-                    }} sx={{
+                    }} sx={isMobile ? {
+                        flexGrow: 1,
+                        width: "110px",
+                        height: "64px",
+                        borderRadius: "16px",
+                    } : {
                         width: "110px",
                         height: "64px",
                         borderRadius: "16px",
                     }}><span className={"material-symbols-outlined"}>play_arrow</span>&nbsp;&nbsp;<span>Try it</span></MaterialButton24>
 
                     {
-                        likeRequest ? <MaterialButtonTonal24 sx={{
+                        likeRequest ? <MaterialButtonTonal24 sx={isMobile ? {
+                                flexGrow: 1,
+                                width: "110px",
+                                height: "64px",
+                                borderRadius: "16px",
+                            } : {
                             width: "110px",
                             height: "64px",
                             borderRadius: "16px",
                         }}><CircularProgress sx={{
                             color: "var(--color-accent-800)",
                             }}/></MaterialButtonTonal24> :
-                            <MaterialButtonTonal24 sx={{
+                            <MaterialButtonTonal24 sx={isMobile ? {
+                                flexGrow: 1,
+                                width: "110px",
+                                height: "64px",
+                                borderRadius: "16px",
+                            } : {
                                 width: "110px",
                                 height: "64px",
                                 borderRadius: "16px",
@@ -112,13 +153,19 @@ function PromptView({prompt, updatePrompts}) {
                 </div>
             </div>
             {
-                assistantIsOpened ? <div className={"assistant-container"}>
+                assistantIsOpened ? <div style={isMobile ? {
+                    height: "calc(var(--vh, 1vh) * 100)",
+                    overflow: "hidden"
+                } : {}} className={isMobile ? "assistant-container-mob" : "assistant-container"}>
                     <Assistant runtimePrompt={modifiedPrompt} type={prompt.type.toLowerCase()} closeWindow={setAssistantIsOpened} />
                 </div> : null
             }
 
             {
-                assistantIsOpened2 ? <div className={"assistant-container"}>
+                assistantIsOpened2 ? <div style={isMobile ? {
+                    height: "calc(var(--vh, 1vh) * 100)",
+                    overflow: "hidden"
+                } : {}} className={isMobile ? "assistant-container-mob" : "assistant-container"}>
                     <Assistant runtimePrompt={""} type={""} closeWindow={setAssistantIsOpened2} />
                 </div> : null
             }

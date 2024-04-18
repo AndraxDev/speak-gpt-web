@@ -1,0 +1,6 @@
+
+¢javascript:S3776k"TRefactor this function to reduce its Cognitive Complexity from 25 to the 15 allowed.(ñÌÊüÿÿÿÿ8·ÈØšï1J$0f284287-c3ac-4534-8a54-21a261161966
+}javascript:S1481r"4Remove the declaration of the unused 'uid' variable.(ìÎìÂ8·ÈØšï1J$412d93e2-7dcf-4986-b9a0-2850806cb47e
+zjavascript:S1854r"1Remove this useless assignment to variable "uid".(ìÎìÂ8·ÈØšï1J$642c0be4-226a-4e5e-9fd6-110e4bf1a297
+’javascript:S6848É"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(ŞæƒËùÿÿÿÿ8·ÈØšï1J$60efbe21-f566-4901-8063-8d189b06da62
+®javascript:S1082É"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ŞæƒËùÿÿÿÿ8·ÈØšï1J$ef786fac-beae-4b82-b528-085709b4de73

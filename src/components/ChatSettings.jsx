@@ -17,46 +17,75 @@
 import React from 'react';
 import Tile from "./Tile"
 import packageJson from '../../package.json';
+import {isMobile, MobileView} from "react-device-detect";
+import {MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
+
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set the height initially
+setFullHeight();
+
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
 
 function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
     return (
-        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
-            setIsOpen(false);
-        }}>
-
-            <div className={"dialog-paper-settings"} onMouseDown={(e) => {
-                e.stopPropagation();
-            }}>
-                <h3 className={"dialog-title-settings"}>Chat settings</h3>
-                <div className={"tiles"}>
-                    <Tile clickAction={() => {
-                        window.open("https://platform.openai.com/account", "_blank")
-                    }} icon={"account_circle"} title={"Account"} subtitle={"Manage OpenAI account"}
-                          description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                    <Tile clickAction={() => {
-                        apiDialogOpen(true);
-                    }} icon={"key"} title={"API key"} subtitle={"Set API key"}
-                          description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                    <Tile clickAction={() => {
-                        openModelDialog(true);
-                    }} icon={"key"} title={"AI model"} subtitle={model}
-                          description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                    <Tile clickAction={() => {
-                        openSystemMessageDialog(true);
-                    }} icon={"key"} title={"System message"} subtitle={"Click to set"}
-                          description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                    <Tile icon={"key"} title={"Use DALL-e 3"} subtitle={dalle3 ? "DALL-e 3 is using" : "DALL-e 2 is using"}
-                          description={"Lorem ipsum dolor sit amet."} checkable={true} checked={dalle3} setChecked={setDalleVersion}/>
-                    <Tile clickAction={() => {
-                        openResolutionDialog(true);
-                    }} icon={"key"} title={"Image resolution"} subtitle={resolution}
-                          description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+        <>
+            <MobileView>
+                <div className={"back-button-priority-1"}>
+                    <MaterialButtonTonalIconV2 onClick={() => setIsOpen(false)}><span
+                        className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
                 </div>
-                <p className={"credits"}>Software version: {packageJson.name + " " + packageJson.version}</p>
-                <p className={"credits"}>Copyright: (C) 2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
-                <br/>
+            </MobileView>
+            <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
+                setIsOpen(false);
+            }}>
+
+                <div style={isMobile ? {
+                    height: "calc(var(--vh, 1vh) * 100)",
+                } : {}} className={isMobile ? "dialog-paper-settings-mob" : "dialog-paper-settings"}
+                     onMouseDown={(e) => {
+                         e.stopPropagation();
+                     }}>
+                    <h3 className={"dialog-title-settings"}>Chat settings</h3>
+                    <div className={isMobile ? "tiles-mob" : "tiles"}>
+                        <Tile clickAction={() => {
+                            window.open("https://platform.openai.com/account", "_blank")
+                        }} icon={"account_circle"} title={"Account"} subtitle={"Manage OpenAI account"}
+                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                        <Tile clickAction={() => {
+                            apiDialogOpen(true);
+                        }} icon={"key"} title={"API key"} subtitle={"Set API key"}
+                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                        <Tile clickAction={() => {
+                            openModelDialog(true);
+                        }} icon={"key"} title={"AI model"} subtitle={model}
+                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                        <Tile clickAction={() => {
+                            openSystemMessageDialog(true);
+                        }} icon={"key"} title={"System message"} subtitle={"Click to set"}
+                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                        <Tile icon={"key"} title={"Use DALL-e 3"}
+                              subtitle={dalle3 ? "DALL-e 3 is using" : "DALL-e 2 is using"}
+                              description={"Lorem ipsum dolor sit amet."} checkable={true} checked={dalle3}
+                              setChecked={setDalleVersion}/>
+                        <Tile clickAction={() => {
+                            openResolutionDialog(true);
+                        }} icon={"key"} title={"Image resolution"} subtitle={resolution}
+                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                    </div>
+                    <p className={"credits"}>Software version: {packageJson.name + " " + packageJson.version}</p>
+                    <p className={"credits"}>Copyright: (C) 2024 <a href={"https://andrax.dev/"}
+                                                                    target={"_blank"}>AndraxDev</a>. All rights
+                        reserved.</p>
+                    <br/>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

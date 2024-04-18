@@ -1,0 +1,7 @@
+
+tjavascript:S1128"+Remove this unused import of 'BrowserView'.(€Äë‚8 —èšï1J$21f7980c-311e-406f-af48-9981a9e46ae2
+|javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(“·¡òûÿÿÿÿ8åÂéšï1
+†javascript:S1481$"=Remove the declaration of the unused 'setChatModel' variable.(´‚Ä§8 —èšï1J$0e668076-70fc-4b1e-b143-c452fc211ea3
+ƒjavascript:S1854$":Remove this useless assignment to variable "setChatModel".(´‚Ä§8 —èšï1J$f8400d7e-1b73-4501-bc25-fa17458ce493
+‰javascript:S6660Š"?'If' statement should not be the only statement in 'else' block(™î‹î8¡—èšï1J$10104cd5-98aa-4e55-ae1e-248d7a69955a
+£javascript:S3776À"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùëÝ¯ùÿÿÿÿ8¡—èšï1J$0697fb31-958a-46cf-addb-b0d3dceba7bd

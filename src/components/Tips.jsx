@@ -16,6 +16,7 @@
 
 import React from 'react';
 import ProTip from "./ProTip";
+import {isMobile, MobileView} from "react-device-detect";
 
 const tips = [
     "Start your message with /imagine to generate an image.",
@@ -32,20 +33,38 @@ const tips = [
 
 ]
 
-function Tips(props) {
+function setFullHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
 
+// Set the height initially
+setFullHeight();
 
+// Re-calculate on resize or orientation change
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('orientationchange', setFullHeight);
 
+function Tips() {
     return (
-        <div>
+        <div style={isMobile ? {
+            overflowY: "hidden",
+            height: "calc(calc(var(--vh, 1vh) * 100) - 92px)"
+        } : {}}>
             <h2 className={"page-title"}>Tips</h2>
 
-            <div className={"tips"}>
+            <div className={isMobile ? "tips-mob" : "tips"}>
                 {tips.map((tip, index) => {
                     return (
                         <ProTip key={index} text={tip} />
                     );
                 })}
+                <MobileView>
+                    <div style={{
+                        width: "100%",
+                        height: "200px"
+                    }}/>
+                </MobileView>
             </div>
         </div>
     );

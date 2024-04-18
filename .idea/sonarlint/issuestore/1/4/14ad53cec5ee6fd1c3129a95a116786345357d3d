@@ -1,16 +1,17 @@
 
-tjavascript:S6774"&'isBot' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$eb54758f-2a48-4a38-9290-911f30c5c00c
-vjavascript:S6774"('message' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$ae0b5457-0021-4af0-a0ea-2fbc7fb857db
-tjavascript:S6774"&'image' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$c66c8e37-a2c4-4c0d-9206-b77bc660b758
-zjavascript:S6774",'isAssistant' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$6ee9e5cf-754e-46af-961c-e6c4c067b929
-|javascript:S6774".'assistantName' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$f7fde674-f7e2-4a80-9d2f-a54046853b8e
-|javascript:S6774".'assistantIcon' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$bdf8fa1c-1415-4291-87f2-ae474288f38e
-¸javascript:S10774"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(Ø¶Ğˆıÿÿÿÿ8”Ïşğî1J$28c4aeb3-630f-4544-8f13-0a8a260842f9
- javascript:S64789"RMove this component definition out of the parent component and pass data as props.(Û³ƒÑüÿÿÿÿ8“Ïşğî1J$d98312a2-4356-4202-8d3c-6bbec80dc01f
-¢javascript:S37769"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(Û³ƒÑüÿÿÿÿ8“Ïşğî1J$feed1213-db58-4ec2-8786-452f775f1bdb
-qjavascript:S6774:")'children' is missing in props validation(ñ¸¦[8“Ïşğî1J$791465ff-1543-4276-bf0f-dc09187db42a
-rjavascript:S6774:"*'className' is missing in props validation(ñ¸¦[8“Ïşğî1J$90403108-07a2-4efb-a4fa-044a0201f269
-mjavascript:S6774:"%'node' is missing in props validation(ñ¸¦[8“Ïşğî1J$af817a8d-8dfb-44e0-b39e-48d57fe352a8
- javascript:S6847d"RNon-interactive elements should not be assigned mouse or keyboard event listeners.(“¨Âøúÿÿÿÿ8”Ïşğî1J$5c1be919-0f0c-4a82-ac64-f3bb5b919ea6
-¸javascript:S1077d"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(“¨Âøúÿÿÿÿ8”Ïşğî1J$e2f07344-b398-4fb6-948c-a061d5332eac
-¸javascript:S1077s"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(ŞÃ³Šıÿÿÿÿ8ÃÓÿğî1J$1093e2db-d78d-45e3-850a-eb28660f2e04
+¢javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(©Úìùÿÿÿÿ8åİÉ˜ï1J$fa3d92a2-3874-4727-a263-3be24c76e596
+tjavascript:S6774"&'isBot' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$2afe4ac9-825b-48aa-b049-1157795f47ad
+vjavascript:S6774"('message' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$e88f9377-6499-4d7f-b403-f0fd5cc34675
+tjavascript:S6774"&'image' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$8d720c2d-03a5-4579-a7fe-3b2abebad018
+zjavascript:S6774",'isAssistant' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$e5837449-806b-48a7-8927-970619349b14
+|javascript:S6774".'assistantName' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$37b76c17-b525-4565-84cd-6825728b3cdb
+|javascript:S6774".'assistantIcon' is missing in props validation(©Úìùÿÿÿÿ8’Ïşğî1J$fc3312b1-826a-42a3-a9cf-162fbcb5df59
+¸javascript:S10775"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(Ø¶Ğˆıÿÿÿÿ8”Ïşğî1J$5523f5a3-bab4-4a5f-b574-c85d551c6160
+ javascript:S6478:"RMove this component definition out of the parent component and pass data as props.(Û³ƒÑüÿÿÿÿ8“Ïşğî1J$eb5ef06b-450e-42db-b049-2cc08e2258f5
+¢javascript:S3776:"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(Û³ƒÑüÿÿÿÿ8“Ïşğî1J$3e965d35-9d5c-49d0-9ae7-bfa0b5d5bdd3
+qjavascript:S6774;")'children' is missing in props validation(ñ¸¦[8“Ïşğî1J$a8aadfd2-3e46-40cf-b44b-5b571acf665a
+rjavascript:S6774;"*'className' is missing in props validation(ñ¸¦[8“Ïşğî1J$d42a36a9-6e7b-4fa9-a7ed-455a32d84c37
+mjavascript:S6774;"%'node' is missing in props validation(ñ¸¦[8“Ïşğî1J$a3403c2c-dd9a-4cdd-b07a-d73a5cce7fa8
+ javascript:S6847e"RNon-interactive elements should not be assigned mouse or keyboard event listeners.(›£‡èûÿÿÿÿ8”Ïşğî1J$b8fb7843-ea3f-4e22-b83d-9ac0a908a7d2
+¸javascript:S1077e"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(›£‡èûÿÿÿÿ8”Ïşğî1J$23326434-e133-4837-9c07-d906c93779c1
+¸javascript:S1077t"jimg elements must have an alt prop, either with meaningful text, or an empty string for decorative images.(úõ¶¾øÿÿÿÿ8ÃÓÿğî1J$99aa2804-9f2f-49f0-94cb-6a94481ab811

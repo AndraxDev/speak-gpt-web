@@ -17,6 +17,7 @@
 import React, {useEffect} from 'react';
 import gpt from "./../gpt.svg";
 import {Link} from "react-router-dom";
+import {isMobile} from "react-device-detect";
 
 function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit, ...props}) {
 
@@ -41,13 +42,13 @@ function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, 
             textDecoration: 'none',
             color: 'inherit'
         }}>
-            <div className={isActive ? "chat-item-active-" + intType.toString() + " chat-item" : "chat-item-" + intType.toString() + " chat-item"}>
-                <div className={"chat-icon-frame-" + intType.toString() + " chat-icon-frame"}>
-                    <img className={"chat-icon"} src={gpt} alt={"GPT"}/>
+            <div className={isActive && !isMobile ? "chat-item-active-" + intType.toString() + " " + (isMobile ? "chat-item-mob" : "chat-item") : "chat-item-" + intType.toString() + " " + (isMobile ? "chat-item-mob" : "chat-item")}>
+                <div className={"chat-icon-frame-" + intType.toString() + " " + (isMobile ? "chat-icon-frame-mob" : "chat-icon-frame")}>
+                    <img className={isMobile ? "chat-icon-mob" : "chat-icon"} src={gpt} alt={"GPT"}/>
                 </div>
-                <div className={"chat-item-info"}>
-                    <h3 className={"chat-item-title"}>{name}</h3>
-                    <p className={"chat-item-model"}>{model}</p>
+                <div className={isMobile ? "chat-item-info-mob" : "chat-item-info"}>
+                    <h3 className={isMobile ? "chat-item-title-mob" : "chat-item-title"}>{name}</h3>
+                    <p className={isMobile ? "chat-item-model-mob" : "chat-item-model"}>{model}</p>
                 </div>
                 <div className={"chat-actions"}><span onClick={(e) => {
                     e.preventDefault()
@@ -55,13 +56,13 @@ function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, 
                     setIsEdit(true)
                     setEditChat(name)
                     setDeleteChat("")
-                }} className={"action material-symbols-outlined"}>edit</span>&nbsp;<span onClick={(e) => {
+                }} className={(isMobile ? "action-mob" : "action") + " material-symbols-outlined"}>edit</span>&nbsp;<span onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
                     setIsDelete(true)
                     setDeleteChat(name)
                     setEditChat("")
-                }} className={"action-dangerous material-symbols-outlined"}>cancel</span></div>
+                }} className={(isMobile ? "action-dangerous-mob" : "action-dangerous") + " material-symbols-outlined"}>cancel</span></div>
             </div>
         </Link>
     );

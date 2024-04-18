@@ -1,20 +1,21 @@
 
-pjavascript:S6774"''prompt' is missing in props validation(Ú°ùß8ê†ì¸î1J$e5631901-55ca-42aa-9be6-dde8f148e273
-wjavascript:S6774".'updatePrompts' is missing in props validation(Ú°ùß8ê†ì¸î1J$008244bd-747b-4d9e-951d-8316fa02671c
-wjavascript:S6774".'prompt.prompt' is missing in props validation(‡¶é´8ê†ì¸î1J$44803c72-c57e-4804-bcce-3b86c0c09ae6
-|javascript:S6774".'prompt.prompt' is missing in props validation(—¯Ýƒúÿÿÿÿ8ê†ì¸î1J$28af288e-0acb-448d-9686-5ab478967e86
-xjavascript:S6774"*'prompt.id' is missing in props validation(ôö“¹üÿÿÿÿ8ë†ì¸î1J$719dcff3-369d-4b59-af6a-9e27d168cac6
-wjavascript:S6774 ".'prompt.prompt' is missing in props validation(µ…ž·8ë†ì¸î1J$52a57893-94b4-425b-8743-428c7a883db8
-|javascript:S6774!".'prompt.prompt' is missing in props validation(Ã†¬™ùÿÿÿÿ8ë†ì¸î1J$4e5a9a4f-a893-43a2-9ad6-4e47d2f8186f
-wjavascript:S6774"".'prompt.prompt' is missing in props validation(Òâªß8ë†ì¸î1J$f41adad3-395c-4d4b-b39d-076e7092ed94
-xjavascript:S6774("*'prompt.id' is missing in props validation(Ì ¤œýÿÿÿÿ8ë†ì¸î1J$f2f4f718-641c-42cc-8171-425d18c5f303
-sjavascript:S6774-"*'prompt.id' is missing in props validation(±°Ü’8ë†ì¸î1J$bbe65a84-21e7-42fc-b26f-06fa7bac0b6d
-xjavascript:S67747"*'prompt.id' is missing in props validation(Ô¢¹³ýÿÿÿÿ8ë†ì¸î1J$b2942537-a14a-41b1-ac16-8a0ad9450686
-xjavascript:S6774<"*'prompt.id' is missing in props validation(ßŒïƒúÿÿÿÿ8ë†ì¸î1J$994da969-e269-4ba9-aa68-7c7e59f73c2c
-ujavascript:S6774L",'prompt.name' is missing in props validation(·ýº8ë†ì¸î1J$7ea7cb61-561f-4785-8545-43e7e6b5a8fe
-vjavascript:S6774R".'prompt.author' is missing in props validation(ïÈ8ë†ì¸î1J$62167b6e-3d79-404f-bd18-92ab6041a5d8
-xjavascript:S6774S"0'prompt.category' is missing in props validation(¸¼ô78ë†ì¸î1J$f35b43fa-f23b-46bb-a85a-9787afb50b34
-xjavascript:S6774S"0'prompt.category' is missing in props validation(¸¼ô78ë†ì¸î1J$079fd5ad-f6e8-4a47-b5b5-a2b7fc1b8cb4
-ujavascript:S6774n"-'prompt.likes' is missing in props validation(»ÆÆz8ë†ì¸î1J$b973e493-7c13-49c5-95d0-ee5d7d7d0709
-ujavascript:S6774t",'prompt.type' is missing in props validation(¿Ùˆ¶8ë†ì¸î1J$9d186e70-64c5-47bc-bc58-fe919557e95b
-javascript:S6774t"8'prompt.type.toLowerCase' is missing in props validation(¿Ùˆ¶8ì†ì¸î1J$a3ebc181-bfba-4dd7-a00c-3c617d725fe6
+javascript:S3776%"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(Ú°ùß8¸±¸šï1J$e5a131b1-0957-404c-9c36-73dc98c008b2
+pjavascript:S6774%"''prompt' is missing in props validation(Ú°ùß8¹±¸šï1J$be156df4-a213-47c4-91c3-c79d677a5273
+wjavascript:S6774%".'updatePrompts' is missing in props validation(Ú°ùß8¹±¸šï1J$e79412fc-ed33-4f5a-9790-28d5fefe7060
+wjavascript:S6774(".'prompt.prompt' is missing in props validation(‡¶é´8¹±¸šï1J$f1bd1412-7536-447c-bc29-64583a1cee44
+|javascript:S6774)".'prompt.prompt' is missing in props validation(—¯Ýƒúÿÿÿÿ8¹±¸šï1J$3fe94e59-2b07-4d5f-bd89-2c3f0804c4f4
+xjavascript:S6774+"*'prompt.id' is missing in props validation(ôö“¹üÿÿÿÿ8¹±¸šï1J$74d825ad-291a-4a56-bccf-42879b3fecab
+wjavascript:S6774.".'prompt.prompt' is missing in props validation(µ…ž·8¹±¸šï1J$16d89439-da7d-4ca8-ae32-c9dcabd1b695
+|javascript:S6774/".'prompt.prompt' is missing in props validation(Ã†¬™ùÿÿÿÿ8¹±¸šï1J$7bfa49fe-6144-4e02-9e0b-7acb256bf5df
+wjavascript:S67740".'prompt.prompt' is missing in props validation(Òâªß8¹±¸šï1J$a47a9893-ec4d-446e-9287-6825b1e25856
+xjavascript:S67746"*'prompt.id' is missing in props validation(Ì ¤œýÿÿÿÿ8¹±¸šï1J$99583f74-c573-4c85-98b3-cdb86532d55b
+sjavascript:S6774;"*'prompt.id' is missing in props validation(±°Ü’8¹±¸šï1J$65b2a787-84c9-4be0-ba45-665047efbcb9
+xjavascript:S6774E"*'prompt.id' is missing in props validation(Ô¢¹³ýÿÿÿÿ8¹±¸šï1J$ef07bd1d-50ee-41e2-9565-f8721a9cda5e
+xjavascript:S6774J"*'prompt.id' is missing in props validation(ßŒïƒúÿÿÿÿ8¹±¸šï1J$6824a7f4-c7de-49a4-a0d1-64ceabefe711
+ujavascript:S6774f",'prompt.name' is missing in props validation(·ýº8¹±¸šï1J$7eb00be2-30ce-48c7-92f0-abcc24327a07
+|javascript:S6774l".'prompt.author' is missing in props validation(½¬åŽùÿÿÿÿ8¹±¸šï1J$3801e5c7-ade7-43ec-9741-2eabd2f1579b
+yjavascript:S6774m"0'prompt.category' is missing in props validation(ï¡Åó8¹±¸šï1J$d33f75f3-86aa-4744-abc9-9ac885757616
+yjavascript:S6774m"0'prompt.category' is missing in props validation(ï¡Åó8¹±¸šï1J$dae118da-c80f-432e-81d4-6e691b8ab332
+vjavascript:S6774—"-'prompt.likes' is missing in props validation(»ÆÆz8¹±¸šï1J$049c0b49-f6e8-4d4f-ba12-aa07beb30f34
+vjavascript:S6774 ",'prompt.type' is missing in props validation(¿Ùˆ¶8¹±¸šï1J$a7366e46-2a5b-4813-8809-354d5f36483a
+‚javascript:S6774 "8'prompt.type.toLowerCase' is missing in props validation(¿Ùˆ¶8¹±¸šï1J$3079bf0b-adea-4e2d-89b8-c51ebc4e4b92

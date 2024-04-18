@@ -110,3 +110,5 @@ A
 public/robots.txt,d\a\dac799070c2d0c2fa24462b02c1f2dcc3fb3a1e9
 K
 src/components/NotFound.jsx,5\a\5ae663b583904677397b1fcfc9ae61f0d17a5704
+S
+#src/widgets/NavigationBarMobile.jsx,9\f\9f2246670d6702f4a709136647b5c3327531adc5
