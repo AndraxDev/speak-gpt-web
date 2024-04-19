@@ -114,3 +114,5 @@ S
 #src/widgets/NavigationBarMobile.jsx,9\f\9f2246670d6702f4a709136647b5c3327531adc5
 C
 .github/FUNDING.yml,4\1\4123588cdef112aa874bf52a300e9ed01db3ccd2
+L
+src/components/Changelog.jsx,3\a\3ad772359ae059fad2a55a148f92431e2fdf782c

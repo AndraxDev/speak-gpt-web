@@ -16,13 +16,102 @@
 
 import React from 'react';
 import {Link} from "react-router-dom";
-import {MaterialButton24} from "../widgets/MaterialButton";
-import {isMobile} from "react-device-detect";
+import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {BrowserView, isMobile, MobileView} from "react-device-detect";
+import {sha256} from "js-sha256";
+import Assistant from "./Assistant";
 
 function setFullHeight() {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
+
+const features = [
+    {
+        title: "Answer your question",
+        icon: "help",
+        description: "Get comprehensive answers from a vast knowledge base on a multitude of topics and queries.",
+        buttonLink: "/chat",
+        buttonLabel: "Start a chat",
+        buttonType: "link",
+        target: "_self",
+        tintBackground: "rgba(49,40,40,0.8)",
+        tintForeground: "rgb(255,168,168)"
+    },
+    {
+        title: "Generate code",
+        icon: "code",
+        description: "Create efficient and customizable code snippets tailored to your specific programming needs.",
+        buttonLink: "Generate code snippet for a Python function that calculates the factorial of a number.",
+        buttonLabel: "Try an example",
+        buttonType: "assistant",
+        tintBackground: "rgba(49,41,39,0.8)",
+        tintForeground: "rgb(255,189,157)"
+    },
+    {
+        title: "Solve math problems",
+        icon: "function",
+        description: "Solve complex mathematical equations and problems with precision, from basic arithmetic to advanced calculus.",
+        buttonLink: "Solve the integral of x^2 from 0 to 1.",
+        buttonLabel: "Try an example",
+        buttonType: "assistant",
+        tintBackground: "rgba(44,42,35,0.8)",
+        tintForeground: "rgb(255,242,176)"
+    },
+    {
+        title: "Translate text",
+        icon: "translate",
+        description: "Translate text from over 170 languages, ensuring accurate and context-aware communication.",
+        buttonLink: "Translate the phrase 'Hello, how are you?' to French.",
+        buttonLabel: "Try an example",
+        buttonType: "assistant",
+        tintBackground: "rgba(37,40,33,0.8)",
+        tintForeground: "rgb(216,255,158)"
+    },
+    {
+        title: "Generate images",
+        icon: "imagesmode",
+        description: "Generate unique images and digital artworks from textual descriptions for your creative projects.",
+        buttonLink: "/imagine Generate an image of a sunset over the ocean.",
+        buttonLabel: "Try an example",
+        buttonType: "assistant",
+        tintBackground: "rgba(34,42,40,0.8)",
+        tintForeground: "rgb(174,255,233)"
+    },
+    {
+        title: "Process png/jpg images",
+        icon: "folder",
+        description: "Include images in your queries and receive detailed information, analysis, and processing of the image content.",
+        buttonLink: "/chat",
+        buttonLabel: "Start a chat",
+        buttonType: "link",
+        target: "_self",
+        tintBackground: "rgba(38,40,47,0.8)",
+        tintForeground: "rgb(183,200,255)"
+    },
+    {
+        title: "Custom assistants",
+        icon: "group_work",
+        description: "Embed personalized assistant to your site using just 1 line of code.",
+        buttonLink: "https://github.com/AndraxDev/speak-gpt-web",
+        buttonLabel: "Open documentation",
+        buttonType: "link",
+        target: "_blank",
+        tintBackground: "rgba(37,35,44,0.8)",
+        tintForeground: "rgb(198,185,255)"
+    },
+    {
+        title: "Prompts Store",
+        icon: "apps",
+        description: "Explore and share AI-driven prompts in a collaborative community, enhancing creativity and inspiration among users and share your own.",
+        buttonLink: "/prompts",
+        buttonLabel: "Explore prompts",
+        buttonType: "link",
+        target: "_self",
+        tintBackground: "rgba(44,38,44,0.8)",
+        tintForeground: "rgb(255,176,244)"
+    }
+];
 
 // Set the height initially
 setFullHeight();
@@ -32,118 +121,264 @@ window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function WelcomePage() {
+
+    const [prompt, setPrompt] = React.useState("");
+    const [assistantIsOpen, setAssistantIsOpen] = React.useState(false);
+    const [mobileQrOpened, setMobileQrOpened] = React.useState(false);
+
     return (
-        <div style={isMobile ? {
-                padding: "24px",
-                overflowY: "auto",
-                height: "calc(calc(var(--vh, 1vh) * 100) - 140px)"
-        } : {
-                padding: "24px",
-                overflowY: "auto",
-                height: "calc(100vh - 48px)"
+        <div className={"v-background"} style={{
+            overflowY: "auto",
+            height: "calc(var(--vh, 1vh) * 100)",
+            backgroundColor: "var(--color-accent-50)"
         }}>
-                <h2 className={"title"}>SpeakGPT</h2>
-                <p className={"warning"}>This version of SpeakGPT is currently experimental. You can try it before
-                        official release. Be careful as some rough edges may appear.
-                        Click the button below
-                        to launch SpeakGPT.</p>
-                <Link to={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></Link>
-                <br/><br/>
-                <code className={"comment"}>// Developer note: This page must be replaced with welcome page.</code>
-                <h3 className={"title"}>Changelog:</h3>
-                <code className={"title"}>1.0.0-rc1</code><br/>
-                <code className={"text"}>- Mobile version</code><br/>
-                <br/>
-                <code className={"title"}>0.9.0-beta09</code><br/>
-                <code className={"text"}>- Personalize embedded assistants with icon and description</code><br/>
-                <br/>
-                <code className={"title"}>0.8.0-beta08</code><br/>
-                <code className={"text"}>- Customize embedded assistants with payload</code><br/>
-                <br/>
-                <code className={"title"}>0.7.0-beta07</code><br/>
-                <code className={"text"}>- Embedded assistant chats are now saved</code><br/>
-                <br/>
-                <code className={"title"}>0.6.0-beta06</code><br/>
-                <code className={"text"}>- Assistant message bar autofocus</code><br/>
-                <br/>
-                <code className={"title"}>0.5.0-beta05</code><br/>
-                <code className={"text"}>- Small fixes</code><br/>
-                <br/>
-                <code className={"title"}>0.4.0-beta04</code><br/>
-                <code className={"text"}>- Added mobile assistant</code><br/>
-                <br/>
-                <code className={"title"}>0.3.0-beta03</code><br/>
-                <code className={"text"}>- Minor fixes</code><br/>
-                <br/>
-                <code className={"title"}>0.2.0-beta02</code><br/>
-                <code className={"text"}>- Added embedded assistant</code><br/>
-                <br/>
-                <code className={"title"}>0.1.1-beta01</code><br/>
-                <code className={"text"}>- Minor fixes</code><br/>
-                <br/>
-                <code className={"title"}>0.1.0-beta01</code><br/>
-                <code className={"text"}>- First public beta release.</code><br/>
-                <code className={"text"}>- Improved images upload.</code><br/>
-                <br/>
-                <code className={"title"}>0.0.14-alpha14</code><br/>
-                <code className={"text"}>- Finished Prompts Store.</code><br/>
-                <code className={"text"}>- Added Quick Assistant.</code><br/>
-                <br/>
-                <code className={"title"}>0.0.13-alpha13</code><br/>
-                <code className={"text"}>- UI improvements.</code><br/>
-                <br/>
-                <code className={"title"}>0.0.12-alpha12</code><br/>
-                <code className={"text"}>- Added code highlighting form more programming languages.</code><br/>
-                <br/>
-                <code className={"title"}>0.0.11-alpha11</code><br/>
-                <code className={"text"}>- Now you can unset your API key and skip API key setup.</code><br/>
-                <code className={"text"}>- Added full list of available models</code><br/>
-                <br/>
-                <code className={"title"}>0.0.10-alpha10</code><br/>
-                <code className={"text"}>- Search chat added</code><br/>
-                <code className={"text"}>- Tips page added</code><br/>
-                <br/>
-                <code className={"title"}>0.0.9-alpha9</code><br/>
-                <code className={"text"}>- Minor bugs fixed</code><br/>
-                <br/>
-                <code className={"title"}>0.0.8-alpha8</code><br/>
-                <code className={"text"}>- Implemented GPT 4 Vision</code><br/>
-                <code className={"text"}>- Chats settings are now take effect</code><br/>
-                <br/>
-                <code className={"title"}>0.0.7-alpha7</code><br/>
-                <code className={"text"}>- Added chat settings</code><br/>
-                <br/>
-                <code className={"title"}>0.0.6-alpha6</code><br/>
-                <code className={"text"}>- Added ability to clear chats</code><br/>
-                <code className={"text"}>- Bugs fixed</code><br/>
-                <br/>
-                <code className={"title"}>0.0.5-alpha5</code><br/>
-                <code className={"text"}>- Minor bugs fixed</code><br/>
-                <br/>
-                <code className={"title"}>0.0.4-alpha4</code><br/>
-                <code className={"text"}>- Added code highlighting</code><br/>
-                <code className={"text"}>- Minor improvements</code><br/>
-                <br/>
-                <code className={"title"}>0.0.3-alpha3</code><br/>
-                <code className={"text"}>- Added image generation.</code><br/>
-                <code className={"text"}>- Fixed minor bugs.</code><br/>
-                <br/>
-                <code className={"title"}>0.0.2-alpha2</code><br/>
-                <code className={"text"}>- Changed chats location. Chats are now located in the indexed DB. We're
-                        preparing
-                        for image generation and chats import/export. You might also noticed that you chats has gone.
-                        Open
-                        Developers Tools > Console and put command localStorage.chatId, where chatId is a sha256 hash of
-                        the
-                        chat name to recover a chat. You can load chat as JSON in SpeakGPT mobile app now. Web version
-                        will
-                        receive this feature soon.</code><br/>
-                <code className={"text"}>- Added autoscroll in chats.</code><br/>
-                <br/>
-                <code className={"title"}>0.0.1-alpha1</code><br/>
-                <code className={"text"}>- Initial release.</code><br/>
-                <code className={"text"}>- You can create multiple chats.</code><br/>
-                <code className={"text"}>- You can select different AI models.</code>
+            <BrowserView className={"v-container"}>
+                <div className={"header"}>
+                    <div className={"app-info"}>
+                        <img src={"./logo192.png"} alt={"SpeakGPT"} className={"app-logo"}/>
+                        <div className={"app-info-text"}>
+                            <h1 className={"app-title"}>SpeakGPT</h1>
+                            <p className={"app-desc"}>SpeakGPT is an advanced and highly intuitive open-source AI
+                                assistant
+                                that
+                                utilizes the powerful OpenAI technologies to provide you with unparalleled performance
+                                and
+                                functionality.</p>
+                            <div className={"btn-row"}>
+                                <Link to={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></Link>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <MaterialButtonOutlined24 onClick={() => setMobileQrOpened(true)}>Get mobile app</MaterialButtonOutlined24>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {
+                        mobileQrOpened ? <div className={"priority dialog-backdrop"} onMouseDown={() => {
+                            setMobileQrOpened(false);
+                        }}>
+                            <div className={"dialog-paper"} onMouseDown={(e) => {
+                                e.stopPropagation()
+                            }}>
+                                <img src={"./qr.png"} alt={"SpeakGPT"} className={"mobile-qr"}/>
+                                <p className={"get-mobile-app"}>Get mobile app</p>
+                            </div>
+                        </div> : null
+                    }
+                </div>
+                <div className={"body"}>
+                <h2 className={"app-subtitle"}>Features</h2>
+                <div className={"feature-cards"}>
+
+                    {
+                        features.map((feature) => <div style={{
+                            backgroundColor: feature.tintBackground,
+                        }} className={"feature-card"} key={sha256(feature.title)}>
+                        <div><span style={{
+                            color: feature.tintForeground,
+                        }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
+                            <div className={"feature-info"}>
+                                <h3 className={"feature-card-title"} style={{
+                                    color: feature.tintForeground,
+                                }}>{feature.title}</h3>
+                                <p className={"feature-card-text"}>{feature.description}</p>
+                                <div className={"feature-button-area"}>
+                                    {
+                                        feature.buttonType === "link" ? <Link to={feature.buttonLink}
+                                                                              target={feature.target}><MaterialButton24 sx={{
+                                                backgroundColor: feature.tintForeground,
+                                                border: "none",
+                                                "&:hover": {
+                                                    backgroundColor: "#fff",
+                                                    border: "none"
+                                                }
+                                            }}>{feature.buttonLabel}</MaterialButton24></Link> :
+                                            <MaterialButton24 sx={{
+                                                backgroundColor: feature.tintForeground,
+                                                border: "none",
+                                                "&:hover": {
+                                                    backgroundColor: "#fff",
+                                                    border: "none"
+                                                }
+                                            }} onClick={() => {
+                                                setPrompt(feature.buttonLink);
+                                                setAssistantIsOpen(true);
+                                            }}>{feature.buttonLabel}</MaterialButton24>
+                                    }
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                </div>
+
+                </div>
+                <div className={"footer"}>
+                    <p className={"api-disclaimer"}>
+                        This app requires an OpenAI key to work. You can get it by visiting <a
+                        href={"https://platform.openai.com/api-keys"} target={"_blank"}>OpenAI</a>. Learn more about API
+                        key safety principles <Link to={"/api/safety"}>here</Link>.
+                    </p>
+                    <hr className={"footer-divider"}/>
+                    <div className={"footer-content"}>
+                        <div className={"footer-column"}>
+                            <Link className={"footer-link"} to={"/terms"}>Terms of Service</Link>
+                            <Link className={"footer-link"} to={"/privacy"}>Privacy Policy</Link>
+                            <Link className={"footer-link"} to={"/api/safety"}>API safety</Link>
+                            <Link className={"footer-link"} to={"/docs"}>Developer documentation</Link>
+                            <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
+                            <Link className={"footer-link"} to={"/contact"}>Contact</Link>
+                            <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
+                            <Link className={"footer-link"} to={"/sitemap"}>Site map</Link>
+                        </div>
+                        <div className={"vertical-divider"}></div>
+                        <div className={"footer-column"}>
+                            <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt-web"}
+                                  target={"_blank"}>GitHub</Link>
+                            <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt"}
+                                  target={"_blank"}>GitHub
+                                (Android)</Link>
+                            <Link className={"footer-link"}
+                                  to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}
+                                  target={"_blank"}>Google Play</Link>
+                            <Link className={"footer-link"} to={"https://buymeacoffee.com/andrax_dev"}
+                                  target={"_blank"}>Buy me a
+                                coffee</Link>
+                            <Link className={"footer-link"} to={"https://ko-fi.com/andrax_dev"}
+                                  target={"_blank"}>Ko-fi</Link>
+                            <Link className={"footer-link"} to={"https://andrax.dev"} target={"_blank"}>AndraxDev</Link>
+                            <Link className={"footer-link"} to={"https://teslasoft.org"}
+                                  target={"_blank"}>Teslasoft</Link>
+                        </div>
+                    </div>
+                    <hr className={"footer-divider"}/>
+                    <p className={"copyright"}>(C) 2024 <a>AndraxDev</a>. All rights reserved.</p>
+                </div>
+            </BrowserView>
+            <MobileView className={"v-container-mob"}>
+                <div className={"header-mob"}>
+                    <div className={"app-info-mob"}>
+                        <img src={"./logo192.png"} alt={"SpeakGPT"} className={"app-logo-mob"}/>
+                        <div className={"app-info-text"}>
+                            <h1 className={"app-title-mob"}>SpeakGPT</h1>
+                            <p className={"app-desc-mob"}>SpeakGPT is an advanced and highly intuitive open-source AI
+                                assistant
+                                that
+                                utilizes the powerful OpenAI technologies to provide you with unparalleled performance
+                                and
+                                functionality.</p>
+                            <div className={"btn-row-mob"}>
+                                <Link to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"} target={"_blank"}><MaterialButton24>Download app</MaterialButton24></Link>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to={"/chat"}><MaterialButtonOutlined24>Launch SpeakGPT Web</MaterialButtonOutlined24></Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={"body"}>
+                    <h2 className={"app-subtitle"}>Features</h2>
+                    <div className={"feature-cards-mob"}>
+                        {
+                            features.map((feature) => <div style={{
+                                backgroundColor: feature.tintBackground,
+                            }} className={"feature-card-mob"} key={sha256(feature.title)}>
+                                <div><span style={{
+                                    color: feature.tintForeground,
+                                }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
+                                <div className={"feature-info"}>
+                                    <h3 className={"feature-card-title"} style={{
+                                        color: feature.tintForeground,
+                                    }}>{feature.title}</h3>
+                                    <p className={"feature-card-text"}>{feature.description}</p>
+                                    <div className={"feature-button-area"}>
+                                        {
+                                            feature.buttonType === "link" ? <Link to={feature.buttonLink}
+                                                                                  target={feature.target}><MaterialButton24
+                                                    sx={{
+                                                        backgroundColor: feature.tintForeground,
+                                                        border: "none",
+                                                        borderRadius: "12px",
+                                                        transition: "border-radius 0.2s",
+                                                        "&:hover": {
+                                                            backgroundColor: "#fff",
+                                                            border: "none",
+                                                            borderRadius: "24px",
+                                                            transition: "border-radius 0.2s",
+                                                        }
+                                                    }}>{feature.buttonLabel}</MaterialButton24></Link> :
+                                                <MaterialButton24 sx={{
+                                                    backgroundColor: feature.tintForeground,
+                                                    border: "none",
+                                                    borderRadius: "12px",
+                                                    transition: "border-radius 0.2s",
+                                                    "&:hover": {
+                                                        backgroundColor: "#fff",
+                                                        border: "none",
+                                                        borderRadius: "24px",
+                                                        transition: "border-radius 0.2s",
+                                                    }
+                                                }} onClick={() => {
+                                                    setPrompt(feature.buttonLink);
+                                                    setAssistantIsOpen(true);
+                                                }}>{feature.buttonLabel}</MaterialButton24>
+                                        }
+                                    </div>
+                                </div>
+                            </div>)
+                        }
+                    </div>
+
+                </div>
+                <div className={"footer-mob"}>
+                    <p className={"api-disclaimer-mob"}>
+                        This app requires an OpenAI key to work. You can get it by visiting <a
+                        href={"https://platform.openai.com/api-keys"} target={"_blank"}>OpenAI</a>. Learn more about API
+                        key safety principles <Link to={"/api/safety"}>here</Link>.
+                    </p>
+                    <hr className={"footer-divider-mob"}/>
+                    <div className={"footer-content-mob"}>
+                        <div className={"footer-column"}>
+                            <Link className={"footer-link"} to={"/terms"}>Terms of Service</Link>
+                            <Link className={"footer-link"} to={"/privacy"}>Privacy Policy</Link>
+                            <Link className={"footer-link"} to={"/api/safety"}>API safety</Link>
+                            <Link className={"footer-link"} to={"/docs"}>Developer documentation</Link>
+                            <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
+                            <Link className={"footer-link"} to={"/contact"}>Contact</Link>
+                            <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
+                            <Link className={"footer-link"} to={"/sitemap"}>Site map</Link>
+                        </div>
+                        <div className={"vertical-divider"}></div>
+                        <div className={"footer-column"}>
+                            <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt-web"}
+                                  target={"_blank"}>GitHub</Link>
+                            <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt"}
+                                  target={"_blank"}>GitHub
+                                (Android)</Link>
+                            <Link className={"footer-link"}
+                                  to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}
+                                  target={"_blank"}>Google Play</Link>
+                            <Link className={"footer-link"} to={"https://buymeacoffee.com/andrax_dev"}
+                                  target={"_blank"}>Buy me a
+                                coffee</Link>
+                            <Link className={"footer-link"} to={"https://ko-fi.com/andrax_dev"}
+                                  target={"_blank"}>Ko-fi</Link>
+                            <Link className={"footer-link"} to={"https://andrax.dev"} target={"_blank"}>AndraxDev</Link>
+                            <Link className={"footer-link"} to={"https://teslasoft.org"}
+                                  target={"_blank"}>Teslasoft</Link>
+                        </div>
+                    </div>
+                    <hr className={"footer-divider-mob"}/>
+                    <p className={"copyright"}>(C) 2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
+                </div>
+            </MobileView>
+            {
+                assistantIsOpen ? <div style={isMobile ? {
+                    height: "calc(var(--vh, 1vh) * 100)",
+                    overflow: "hidden"
+                } : {}} className={isMobile ? "assistant-container-mob" : "assistant-container"}>
+                    <Assistant runtimePrompt={prompt} type={prompt.toLowerCase().includes("/imagine") ? "dalle" : "gpt"}
+                               closeWindow={setAssistantIsOpen}/>
+                </div> : null
+            }
         </div>
     );
 }

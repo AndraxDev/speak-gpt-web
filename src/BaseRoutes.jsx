@@ -24,13 +24,17 @@ import Tips from "./components/Tips";
 import AssistantEmbedded from "./components/AssistantEmbedded";
 import AssistantMobile from "./components/AssistantMobile";
 import NotFound from "./components/NotFound";
+import Changelog from "./components/Changelog";
 
 function BaseRoutes() {
     return (
         <Routes>
             <Route path="/" element={
-                <MaterialWindow page={"welcome"}>
-                    <WelcomePage/>
+                <WelcomePage/>
+            } exact />
+            <Route path="/changelog" element={
+                <MaterialWindow page={"changelog"}>
+                    <Changelog/>
                 </MaterialWindow>
             } exact />
             <Route path="/chat" element={

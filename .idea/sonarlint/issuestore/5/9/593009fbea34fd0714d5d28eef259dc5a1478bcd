@@ -1,3 +1,4 @@
 
-javascript:S64384"FComments inside children section of tag should be placed inside braces(Ú¾ş8Â”—ï1J$52f47d68-2b5c-4025-b276-e5faf9a7501c
-mjavascript:S6766ˆ"#HTML entity, `>` , must be escaped.(”ÀÎ‘8Â”—ï1J$3fc2ab99-0492-402d-86a6-ff68315a9d53
+’javascript:S6848"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(¡‘ øÿÿÿÿ8ò›Äï1J$b1e46ebb-7b73-40c2-ad41-5de5fe9a8883
+javascript:S6848 "ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(ªÀª8ò›Äï1J$cc5e6c2b-d7ae-4e69-9f86-240cce8efd60
+Ïjavascript:S6844ş"ÿThe href attribute is required for an anchor to be keyboard accessible. Provide a valid, navigable address as the href value. If you cannot provide an href, but still need the element to resemble a link, use a button and change it with appropriate styles.(ŸÈ²şùÿÿÿÿ8ò›Äï1J$19f98e75-fb70-4029-b5c2-ffd3d3aa5a84
