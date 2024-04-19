@@ -112,3 +112,5 @@ K
 src/components/NotFound.jsx,5\a\5ae663b583904677397b1fcfc9ae61f0d17a5704
 S
 #src/widgets/NavigationBarMobile.jsx,9\f\9f2246670d6702f4a709136647b5c3327531adc5
+C
+.github/FUNDING.yml,4\1\4123588cdef112aa874bf52a300e9ed01db3ccd2

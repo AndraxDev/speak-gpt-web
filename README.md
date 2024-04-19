@@ -197,7 +197,7 @@ To secure your API key perform the following steps:
 
 ## Buy me a coffee:
 
-<a href = "https://www.paypal.com/donate/?hosted_button_id=KR6BRY2BPEQTL"><img src = "https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"></a>
+<a href="https://buymeacoffee.com/andrax_dev"><img src="https://andrax.dev/bmc_qr.png" width="200"/></a>
 
 ## License
 
