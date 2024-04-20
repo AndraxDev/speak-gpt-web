@@ -403,7 +403,7 @@ function ChatList() {
                         <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                 </div>
                 <div style={isMobile ? {
-                    height: "calc(calc(var(--vh, 1vh) * 100) - 216px)",
+                    height: "calc(calc(var(--vh, 1vh) * 100) - 220px)",
                 } : {}} className={isMobile ? "chat-list-mob" : "chat-list"}>
                     {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""}
                                                setSelectedChatForDeletion={setSelectedChatForDeletion}

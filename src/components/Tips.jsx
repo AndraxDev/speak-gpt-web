@@ -59,6 +59,7 @@ function Tips() {
                         <ProTip key={index} text={tip} />
                     );
                 })}
+
                 <MobileView>
                     <div style={{
                         width: "100%",

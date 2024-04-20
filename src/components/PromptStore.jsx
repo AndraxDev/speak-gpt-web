@@ -185,7 +185,7 @@ function PromptStore() {
             height: "calc(calc(var(--vh, 1vh) * 100) - 80px)",
         } : {}} className={"prompt-window"}>
             <div className={isMobile ? "prompt-list-container-mob" : "prompt-list-container"}>
-                <div className={"prompts-filter"}>
+                <div className={isMobile ? "prompts-filter-mob" : "prompts-filter"}>
                     <h2 className={"page-title"}>Prompts Store</h2>
                     <div className={isMobile ? "search-box-mob" : "search-box-2"}>
                         <input className={"search-input"} type={"text"} placeholder={"Search prompts..."}
@@ -194,7 +194,10 @@ function PromptStore() {
                                }}/>
                         <span className={"search-icon material-symbols-outlined"}>search</span>
                     </div>
-                    <br/>
+                    <div style={{
+                        height: "12px",
+                        width: "100%"
+                    }}/>
                     <div className={isMobile ? "categories-mob" : "categories"}>
                         {
                             categories.map((e) => (
@@ -208,19 +211,30 @@ function PromptStore() {
                             ))
                         }
                     </div>
-                    <div className={isMobile ? "filter-buttons-mob" : "filter-buttons"} style={{
-                        "display": "flex",
-                        "flexDirection": "row",
-                        "justifyContent": "center",
-                        "alignItems": "center",
-                        marginLeft: "20px",
+                    <div className={isMobile ? "filter-buttons-mob" : "filter-buttons"} style={isMobile ? {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "12px",
+                        marginLeft: "16px",
+                        userSelect: "none"
+                    } : {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "12px",
+                        marginLeft: "8px",
                         userSelect: "none"
                     }}>
                         {
                             selectedType === "all" ? <MaterialButton24 style={{
-                                width: "140px",
+                                width: "100%",
+                                flexGrow: 1
                             }}>All</MaterialButton24> : <MaterialButtonTonal24 style={{
-                                width: "140px"
+                                width: "100%",
+                                flexGrow: 1
                             }} onClick={() => {
                                 setSearchQuery("");
                                 setSelectedType("all");
@@ -228,13 +242,11 @@ function PromptStore() {
                         }
                         {
                             selectedType === "gpt" ? <MaterialButton24 style={{
-                                width: "140px",
-                                marginLeft: "12px",
-                                marginRight: "12px",
+                                width: "100%",
+                                flexGrow: 1
                             }}>GPT</MaterialButton24> : <MaterialButtonTonal24 style={{
-                                width: "140px",
-                                marginLeft: "12px",
-                                marginRight: "12px"
+                                width: "100%",
+                                flexGrow: 1
                             }} onClick={() => {
                                 setSearchQuery("type:gpt");
                                 setSelectedType("gpt");
@@ -242,16 +254,21 @@ function PromptStore() {
                         }
                         {
                             selectedType === "dalle" ? <MaterialButton24 style={{
-                                width: "140px",
+                                width: "100%",
+                                flexGrow: 1
                             }}>DALL-e</MaterialButton24> : <MaterialButtonTonal24 style={{
-                                width: "140px"
+                                width: "100%",
+                                flexGrow: 1
                             }} onClick={() => {
                                 setSearchQuery("type:dall-e");
                                 setSelectedType("dalle");
                             }}>DALL-e</MaterialButtonTonal24>
                         }
                     </div>
-                    <br/>
+                    <div style={{
+                        height: "12px",
+                        width: "100%"
+                    }}/>
                 </div>
                 <div className={isMobile ? "fab-area-mob" : "fw-2"}>
                     <MaterialButton16 className={"fab"} style={{
@@ -270,7 +287,7 @@ function PromptStore() {
                             height: "64px"
                         }}/>
                     </div> : <div style={isMobile ? {
-                        height: "calc(calc(var(--vh, 1vh) * 100) - 80px - 270px)",
+                        height: "calc(calc(var(--vh, 1vh) * 100) - 80px - 268px)",
                     } : {}} className={isMobile ? "prompt-list-mob" : "prompt-list"}>
                         {
                             prompts.map((e) =>

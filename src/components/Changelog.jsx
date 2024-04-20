@@ -47,6 +47,9 @@ function WelcomePage() {
                         official release. Be careful as some rough edges may appear.
                         Click the button below
                         to launch SpeakGPT.</p>
+                <code className={"title"}>1.0.0-rc3</code><br/>
+                <code className={"text"}>- Improved mobile UI</code><br/>
+                <br/>
                 <code className={"title"}>1.0.0-rc2</code><br/>
                 <code className={"text"}>- Bugfix</code><br/>
                 <br/>

@@ -44,7 +44,7 @@
     --color-dark-blue: #212142;
     --color-autofill: #181d1a;
     --color-warn: #db4437;
-    --color-warn-transparent: rgba(219, 68, 55, 0.3);
+    --color-warn-transparent: rgba(219, 68, 55, 0.2);
     --color-warn-transparent-hover: rgba(219, 68, 55, 0.5);
 }
 

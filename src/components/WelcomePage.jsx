@@ -113,6 +113,72 @@ const features = [
     }
 ];
 
+const mobileFeatures = [
+    {
+        title: "Assistant",
+        icon: "group_work",
+        description: "Make SpeakGPT your default assistant and access SpeakGPT any app or site.",
+        tintBackground: "rgba(20,20,20,0.8)",
+        tintForeground: "rgb(200,200,200)"
+    },
+    {
+        title: "Different AI models",
+        icon: "extension",
+        description: "Access OpenAI GPT, Facebook LLama, Groq Mixtral and other powerful AI models",
+        tintBackground: "rgba(40,40,40,0.8)",
+        tintForeground: "rgb(255,255,255)"
+    },
+    {
+        title: "WhisperAI",
+        icon: "graphic_eq",
+        description: "Use your voice to access SpeakGPT. Currently is supports WhisperAI and Google Speech recognition. Voice language is detected automatically.",
+        tintBackground: "rgba(20,20,20,0.8)",
+        tintForeground: "rgb(200,200,200)"
+    },
+    {
+        title: "Text-To-Speech",
+        icon: "text_to_speech",
+        description: "Mobile app supports pronouncing text using OpenAI TTS and Google TTS.",
+        tintBackground: "rgba(40,40,40,0.8)",
+        tintForeground: "rgb(255,255,255)"
+    },
+    {
+        title: "Offline mode",
+        icon: "cloud_off",
+        description: "Access your saved chats while you're offline.",
+        tintBackground: "rgba(20,20,20,0.8)",
+        tintForeground: "rgb(200,200,200)"
+    },
+    {
+        title: "Context menu",
+        icon: "lists",
+        description: "Select text in any app and select 'SpeakGPT' in your context menu to use this text with assistant. Currently you can summarize, explain, translate text, use it as prompt or generate images.",
+        tintBackground: "rgba(40,40,40,0.8)",
+        tintForeground: "rgb(255,255,255)"
+    },
+    {
+        title: "Experiments",
+        icon: "science",
+        description: "Sometimes we're rolling out new interesting function for a limited time. Check out 'Experiments' section in the app.",
+        tintBackground: "rgba(20,20,20,0.8)",
+        tintForeground: "rgb(200,200,200)"
+    },
+    {
+        title: "Fine-tines",
+        icon: "token",
+        description: "Mobile version allows you to use you fine-tuned models.",
+        tintBackground: "rgba(40,40,40,0.8)",
+        tintForeground: "rgb(255,255,255)"
+    },
+    {
+        title: "Dynamic theme",
+        icon: "palette",
+        description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT.",
+        tintBackground: "rgba(20,20,20,0.8)",
+        tintForeground: "rgb(200,200,200)"
+    }
+]
+
 // Set the height initially
 setFullHeight();
 
@@ -152,7 +218,6 @@ function WelcomePage() {
                         </div>
                     </div>
 
-
                     {
                         mobileQrOpened ? <div className={"priority dialog-backdrop"} onMouseDown={() => {
                             setMobileQrOpened(false);
@@ -167,50 +232,67 @@ function WelcomePage() {
                     }
                 </div>
                 <div className={"body"}>
-                <h2 className={"app-subtitle"}>Features</h2>
-                <div className={"feature-cards"}>
-
-                    {
-                        features.map((feature) => <div style={{
-                            backgroundColor: feature.tintBackground,
-                        }} className={"feature-card"} key={sha256(feature.title)}>
-                        <div><span style={{
-                            color: feature.tintForeground,
-                        }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
-                            <div className={"feature-info"}>
-                                <h3 className={"feature-card-title"} style={{
+                    <h2 className={"app-subtitle"}>Features</h2>
+                    <div className={"feature-cards"}>
+                        {
+                            features.map((feature) => <div style={{
+                                backgroundColor: feature.tintBackground,
+                            }} className={"feature-card"} key={sha256(feature.title)}>
+                                <div><span style={{
                                     color: feature.tintForeground,
-                                }}>{feature.title}</h3>
-                                <p className={"feature-card-text"}>{feature.description}</p>
-                                <div className={"feature-button-area"}>
-                                    {
-                                        feature.buttonType === "link" ? <Link to={feature.buttonLink}
-                                                                              target={feature.target}><MaterialButton24 sx={{
-                                                backgroundColor: feature.tintForeground,
-                                                border: "none",
-                                                "&:hover": {
-                                                    backgroundColor: "#fff",
-                                                    border: "none"
-                                                }
-                                            }}>{feature.buttonLabel}</MaterialButton24></Link> :
-                                            <MaterialButton24 sx={{
-                                                backgroundColor: feature.tintForeground,
-                                                border: "none",
-                                                "&:hover": {
-                                                    backgroundColor: "#fff",
-                                                    border: "none"
-                                                }
-                                            }} onClick={() => {
-                                                setPrompt(feature.buttonLink);
-                                                setAssistantIsOpen(true);
-                                            }}>{feature.buttonLabel}</MaterialButton24>
-                                    }
+                                }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
+                                <div className={"feature-info"}>
+                                    <h3 className={"feature-card-title"} style={{
+                                        color: feature.tintForeground,
+                                    }}>{feature.title}</h3>
+                                    <p className={"feature-card-text"}>{feature.description}</p>
+                                    <div className={"feature-button-area"}>
+                                        {
+                                            feature.buttonType === "link" ? <Link to={feature.buttonLink}
+                                                                                  target={feature.target}><MaterialButton24
+                                                    sx={{
+                                                        backgroundColor: feature.tintForeground,
+                                                        border: "none",
+                                                        "&:hover": {
+                                                            backgroundColor: "#fff",
+                                                            border: "none"
+                                                        }
+                                                    }}>{feature.buttonLabel}</MaterialButton24></Link> :
+                                                <MaterialButton24 sx={{
+                                                    backgroundColor: feature.tintForeground,
+                                                    border: "none",
+                                                    "&:hover": {
+                                                        backgroundColor: "#fff",
+                                                        border: "none"
+                                                    }
+                                                }} onClick={() => {
+                                                    setPrompt(feature.buttonLink);
+                                                    setAssistantIsOpen(true);
+                                                }}>{feature.buttonLabel}</MaterialButton24>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                        </div>)
-                    }
-                </div>
-
+                            </div>)
+                        }
+                    </div>
+                    <h2 className={"app-subtitle"}>Exclusive mobile features</h2>
+                    <div className={"feature-cards"}>
+                        {
+                            mobileFeatures.map((feature) => <div style={{
+                                backgroundColor: feature.tintBackground,
+                            }} className={"feature-card"} key={sha256(feature.title)}>
+                                <div><span style={{
+                                    color: feature.tintForeground,
+                                }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
+                                <div className={"feature-info"}>
+                                    <h3 className={"feature-card-title"} style={{
+                                        color: feature.tintForeground,
+                                    }}>{feature.title}</h3>
+                                    <p className={"feature-card-text"}>{feature.description}</p>
+                                </div>
+                            </div>)
+                        }
+                    </div>
                 </div>
                 <div className={"footer"}>
                     <p className={"api-disclaimer"}>
@@ -251,7 +333,7 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider"}/>
-                    <p className={"copyright"}>(C) 2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
                 </div>
             </BrowserView>
             <MobileView className={"v-container-mob"}>
@@ -326,7 +408,24 @@ function WelcomePage() {
                             </div>)
                         }
                     </div>
-
+                    <h2 className={"app-subtitle"}>Exclusive mobile features</h2>
+                    <div className={"feature-cards-mob"}>
+                        {
+                            mobileFeatures.map((feature) => <div style={{
+                                backgroundColor: feature.tintBackground,
+                            }} className={"feature-card-mob"} key={sha256(feature.title)}>
+                                <div><span style={{
+                                    color: feature.tintForeground,
+                                }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
+                                <div className={"feature-info"}>
+                                    <h3 className={"feature-card-title"} style={{
+                                        color: feature.tintForeground,
+                                    }}>{feature.title}</h3>
+                                    <p className={"feature-card-text"}>{feature.description}</p>
+                                </div>
+                            </div>)
+                        }
+                    </div>
                 </div>
                 <div className={"footer-mob"}>
                     <p className={"api-disclaimer-mob"}>
@@ -346,7 +445,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
                             <Link className={"footer-link"} to={"/sitemap"}>Site map</Link>
                         </div>
-                        <div className={"vertical-divider"}></div>
+                        <div className={"vertical-divider-mob"}></div>
                         <div className={"footer-column"}>
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt-web"}
                                   target={"_blank"}>GitHub</Link>
@@ -367,7 +466,7 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider-mob"}/>
-                    <p className={"copyright"}>(C) 2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
                 </div>
             </MobileView>
             {

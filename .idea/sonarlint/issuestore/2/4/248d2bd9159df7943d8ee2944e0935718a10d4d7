@@ -1,6 +1,6 @@
 
-¢javascript:S3776k"TRefactor this function to reduce its Cognitive Complexity from 25 to the 15 allowed.(ñÌÊüÿÿÿÿ8·ÈØšï1J$15fa78aa-3fe4-44a2-b528-5ed2cc004c7c
-}javascript:S1481r"4Remove the declaration of the unused 'uid' variable.(ìÎìÂ8·ÈØšï1J$7bfbf96c-ffee-4169-8b51-0b083ba4fe8e
-zjavascript:S1854r"1Remove this useless assignment to variable "uid".(ìÎìÂ8·ÈØšï1J$00f47ba8-d408-4337-80ba-35076ffe4d2f
-’javascript:S6848É"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(ŞæƒËùÿÿÿÿ8·ÈØšï1J$a0ee72c4-ac24-45d7-9db0-a6b5446f277e
-®javascript:S1082É"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ŞæƒËùÿÿÿÿ8·ÈØšï1J$85baffb8-e2ec-4f4c-8ba4-e0d00d20b865
+¢javascript:S3776k"TRefactor this function to reduce its Cognitive Complexity from 27 to the 15 allowed.(ñÌÊüÿÿÿÿ8ˆ—½Şï1J$62edc0f8-606d-4844-b09e-b27ab0dcd748
+}javascript:S1481r"4Remove the declaration of the unused 'uid' variable.(ìÎìÂ8ˆ—½Şï1J$c899a2cf-bbcb-4343-847b-3d96acf20f5f
+zjavascript:S1854r"1Remove this useless assignment to variable "uid".(ìÎìÂ8‰—½Şï1J$b6f5e4b8-c1c7-41bb-8c11-2b908372f70c
+’javascript:S6848Ì"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(ŞæƒËùÿÿÿÿ8‰—½Şï1J$4f035658-e481-4527-b788-bb3c0db27ab4
+®javascript:S1082Ì"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ŞæƒËùÿÿÿÿ8Š—½Şï1J$06b5b06a-9d91-4349-97d9-8ff9e8adeadf
