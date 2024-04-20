@@ -2111,10 +2111,10 @@ td {
 
 .v-container {
     width: 100%;
-    background-image: url("backdrop2.jpg");
-    background-size: 100%;
-    background-position: center;
-    background-attachment: fixed;
+    /*background-image: url("backdrop2.jpg");*/
+    /*background-size: 100%;*/
+    /*background-position: center;*/
+    /*background-attachment: fixed;*/
 }
 
 .app-logo-mob {
@@ -2243,7 +2243,7 @@ td {
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: var(--color-accent-50);
+    background-color: var(--color-accent-100);
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     padding-top: 16px;

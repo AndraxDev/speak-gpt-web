@@ -21,7 +21,7 @@ import {
 import Message from "./Message";
 import OpenAI from "openai";
 import ConfirmChatClear from "./ConfirmChatClear";
-import {CircularProgress} from "@mui/material";
+import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
 import {
@@ -36,6 +36,7 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
+import {supportedFileTypes} from "../util/ModelTypeConverter";
 
 const getDefaultDescription = () => {
     return (`
@@ -76,6 +77,8 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
     const [confirmClear, setConfirmClear] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState(null);
+    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -144,9 +147,13 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     async function convertImageToBase64(url) {
         try {
             let urlEncoded = btoa(url);
-            const response = await fetch("https://gpt.teslasoft.org/api/v1/images?u=" + urlEncoded);
+            const response = await fetch("https://assistant.teslasoft.org/api/v1/images?u=" + urlEncoded);
 
-            if (!response.ok) throw new Error('Network response was not ok.');
+            if (!response.ok) {
+                setErrorSnackBarMessage("Failed fetch image from the server.");
+                setErrorSnackBar(true);
+                return
+            }
 
             // Step 2: Convert it to a Blob
             const blob = await response.blob();
@@ -379,17 +386,22 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 let srcData = e.target.result;
                 let fileType = file.type;
 
-                if (fileType.startsWith("image")) {
+                if (supportedFileTypes.includes(fileType)) {
                     if (!getAndroidOS() && !isMobile) {
                         document.querySelector(".chat-textarea").focus();
                     }
                     setSelectedFile(srcData);
+                } else {
+                    setErrorSnackBarMessage("Unsupported file type. Supported images format: jpg, png, gif, webp");
+                    setErrorSnackBar(true);
                 }
             }
 
             reader.readAsDataURL(file);
         } catch (e) {
             console.error("Error processing file: " + e)
+            setErrorSnackBarMessage("Failed to read file.");
+            setErrorSnackBar(true);
         }
     }
 
@@ -440,6 +452,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
         dropArea.addEventListener('drop', handleDrop, false);
 
+        /* Temporarily removed due to a bug
         document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
             e.preventDefault();
             const items = (e.clipboardData || window.clipboardData).items;
@@ -464,6 +477,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+        */
     }, [])
 
     useEffect(() => {
@@ -474,6 +488,20 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
     return (
         <div className={"chat-frame"}>
+            <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={errorSnackBar} autoHideDuration={6000} onClose={() => {
+                setErrorSnackBar(false);
+            }}>
+                <Alert
+                    onClose={() => {
+                        setErrorSnackBar(false);
+                    }}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    {errorSnackBarMessage}
+                </Alert>
+            </Snackbar>
             {
                 clearDialogOpen ? <ConfirmChatClear setOpenState={setClearDialogOpen} confirm={setConfirmClear} isAssistant={true}/> : null
             }

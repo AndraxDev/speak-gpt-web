@@ -51,7 +51,7 @@ function PromptView({prompt, updatePrompts}) {
     const likePrompt = () => {
         if (likeStatus) {
             console.log("Dislike");
-            fetch("https://gpt.teslasoft.org/api/v1/dislike?api_key=16790f7ac03237764a8a0ad36eede490&id=" + prompt.id).then((r) =>
+            fetch("https://assistant.teslasoft.org/api/v1/dislike?api_key=16790f7ac03237764a8a0ad36eede490&id=" + prompt.id).then((r) =>
                 r.json()
             ).then((r) => {
                 if (r.code === 200) {
@@ -66,7 +66,7 @@ function PromptView({prompt, updatePrompts}) {
             });
         } else {
             console.log("Like");
-            fetch("https://gpt.teslasoft.org/api/v1/like?api_key=16790f7ac03237764a8a0ad36eede490&id=" + prompt.id).then((r) =>
+            fetch("https://assistant.teslasoft.org/api/v1/like?api_key=16790f7ac03237764a8a0ad36eede490&id=" + prompt.id).then((r) =>
                 r.json()
             ).then((r) => {
                 if (r.code === 200) {

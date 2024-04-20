@@ -121,7 +121,7 @@ function PromptStore() {
     }, [id]);
 
     const fetchData = (query) => {
-        fetch("https://gpt.teslasoft.org/api/v1/search?api_key=16790f7ac03237764a8a0ad36eede490&query="+query, {
+        fetch("https://assistant.teslasoft.org/api/v1/search?api_key=16790f7ac03237764a8a0ad36eede490&query="+query, {
             method: "GET",
         }).then(r => r.json())
         .then(r => {
@@ -134,7 +134,7 @@ function PromptStore() {
     useEffect(() => {
         if (id !== undefined && id !== null && id !== "") {
             setLoading(true)
-            fetch("https://gpt.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+id, {
+            fetch("https://assistant.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+id, {
                 method: "GET",
             }).then(r => r.json())
             .then(r => {
@@ -166,7 +166,7 @@ function PromptStore() {
 
         if (selectedPrompt !== null) {
             setLoading(true)
-            fetch("https://gpt.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+selectedPrompt.id, {
+            fetch("https://assistant.teslasoft.org/api/v1/prompt?api_key=16790f7ac03237764a8a0ad36eede490&id="+selectedPrompt.id, {
                 method: "GET",
             }).then(r => r.json())
             .then(r => {

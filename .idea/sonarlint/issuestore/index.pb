@@ -116,3 +116,5 @@ C
 .github/FUNDING.yml,4\1\4123588cdef112aa874bf52a300e9ed01db3ccd2
 L
 src/components/Changelog.jsx,3\a\3ad772359ae059fad2a55a148f92431e2fdf782c
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a

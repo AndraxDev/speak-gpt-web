@@ -21,7 +21,7 @@ import {
 import Message from "./Message";
 import OpenAI from "openai";
 import ConfirmChatClear from "./ConfirmChatClear";
-import {CircularProgress} from "@mui/material";
+import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
 import {
@@ -37,6 +37,7 @@ import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {useParams} from "react-router-dom";
+import {supportedFileTypes} from "../util/ModelTypeConverter";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -101,6 +102,8 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     const [customChatLocation, setCustomChatLocation] = React.useState(chatLocation);
     const [assistantIcon, setAssistantIcon] = React.useState("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=");
     const [assistantDescription, setAssistantDescription] = React.useState(getDefaultDescription());
+    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -276,9 +279,13 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     async function convertImageToBase64(url) {
         try {
             let urlEncoded = btoa(url);
-            const response = await fetch("https://gpt.teslasoft.org/api/v1/images?u=" + urlEncoded);
+            const response = await fetch("https://assistant.teslasoft.org/api/v1/images?u=" + urlEncoded);
 
-            if (!response.ok) throw new Error('Network response was not ok.');
+            if (!response.ok) {
+                setErrorSnackBarMessage("Failed fetch image from the server.");
+                setErrorSnackBar(true);
+                return
+            }
 
             // Step 2: Convert it to a Blob
             const blob = await response.blob();
@@ -551,15 +558,20 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 let srcData = e.target.result;
                 let fileType = file.type;
 
-                if (fileType.startsWith("image")) {
+                if (supportedFileTypes.includes(fileType)) {
                     document.querySelector(".chat-textarea").focus();
                     setSelectedFile(srcData);
+                } else {
+                    setErrorSnackBarMessage("Unsupported file type. Supported images format: jpg, png, gif, webp");
+                    setErrorSnackBar(true);
                 }
             }
 
             reader.readAsDataURL(file);
         } catch (e) {
             console.error("Error processing file: " + e)
+            setErrorSnackBarMessage("Failed to read file.");
+            setErrorSnackBar(true);
         }
     }
 
@@ -610,6 +622,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
         dropArea.addEventListener('drop', handleDrop, false);
 
+        /* Temporarily removed due to a bug
         document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
             e.preventDefault();
             const items = (e.clipboardData || window.clipboardData).items;
@@ -634,6 +647,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+        */
     }, [])
 
     useEffect(() => {
@@ -642,6 +656,20 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
     return (
         <div className={"assistant-container-embedded"}>
+            <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={errorSnackBar} autoHideDuration={6000} onClose={() => {
+                setErrorSnackBar(false);
+            }}>
+                <Alert
+                    onClose={() => {
+                        setErrorSnackBar(false);
+                    }}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    {errorSnackBarMessage}
+                </Alert>
+            </Snackbar>
             <div className={"chat-frame"}>
                 {
                     clearDialogOpen ?

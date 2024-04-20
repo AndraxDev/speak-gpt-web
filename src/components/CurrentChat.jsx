@@ -16,20 +16,19 @@
 
 import React, {useEffect} from 'react';
 import {
-    MaterialButtonError,
-    MaterialButtonTonal24, MaterialButtonTonal24Icon, MaterialButtonTonalIcon, MaterialButtonTonalIconV2
+    MaterialButtonError, MaterialButtonTonal24Icon, MaterialButtonTonalIcon, MaterialButtonTonalIconV2
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
 import {sha256} from "js-sha256";
 import ConfirmChatClear from "./ConfirmChatClear";
-import {CircularProgress} from "@mui/material";
+import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
 import {getModel, setModel, getSystemMessage, setSystemMessage, getDalleVersion, setDalleVersion, getResolution, setResolution} from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
-import {modelToType} from "../util/ModelTypeConverter";
+import {modelToType, supportedFileTypes} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile, MobileView} from 'react-device-detect';
 import {Link} from "react-router-dom";
@@ -64,6 +63,8 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
     const [confirmClear, setConfirmClear] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState(null);
+    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
 
     useEffect(() => {
         let c = [];
@@ -169,9 +170,13 @@ function CurrentChat({chats, id, chatName, updateChats}) {
     async function convertImageToBase64(url) {
         try {
             let urlEncoded = btoa(url);
-            const response = await fetch("https://gpt.teslasoft.org/api/v1/images?u=" + urlEncoded);
+            const response = await fetch("https://assistant.teslasoft.org/api/v1/images?u=" + urlEncoded);
 
-            if (!response.ok) throw new Error('Network response was not ok.');
+            if (!response.ok) {
+                setErrorSnackBarMessage("Failed fetch image from the server.");
+                setErrorSnackBar(true);
+                return
+            }
 
             // Step 2: Convert it to a Blob
             const blob = await response.blob();
@@ -487,15 +492,20 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 let srcData = e.target.result;
                 let fileType = file.type;
 
-                if (fileType.startsWith("image")) {
+                if (supportedFileTypes.includes(fileType)) {
                     document.querySelector(".chat-textarea").focus();
                     setSelectedFile(srcData);
+                } else {
+                    setErrorSnackBarMessage("Unsupported file type. Supported images format: jpg, png, gif, webp");
+                    setErrorSnackBar(true);
                 }
             }
 
             reader.readAsDataURL(file);
         } catch (e) {
             console.error("Error processing file", e);
+            setErrorSnackBarMessage("Failed to read file.");
+            setErrorSnackBar(true);
         }
     }
 
@@ -571,6 +581,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
 
         dropArea.addEventListener('drop', handleDrop, false);
 
+        /* Temporarily removed due to issues with pasting images
         document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
             e.preventDefault();
             const items = (e.clipboardData || window.clipboardData).items;
@@ -595,12 +606,27 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+        */
     }, [])
 
     return (
         <div style={isMobile ? {
             height: "calc(var(--vh, 1vh) * 100)"
         } : {}} className={isMobile ? "chat-fixed chat-frame-mob" : "chat-frame"}>
+            <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={errorSnackBar} autoHideDuration={6000} onClose={() => {
+                setErrorSnackBar(false);
+            }}>
+                <Alert
+                    onClose={() => {
+                        setErrorSnackBar(false);
+                    }}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    {errorSnackBarMessage}
+                </Alert>
+            </Snackbar>
             <MobileView>
                 <Link to={"/chat"} className={"back-button"}>
                     <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}>arrow_back</span></MaterialButtonTonalIconV2>
