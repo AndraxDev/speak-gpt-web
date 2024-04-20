@@ -1,4 +1,4 @@
-# SpeakGPT Desktop
+# SpeakGPT Web
 
 SpeakGPT is an advanced and highly intuitive open-source AI assistant that utilizes the powerful OpenAI technologies to provide you with unparalleled performance and functionality.
 
@@ -10,7 +10,7 @@ This is a desktop version of SpeakGPT created using ReactJS and Google Material 
 
 ## Try it out
 
-[Launch SpeakGPT Desktop](https://assistant.teslasoft.org/chat)
+[Launch SpeakGPT Web](https://assistant.teslasoft.org/chat)
 
 Mobile app can be found [here](https://github.com/AndraxDev/speak-gpt).
 
