@@ -36,7 +36,7 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {supportedFileTypes} from "../util/ModelTypeConverter";
 
 function setFullHeight() {
@@ -69,15 +69,14 @@ const getDefaultDescription = () => {
     `);
 }
 
-console.log("AssistantEmbedded.jsx: Example payload: " + encodeURIComponent(btoa(JSON.stringify(examplePayload))));
-
 // Re-calculate on resize or orientation change
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
+    const [getParams, setParams] = useSearchParams();
 
-    const { payload } = useParams();
+    const payload = getParams.get("payload");
 
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);

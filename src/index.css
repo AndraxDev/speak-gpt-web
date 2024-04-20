@@ -733,7 +733,7 @@ html, body {
     position: fixed;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(48px);
     top: 0;
     right: 0;
     z-index: 300;
@@ -744,7 +744,7 @@ html, body {
     width: 500px;
     height: calc(100vh - 48px);
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(48px);
     top: 24px;
     border-radius: 48px;
     right: 24px;
@@ -2411,9 +2411,8 @@ td {
 
 .footer-divider {
     width: 80%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
+    height: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .vertical-divider {

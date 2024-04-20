@@ -251,7 +251,7 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider"}/>
-                    <p className={"copyright"}>(C) 2024 <a>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>(C) 2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
                 </div>
             </BrowserView>
             <MobileView className={"v-container-mob"}>
