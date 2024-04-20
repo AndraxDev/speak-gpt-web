@@ -43,28 +43,7 @@
     --color-dark-green: #214221;
     --color-dark-blue: #212142;
     --color-autofill: #181d1a;
-    --color-warn: #db4437;
-    --color-warn-transparent: rgba(219, 68, 55, 0.2);
+    --color-warn: #ffe6e4;
+    --color-warn-transparent: rgba(155, 75, 66, 0.1);
     --color-warn-transparent-hover: rgba(219, 68, 55, 0.5);
-}
-
-@font-face {
-    font-family: 'squares-custom';
-    src: local('squares'), url('fonts/squares.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ocr-custom';
-    src: local('ocr'), url('fonts/ocr.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'google-sans';
-    src: local('google'), url('fonts/google.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }

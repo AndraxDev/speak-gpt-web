@@ -118,3 +118,7 @@ L
 src/components/Changelog.jsx,3\a\3ad772359ae059fad2a55a148f92431e2fdf782c
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+B
+public/sitemap.xml,2\f\2fe7f218c8d47bee56d71bed3b5f461be878d1d6
+B
+public/preload.css,f\2\f26076c620ad2d0e4a8f4e1d85773fa1acdc4c8e

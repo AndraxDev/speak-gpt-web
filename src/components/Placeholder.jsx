@@ -19,7 +19,9 @@ import React from 'react';
 function Placeholder({icon, message}) {
     return (
         <div className={"placeholder-bg"}>
-            <span className={"placeholder-icon material-symbols-outlined"}>{icon}</span>
+            <span style={{
+                fontSize: "120px"
+            }} className={"placeholder-icon material-symbols-outlined"}>{icon}</span>
             <p className={"placeholder-text"}>{message}</p>
         </div>
     );

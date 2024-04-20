@@ -668,7 +668,9 @@ function CurrentChat({chats, id, chatName, updateChats}) {
                     height: "calc(calc(var(--vh, 1vh) * 100) - 90px)"
                 } : {}} className={isMobile ? "chat-history-mob" : "chat-history"} id={"drop-area"}>
                     <div className={isMobile ? "unhiglighted drop-frame-mob" : "unhiglighted drop-frame"} id={"drop-area-2"}>
-                        <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                        <span style={{
+                            fontSize: "120px"
+                        }} className={"placeholder-icon material-symbols-outlined"}>photo</span>
                         <p className={"placeholder-text"}>Drag your images here to use it with SpeakGPT.</p>
                     </div>
                     <div className={isMobile ? "chat-ab-actions-container-mob" : "chat-ab-actions-container"}>

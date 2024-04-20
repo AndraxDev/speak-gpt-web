@@ -119,7 +119,7 @@ const mobileFeatures = [
         icon: "group_work",
         description: "Make SpeakGPT your default assistant and access SpeakGPT any app or site.",
         tintBackground: "rgba(20,20,20,0.8)",
-        tintForeground: "rgb(200,200,200)"
+        tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Different AI models",
@@ -133,7 +133,7 @@ const mobileFeatures = [
         icon: "graphic_eq",
         description: "Use your voice to access SpeakGPT. Currently is supports WhisperAI and Google Speech recognition. Voice language is detected automatically.",
         tintBackground: "rgba(20,20,20,0.8)",
-        tintForeground: "rgb(200,200,200)"
+        tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Text-To-Speech",
@@ -147,7 +147,7 @@ const mobileFeatures = [
         icon: "cloud_off",
         description: "Access your saved chats while you're offline.",
         tintBackground: "rgba(20,20,20,0.8)",
-        tintForeground: "rgb(200,200,200)"
+        tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Context menu",
@@ -161,7 +161,7 @@ const mobileFeatures = [
         icon: "science",
         description: "Sometimes we're rolling out new interesting function for a limited time. Check out 'Experiments' section in the app.",
         tintBackground: "rgba(20,20,20,0.8)",
-        tintForeground: "rgb(200,200,200)"
+        tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Fine-tines",
@@ -175,7 +175,7 @@ const mobileFeatures = [
         icon: "palette",
         description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT.",
         tintBackground: "rgba(20,20,20,0.8)",
-        tintForeground: "rgb(200,200,200)"
+        tintForeground: "rgb(255,255,255)"
     }
 ]
 
@@ -201,7 +201,7 @@ function WelcomePage() {
             <BrowserView className={"v-container"}>
                 <div className={"header"}>
                     <div className={"app-info"}>
-                        <img src={"./logo192.png"} alt={"SpeakGPT"} className={"app-logo"}/>
+                        <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title"}>SpeakGPT</h1>
                             <p className={"app-desc"}>SpeakGPT is an advanced and highly intuitive open-source AI
@@ -240,6 +240,7 @@ function WelcomePage() {
                             }} className={"feature-card"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
+                                    fontSize: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -283,6 +284,7 @@ function WelcomePage() {
                             }} className={"feature-card"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
+                                    fontSize: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -297,8 +299,7 @@ function WelcomePage() {
                 <div className={"footer"}>
                     <p className={"api-disclaimer"}>
                         This app requires an OpenAI key to work. You can get it by visiting <a
-                        href={"https://platform.openai.com/api-keys"} target={"_blank"}>OpenAI</a>. Learn more about API
-                        key safety principles <Link to={"/api/safety"}>here</Link>.
+                        href={"https://platform.openai.com/api-keys"} target={"_blank"} className={"link-special"}>OpenAI</a>. Learn more about API <Link className={"link-special"} to={"/api/safety"}>safety principles</Link>.
                     </p>
                     <hr className={"footer-divider"}/>
                     <div className={"footer-content"}>
@@ -310,7 +311,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
-                            <Link className={"footer-link"} to={"/sitemap"}>Site map</Link>
+                            <Link className={"footer-link"} to={"/sitemap.xml"}>Site map</Link>
                         </div>
                         <div className={"vertical-divider"}></div>
                         <div className={"footer-column"}>
@@ -333,13 +334,13 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider"}/>
-                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"}>AndraxDev</a>. All rights reserved.</p>
                 </div>
             </BrowserView>
             <MobileView className={"v-container-mob"}>
                 <div className={"header-mob"}>
                     <div className={"app-info-mob"}>
-                        <img src={"./logo192.png"} alt={"SpeakGPT"} className={"app-logo-mob"}/>
+                        <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo-mob"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title-mob"}>SpeakGPT</h1>
                             <p className={"app-desc-mob"}>SpeakGPT is an advanced and highly intuitive open-source AI
@@ -365,6 +366,7 @@ function WelcomePage() {
                             }} className={"feature-card-mob"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
+                                    fontSize: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -416,6 +418,7 @@ function WelcomePage() {
                             }} className={"feature-card-mob"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
+                                    fontSize: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -430,8 +433,7 @@ function WelcomePage() {
                 <div className={"footer-mob"}>
                     <p className={"api-disclaimer-mob"}>
                         This app requires an OpenAI key to work. You can get it by visiting <a
-                        href={"https://platform.openai.com/api-keys"} target={"_blank"}>OpenAI</a>. Learn more about API
-                        key safety principles <Link to={"/api/safety"}>here</Link>.
+                        href={"https://platform.openai.com/api-keys"} target={"_blank"} className={"link-special"}>OpenAI</a>. Learn more about API <Link className={"link-special"} to={"/api/safety"}>safety principles</Link>.
                     </p>
                     <hr className={"footer-divider-mob"}/>
                     <div className={"footer-content-mob"}>
@@ -443,7 +445,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
-                            <Link className={"footer-link"} to={"/sitemap"}>Site map</Link>
+                            <Link className={"footer-link"} to={"/sitemap.xml"}>Site map</Link>
                         </div>
                         <div className={"vertical-divider-mob"}></div>
                         <div className={"footer-column"}>
@@ -466,7 +468,7 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider-mob"}/>
-                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"}>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"}>AndraxDev</a>. All rights reserved.</p>
                 </div>
             </MobileView>
             {

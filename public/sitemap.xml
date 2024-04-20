@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <url>
+        <loc>
+            https://assistant.teslasoft.org
+        </loc>
+        <lastmod>2024-04-16</lastmod>
+        <changefreq>always</changefreq>
+        <priority>1</priority>
+        <image:image>
+            <image:loc>
+                https://assistant.teslasoft.org/logo512.png
+            </image:loc>
+            <image:title>
+                SpeakGPT
+            </image:title>
+            <image:caption>
+                SpeakGPT logo
+            </image:caption>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://assistant.teslasoft.org</loc>
+        <lastmod>2024-04-20</lastmod>
+        <changefreq>always</changefreq>
+        <priority>1</priority>
+    </url>
+    <url>
+        <loc>https://assistant.teslasoft.org/chat</loc>
+        <lastmod>2024-04-20</lastmod>
+        <changefreq>always</changefreq>
+        <priority>1</priority>
+    </url>
+    <url>
+        <loc>https://assistant.teslasoft.org/prompts</loc>
+        <lastmod>2024-04-20</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://assistant.teslasoft.org/tips</loc>
+        <lastmod>2024-04-20</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://assistant.teslasoft.org/assistant/mobile</loc>
+        <lastmod>2024-04-20</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.9</priority>
+    </url>
+</urlset>

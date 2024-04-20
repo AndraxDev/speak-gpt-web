@@ -30,7 +30,6 @@ const tips = [
     "Only GPT models can remember previous messages. Other models are not optimized for it.",
     "Sometimes some weird or useless features may appear. It because this app is in beta test.",
     "SpeakGPT is too slow? Try to reduce max tokens per output."
-
 ]
 
 function setFullHeight() {

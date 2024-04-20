@@ -56,12 +56,16 @@ function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, 
                     setIsEdit(true)
                     setEditChat(name)
                     setDeleteChat("")
+                }} style={isMobile ? {} : {
+                    fontSize: "14px"
                 }} className={(isMobile ? "action-mob" : "action") + " material-symbols-outlined"}>edit</span>&nbsp;<span onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
                     setIsDelete(true)
                     setDeleteChat(name)
                     setEditChat("")
+                }} style={isMobile ? {} : {
+                    fontSize: "14px"
                 }} className={(isMobile ? "action-dangerous-mob" : "action-dangerous") + " material-symbols-outlined"}>cancel</span></div>
             </div>
         </Link>

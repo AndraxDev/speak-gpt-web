@@ -538,7 +538,9 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     height: "calc(calc(var(--vh, 1vh) * 100) - 158px)"
                 } : {}} id={"drop-area"}>
                     <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
-                        <span className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                        <span style={{
+                            fontSize: "120px"
+                        }} className={"placeholder-icon material-symbols-outlined"}>photo</span>
                         <p className={"placeholder-text"}>Drag your images here to use it with SpeakGPT.</p>
                     </div>
                     <div className={"chat-ab-actions-container-assistant"}>

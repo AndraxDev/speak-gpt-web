@@ -1,0 +1,99 @@
+.loader {
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #191c20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2147483647;
+    transition: opacity 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
+
+.app-logo-preload {
+    width: 180px;
+    height: 180px;
+    border-radius: 24px;
+}
+
+.app-title-preload {
+    font-size: 24px;
+    color: #a9c7ff;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.app-text {
+    font-size: 16px;
+    color: #d6e3ff;
+    margin-top: 8px;
+}
+
+.pure-material-progress-linear {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    height: 0.25em;
+    color: #a9c7ff;
+    background-color: rgba(169, 199, 255, 0.12);
+    font-size: 16px;
+    border-radius: 0.125em;
+}
+
+.pure-material-progress-linear::-webkit-progress-bar {
+    background-color: transparent;
+}
+
+/* Determinate */
+.pure-material-progress-linear::-webkit-progress-value {
+    background-color: currentColor;
+    transition: all 0.2s;
+}
+
+.pure-material-progress-linear::-moz-progress-bar {
+    background-color: currentColor;
+    transition: all 0.2s;
+}
+
+.pure-material-progress-linear::-ms-fill {
+    border: none;
+    background-color: currentColor;
+    transition: all 0.2s;
+}
+
+/* Indeterminate */
+.pure-material-progress-linear:indeterminate {
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, transparent 50%, currentColor 50%, currentColor 60%, transparent 60%, transparent 71.5%, currentColor 71.5%, currentColor 84%, transparent 84%);
+    animation: pure-material-progress-linear 2s infinite linear;
+}
+
+.pure-material-progress-linear:indeterminate::-moz-progress-bar {
+    background-color: transparent;
+}
+
+.pure-material-progress-linear:indeterminate::-ms-fill {
+    animation-name: none;
+}
+
+@keyframes pure-material-progress-linear {
+    0% {
+        background-size: 200% 100%;
+        background-position: left -31.25% top 0%;
+    }
+    50% {
+        background-size: 800% 100%;
+        background-position: left -49% top 0%;
+    }
+    100% {
+        background-size: 400% 100%;
+        background-position: left -102% top 0%;
+    }
+}

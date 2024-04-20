@@ -1,9 +1,9 @@
 
-wjavascript:S6774A".'runtimePrompt' is missing in props validation(¤–ûô8…Ìô×ï1J$c4ecfb5d-7971-4d87-93ff-6f091f85dbdf
-njavascript:S6774A"%'type' is missing in props validation(¤–ûô8…Ìô×ï1J$25e30f6e-b8e8-4df7-8c98-ed05df749509
-ujavascript:S6774A",'closeWindow' is missing in props validation(¤–ûô8…Ìô×ï1J$125eda19-dd97-45da-9db6-5a3140ad1123
-ˆjavascript:S6754I":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8†Ìô×ï1J$7e7f7ea3-d815-488d-b864-a564e6f3b83e
-£javascript:S3776ä"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8†Ìô×ï1J$69b3b7ad-976e-4935-b12a-59f4555977b4
-mjavascript:S6479´"Do not use Array index in keys(Ë«„çşÿÿÿÿ8“ö‘Øï1J$0b5a9de1-f074-4b27-b297-354f55a21595
-’javascript:S6848É"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8”ö‘Øï1J$ddcb0624-4778-4754-8ae0-b0cc93ac7c28
-®javascript:S1082É"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8•ö‘Øï1J$254089d6-b78d-4cab-aa15-91746cbf9a3d
+wjavascript:S6774A".'runtimePrompt' is missing in props validation(¤–ûô8…Ìô×ï1J$96d15fee-e1e8-42eb-a4c3-72af9d30db8f
+njavascript:S6774A"%'type' is missing in props validation(¤–ûô8…Ìô×ï1J$a4348390-aee5-4649-b822-7c7a83bc6c3f
+ujavascript:S6774A",'closeWindow' is missing in props validation(¤–ûô8…Ìô×ï1J$c052e234-8692-4535-b073-564cc735665b
+ˆjavascript:S6754I":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8†Ìô×ï1J$8620c089-e35b-4aa3-8597-463d30414312
+£javascript:S3776ä"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8†Ìô×ï1J$9a3681a9-e8a7-4c19-b93b-0036772e9d82
+mjavascript:S6479¶"Do not use Array index in keys(Ë«„çşÿÿÿÿ8“ö‘Øï1J$20920728-9091-4669-a21e-10f55368630f
+’javascript:S6848Ë"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8”ö‘Øï1J$251afac5-c01d-46c8-a5fd-849701cf6736
+®javascript:S1082Ë"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8•ö‘Øï1J$22466b80-6a71-4382-9493-e4dedce9f3fe

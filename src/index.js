@@ -23,6 +23,16 @@ import { LicenseInfo } from '@mui/x-license';
 import {LICENSE_KEY} from "./LicenseKey";
 import {setMaxSettings, setMinSettings} from "./util/Settings";
 
+function loadStylesheet(path) {
+    let link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = path;
+    link.media = 'all';
+
+    document.head.appendChild(link);
+}
+
 LicenseInfo.setLicenseKey(LICENSE_KEY);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,6 +42,9 @@ root.render(
   // </React.StrictMode>
 );
 
+loadStylesheet('https://cdn.teslasoft.org/prism/prism.css');
+loadStylesheet('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+loadStylesheet('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 /* Set max global settings */
 window._debug_setMaxSettings = () => {

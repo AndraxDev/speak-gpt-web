@@ -1,16 +1,16 @@
 
-njavascript:S6774"%'name' is missing in props validation(éª¿Ä8„åå™ï1J$5f9219da-a34a-4b47-adc7-3e422698fba9
-ljavascript:S6774"#'id' is missing in props validation(éª¿Ä8„åå™ï1J$6b68c961-7aa3-42dc-8bb6-088c4d951ebd
-ojavascript:S6774"&'model' is missing in props validation(éª¿Ä8…åå™ï1J$968ce6c0-8fbf-454a-a86b-5e9fcac39c26
-njavascript:S6774"%'type' is missing in props validation(éª¿Ä8…åå™ï1J$54ae160f-f232-4769-adeb-2217f518227c
-rjavascript:S6774")'isActive' is missing in props validation(éª¿Ä8…åå™ï1J$2854e63e-0d0e-4beb-a660-257223aac5e6
-wjavascript:S6774".'setDeleteChat' is missing in props validation(éª¿Ä8…åå™ï1J$27cb6837-65c8-4d3b-9d35-e5b48c418f38
-ujavascript:S6774",'setEditChat' is missing in props validation(éª¿Ä8…åå™ï1J$c7a2f7e5-b971-4fcd-bdad-8fa6366f0dbd
-ujavascript:S6774",'setIsDelete' is missing in props validation(éª¿Ä8…åå™ï1J$0cdd89f3-4af1-4a76-9cc8-ea53ed1c3151
-sjavascript:S6774"*'setIsEdit' is missing in props validation(éª¿Ä8…åå™ï1J$cd6f383c-54a6-4a29-81dc-6e347735596c
-javascript:S3358-"DExtract this nested ternary operation into an independent statement.(èùşŸ8…åå™ï1J$29961212-432b-46e2-abae-129c759d2fa5
-javascript:S3358-"DExtract this nested ternary operation into an independent statement.(èùşŸ8…åå™ï1J$69504811-4332-42cb-ab61-ea450cc2b0db
-Œjavascript:S68485"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(±£Œ§8…åå™ï1J$96c9aa00-51d2-4a2f-8913-c84174eabf99
-¨javascript:S10825"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(±£Œ§8†åå™ï1J$af0fe154-5129-4d13-9b4b-e072461dbc64
-Œjavascript:S6848;"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(˜ùˆÜ8†åå™ï1J$0866f822-81aa-485f-a1be-b730a651d416
-¨javascript:S1082;"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(˜ùˆÜ8†åå™ï1J$ac4d6807-8d1f-48c2-8e9f-ff98ab7d83ae
+njavascript:S6774"%'name' is missing in props validation(éª¿Ä8Ê¢¡êï1J$7bf781f5-a8f6-4f9b-b944-6e3f8e296154
+ljavascript:S6774"#'id' is missing in props validation(éª¿Ä8Ê¢¡êï1J$a77d6ef8-ea0e-4315-960e-97aed8a10036
+ojavascript:S6774"&'model' is missing in props validation(éª¿Ä8Ê¢¡êï1J$70eed643-0ff8-4b2a-b3a9-99269a125f77
+njavascript:S6774"%'type' is missing in props validation(éª¿Ä8Ê¢¡êï1J$b02a3879-04f9-42d7-9790-558f8ae1a05b
+rjavascript:S6774")'isActive' is missing in props validation(éª¿Ä8Ê¢¡êï1J$59c4eb26-e302-4ce4-aafb-430bc5302927
+wjavascript:S6774".'setDeleteChat' is missing in props validation(éª¿Ä8Ê¢¡êï1J$4f2e954c-68a5-47dd-b8bc-8f56cc80a3c1
+ujavascript:S6774",'setEditChat' is missing in props validation(éª¿Ä8Ê¢¡êï1J$f04e6e72-cfee-4968-b8cb-b491dbf3dd14
+ujavascript:S6774",'setIsDelete' is missing in props validation(éª¿Ä8Ê¢¡êï1J$beab9a2f-f902-44da-b418-48b442cbba9a
+sjavascript:S6774"*'setIsEdit' is missing in props validation(éª¿Ä8Ê¢¡êï1J$96ed5fba-c7d1-439c-a1c4-1835919280b7
+javascript:S3358-"DExtract this nested ternary operation into an independent statement.(èùşŸ8Ë¢¡êï1J$13a54101-7b0f-45aa-ae01-fcb997c42952
+javascript:S3358-"DExtract this nested ternary operation into an independent statement.(èùşŸ8Ë¢¡êï1J$5d307869-480f-4274-95b2-97acd761535b
+Œjavascript:S68485"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(±£Œ§8Ë¢¡êï1J$a20775b2-d8d6-4d22-b00e-7d7ee965b726
+¨javascript:S10825"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(±£Œ§8Ì¢¡êï1J$1782a643-48f0-43b3-aeb1-ea4d50edfedf
+Œjavascript:S6848="ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(˜ùˆÜ8Ì¢¡êï1J$50d4ee1b-f99d-4f9c-af11-e17bcda21478
+¨javascript:S1082="_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(˜ùˆÜ8Ì¢¡êï1J$cc082958-7c5b-41a9-8bd1-38364e235668

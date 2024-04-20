@@ -3,12 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-        <link rel="stylesheet" href="https://cdn.teslasoft.org/prism/prism.css" />
+        <link rel="stylesheet" href="/preload.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <meta name="theme-color" content="#000000" />
         <meta
             name="description"
@@ -28,7 +26,19 @@
         </script>
     </head>
     <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
+        <noscript>
+            <div class="loader">
+                <img src="/logo192.png" alt="SpeakGPT" class="app-logo-preload" />
+                <h1 class="app-title-preload">SpeakGPT</h1>
+                <p class="app-text">Please enable JavaScript to run this app.</p>
+            </div>
+        </noscript>
+        <div id="root">
+            <div class="loader">
+                <img src="/logo192.png" alt="SpeakGPT" class="app-logo-preload" />
+                <h1 class="app-title-preload">SpeakGPT</h1>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+        </div>
     </body>
 </html>

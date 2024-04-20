@@ -9,6 +9,6 @@ gjavascript:S125<"Remove this commented out code.(Ÿ‡Ý†8Ÿ™‡Øï1J$f79272eb-35e
 wjavascript:S6774H".'chats.forEach' is missing in props validation(„Ìš³8À™‡Øï1J$c3d4c314-43f2-4deb-b039-04f7dc1ca54e
 xjavascript:S6774".'chats.forEach' is missing in props validation(„Ìš³8À™‡Øï1J$db554a56-656c-45de-8681-4a1388633b1b
 £javascript:S3776€"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµýÿÿÿÿ8Á™‡Øï1J$76417ce1-8902-4c0b-bafd-4c67ad4fc95f
-mjavascript:S6479º"Do not use Array index in keys(Ë«„çþÿÿÿÿ8Ï™‡Øï1J$46ab3aff-2e93-4b6d-8d6e-843f2071a1ff
-’javascript:S6848Ç"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·þÿÿÿÿ8ß™‡Øï1J$06521e07-641d-4266-9f59-b5b75e76e868
-®javascript:S1082Ç"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·þÿÿÿÿ8à™‡Øï1J$c24e2569-aa4a-49a4-99d7-5a41cea52fdc
+mjavascript:S6479¼"Do not use Array index in keys(Ë«„çþÿÿÿÿ8Ï™‡Øï1J$46ab3aff-2e93-4b6d-8d6e-843f2071a1ff
+’javascript:S6848É"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·þÿÿÿÿ8ß™‡Øï1J$06521e07-641d-4266-9f59-b5b75e76e868
+®javascript:S1082É"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·þÿÿÿÿ8à™‡Øï1J$c24e2569-aa4a-49a4-99d7-5a41cea52fdc
