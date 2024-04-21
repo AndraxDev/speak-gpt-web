@@ -1,11 +1,11 @@
 
-vjavascript:S6774"-'selectedChat' is missing in props validation(ÀæÁü8°ì¤–ï1J$45489141-ea8e-46b3-845b-e3160dfbb3e4
-ljavascript:S6774"#'id' is missing in props validation(ÀæÁü8±ì¤–ï1J$e4024aef-8062-4620-82a1-3a81a95fdd49
-ojavascript:S6774"&'chats' is missing in props validation(ÀæÁü8±ì¤–ï1J$f9dad774-f4cf-4ead-b07f-fcdb10c9ada6
-„javascript:S6774";'setSelectedChatForDeletion' is missing in props validation(ÀæÁü8±ì¤–ï1J$822b0db9-3827-484d-ba42-bb15adfa23c6
-€javascript:S6774"7'setSelectedChatForEdit' is missing in props validation(ÀæÁü8±ì¤–ï1J$089c640a-93c4-46a8-90e0-572ffb331c41
-wjavascript:S6774 ".'chats.forEach' is missing in props validation(„Ìš³8±ì¤–ï1J$b0be9534-5987-43c9-9540-66e538663037
-xjavascript:S6774;"*'chats.map' is missing in props validation(€™Ùëøÿÿÿÿ8•Ï¥–ï1J$2ad23dad-cbc9-423b-a857-ad23e63cabcc
-‘javascript:S6848="ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(àœ»ÿÿÿÿÿ8 Ï¥–ï1J$e6bac86f-dba4-48b8-86cb-e7d947db117c
-­javascript:S1082="_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(àœ»ÿÿÿÿÿ8¡Ï¥–ï1J$c7f8eeeb-a5bf-48ab-8074-c7a02e778515
-zjavascript:S6774>",'setSelected' is missing in props validation(Öµ¯¦þÿÿÿÿ8¡Ï¥–ï1J$c29fea5c-619b-4a1c-ac84-7c7c66099934
+vjavascript:S6774"-'selectedChat' is missing in props validation(ÀæÁü8°ì¤–ï1J$17cd6311-b294-4620-b9e8-708effc96bd3
+ljavascript:S6774"#'id' is missing in props validation(ÀæÁü8±ì¤–ï1J$ed7052e9-76c3-4668-a46a-95c9eb2ab210
+ojavascript:S6774"&'chats' is missing in props validation(ÀæÁü8±ì¤–ï1J$817ee994-5af7-447f-8a65-eeb725982092
+„javascript:S6774";'setSelectedChatForDeletion' is missing in props validation(ÀæÁü8±ì¤–ï1J$9763d41a-4f58-4dd6-a6aa-19ed0633d440
+€javascript:S6774"7'setSelectedChatForEdit' is missing in props validation(ÀæÁü8±ì¤–ï1J$3294aeb7-95d9-443a-8e86-93c831d877ef
+wjavascript:S6774 ".'chats.forEach' is missing in props validation(„Ìš³8±ì¤–ï1J$43c6220b-9ec8-49fc-a33c-5469e8ee42dd
+xjavascript:S6774;"*'chats.map' is missing in props validation(€™Ùëøÿÿÿÿ8•Ï¥–ï1J$803b4935-3d94-4ec1-9e13-31a1553ea3d9
+‘javascript:S6848="ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(àœ»ÿÿÿÿÿ8 Ï¥–ï1J$2129f5a4-6279-4ca3-8a7a-f1840c5943a1
+­javascript:S1082="_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(àœ»ÿÿÿÿÿ8¡Ï¥–ï1J$33586026-1d97-4011-9d30-f504294aec4d
+zjavascript:S6774>",'setSelected' is missing in props validation(Öµ¯¦þÿÿÿÿ8¡Ï¥–ï1J$bdf5a49b-9758-42f4-8a48-3c7004ad7a22

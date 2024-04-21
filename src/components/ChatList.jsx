@@ -41,6 +41,8 @@ function ChatList() {
     const [deleteChatName, setDeleteChatName] = React.useState("");
     const [db, setDb] = React.useState(null);
     const [searchTerm, setSearchTerm] = React.useState("");
+    const [chatsAreLoaded, setChatsAreLoaded] = React.useState(false);
+    const [updateCounter, setUpdateCounter] = React.useState(0);
 
     let { id } = useParams();
 
@@ -81,23 +83,25 @@ function ChatList() {
     }
 
     useEffect(() => {
-        let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
+        if (db !== null && db !== undefined) {
+            let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
 
-        if (c === undefined || c === null) {
-            setChats([]);
-            return;
+            if (c === undefined || c === null) {
+                setChats([]);
+                return;
+            }
+
+            if (searchTerm !== "" && chats !== null) {
+                c = chats.filter((e) => {
+                    return e.title.toLowerCase().includes(searchTerm.toLowerCase());
+                });
+
+                forceUpdate(getChatsListWithModels(c));
+            } else {
+                forceUpdate(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
+            }
         }
-
-        if (searchTerm !== "" && chats !== null) {
-            c = chats.filter((e) => {
-                return e.title.toLowerCase().includes(searchTerm.toLowerCase());
-            });
-
-            setChats(getChatsListWithModels(c));
-        } else {
-            setChats(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
-        }
-    }, [searchTerm]);
+    }, [db, searchTerm]);
 
     const getDatabase = () => {
         let db;
@@ -166,6 +170,22 @@ function ChatList() {
     }
 
     const [chats, setChats] = React.useState(getChatsList());
+
+    const requestUpdate = () => {
+        getAllFirstMessages(chats).then((res) => {
+            console.log(res);
+            setChats(res);
+            setChatsAreLoaded(true);
+        })
+    }
+
+    const forceUpdate = (chats) => {
+        getAllFirstMessages(chats).then((res) => {
+            console.log(res);
+            setChats(res);
+            setChatsAreLoaded(true);
+        })
+    }
 
     const receiveLatestAvailableChatName = () => {
         if (chats === undefined || chats === null) return "New chat 1";
@@ -320,9 +340,9 @@ function ChatList() {
                 return e.title.toLowerCase().includes(searchTerm.toLowerCase());
             });
 
-            setChats(getChatsListWithModels(c));
+            forceUpdate(getChatsListWithModels(c));
         } else {
-            setChats(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
+            forceUpdate(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
         }
     }
 
@@ -372,6 +392,59 @@ function ChatList() {
         }
     }, [deleteChatName, deletionDialogOpen]);
 
+    const getConversation = async (chatId) => {
+        const transaction = db.transaction(['chats'], 'readonly');
+        const objectStore = transaction.objectStore('chats');
+        const request = objectStore.get(chatId);
+
+        return new Promise((resolve, reject) => {
+            request.onsuccess = function() {
+                let conversation = request.result === undefined ? "[]" : request.result.content;
+                resolve(JSON.parse(conversation));
+            };
+
+            request.onerror = function(event) {
+                reject("Error getting conversation", event.target.errorCode);
+            }
+        });
+    }
+
+    const getAllFirstMessages = async (chats) => {
+        const cht = [];
+        for (const e of chats) {
+            await getConversation(sha256(e.title)).then((result) => {
+                if (result.image !== undefined && result.image !== null && result.message.toString().trim() === "") {
+                    cht.push({
+                        title: e.title,
+                        model: e.model,
+                        type: e.type,
+                        firstMessage: "Image",
+                    });
+                } else {
+                    cht.push({
+                        title: e.title,
+                        model: e.model,
+                        type: e.type,
+                        firstMessage: result.length === 0 ? "No messages yet." : result[0].message,
+                    });
+                }
+
+            });
+        }
+
+        return cht;
+    }
+
+    useEffect(() => {
+        if (db !== null && chats !== null && chats !== undefined && chats.length > 0 && updateCounter === 0) {
+            getAllFirstMessages(chats).then((res) => {
+                setChats(res);
+                setChatsAreLoaded(true);
+                setUpdateCounter(updateCounter + 1);
+            })
+        }
+    }, [db, chats, updateCounter]);
+
     return (
         <div className={"chat-window"}>
             {
@@ -417,7 +490,7 @@ function ChatList() {
                 {id === undefined ? <>
                     { isMobile ? null : <Placeholder icon={"chat"} message={"Create or select a chat to start conversation."}/> }
                     </> :
-                    <CurrentChat chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
+                    <CurrentChat onUpdate={requestUpdate} chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>
         </div>
     );

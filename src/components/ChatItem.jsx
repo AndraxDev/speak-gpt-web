@@ -19,7 +19,7 @@ import gpt from "./../gpt.svg";
 import {Link} from "react-router-dom";
 import {isMobile} from "react-device-detect";
 
-function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit, ...props}) {
+function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit, ...props}) {
 
     const [intType, setIntType] = React.useState(0);
 
@@ -48,6 +48,7 @@ function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, 
                 </div>
                 <div className={isMobile ? "chat-item-info-mob" : "chat-item-info"}>
                     <h3 className={isMobile ? "chat-item-title-mob" : "chat-item-title"}>{name}</h3>
+                    <p className={isMobile ? "chat-item-message-mob" : "chat-item-message"}>{firstMessage}</p>
                     <p className={isMobile ? "chat-item-model-mob" : "chat-item-model"}>{model}</p>
                 </div>
                 <div className={"chat-actions"}><span onClick={(e) => {
@@ -56,7 +57,9 @@ function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, 
                     setIsEdit(true)
                     setEditChat(name)
                     setDeleteChat("")
-                }} style={isMobile ? {} : {
+                }} style={isMobile ? {
+                    fontSize: "20px",
+                } : {
                     fontSize: "14px"
                 }} className={(isMobile ? "action-mob" : "action") + " material-symbols-outlined"}>edit</span>&nbsp;<span onClick={(e) => {
                     e.preventDefault()
@@ -64,7 +67,9 @@ function ChatItem({name, id, model, type, isActive, setDeleteChat, setEditChat, 
                     setIsDelete(true)
                     setDeleteChat(name)
                     setEditChat("")
-                }} style={isMobile ? {} : {
+                }} style={isMobile ? {
+                    fontSize: "20px",
+                } : {
                     fontSize: "14px"
                 }} className={(isMobile ? "action-dangerous-mob" : "action-dangerous") + " material-symbols-outlined"}>cancel</span></div>
             </div>

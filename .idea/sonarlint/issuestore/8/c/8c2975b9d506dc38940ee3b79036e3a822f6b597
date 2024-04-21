@@ -1,14 +1,15 @@
 
-œjavascript:S37760"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(€üi8ˆ™‡Øï1J$c2fd3645-9798-4d8b-b35f-c64df890afec
-njavascript:S67740"&'chats' is missing in props validation(€üi8Š™‡Øï1J$677e8fd3-d0e8-4e4c-a39a-9e781bb10100
-kjavascript:S67740"#'id' is missing in props validation(€üi8Š™‡Øï1J$b09d4a52-eadf-44a8-bc33-9f5813b870ca
-qjavascript:S67740")'chatName' is missing in props validation(€üi8Š™‡Øï1J$54866ddc-353d-4392-931f-2f3c9955d74c
-tjavascript:S67740",'updateChats' is missing in props validation(€üi8Š™‡Øï1J$b2a52995-3b9a-44e0-90d8-a4eae8cd5b6b
-ƒjavascript:S6754:":useState call is not destructured into value + setter pair(„ šñ8™‡Øï1J$0d8a6be1-8cf6-4a68-aa88-f6d205d7ad65
-gjavascript:S125<"Remove this commented out code.(Ÿ‡İ†8Ÿ™‡Øï1J$f79272eb-35ea-4522-bfe7-168ad7fe028a
-wjavascript:S6774H".'chats.forEach' is missing in props validation(„Ìš³8À™‡Øï1J$c3d4c314-43f2-4deb-b039-04f7dc1ca54e
-xjavascript:S6774".'chats.forEach' is missing in props validation(„Ìš³8À™‡Øï1J$db554a56-656c-45de-8681-4a1388633b1b
-£javascript:S3776€"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8Á™‡Øï1J$76417ce1-8902-4c0b-bafd-4c67ad4fc95f
-mjavascript:S6479¼"Do not use Array index in keys(Ë«„çşÿÿÿÿ8Ï™‡Øï1J$46ab3aff-2e93-4b6d-8d6e-843f2071a1ff
-’javascript:S6848É"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ß™‡Øï1J$06521e07-641d-4266-9f59-b5b75e76e868
-®javascript:S1082É"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8à™‡Øï1J$c24e2569-aa4a-49a4-99d7-5a41cea52fdc
+¢javascript:S37760"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(ƒ€”ğÿÿÿÿÿ8ˆ™‡Øï1J$16332ee1-421a-4e20-9d7d-314872e0fe2a
+wjavascript:S67740")'onUpdate' is missing in props validation(ƒ€”ğÿÿÿÿÿ8ˆ÷´…ğ1J$c39a731f-a572-49b7-98d9-8298be366479
+tjavascript:S67740"&'chats' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Š™‡Øï1J$726a248c-97b9-425c-9a8e-04972def955a
+qjavascript:S67740"#'id' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Š™‡Øï1J$e58efb41-42b6-4e60-bf4e-0b4acd7cd02e
+wjavascript:S67740")'chatName' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Š™‡Øï1J$2420bd55-c71e-4978-927f-b9b023cb1bcd
+zjavascript:S67740",'updateChats' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Š™‡Øï1J$6528f2e8-c404-4c2d-9615-35aa557b721e
+ƒjavascript:S6754:":useState call is not destructured into value + setter pair(„ šñ8™‡Øï1J$0d0a105c-b1d2-4869-8777-ba1ff2668e2e
+gjavascript:S125<"Remove this commented out code.(Ÿ‡İ†8Ÿ™‡Øï1J$611266de-1423-4160-a913-ca36ecea710d
+wjavascript:S6774H".'chats.forEach' is missing in props validation(„Ìš³8À™‡Øï1J$df6c3415-6cf8-453d-8da4-76f3d73640c8
+xjavascript:S6774".'chats.forEach' is missing in props validation(„Ìš³8À™‡Øï1J$a9c67857-9c6c-48e1-93f2-c6b0914a7a4a
+£javascript:S3776€"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ôæäµıÿÿÿÿ8Á™‡Øï1J$c8ebe5f6-e06c-4134-879e-c9b057f15d87
+mjavascript:S6479½"Do not use Array index in keys(Ë«„çşÿÿÿÿ8Ï™‡Øï1J$b125fcd8-1eda-4c3d-b280-cd9bd73b2247
+’javascript:S6848Ê"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8ß™‡Øï1J$ae568c87-61b3-4ef8-90ff-1ac5c0b944ca
+®javascript:S1082Ê"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8à™‡Øï1J$4306df81-d627-4e5c-9337-bca1edb3b644

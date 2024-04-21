@@ -61,7 +61,7 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
                         <div key={sha256(e.title)} onClick={() => {
                             props.setSelected(e.title);
                         }}>
-                            <ChatItem isActive={e.title === stateSelectedChat} name={e.title} model={e.model} type={e.type} id={sha256(e.title)} setDeleteChat={setSelectedChatForDeletionTemp} setEditChat={setSelectedChatForEditTemp} setIsDelete={setIsDeleteTemp} setIsEdit={setIsEditTemp}/>
+                            <ChatItem isActive={e.title === stateSelectedChat} name={e.title} model={e.model} type={e.type} firstMessage={e.firstMessage} id={sha256(e.title)} setDeleteChat={setSelectedChatForDeletionTemp} setEditChat={setSelectedChatForEditTemp} setIsDelete={setIsDeleteTemp} setIsEdit={setIsEditTemp}/>
                         </div>
                     )
                 }) : null

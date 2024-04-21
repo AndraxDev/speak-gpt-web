@@ -45,7 +45,7 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function CurrentChat({chats, id, chatName, updateChats}) {
+function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
     const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
@@ -473,6 +473,7 @@ function CurrentChat({chats, id, chatName, updateChats}) {
 
         request.onsuccess = function() {
             console.log("Conversation saved successfully");
+            onUpdate();
         };
 
         request.onerror = function(event) {

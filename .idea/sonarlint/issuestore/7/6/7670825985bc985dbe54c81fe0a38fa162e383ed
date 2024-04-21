@@ -1,7 +1,11 @@
 
-tjavascript:S1128"+Remove this unused import of 'BrowserView'.(€Äë‚8 —èšï1J$88e85401-25ac-4474-a02b-94f00e0520f1
-¢javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(“·¡òûÿÿÿÿ8åÂéšï1J$cc13f686-f72a-47d2-9185-7a4a65e5d1df
-†javascript:S1481$"=Remove the declaration of the unused 'setChatModel' variable.(´‚Ä§8 —èšï1J$d3c58163-7353-4206-8aee-00a0d05a0173
-ƒjavascript:S1854$":Remove this useless assignment to variable "setChatModel".(´‚Ä§8 —èšï1J$4f077cb6-53c6-413c-ad51-1e8b80276b06
-‰javascript:S6660Š"?'If' statement should not be the only statement in 'else' block(™î‹î8¡—èšï1J$4fff6bee-1b86-4b8f-8a54-6902e9050b9e
-£javascript:S3776À"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùëÝ¯ùÿÿÿÿ8¡—èšï1J$39ab0e05-e431-4b9e-8d59-bb60fd5773d4
+tjavascript:S1128"+Remove this unused import of 'BrowserView'.(€Äë‚8¯¾Ä…ð1J$0e2ddf7b-c15b-4d1e-b2eb-44ec688238bc
+¢javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(“·¡òûÿÿÿÿ8°¾Ä…ð1J$8a22bb1d-741f-49ff-a0d4-0bc12eea82c6
+†javascript:S1481$"=Remove the declaration of the unused 'setChatModel' variable.(´‚Ä§8°¾Ä…ð1J$9142f379-6071-4466-b916-ef154cc4ce00
+ƒjavascript:S1854$":Remove this useless assignment to variable "setChatModel".(´‚Ä§8°¾Ä…ð1J$13ca06e5-852b-412e-a747-864139f9a988
+ˆjavascript:S1481,"?Remove the declaration of the unused 'chatsAreLoaded' variable.(¦˜òœ8°¾Ä…ð1J$870d631d-dfb9-47c2-ac2a-fd36e328139f
+…javascript:S1854,"<Remove this useless assignment to variable "chatsAreLoaded".(¦˜òœ8°¾Ä…ð1J$f13e6912-8cd5-408f-a040-7b8f66bc4ca5
+‰javascript:S6660Ž"?'If' statement should not be the only statement in 'else' block(™î‹î8°¾Ä…ð1J$59d2ad4f-f3e7-4dd6-af39-3962e1c3d863
+¢javascript:S4144¶"XUpdate this function so that its implementation is not identical to the one on line 174.(Õæ£·8±¾Ä…ð1J$acec13ee-5f34-4e39-9129-eb987dd93645
+£javascript:S3776Ô"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùëÝ¯ùÿÿÿÿ8±¾Ä…ð1J$1015a646-e7de-4faf-abaf-6a0babfed5b1
+„javascript:S6671—"5Expected the Promise rejection reason to be an Error.(“¬©›ÿÿÿÿÿ8±¾Ä…ð1J$cdcea75e-5e25-4ef1-a705-4499f1e22b2a

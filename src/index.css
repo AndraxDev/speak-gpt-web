@@ -304,20 +304,9 @@ html, body {
     transition: 0.2s;
 }
 
-/*.chat-content-mob {*/
-/*    background-color: var(--color-accent-50);*/
-/*    width: calc(100vw - 388px);*/
-/*    height: 100vh;*/
-/*    overflow-x: hidden;*/
-/*    overflow-y: auto;*/
-/*    border-top-left-radius: 24px;*/
-/*    border-bottom-left-radius: 24px;*/
-/*    transition: 0.2s;*/
-/*}*/
-
 .chat-content {
     background-color: var(--color-accent-50);
-    width: calc(100vw - 388px);
+    width: calc(100vw - 488px);
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -359,7 +348,7 @@ html, body {
     align-content: center;
     border-radius: 10px;
     padding: 6px;
-    width: 256px;
+    width: 356px;
     justify-content: space-between;
     margin-left: 16px;
     margin-top: 6px;
@@ -441,8 +430,8 @@ html, body {
 }
 
 .chat-icon-frame-mob {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -450,8 +439,8 @@ html, body {
 }
 
 .chat-icon-frame {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -479,13 +468,13 @@ html, body {
 }
 
 .chat-icon-mob {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
 }
 
 .chat-icon {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
 }
 
 .chat-item-info-mob {
@@ -493,7 +482,7 @@ html, body {
     padding-left: 8px;
     padding-right: 8px;
     flex-grow: 4;
-    max-width: calc(100vw - 180px);
+    max-width: calc(100vw - 190px);
 }
 
 .chat-item-info {
@@ -501,24 +490,48 @@ html, body {
     padding-left: 8px;
     padding-right: 8px;
     flex-grow: 4;
-    max-width: 164px;
+    max-width: 244px;
 }
 
 .chat-item-title-mob {
     padding: 0;
     margin: 0;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: calc(100vw - 190px);
+}
+
+.chat-item-title {
+    padding: 0;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 240px;
+}
+
+.chat-item-message-mob {
+    padding: 0;
+    margin: 4px 0;
+    height: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: calc(100vw - 170px);
 }
 
-.chat-item-title {
+.chat-item-message {
     padding: 0;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.8);
+    margin: 4px 0;
+    height: 18px;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
     overflow: hidden;
     white-space: nowrap;
@@ -529,7 +542,7 @@ html, body {
 .chat-item-model-mob {
     padding: 0;
     color: rgba(255, 255, 255, 0.5);
-    font-size: 16px;
+    font-size: 14px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -799,7 +812,7 @@ html, body {
 .fw {
     position: fixed;
     bottom: 16px;
-    width: 294px;
+    width: 394px;
     left: 88px;
     display: flex;
     flex-direction: row;
@@ -944,7 +957,7 @@ html, body {
 }
 
 .chat-actions {
-    height: 42px;
+    height: 60px;
     user-select: none;
 }
 
@@ -1444,7 +1457,7 @@ td {
 }
 
 .search-box {
-    width: 244px;
+    width: 344px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1533,8 +1546,8 @@ td {
 }
 
 .cat-development {
-    background-color: rgba(255, 201, 95, 0.1);
-    color: rgb(255, 207, 134);
+    background-color: rgba(255, 175, 95, 0.1);
+    color: rgb(255, 176, 134);
 }
 
 .cat-music {
@@ -1680,7 +1693,7 @@ td {
 }
 
 .cat-active-development {
-    background-color: rgb(255, 207, 134);
+    background-color: rgb(255, 195, 134);
     color: var(--color-accent-50);
 }
 
@@ -1794,7 +1807,7 @@ td {
 }
 
 .chat-list-container {
-    width: 300px;
+    width: 400px;
 }
 
 .chat-list-filter {
@@ -1995,7 +2008,7 @@ td {
     align-items: center;
     justify-content: center;
     position: fixed;
-    width: calc(100vw - 388px);
+    width: calc(100vw - 488px);
     height: 100vh;
     left: 388px;
     top: 0;
