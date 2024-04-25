@@ -16,6 +16,11 @@
 
 import React from 'react';
 import {isMobile} from "react-device-detect";
+import {Link} from "react-router-dom";
+import Prism from "../prism";
+import {highlightCode, linesNumbers} from "../util/MarkDownCode";
+import remarkGfm from "remark-gfm";
+import Markdown from "react-markdown";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -29,9 +34,9 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function DocPage({children}) {
+function DocPage({children, title}) {
     return (
-        <div style={isMobile ? {
+        <div className={isMobile ? "doc-bg-mob" : "doc-bg"} style={isMobile ? {
             padding: "24px",
             overflowY: "auto",
             height: "calc(calc(var(--vh, 1vh) * 100) - 140px)"
@@ -39,7 +44,61 @@ function DocPage({children}) {
             padding: "24px",
             overflowY: "auto",
             height: "calc(100vh - 48px)"
-        }}>{children}</div>
+        }}>
+            <div className={isMobile ? "doc-header-mob" : "doc-header"}>
+                <Link to={"/"}><span className={"doc-title material-symbols-outlined"}>arrow_back</span></Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <h2 className={"doc-title"}>{title}</h2>
+            </div>
+            <br/>
+            <div className={isMobile ? "doc-content-mob" : "doc-content"}>
+                <Markdown
+                    components={{
+                        code(props) {
+                            const {children, className, node, ...rest} = props
+                            const match = /language-(\w+)/.exec(className || '')
+
+                            let language = match ? match[1] : undefined
+
+                            if (language === "python") language = Prism.languages.py;
+                            if (language === "javascript") language = Prism.languages.js;
+                            if (language === "java") language = Prism.languages.java;
+                            if (language === "c") language = Prism.languages.c;
+                            if (language === "cpp") language = Prism.languages.cpp;
+                            if (language === "csharp") language = Prism.languages.csharp;
+                            if (language === "html") language = Prism.languages.html;
+                            if (language === "css") language = Prism.languages.css;
+                            if (language === "json") language = Prism.languages.json;
+                            if (language === "yaml") language = Prism.languages.yaml;
+                            if (language === "xml") language = Prism.languages.xml;
+                            if (language === "markdown") language = Prism.languages.markdown;
+                            if (language === "bash") language = Prism.languages.bash;
+
+                            return match ? (
+                                <div className={"code-block"}>
+                                    {
+                                        highlightCode(children, language, className) !== null ?
+                                            <>
+                                                <div className={"lines"}
+                                                     dangerouslySetInnerHTML={{__html: linesNumbers(highlightCode(children, language, className))}}/>
+                                                <div className={"lines-delim"}/>
+                                            </>
+                                            : null
+                                    }
+
+                                    <div dangerouslySetInnerHTML={{__html: highlightCode(children, language, className) == null ? children : highlightCode(children, language, className)}}/>
+                                </div>
+                            ) : (
+                                <code {...rest} className={"unknown-code-block " + className}>
+                                    {children}
+                                </code>
+                            )
+                        }
+                    }}
+                    remarkPlugins={[remarkGfm]}
+                    className={"message-content"}>{children}</Markdown>
+            </div>
+        </div>
     );
 }
 

@@ -32,6 +32,7 @@ import {modelToType, supportedFileTypes} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile, MobileView} from 'react-device-detect';
 import {Link} from "react-router-dom";
+import ApiKeyDialog from "./ApiKeyDialog";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -744,6 +745,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     </div>
                 </div>
             </div>
+            <ApiKeyDialog/>
         </div>
     );
 }

@@ -31,6 +31,7 @@ import ApiSafety from "./documentation/ApiSafety";
 import FAQ from "./documentation/FAQ";
 import Contact from "./documentation/Contact";
 import Debug from "./documentation/Debug";
+import DeleteData from "./documentation/DeleteData";
 
 function BaseRoutes() {
     return (
@@ -41,6 +42,11 @@ function BaseRoutes() {
             <Route path="/changelog" element={
                 <MaterialWindow page={"changelog"}>
                     <Changelog/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/data/delete" element={
+                <MaterialWindow page={"delete_data"}>
+                    <DeleteData/>
                 </MaterialWindow>
             } exact />
             <Route path="/privacy" element={

@@ -37,6 +37,7 @@ import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {supportedFileTypes} from "../util/ModelTypeConverter";
+import ApiKeyDialog from "./ApiKeyDialog";
 
 const getDefaultDescription = () => {
     return (`
@@ -615,6 +616,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     </div>
                 </div>
             </div>
+            <ApiKeyDialog/>
         </div>
     );
 }

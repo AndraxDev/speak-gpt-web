@@ -110,6 +110,17 @@ const features = [
         target: "_self",
         tintBackground: "rgba(44,38,44,0.8)",
         tintForeground: "rgb(255,176,244)"
+    },
+    {
+        title: "Privacy",
+        icon: "visibility_off",
+        description: "Your data is not used for training AI models. All your conversation and credentials are stored locally and no other apps have access to these data.",
+        buttonLink: "/chat",
+        buttonLabel: "Start a chat",
+        buttonType: "link",
+        target: "_self",
+        tintBackground: "rgba(49,40,40,0.8)",
+        tintForeground: "rgb(255,168,168)"
     }
 ];
 

@@ -8,6 +8,8 @@ This is a desktop version of SpeakGPT created using ReactJS and Google Material 
 > 
 > SpeakGPT Desktop is currently early access and may have bugs. Please report any issues you find.
 
+> This project is a part of my Bachelor Thesis. Attribution is required to use this work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+
 ## Try it out
 
 [Launch SpeakGPT Web](https://assistant.teslasoft.org/chat)

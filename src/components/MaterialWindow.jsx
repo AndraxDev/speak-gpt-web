@@ -66,7 +66,6 @@ function MaterialWindow({children, page, ...props}) {
                 } : {}} className={isMobile ? "content-mob" : "content"}>
                     {children}
                 </div>
-                <ApiKeyDialog/>
             </div>
         </div>
     );

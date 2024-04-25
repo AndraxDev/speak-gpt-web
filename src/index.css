@@ -102,6 +102,8 @@ html, body {
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;
     user-select: none;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .nav-bar-mobile {
@@ -581,6 +583,14 @@ html, body {
     user-select: none;
 }
 
+.doc-title {
+    color: var(--color-accent-900);
+    font-size: 20px;
+    margin: 0;
+    user-select: none;
+    vertical-align: middle;
+}
+
 .write-bar-mob {
     width: calc(100vw - 48px);
     background-color: var(--color-accent-100);
@@ -1049,6 +1059,60 @@ a {
 a:hover {
     color: #ffffff;
     transition: color 0.2s;
+}
+
+blockquote {
+    border-radius: 16px;
+    color: var(--color-accent-900);
+    background-color: var(--color-accent-300);
+    padding: 0 12px;
+    width: calc(100% - 44px);
+    font-size: 14px;
+    margin: 0;
+    border-left: 16px solid var(--color-accent-800);
+}
+
+ol, ul, li {
+    margin: 0;
+}
+
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+ul li {
+    position: relative;
+    padding-left: 40px;
+}
+
+ul li::before {
+    content: "●";
+    position: absolute;
+    left: 20px;
+}
+
+li ul li::before {
+    content: "●";
+    position: absolute;
+    left: 20px;
+    top: 18px;
+}
+
+li > p {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.message-content > p {
+    margin: 0;
+    padding: 0;
+}
+
+blockquote > p {
+    margin: 0;
+    padding: 0;
 }
 
 .code-block {
@@ -2170,7 +2234,7 @@ td {
 .app-logo {
     width: 240px;
     height: 240px;
-    border-radius: 36px;
+    border-radius: 48px;
 }
 
 .mobile-qr {
@@ -2482,7 +2546,7 @@ td {
 }
 
 .vertical-divider-mob {
-    width: 1.5px;
+    width: 2px;
     height: 194px;
     min-height: 100%;
     background-color: rgba(255, 255, 255, 0.1);
@@ -2490,7 +2554,7 @@ td {
 }
 
 .vertical-divider {
-    width: 1px;
+    width: 2px;
     height: 194px;
     min-height: 100%;
     background-color: rgba(255, 255, 255, 0.1);
@@ -2517,4 +2581,64 @@ td {
 .link-special {
     color: rgb(204, 229, 255);
     text-decoration: underline;
+}
+
+.doc-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    user-select: none;
+    width: 80%;
+    max-width: 1224px;
+}
+
+.doc-header-mob {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    user-select: none;
+}
+
+.doc-bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.doc-content {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 80%;
+    max-width: 1224px;
+}
+
+.doc-bg-mob {
+    display: flex;
+    flex-direction: column;
+}
+
+.doc-content-mob {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.nav-bar-expand {
+    flex-grow: 1;
+}
+
+.message-content > h2, .message-content > h3 {
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 12px;
+}
+
+.message-content > hr {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
 }

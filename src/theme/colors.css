@@ -18,6 +18,7 @@
     --color-primary-light: #ffffff;
     --color-secondary-light: rgba(255, 255, 255, 0.8);
     --color-tretinary-light: rgba(255, 255, 255, 0.7);
+    /*--color-accent-overlay: rgba(24, 29, 26, 0.8);*/
     /*--color-accent-0: #181d1a;*/
     /*--color-accent-50: #141715;*/
     /*--color-accent-100: #181d1a;*/
@@ -36,6 +37,19 @@
     --color-accent-400: #555f71;
     --color-accent-800: #a9c7ff;
     --color-accent-900: #d6e3ff;
+
+    /*--color-accent-overlay: rgba(43, 32, 32, 0.8);*/
+    /*--color-accent-0: #2b2020;*/
+    /*--color-accent-50: #201919;*/
+    /*--color-accent-100: #2b2020;*/
+    /*--color-accent-200: #3e2c2c;*/
+    /*--color-accent-300: #583e3e;*/
+    /*--color-accent-400: #715555;*/
+    /*--color-accent-800: #ffa9a9;*/
+    /*--color-accent-900: #ffd6d6;*/
+
+    --color-accent-1000: #ffffff;
+
     --color-primary-accent-transparent: rgba(255, 255, 255, 0.07);
     --color-secondary-accent: #00ffff;
     --color-disclaimer: #ffff00;

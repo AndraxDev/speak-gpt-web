@@ -17,119 +17,119 @@
 import React from 'react';
 import DocPage from "./DocPage";
 
+const pageContent = `
+> This version of SpeakGPT is currently experimental. You can try it before official release. Be careful as some rough edges may appear.
+
+## 1.0.0-rc6
+- Added documentation and legal pages
+- Now you will no longer see API key dialog on the main screen. API key dialog will be shown only when you need to enter API key to perform API-restricted actions.
+- Fixed Markdown lists appearance
+
+## 1.0.0-rc5
+- Added support for app and deep links
+
+## 1.0.0-rc4
+- Added first message in chat list
+
+## 1.0.0-rc3
+- Improved mobile UI
+
+## 1.0.0-rc2
+- Bugfix
+
+## 1.0.0-rc1
+- Mobile version
+
+## 0.9.0-beta09
+- Personalize embedded assistants with icon and description
+
+
+## 0.8.0-beta08
+- Customize embedded assistants with payload
+
+## 0.7.0-beta07
+- Embedded assistant chats are now saved
+
+## 0.6.0-beta06
+- Assistant message bar autofocus
+
+## 0.5.0-beta05
+- Small fixes
+
+## 0.4.0-beta04
+- Added mobile assistant
+
+## 0.3.0-beta03
+- Minor fixes
+
+## 0.2.0-beta02
+- Added embedded assistant
+
+## 0.1.1-beta01
+- Minor fixes
+
+## 0.1.0-beta01
+- First public beta release.
+- Improved images upload.
+
+## 0.0.14-alpha14
+- Finished Prompts Store.
+- Added Quick Assistant.
+
+## 0.0.13-alpha13
+- UI improvements.
+
+## 0.0.12-alpha12
+- Added code highlighting form more programming languages.
+
+## 0.0.11-alpha11
+- Now you can unset your API key and skip API key setup.
+- Added full list of available models
+
+## 0.0.10-alpha10
+- Search chat added
+- Tips page added
+
+## 0.0.9-alpha9
+- Minor bugs fixed
+
+## 0.0.8-alpha8
+- Implemented GPT 4 Vision
+- Chats settings are now take effect
+
+## 0.0.7-alpha7
+- Added chat settings
+
+## 0.0.6-alpha6
+- Added ability to clear chats
+- Bugs fixed
+
+## 0.0.5-alpha5
+- Minor bugs fixed
+
+## 0.0.4-alpha4
+- Added code highlighting
+- Minor improvements
+
+## 0.0.3-alpha3
+- Added image generation.
+- Fixed minor bugs.
+
+## 0.0.2-alpha2
+- Changed chats location. Chats are now located in the indexed DB. We're preparing for image generation and chats import/export. You might also noticed that you chats has gone. Open Developers Tools > Console and put command localStorage.chatId, where chatId is a sha256 hash of the chat name to recover a chat. You can load chat as JSON in SpeakGPT mobile app now. Web version will receive this feature soon.
+- Added autoscroll in chats.
+
+## 0.0.1-alpha1
+- Initial release.
+- You can create multiple chats.
+- You can select different AI models.
+
+`;
+
 function WelcomePage() {
     return (
-        <DocPage>
-            <h2 className={"title"}>Changelog</h2>
-            <p className={"warning"}>This version of SpeakGPT is currently experimental. You can try it before
-                official release. Be careful as some rough edges may appear.
-                Click the button below
-                to launch SpeakGPT.</p>
-            <code className={"title"}>1.0.0-rc5</code><br/>
-            <code className={"text"}>- Added support for app and deep links</code><br/>
-            <br/>
-            <code className={"title"}>1.0.0-rc4</code><br/>
-            <code className={"text"}>- Added first message in chat list</code><br/>
-            <br/>
-            <code className={"title"}>1.0.0-rc3</code><br/>
-            <code className={"text"}>- Improved mobile UI</code><br/>
-            <br/>
-            <code className={"title"}>1.0.0-rc2</code><br/>
-            <code className={"text"}>- Bugfix</code><br/>
-            <br/>
-            <code className={"title"}>1.0.0-rc1</code><br/>
-            <code className={"text"}>- Mobile version</code><br/>
-            <br/>
-            <code className={"title"}>0.9.0-beta09</code><br/>
-            <code className={"text"}>- Personalize embedded assistants with icon and description</code><br/>
-            <br/>
-            <code className={"title"}>0.8.0-beta08</code><br/>
-            <code className={"text"}>- Customize embedded assistants with payload</code><br/>
-            <br/>
-            <code className={"title"}>0.7.0-beta07</code><br/>
-            <code className={"text"}>- Embedded assistant chats are now saved</code><br/>
-            <br/>
-            <code className={"title"}>0.6.0-beta06</code><br/>
-            <code className={"text"}>- Assistant message bar autofocus</code><br/>
-            <br/>
-            <code className={"title"}>0.5.0-beta05</code><br/>
-            <code className={"text"}>- Small fixes</code><br/>
-            <br/>
-            <code className={"title"}>0.4.0-beta04</code><br/>
-            <code className={"text"}>- Added mobile assistant</code><br/>
-            <br/>
-            <code className={"title"}>0.3.0-beta03</code><br/>
-            <code className={"text"}>- Minor fixes</code><br/>
-            <br/>
-            <code className={"title"}>0.2.0-beta02</code><br/>
-            <code className={"text"}>- Added embedded assistant</code><br/>
-            <br/>
-            <code className={"title"}>0.1.1-beta01</code><br/>
-            <code className={"text"}>- Minor fixes</code><br/>
-            <br/>
-            <code className={"title"}>0.1.0-beta01</code><br/>
-            <code className={"text"}>- First public beta release.</code><br/>
-            <code className={"text"}>- Improved images upload.</code><br/>
-            <br/>
-            <code className={"title"}>0.0.14-alpha14</code><br/>
-            <code className={"text"}>- Finished Prompts Store.</code><br/>
-            <code className={"text"}>- Added Quick Assistant.</code><br/>
-            <br/>
-            <code className={"title"}>0.0.13-alpha13</code><br/>
-            <code className={"text"}>- UI improvements.</code><br/>
-            <br/>
-            <code className={"title"}>0.0.12-alpha12</code><br/>
-            <code className={"text"}>- Added code highlighting form more programming languages.</code><br/>
-            <br/>
-            <code className={"title"}>0.0.11-alpha11</code><br/>
-            <code className={"text"}>- Now you can unset your API key and skip API key setup.</code><br/>
-            <code className={"text"}>- Added full list of available models</code><br/>
-            <br/>
-            <code className={"title"}>0.0.10-alpha10</code><br/>
-            <code className={"text"}>- Search chat added</code><br/>
-            <code className={"text"}>- Tips page added</code><br/>
-            <br/>
-            <code className={"title"}>0.0.9-alpha9</code><br/>
-            <code className={"text"}>- Minor bugs fixed</code><br/>
-            <br/>
-            <code className={"title"}>0.0.8-alpha8</code><br/>
-            <code className={"text"}>- Implemented GPT 4 Vision</code><br/>
-            <code className={"text"}>- Chats settings are now take effect</code><br/>
-            <br/>
-            <code className={"title"}>0.0.7-alpha7</code><br/>
-            <code className={"text"}>- Added chat settings</code><br/>
-            <br/>
-            <code className={"title"}>0.0.6-alpha6</code><br/>
-            <code className={"text"}>- Added ability to clear chats</code><br/>
-            <code className={"text"}>- Bugs fixed</code><br/>
-            <br/>
-            <code className={"title"}>0.0.5-alpha5</code><br/>
-            <code className={"text"}>- Minor bugs fixed</code><br/>
-            <br/>
-            <code className={"title"}>0.0.4-alpha4</code><br/>
-            <code className={"text"}>- Added code highlighting</code><br/>
-            <code className={"text"}>- Minor improvements</code><br/>
-            <br/>
-            <code className={"title"}>0.0.3-alpha3</code><br/>
-            <code className={"text"}>- Added image generation.</code><br/>
-            <code className={"text"}>- Fixed minor bugs.</code><br/>
-            <br/>
-            <code className={"title"}>0.0.2-alpha2</code><br/>
-            <code className={"text"}>- Changed chats location. Chats are now located in the indexed DB. We're
-                preparing
-                for image generation and chats import/export. You might also noticed that you chats has gone.
-                Open
-                Developers Tools > Console and put command localStorage.chatId, where chatId is a sha256 hash of
-                the
-                chat name to recover a chat. You can load chat as JSON in SpeakGPT mobile app now. Web version
-                will
-                receive this feature soon.</code><br/>
-            <code className={"text"}>- Added autoscroll in chats.</code><br/>
-            <br/>
-            <code className={"title"}>0.0.1-alpha1</code><br/>
-            <code className={"text"}>- Initial release.</code><br/>
-            <code className={"text"}>- You can create multiple chats.</code><br/>
-            <code className={"text"}>- You can select different AI models.</code>
+        <DocPage title={"Changelog"}>
+            {pageContent}
         </DocPage>
     );
 }
