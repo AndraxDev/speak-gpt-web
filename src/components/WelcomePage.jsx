@@ -205,13 +205,11 @@ function WelcomePage() {
                         <div className={"app-info-text"}>
                             <h1 className={"app-title"}>SpeakGPT</h1>
                             <p className={"app-desc"}>SpeakGPT is an advanced and highly intuitive open-source AI
-                                assistant
-                                that
+                                assistant that
                                 utilizes the powerful OpenAI technologies to provide you with unparalleled performance
-                                and
-                                functionality.</p>
+                                and functionality.</p>
                             <div className={"btn-row"}>
-                                <Link to={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></Link>
+                                <a href={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <MaterialButtonOutlined24 onClick={() => setMobileQrOpened(true)}>Get mobile app</MaterialButtonOutlined24>
                             </div>
@@ -311,7 +309,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
-                            <Link className={"footer-link"} to={"/sitemap.xml"}>Site map</Link>
+                            <a className={"footer-link"} href={"/sitemap.xml"}>Site map</a>
                         </div>
                         <div className={"vertical-divider"}></div>
                         <div className={"footer-column"}>
@@ -352,7 +350,7 @@ function WelcomePage() {
                             <div className={"btn-row-mob"}>
                                 <Link to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"} target={"_blank"}><MaterialButton24>Download app</MaterialButton24></Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to={"/chat"}><MaterialButtonOutlined24>Launch SpeakGPT Web</MaterialButtonOutlined24></Link>
+                                <a href={"/chat"}><MaterialButtonOutlined24>Launch SpeakGPT</MaterialButtonOutlined24></a>
                             </div>
                         </div>
                     </div>
@@ -445,7 +443,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
-                            <Link className={"footer-link"} to={"/sitemap.xml"}>Site map</Link>
+                            <a className={"footer-link"} href={"/sitemap.xml"}>Site map</a>
                         </div>
                         <div className={"vertical-divider-mob"}></div>
                         <div className={"footer-column"}>

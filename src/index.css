@@ -1147,6 +1147,7 @@ td {
 .chat-ab-actions-assistant {
     border-radius: 48px;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(32px);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -2010,7 +2011,7 @@ td {
     position: fixed;
     width: calc(100vw - 488px);
     height: 100vh;
-    left: 388px;
+    left: 488px;
     top: 0;
     transition: 0s;
     box-sizing: border-box;

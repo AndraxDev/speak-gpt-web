@@ -122,3 +122,19 @@ B
 public/sitemap.xml,2\f\2fe7f218c8d47bee56d71bed3b5f461be878d1d6
 B
 public/preload.css,f\2\f26076c620ad2d0e4a8f4e1d85773fa1acdc4c8e
+J
+src/components/DocPage.jsx,0\f\0fcaf7869310c11f91b60554e2ed9fecf1412cf5
+O
+src/documentation/ApiSafety.jsx,e\3\e37694f5ac87a4890188f706cd969b91d26ebd3e
+M
+src/documentation/Privacy.jsx,6\a\6af2cfde9b2cdd9b69d4837ce73725fd3de8e8a4
+K
+src/documentation/Terms.jsx,5\2\5236ca737319598acab4bcc71e257213b05b8dcb
+M
+src/documentation/Contact.jsx,8\9\893f45b8b3628f4c675a49f7e56765961dc7f725
+I
+src/documentation/FAQ.jsx,5\b\5be3fce0472ebedbb2d8cf0efad2036505d19e80
+K
+src/documentation/Debug.jsx,9\4\945798f116a797c89631f64e8c70213b6eabcfae
+=
+src/prism.css,4\e\4e250f20823a23ba702aa02cb5f031865e6069ca

@@ -25,6 +25,12 @@ import AssistantEmbedded from "./components/AssistantEmbedded";
 import AssistantMobile from "./components/AssistantMobile";
 import NotFound from "./components/NotFound";
 import Changelog from "./components/Changelog";
+import Privacy from "./documentation/Privacy";
+import Terms from "./documentation/Terms";
+import ApiSafety from "./documentation/ApiSafety";
+import FAQ from "./documentation/FAQ";
+import Contact from "./documentation/Contact";
+import Debug from "./documentation/Debug";
 
 function BaseRoutes() {
     return (
@@ -35,6 +41,36 @@ function BaseRoutes() {
             <Route path="/changelog" element={
                 <MaterialWindow page={"changelog"}>
                     <Changelog/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/privacy" element={
+                <MaterialWindow page={"privacy"}>
+                    <Privacy/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/debug" element={
+                <MaterialWindow page={"debug"}>
+                    <Debug/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/terms" element={
+                <MaterialWindow page={"terms"}>
+                    <Terms/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/api/safety" element={
+                <MaterialWindow page={"api_safety"}>
+                    <ApiSafety/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/faq" element={
+                <MaterialWindow page={"faq"}>
+                    <FAQ/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/contact" element={
+                <MaterialWindow page={"contact"}>
+                    <Contact/>
                 </MaterialWindow>
             } exact />
             <Route path="/chat" element={
