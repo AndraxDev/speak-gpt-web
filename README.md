@@ -149,18 +149,20 @@ Example of payload:
 ```json
 {
   "name": "Example Chat",
+  "icon": "https://example.com/icon.png",
+  "description": "This assistant can provide you with relevant responses based on ...",
   "initialMessage": "Hello, how are you?",
   "initialResponse": "I'm fine, thank you.",
-  "styleMessage": "This is an example chat. Please be polite.",
+  "systemMessage": "This is an example chat. Please be polite.",
   "chatLocation": "exampleLocation"
 }
 ```
 - `name` - name that will be displayed on the top of the assistant window
 - `icon` - URL to the icon that will be displayed on the top of the assistant window when conversation is empty
 - `description` - description that will be displayed on the top of the assistant window when conversation is empty. Supports HTML
-- `initialMessage` - message that will be sent to the assistant when it's loaded
+- `initialMessage` - a message that will be sent to the assistant when it's loaded
 - `initialResponse` - response of assistant to make conversation work properly
-- `styleMessage` - message with additional content that are not shown in the chat and appended to the end of the chat history.
+- `systemMessage` - a message with additional content that are not shown in the chat and appended to the end of the chat history.
 - `chatLocation` - location of the chat in the indexed database, don't use whitespaces or special characters
 
 More params will be added in the future.
