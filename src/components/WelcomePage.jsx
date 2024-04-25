@@ -224,7 +224,7 @@ function WelcomePage() {
                                 e.stopPropagation()
                             }}>
                                 <img src={"./qr.png"} alt={"SpeakGPT"} className={"mobile-qr"}/>
-                                <p className={"get-mobile-app"}>Get mobile app</p>
+                                <p className={"get-mobile-app"}>Scan this code from your phone.</p>
                             </div>
                         </div> : null
                     }
