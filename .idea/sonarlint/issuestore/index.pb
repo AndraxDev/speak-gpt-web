@@ -144,3 +144,5 @@ H
 src/util/MarkDownCode.js,0\f\0f826e4eb46bdf57a63fad937511623b622da26d
 P
  src/documentation/DeleteData.jsx,c\5\c5f2a4e62196efeb770030f7089b0ddf99658084
+@
+public/prism.css,6\9\698bd84662a95771ee677122b7cb44b2637b89ed

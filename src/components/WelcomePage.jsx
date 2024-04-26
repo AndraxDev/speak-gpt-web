@@ -20,6 +20,7 @@ import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialBut
 import {BrowserView, isMobile, MobileView} from "react-device-detect";
 import {sha256} from "js-sha256";
 import Assistant from "./Assistant";
+import LazyHydrate from "react-lazy-hydration";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -204,7 +205,7 @@ function WelcomePage() {
     const [mobileQrOpened, setMobileQrOpened] = React.useState(false);
 
     return (
-        <div className={"v-background"} style={{
+        <LazyHydrate ssrOnly className={"v-background"} style={{
             overflowY: "auto",
             height: "calc(var(--vh, 1vh) * 100)",
             backgroundColor: "var(--color-accent-50)"
@@ -249,7 +250,9 @@ function WelcomePage() {
                             }} className={"feature-card"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
-                                    fontSize: "48px"
+                                    fontSize: "48px",
+                                    width: "48px",
+                                    height: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -293,7 +296,9 @@ function WelcomePage() {
                             }} className={"feature-card"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
-                                    fontSize: "48px"
+                                    fontSize: "48px",
+                                    width: "48px",
+                                    height: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -375,7 +380,9 @@ function WelcomePage() {
                             }} className={"feature-card-mob"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
-                                    fontSize: "48px"
+                                    fontSize: "48px",
+                                    width: "48px",
+                                    height: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -427,7 +434,9 @@ function WelcomePage() {
                             }} className={"feature-card-mob"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
-                                    fontSize: "48px"
+                                    fontSize: "48px",
+                                    width: "48px",
+                                    height: "48px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -489,7 +498,7 @@ function WelcomePage() {
                                closeWindow={setAssistantIsOpen}/>
                 </div> : null
             }
-        </div>
+        </LazyHydrate>
     );
 }
 
