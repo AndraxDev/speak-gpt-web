@@ -151,7 +151,10 @@ export const setGlobalSystemMessage = (systemMessage) => {
 }
 
 export const getApiHost = (chatId) => {
-    return getSettingsJSON(chatId).apiHost ? getSettingsJSON(chatId).apiHost : getDefaultSettings().apiHost;
+    let s = getSettingsJSON(chatId).apiHost !== null && getSettingsJSON(chatId).apiHost !== undefined && getSettingsJSON(chatId).apiHost.toString().trim() !== "" ? getSettingsJSON(chatId).apiHost : getDefaultSettings().apiHost;
+    if (s === undefined) s = "https://api.openai.com/v1/";
+    console.log(s)
+    return s
 }
 
 export const setApiHost = (chatId, apiHost) => {
