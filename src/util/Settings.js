@@ -19,14 +19,16 @@ const defaultSettings = {
     model: "gpt-3.5-turbo",
     dalleVersion: "2",
     resolution: "256x256",
-    systemMessage: ""
+    systemMessage: "",
+    apiHost: "https://api.openai.com/v1/"
 }
 
 const defaultSettingsMax = {
     model: "gpt-4-turbo-2024-04-09",
     dalleVersion: "3",
     resolution: "1024x1024",
-    systemMessage: ""
+    systemMessage: "",
+    apiHost: "https://api.openai.com/v1/"
 }
 
 const getDefaultSettings = () => {
@@ -146,4 +148,14 @@ export const setGlobalSystemMessage = (systemMessage) => {
     let settings = getDefaultSettings();
     settings.systemMessage = systemMessage;
     window.localStorage.setItem("globalSettings", JSON.stringify(settings));
+}
+
+export const getApiHost = (chatId) => {
+    return getSettingsJSON(chatId).apiHost ? getSettingsJSON(chatId).apiHost : getDefaultSettings().apiHost;
+}
+
+export const setApiHost = (chatId, apiHost) => {
+    let settings = getSettingsJSON(chatId);
+    settings.apiHost = apiHost;
+    setSettingsJSON(chatId, settings);
 }

@@ -19,6 +19,7 @@ import Tile from "./Tile"
 import packageJson from '../../package.json';
 import {isMobile, MobileView} from "react-device-detect";
 import {MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
+import ApiHostChangeDialog from "./ApiHostChangeDialog";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -33,6 +34,8 @@ window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
+    const [apiHostDialogOpen, setApiHostDialogOpen] = React.useState(false);
+
     return (
         <>
             <MobileView>
@@ -44,7 +47,9 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
             <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
                 setIsOpen(false);
             }}>
-
+                {
+                    apiHostDialogOpen ? <ApiHostChangeDialog chatId={chatId} setOpen={setApiHostDialogOpen}/> : null
+                }
                 <div style={isMobile ? {
                     height: "calc(var(--vh, 1vh) * 100)",
                 } : {}} className={isMobile ? "dialog-paper-settings-mob" : "dialog-paper-settings"}
@@ -76,6 +81,11 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
                         <Tile clickAction={() => {
                             openResolutionDialog(true);
                         }} icon={"key"} title={"Image resolution"} subtitle={resolution}
+                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+
+                        <Tile clickAction={() => {
+                            setApiHostDialogOpen(true);
+                        }} icon={"lan"} title={"Custom API host"} subtitle={"Click to set"}
                               description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                     </div>
                     <p className={"credits"}>Software version: {packageJson.name + " " + packageJson.version}</p>

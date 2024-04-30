@@ -14,6 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
+/* DEPRECATED > SUPERSEDED WITH SpeakGPT Mobile PWA */
 import React from 'react';
 import AssistantEmbedded from "./AssistantEmbedded";
 

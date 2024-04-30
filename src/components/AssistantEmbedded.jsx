@@ -30,7 +30,7 @@ import {
     getGlobalModel,
     getGlobalDalleVersion,
     getGlobalResolution,
-    getGlobalSystemMessage, setGlobalResolution, setGlobalSystemMessage
+    getGlobalSystemMessage, setGlobalResolution, setGlobalSystemMessage, getApiHost
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
@@ -38,6 +38,7 @@ import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {useParams, useSearchParams} from "react-router-dom";
 import {supportedFileTypes} from "../util/ModelTypeConverter";
+import {sha256} from "js-sha256";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -311,7 +312,8 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         try {
             const openai = new OpenAI({
                 apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiHost(chatLocation)
             });
 
             const response = await openai.images.generate({
@@ -365,7 +367,8 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         try {
             const openai = new OpenAI({
                 apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiHost(chatLocation)
             });
 
             if (selectedFile !== null) {
@@ -676,7 +679,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 }
                 {
                     settingsOpen ? <ChatSettings
-                        chatId={null}
+                        chatId={chatLocation}
                         setIsOpen={setSettingsOpen}
                         apiDialogOpen={setOpenAIKeyChangeDialogIsOpened}
                         setDalleVersion={setUseDalle3}
@@ -702,7 +705,8 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 }
                 {
                     modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel}
-                                                           setIsOpen={setModelDialogOpened} isAssistant={true}/> : null
+                                                           setIsOpen={setModelDialogOpened} isAssistant={true}
+                                                           chatId={chatLocation}/> : null
                 }
                 {
                     systemMessageDialogOpened ?

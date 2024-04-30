@@ -18,8 +18,9 @@ import React, {useEffect} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {CircularProgress} from "@mui/material";
+import {getApiHost} from "../util/Settings";
 
-function SelectModelDialog({setIsOpen, setModel, model, isAssistant}) {
+function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
 
     const availableModels = [
         {
@@ -52,8 +53,24 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant}) {
 
     const [allModels, setAllModels] = React.useState([]);
 
+    const [chatModelsProjection, setChatModelsProjection] = React.useState([]);
+
+    const syncProjection = (query) => {
+        if (query === "") {
+            setChatModelsProjection(allModels);
+        } else {
+            let projection = [];
+            allModels.forEach((m) => {
+                if (m.label.toLowerCase().includes(query.toLowerCase()) || query.toLowerCase().includes(m.model.toLowerCase())) {
+                    projection.push(m);
+                }
+            })
+            setChatModelsProjection(projection);
+        }
+    }
+
     useEffect(() => {
-        fetch('https://api.openai.com/v1/models', {
+        fetch(getApiHost(chatId) + 'models', {
             method: 'GET', // The HTTP method
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("apiKey")}`, // Authorization header
@@ -64,15 +81,14 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant}) {
         .then(data => {
             let mm = [];
             data.data.forEach((m) => {
-                if (m.id.includes("gpt-") || m.id.includes(":ft") || m.id.includes("ft:")) {
-                    mm.push({
-                        model: m.id,
-                        label: m.id
-                    })
-                }
+                mm.push({
+                    model: m.id,
+                    label: m.id
+                })
             })
 
             setAllModels(mm);
+            setChatModelsProjection(mm);
         }) // Log the data
         .catch(error => console.error('Error:', error)); // Log errors, if any
     }, []);
@@ -131,9 +147,18 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant}) {
                         borderLeft: "none",
                         borderRight: "none",
                     }}/>
+                    <MaterialEditText onChange={(e) => syncProjection(e.target.value)} label={"Search models"}/>
+                    <hr style={{
+                        width: "100%",
+                        margin: "16px 0",
+                        borderBottom: "1px solid var(--color-accent-200)",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                    }}/>
                     {
-                        allModels.length > 0 ?
-                            allModels.map((m, index) => {
+                        chatModelsProjection.length > 0 ?
+                            chatModelsProjection.map((m, index) => {
                                 return (
                                     <div key={index}
                                          className={m.model === selectedModel ? "selector-item-active" : "selector-item"}

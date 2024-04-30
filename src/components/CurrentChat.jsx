@@ -25,7 +25,17 @@ import ConfirmChatClear from "./ConfirmChatClear";
 import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
-import {getModel, setModel, getSystemMessage, setSystemMessage, getDalleVersion, setDalleVersion, getResolution, setResolution} from "../util/Settings";
+import {
+    getModel,
+    setModel,
+    getSystemMessage,
+    setSystemMessage,
+    getDalleVersion,
+    setDalleVersion,
+    getResolution,
+    setResolution,
+    getApiHost
+} from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import {modelToType, supportedFileTypes} from "../util/ModelTypeConverter";
@@ -204,7 +214,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         try {
             const openai = new OpenAI({
                 apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiHost(stateSelectedChat)
             });
 
             const response = await openai.images.generate({
@@ -258,7 +269,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         try {
             const openai = new OpenAI({
                 apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiHost(stateSelectedChat)
             });
 
             if (selectedFile !== null) {
@@ -660,7 +672,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                 resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={false} /> : null
             }
             {
-                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={false} /> : null
+                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={false} chatId={stateSelectedChat} /> : null
             }
             {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={false} /> : null

@@ -30,7 +30,7 @@ import {
     getGlobalModel,
     getGlobalDalleVersion,
     getGlobalResolution,
-    getGlobalSystemMessage, setGlobalResolution, setGlobalSystemMessage
+    getGlobalSystemMessage, setGlobalResolution, setGlobalSystemMessage, getApiHost
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
@@ -38,6 +38,7 @@ import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {supportedFileTypes} from "../util/ModelTypeConverter";
 import ApiKeyDialog from "./ApiKeyDialog";
+import {sha256} from "js-sha256";
 
 const getDefaultDescription = () => {
     return (`
@@ -181,7 +182,8 @@ function Assistant({runtimePrompt, type, closeWindow}) {
         try {
             const openai = new OpenAI({
                 apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiHost("")
             });
 
             const response = await openai.images.generate({
@@ -230,7 +232,8 @@ function Assistant({runtimePrompt, type, closeWindow}) {
         try {
             const openai = new OpenAI({
                 apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiHost("")
             });
 
             if (selectedFile !== null) {
@@ -529,7 +532,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={true} /> : null
             }
             {
-                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={true} /> : null
+                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={true} chatId={""} /> : null
             }
             {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={true} /> : null
