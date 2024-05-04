@@ -122,71 +122,74 @@ const features = [
         target: "_self",
         tintBackground: "rgba(49,40,40,0.8)",
         tintForeground: "rgb(255,168,168)"
-    }
+    },
+    {
+        title: "Different AI models",
+        icon: "extension",
+        description: "Access GPT, Gemini, Claude, Mistral, LLama and other powerful AI models.",
+        buttonLink: "/chat",
+        buttonLabel: "Start a chat",
+        buttonType: "link",
+        tintBackground: "rgba(49,41,39,0.8)",
+        tintForeground: "rgb(255,189,157)"
+    },
 ];
 
 const mobileFeatures = [
     {
         title: "Assistant",
         icon: "group_work",
-        description: "Make SpeakGPT your default assistant and access SpeakGPT any app or site.",
+        description: "Make SpeakGPT your default assistant and access SpeakGPT from any app or site.",
         tintBackground: "rgba(20,20,20,0.8)",
-        tintForeground: "rgb(255,255,255)"
-    },
-    {
-        title: "Different AI models",
-        icon: "extension",
-        description: "Access OpenAI GPT, Facebook LLama, Groq Mixtral and other powerful AI models",
-        tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "WhisperAI",
         icon: "graphic_eq",
         description: "Use your voice to access SpeakGPT. Currently is supports WhisperAI and Google Speech recognition. Voice language is detected automatically.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Text-To-Speech",
         icon: "text_to_speech",
         description: "Mobile app supports pronouncing text using OpenAI TTS and Google TTS.",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(20,20,20,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Offline mode",
         icon: "cloud_off",
         description: "Access your saved chats while you're offline.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Context menu",
         icon: "lists",
         description: "Select text in any app and select 'SpeakGPT' in your context menu to use this text with assistant. Currently you can summarize, explain, translate text, use it as prompt or generate images.",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(20,20,20,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Experiments",
         icon: "science",
         description: "Sometimes we're rolling out new interesting function for a limited time. Check out 'Experiments' section in the app.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Fine-tines",
         icon: "token",
         description: "Mobile version allows you to use you fine-tuned models.",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(20,20,20,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Dynamic theme",
         icon: "palette",
         description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     }
 ]

@@ -526,7 +526,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         saveConversation(customChatLocation, JSON.stringify(messages));
 
         let mx = document.querySelector(".chat-textarea").value
-        if (mx.includes("/imagine ")) {
+        if (mx.toString().trim().startsWith("/imagine ")) {
             generateImage(mx.replace("/imagine ", "")).then(r => {
                 setLockedState(false);
 

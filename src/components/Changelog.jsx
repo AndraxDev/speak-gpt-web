@@ -20,6 +20,12 @@ import DocPage from "./DocPage";
 const pageContent = `
 > This version of SpeakGPT is currently experimental. You can try it before official release. Be careful as some rough edges may appear.
 
+## 1.2.0
+- Fixed /imagine command
+
+## 1.1.0
+- Updated features list
+
 ## 1.0.0-rc6
 - Added documentation and legal pages
 - Now you will no longer see API key dialog on the main screen. API key dialog will be shown only when you need to enter API key to perform API-restricted actions.

@@ -324,6 +324,9 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             } else {
                 let ms = messages;
 
+                console.log("[SENDING COMPLETION REQUEST]")
+                console.log(ms)
+
                 if (getSystemMessage(id) !== "") {
                     ms.push({
                         content: getSystemMessage(id),
@@ -408,7 +411,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         saveConversation(sha256(stateSelectedChat), JSON.stringify(messages));
 
         let mx = document.querySelector(".chat-textarea").value
-        if (mx.includes("/imagine ")) {
+        if (mx.toString().trim().startsWith("/imagine ")) {
             generateImage(mx.replace("/imagine ", "")).then(r => {
                 setLockedState(false);
                 if (!getAndroidOS()) {
