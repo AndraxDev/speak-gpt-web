@@ -41,6 +41,8 @@ function NavigationBar({page, openAssistant}) {
             <br/>
             <NavigationBarItem name="Chat" icon="chat" isActive={page === "chat"} page={"/chat"}/>
             <NavigationBarItem name="Prompts" icon="apps" isActive={page === "prompts"} page={"/prompts"}/>
+            <NavigationBarItem name="Playground" icon="terminal" isActive={page === "playground"} page={"/playground"}/>
+            <NavigationBarItem name="AI Photo editor" icon="image" isActive={page === "editor"} page={"/editor"}/>
             <NavigationBarItem name="Tips" icon="lightbulb" isActive={page === "tips"} page={"/tips"}/>
             <div className={"nav-bar-expand"}></div>
             <Tooltip title="Close SpeakGPT" placement="right">

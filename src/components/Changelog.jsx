@@ -20,6 +20,12 @@ import DocPage from "./DocPage";
 const pageContent = `
 > This version of SpeakGPT is currently experimental. You can try it before official release. Be careful as some rough edges may appear.
 
+## 1.4.0
+- Added AI photo editor
+
+## 1.3.0
+- Added AI playground
+
 ## 1.2.0
 - Fixed /imagine command
 

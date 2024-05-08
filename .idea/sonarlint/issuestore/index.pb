@@ -148,3 +148,7 @@ P
 public/prism.css,6\9\698bd84662a95771ee677122b7cb44b2637b89ed
 V
 &src/components/ApiHostChangeDialog.jsx,a\2\a23b4928cbf5cea665ab549f6951127275a0a77b
+M
+src/components/Playground.jsx,1\9\19ecfab6d977a9fb765295c72df79072c4e6d6c2
+P
+ src/components/AIPhotoEditor.jsx,5\c\5caab04ff553d1a7e3d5a466d1c37d7a74ddf08e

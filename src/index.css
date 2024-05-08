@@ -219,6 +219,7 @@ html, body {
     margin-top: 4px;
     margin-bottom: 0;
     font-size: 14px;
+    text-align: center;
     padding: 0;
 }
 
@@ -1443,6 +1444,16 @@ td {
     cursor: pointer;
 }
 
+.visually-hidden-input-v2 {
+    position: absolute;
+    width: 160px;
+    height: 48px;
+    opacity: 0;
+    outline: 0;
+    border-radius: 24px;
+    cursor: pointer;
+}
+
 .selected-image-frame {
     position: fixed;
     bottom: 116px;
@@ -2641,4 +2652,109 @@ td {
 .message-content > hr {
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 0;
+}
+
+.app-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding: 0 8px;
+    background-color: var(--color-accent-100);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    color: var(--color-accent-900);
+    user-select: none;
+}
+
+.dropdown-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 8px 16px;
+    margin: 8px;
+    border-radius: 24px;
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--color-accent-300);
+    color: #fff;
+    transition: 0.15s;
+    border: none;
+    outline: none;
+}
+
+.dropdown-btn:hover {
+    background-color: var(--color-accent-400);
+    transition: 0.15s;
+}
+
+.playground-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+}
+
+.playground {
+    margin: 16px;
+}
+
+.select-file {
+    width: 160px;
+}
+
+.photo-panel {
+    display: flex;
+    flex-direction: row;
+    margin: 0 16px;
+    height: calc(100vh - 96px);
+}
+
+.photo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    border-radius: 24px;
+    background-color: var(--color-accent-200);
+    margin: 0 16px;
+    color: var(--color-accent-900);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.photo-editor-image {
+    width: 500px;
+    height: 500px;
+    background-color: #000000;
+}
+
+.photo-editor-image-output {
+    width: 500px;
+}
+
+.photo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.container-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.actions-left {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
 }

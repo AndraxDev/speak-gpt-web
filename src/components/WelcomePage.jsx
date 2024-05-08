@@ -133,6 +133,26 @@ const features = [
         tintBackground: "rgba(49,41,39,0.8)",
         tintForeground: "rgb(255,189,157)"
     },
+    {
+        title: "Playground",
+        icon: "terminal",
+        description: "Play with different AI models and see how they work.",
+        buttonLink: "/playground",
+        buttonLabel: "Launch playground",
+        buttonType: "link",
+        tintBackground: "rgba(44,42,35,0.8)",
+        tintForeground: "rgb(255,242,176)"
+    },
+    {
+        title: "AI Photo Editor",
+        icon: "photo",
+        description: "Edit your photos using DALL-e.",
+        buttonLink: "/editor",
+        buttonLabel: "Launch AI Photo Editor",
+        buttonType: "link",
+        tintBackground: "rgba(37,40,33,0.8)",
+        tintForeground: "rgb(216,255,158)"
+    },
 ];
 
 const mobileFeatures = [

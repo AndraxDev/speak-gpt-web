@@ -32,6 +32,8 @@ import FAQ from "./documentation/FAQ";
 import Contact from "./documentation/Contact";
 import Debug from "./documentation/Debug";
 import DeleteData from "./documentation/DeleteData";
+import Playground from "./components/Playground";
+import AIPhotoEditor from "./components/AIPhotoEditor";
 
 function BaseRoutes() {
     return (
@@ -59,6 +61,11 @@ function BaseRoutes() {
                     <Debug/>
                 </MaterialWindow>
             } exact />
+            <Route path="/editor" element={
+                <MaterialWindow page={"editor"}>
+                    <AIPhotoEditor/>
+                </MaterialWindow>
+            } exact />
             <Route path="/terms" element={
                 <MaterialWindow page={"terms"}>
                     <Terms/>
@@ -82,6 +89,11 @@ function BaseRoutes() {
             <Route path="/chat" element={
                 <MaterialWindow page={"chat"}>
                     <ChatList/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/playground" element={
+                <MaterialWindow page={"playground"}>
+                    <Playground/>
                 </MaterialWindow>
             } exact />
             <Route path="/assistant/mobile" element={

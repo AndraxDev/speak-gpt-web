@@ -19,7 +19,7 @@ import {MaterialButton24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {getApiHost, setApiHost} from "../util/Settings";
 
-function ApiHostChangeDialog({chatId, setOpen}) {
+function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
     const [apiHostX, setApiHostX] = React.useState(getApiHost(chatId));
 
     return (
@@ -33,6 +33,7 @@ function ApiHostChangeDialog({chatId, setOpen}) {
                 <div className={"dialog-actions"}>
                     <MaterialButton24 onClick={() => {
                         setApiHost(chatId, apiHostX);
+                        if (setApiHostD != undefined) setApiHostD(apiHostX);
                         setOpen(false);
                     }}>Save</MaterialButton24>
                 </div>
