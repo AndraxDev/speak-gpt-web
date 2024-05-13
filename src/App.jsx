@@ -18,9 +18,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 import BaseRoutes from "./BaseRoutes";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {BaseTheme} from "./Theme";
+import {useEffect} from "react";
+import {migrateFromLegacyAPIs} from "./util/Settings";
 
 function App() {
     const baseTheme = createTheme(BaseTheme);
+
+    useEffect(() => {
+        migrateFromLegacyAPIs()
+    }, []);
 
     return (
         <ThemeProvider theme={baseTheme}>

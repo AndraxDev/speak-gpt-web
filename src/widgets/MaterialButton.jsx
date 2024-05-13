@@ -216,16 +216,20 @@ export const MaterialButtonCard = styled(Button)(({ theme }) => ({
 
 export const MaterialButtonError = styled(Button)(({ theme }) => ({
     color: "var(--color-warn)",
-    backgroundColor: "var(--color-warn-transparent)",
+    backgroundColor: "rgba(255,103,103,0.2)",
     textTransform: "none",
     borderRadius: "50pc",
     paddingLeft: "12px",
     paddingRight: "12px",
+    paddingTop: "10px",
+    paddingBottom: "10px",
     verticalAlign: "middle",
-    // border: "1px solid var(--color-warn-transparent)",
+    boxSizing: "border-box",
+    fontSize: "12px",
+    outline: "1px solid rgba(255,103,103,0.2)",
     '&:hover': {
         backgroundColor: "var(--color-warn-transparent-hover)",
-        // border: "1px solid var(--color-warn-transparent-hover)",
+        outline: "1px solid var(--color-warn-transparent-hover)",
     },
 }));
 

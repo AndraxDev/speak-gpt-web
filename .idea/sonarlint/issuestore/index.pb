@@ -152,3 +152,7 @@ M
 src/components/Playground.jsx,1\9\19ecfab6d977a9fb765295c72df79072c4e6d6c2
 P
  src/components/AIPhotoEditor.jsx,5\c\5caab04ff553d1a7e3d5a466d1c37d7a74ddf08e
+X
+(src/components/ApiEndpointEditDialog.jsx,7\4\74f60d718080ae78793a9d96fbb1704cd0b2cfbb
+V
+&src/components/ApiEndpointSelector.jsx,0\9\0929f195c0d514eb8b39c324b4cc02776c4e229e

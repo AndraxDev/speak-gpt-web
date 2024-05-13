@@ -29,7 +29,9 @@ const tips = [
     "ChatGPT is stuffy? Try out other models. Sometimes you may get very interesting results.",
     "Only GPT models can remember previous messages. Other models are not optimized for it.",
     "Sometimes some weird or useless features may appear. It because this app is in beta test.",
-    "SpeakGPT is too slow? Try to reduce max tokens per output."
+    "SpeakGPT is too slow? Try to reduce max tokens per output.",
+    "Getting the same picture in the photo editor as you sent? Don't forget to draw a mask.",
+    "Getting generation errors after updating to SpeakGPT 1.5.0? Add or change API endpoint. Usually it will be done automatically, but if not you can do it manually."
 ]
 
 function setFullHeight() {

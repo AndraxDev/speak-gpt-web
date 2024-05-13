@@ -14,10 +14,13 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 
+/*
+* @deprecated This component is deprecated and will be removed in the future versions. Use ApiEndpointEditDialog instead.
+* */
 function ApiKeyDialog(props) {
     const [apiKey, setApiKey] = React.useState("");
 
@@ -27,6 +30,10 @@ function ApiKeyDialog(props) {
             window.location.reload();
         }
     }
+
+    useEffect(() => {
+        console.warn("ApiKeyDialog is deprecated and will be removed in the future versions. Use ApiEndpointEditDialog instead.");
+    }, []);
 
     return (
         <>

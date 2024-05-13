@@ -18,7 +18,7 @@ import React, {useEffect} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {CircularProgress} from "@mui/material";
-import {getApiHost} from "../util/Settings";
+import {getApiEndpointById, getApiEndpointId, getApiHost} from "../util/Settings";
 
 function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
 
@@ -50,9 +50,7 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
     ]
 
     const [selectedModel, setSelectedModel] = React.useState(model);
-
     const [allModels, setAllModels] = React.useState([]);
-
     const [chatModelsProjection, setChatModelsProjection] = React.useState([]);
 
     const syncProjection = (query) => {
@@ -70,10 +68,11 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
     }
 
     useEffect(() => {
-        fetch(getApiHost(chatId) + 'models', {
+        let endpoint = getApiEndpointById(getApiEndpointId(chatId))
+        fetch(endpoint.url + 'models', {
             method: 'GET', // The HTTP method
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("apiKey")}`, // Authorization header
+                'Authorization': `Bearer ${endpoint.key}`, // Authorization header
                 'Content-Type': 'application/json' // Set the content type
             }
         })

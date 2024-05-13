@@ -18,13 +18,13 @@ import React, {useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError} from "../widgets/MaterialButton";
 import {CircularProgress} from "@mui/material";
-import {getApiHost, getModel} from "../util/Settings";
+import {getApiEndpointById, getGlobalEndpointId, getModel, setGlobalEndpointId, setGlobalModel} from "../util/Settings";
 import SelectModelDialog from "./SelectModelDialog";
-import ApiHostChangeDialog from "./ApiHostChangeDialog";
 import OpenAI from "openai";
+import ApiEndpointSelector from "./ApiEndpointSelector";
 
 function Playground() {
-    const [apiEndpoint, setApiEndpoint] = useState(getApiHost(""));
+    const [apiEndpoint, setApiEndpoint] = useState(getGlobalEndpointId());
     const [model, setModel] = useState(getModel(""));
     const [apiEndpointDialogOpen, setApiEndpointDialogOpen] = useState(false);
     const [modelDialogOpen, setModelDialogOpen] = useState(false);
@@ -47,9 +47,9 @@ function Playground() {
 
     const runAI = async () => {
         const openai = new OpenAI({
-            apiKey: localStorage.getItem("apiKey"),
+            apiKey: getApiEndpointById(apiEndpoint).key,
             dangerouslyAllowBrowser: true,
-            baseURL: getApiHost("")
+            baseURL: getApiEndpointById(apiEndpoint).url
         });
 
         const messages = systemMessage === "" ? [{
@@ -128,10 +128,16 @@ function Playground() {
     return (
         <div>
             {
-                modelDialogOpen ? <SelectModelDialog setModel={setModel} model={model} setIsOpen={setModelDialogOpen} isAssistant={false} chatId={""} /> : null
+                modelDialogOpen ? <SelectModelDialog setModel={(m) => {
+                    setGlobalModel(m)
+                    setModel(m)
+                }} model={model} setIsOpen={setModelDialogOpen} isAssistant={false} chatId={""} /> : null
             }
             {
-                apiEndpointDialogOpen ? <ApiHostChangeDialog chatId={""} setOpen={setApiEndpointDialogOpen} setApiHostD={setApiEndpoint}/> : null
+                apiEndpointDialogOpen ? <ApiEndpointSelector selectedApiEndpointId={apiEndpoint} setSelectedApiEndpointId={(e) => {
+                    setGlobalEndpointId(e)
+                    setApiEndpoint(e)
+                }} isAssistant={false} isOpened={apiEndpointDialogOpen} setIsOpened={setApiEndpointDialogOpen}/> : null
             }
             <div className={"app-bar"}>
                 &nbsp;&nbsp;
@@ -139,7 +145,7 @@ function Playground() {
                 &nbsp;&nbsp;
                 <button className={"dropdown-btn"} onClick={() => {
                     setApiEndpointDialogOpen(true);
-                }}>API Endpoint:&nbsp;<span>{apiEndpoint}</span>&nbsp;<span className={"material-symbols-outlined"}>expand_more</span></button>
+                }}>API Endpoint:&nbsp;<span>{getApiEndpointById(apiEndpoint).url}</span>&nbsp;<span className={"material-symbols-outlined"}>expand_more</span></button>
                 <button className={"dropdown-btn"} onClick={() => {
                     setModelDialogOpen(true);
                 }}>AI model:&nbsp;<span>{model}</span>&nbsp;<span className={"material-symbols-outlined"}>expand_more</span></button>
@@ -165,13 +171,9 @@ function Playground() {
                     }}/>
                 </> : null}</MaterialButton24>
                 &nbsp;&nbsp;&nbsp;
-                <MaterialButtonError style={{
-                    fontSize: "16px",
-                }} onClick={() => {setInput("")}}>Clear input</MaterialButtonError>
+                <MaterialButtonError onClick={() => {setInput("")}}>Clear input</MaterialButtonError>
                 &nbsp;&nbsp;&nbsp;
-                <MaterialButtonError style={{
-                    fontSize: "16px",
-                }} onClick={() => {setOutput("")}}>Clear output</MaterialButtonError>
+                <MaterialButtonError onClick={() => {setOutput("")}}>Clear output</MaterialButtonError>
             </div>
             <div className={"app-bar"}>
                 &nbsp;&nbsp;

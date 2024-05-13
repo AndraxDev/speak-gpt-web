@@ -23,7 +23,10 @@ function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
     const [apiHostX, setApiHostX] = React.useState(getApiHost(chatId));
 
     return (
-        <div className={"priority dialog-backdrop"} onMouseDown={() => setOpen(false)}>
+        <div className={"priority dialog-backdrop"} onMouseDown={(e) => {
+            e.stopPropagation();
+            setOpen(false)
+        }}>
             <div className={"dialog-paper"} onMouseDown={(e) => e.stopPropagation()}>
                 <h3 className={"dialog-title"}>API Host</h3>
                 <div className={"dialog-content"}>

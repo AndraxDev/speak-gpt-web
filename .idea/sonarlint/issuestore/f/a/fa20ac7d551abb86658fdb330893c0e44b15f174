@@ -1,12 +1,12 @@
 
-wjavascript:S1128'")Remove this unused import of 'useParams'.(ÚÓÔàüÿÿÿÿ8Œø­Üï1J$8af663e8-afbb-45e2-99e7-a992b99be65c
-ojavascript:S1128)"&Remove this unused import of 'sha256'.(Ë¸ÄÖ8ü¨İîò1J$0723510d-f5aa-41f2-88d9-f83bcd06093c
-vjavascript:S6774M"-'chatLocation' is missing in props validation(¾†Ÿ½8â“ÀÜï1J$c9f9f418-e518-4427-9aaf-052daf3e0c07
-ƒjavascript:S1481N":Remove the declaration of the unused 'setParams' variable.(È¢8æ“ÀÜï1J$ebd0d906-f8e8-4c21-8126-078f55ab7102
-€javascript:S1854N"7Remove this useless assignment to variable "setParams".(È¢8æ“ÀÜï1J$d3fed95f-2342-44c5-a85e-0994417a2675
-ˆjavascript:S6754Y":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8è“ÀÜï1J$dea253b4-6083-4399-9998-a53e30cd3b7e
-£javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(ùëİ¯ùÿÿÿÿ8è“ÀÜï1J$78936817-5258-4cff-a9f0-5a449ed0d342
-£javascript:S3776î"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(ôæäµıÿÿÿÿ8è“ÀÜï1J$8cf252d3-f82e-49c8-a4dc-f24f82d00175
-mjavascript:S6479ì"Do not use Array index in keys(Ë«„çşÿÿÿÿ8Õøêï1J$7dd0201d-06fe-4083-9394-52f28b32a9b5
-’javascript:S6848ƒ"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8Öøêï1J$40319225-fb9b-40ad-ae53-fb2c363b2ed2
-®javascript:S1082ƒ"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8Öøêï1J$87508a18-2b69-49b9-8d0a-715dee6ffdfa
+wjavascript:S1128+")Remove this unused import of 'useParams'.(ÚÓÔàüÿÿÿÿ8üÂç÷1J$678c6b87-f8a4-42ea-972f-83b4d3aea29f
+ojavascript:S1128-"&Remove this unused import of 'sha256'.(Ë¸ÄÖ8üÂç÷1J$282326cb-b6c5-4a83-93c5-4affe3a2aaff
+vjavascript:S6774Q"-'chatLocation' is missing in props validation(¾†Ÿ½8ıÂç÷1J$486a34e1-b226-4503-a4f4-21ed1e0c3b72
+ƒjavascript:S1481R":Remove the declaration of the unused 'setParams' variable.(È¢8şÂç÷1J$0d484d77-dab7-4a59-9840-1b7e504480a4
+€javascript:S1854R"7Remove this useless assignment to variable "setParams".(È¢8ÿÂç÷1J$88f8542e-1366-4309-85fb-5e1ab147da11
+ˆjavascript:S6754]":useState call is not destructured into value + setter pair(û‘šùÿÿÿÿ8ÿÂç÷1J$f13d1385-15ba-4683-a34e-51bfa37acaa6
+£javascript:S3776…"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(ùëİ¯ùÿÿÿÿ8€Ãç÷1J$06f0a082-3609-4591-a673-d0b81b294cae
+£javascript:S3776ÿ"TRefactor this function to reduce its Cognitive Complexity from 29 to the 15 allowed.(ôæäµıÿÿÿÿ8€Ãç÷1J$f24379fb-e3a5-4ad9-b61d-6eadb299d018
+mjavascript:S6479"Do not use Array index in keys(Ë«„çşÿÿÿÿ8Ãç÷1J$5ef79a83-2eec-47b5-ab66-3bcb7b50a138
+’javascript:S6848¥"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8Ãç÷1J$a5d3eb8b-6744-4e67-aa76-15c9efe1fb9f
+®javascript:S1082¥"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8ŒÃç÷1J$6c64943d-8dc8-40c9-b023-7aa2dbc272d8

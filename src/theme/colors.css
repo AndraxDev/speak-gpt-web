@@ -58,6 +58,6 @@
     --color-dark-blue: #212142;
     --color-autofill: #181d1a;
     --color-warn: #ffe6e4;
-    --color-warn-transparent: rgba(155, 75, 66, 0.1);
+    --color-warn-transparent: rgba(155, 75, 66, 0.2);
     --color-warn-transparent-hover: rgba(219, 68, 55, 0.5);
 }

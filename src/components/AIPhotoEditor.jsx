@@ -20,6 +20,7 @@ import {MaterialEditText} from "../widgets/MaterialEditText";
 import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import {supportedFileTypes} from "../util/ModelTypeConverter";
 import OpenAI from "openai";
+import {findOpenAIEndpointIdOrNull, getApiEndpointById, migrateFromLegacyAPIs} from "../util/Settings";
 
 function AiPhotoEditor(props) {
 
@@ -171,22 +172,31 @@ function AiPhotoEditor(props) {
     }
 
     const sendRequest = async () => {
-        const openai = new OpenAI({
-            apiKey: localStorage.getItem("apiKey"),
-            dangerouslyAllowBrowser: true
-        });
+        migrateFromLegacyAPIs()
 
-        const canvas = document.getElementById('canvas');
-        const fileMask = canvasToImageFile(canvas, 'mask.png');
+        if (findOpenAIEndpointIdOrNull() !== null) {
+            const openai = new OpenAI({
+                apiKey: getApiEndpointById(findOpenAIEndpointIdOrNull()).key,
+                dangerouslyAllowBrowser: true,
+                baseURL: getApiEndpointById(findOpenAIEndpointIdOrNull()).url
+            });
 
-        const response = await openai.images.edit({
-            image: inFilePrepared,
-            prompt: input.toString(),
-            mask: fileMask,
-            n: 1,
-            size: "1024x1024",
-        });
-        return response.data[0].url;
+            const canvas = document.getElementById('canvas');
+            const fileMask = canvasToImageFile(canvas, 'mask.png');
+
+            const response = await openai.images.edit({
+                image: inFilePrepared,
+                prompt: input.toString(),
+                mask: fileMask,
+                n: 1,
+                size: "1024x1024",
+            });
+            return response.data[0].url;
+        } else {
+            setErrorSnackBarMessage("This feature requires OpenAI endpoint. Open quick assistant settings and add OpenAI endpoint.");
+            setErrorSnackBar(true);
+            return "";
+        }
     }
 
     return (
@@ -238,6 +248,12 @@ function AiPhotoEditor(props) {
                         },
                     }} InputLabelProps={{shrink: true}} rows={7} id={"iInput"} value={input} label={"Edit prompt"}
                                       multiline onChange={(e) => setInput(e.target.value)}></MaterialEditText>
+
+                    <br/>
+                    <p style={{
+                        margin: "0",
+                        width: "calc(100% - 32px)"
+                    }} className={"hint"}>To use photo editor you will need to draw a mask over the image. Erase object you want to change and write a prompt. Currently DALL-e 2 only is supported.</p>
                 </div>
                 <div className={"photo-block"}>
                     <p>Edited photo will appear here</p>

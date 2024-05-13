@@ -20,6 +20,12 @@ import DocPage from "./DocPage";
 const pageContent = `
 > This version of SpeakGPT is currently experimental. You can try it before official release. Be careful as some rough edges may appear.
 
+## 1.5.0
+- Added API endpoint selector
+
+## 1.4.1
+- Fixed chat creation
+
 ## 1.4.0
 - Added AI photo editor
 

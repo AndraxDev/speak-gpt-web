@@ -20,6 +20,8 @@ import packageJson from '../../package.json';
 import {isMobile, MobileView} from "react-device-detect";
 import {MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
 import ApiHostChangeDialog from "./ApiHostChangeDialog";
+import ApiEndpointSelector from "./ApiEndpointSelector";
+import {getApiEndpointId, getGlobalEndpointId, setApiEndpointId, setGlobalEndpointId} from "../util/Settings";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -35,6 +37,7 @@ window.addEventListener('orientationchange', setFullHeight);
 
 function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
     const [apiHostDialogOpen, setApiHostDialogOpen] = React.useState(false);
+    const [apiEndpointSelector, setApiEndpointSelector] = React.useState(false);
 
     return (
         <>
@@ -44,9 +47,19 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
                         className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
                 </div>
             </MobileView>
-            <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
+            <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={(e) => {
+                e.stopPropagation();
                 setIsOpen(false);
             }}>
+                {
+                    apiEndpointSelector ? <ApiEndpointSelector isOpened={apiEndpointSelector} setIsOpened={setApiEndpointSelector} isAssistant={isAssistant} selectedApiEndpointId={(chatId !== undefined && chatId !== null) ? getApiEndpointId(chatId) : getGlobalEndpointId()} setSelectedApiEndpointId={(endpointId) => {
+                        if (chatId !== undefined && chatId !== null) {
+                            setApiEndpointId(chatId, endpointId);
+                        } else {
+                            setGlobalEndpointId(endpointId)
+                        }
+                    }} /> : null
+                }
                 {
                     apiHostDialogOpen ? <ApiHostChangeDialog chatId={chatId} setOpen={setApiHostDialogOpen}/> : null
                 }
@@ -63,8 +76,8 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
                         }} icon={"account_circle"} title={"Account"} subtitle={"Manage OpenAI account"}
                               description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                         <Tile clickAction={() => {
-                            apiDialogOpen(true);
-                        }} icon={"key"} title={"API key"} subtitle={"Set API key"}
+                            setApiEndpointSelector(true);
+                        }} icon={"lan"} title={"API Endpoint"} subtitle={"Click to set"}
                               description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                         <Tile clickAction={() => {
                             openModelDialog(true);
@@ -82,11 +95,14 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
                             openResolutionDialog(true);
                         }} icon={"key"} title={"Image resolution"} subtitle={resolution}
                               description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-
-                        <Tile clickAction={() => {
-                            setApiHostDialogOpen(true);
-                        }} icon={"lan"} title={"Custom API host"} subtitle={"Click to set"}
-                              description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                        {/*<Tile clickAction={() => {*/}
+                        {/*    setApiHostDialogOpen(true);*/}
+                        {/*}} icon={"lan"} title={"Custom API host"} subtitle={"DEPRECATED"}*/}
+                        {/*      description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>*/}
+                        {/*<Tile clickAction={() => {*/}
+                        {/*    apiDialogOpen(true);*/}
+                        {/*}} icon={"key"} title={"API key"} subtitle={"DEPRECATED"}*/}
+                        {/*      description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>*/}
                     </div>
                     <p className={"credits"}>Software version: {packageJson.name + " " + packageJson.version}</p>
                     <p className={"credits"}>Copyright: (C) 2024 <a href={"https://andrax.dev/"}

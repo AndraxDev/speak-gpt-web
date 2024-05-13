@@ -527,7 +527,7 @@ html, body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: calc(100vw - 170px);
+    max-width: calc(100vw - 190px);
 }
 
 .chat-item-message {
@@ -539,7 +539,7 @@ html, body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 160px;
+    max-width: 240px;
 }
 
 .chat-item-model-mob {
@@ -865,6 +865,18 @@ html, body {
     z-index: 10001;
 }
 
+.priority-high {
+    z-index: 10010;
+}
+
+.priority-ultra {
+    z-index: 10100;
+}
+
+.priority-max {
+    z-index: 2147483647;
+}
+
 .dialog-backdrop {
     position: fixed;
     top: 0;
@@ -993,8 +1005,8 @@ html, body {
 }
 
 .warning {
-    background-color: rgba(255, 0, 0, 0.2);
-    color: #db4437;
+    background-color: var(--color-warn-transparent);
+    color: var(--color-warn);
     padding: 16px;
     border-radius: 16px;
 }
@@ -1369,7 +1381,6 @@ td {
     background-color: var(--color-accent-900);
     cursor: pointer;
     width: calc(100% - 32px);
-    height: 24px;
     border-radius: 24px;
     padding: 16px;
     transition: 0.15s;
@@ -1378,12 +1389,12 @@ td {
     flex-direction: row;
     align-items: center;
     user-select: none;
+    min-height: 24px;
 }
 
 .selector-item {
     background-color: transparent;
     cursor: pointer;
-    height: 24px;
     width: calc(100% - 32px);
     padding: 16px;
     transition: 0.15s;
@@ -1393,6 +1404,7 @@ td {
     flex-direction: row;
     align-items: center;
     user-select: none;
+    min-height: 24px;
 }
 
 .selector-item:hover {

@@ -52,6 +52,12 @@ function ChatList() {
         getDatabase()
     }, []);
 
+    useEffect(() => {
+        if (db !== null) {
+            requestUpdate();
+        }
+    }, [db, selectedChat])
+
     const getChatsList = () => {
         let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
         let cc = [];
@@ -173,7 +179,6 @@ function ChatList() {
 
     const requestUpdate = () => {
         getAllFirstMessages(chats).then((res) => {
-            console.log(res);
             setChats(res);
             setChatsAreLoaded(true);
         })
@@ -181,7 +186,6 @@ function ChatList() {
 
     const forceUpdate = (chats) => {
         getAllFirstMessages(chats).then((res) => {
-            console.log(res);
             setChats(res);
             setChatsAreLoaded(true);
         })
@@ -194,11 +198,23 @@ function ChatList() {
 
         let c = localStorage.getItem("chats") !== undefined && localStorage.getItem("chats") !== null ? JSON.parse(localStorage.getItem("chats")) : [];
 
-        c.forEach((e) => {
-            if (e.title === chatName + chatNumber.toString()) {
-                chatNumber++;
+        // eslint-disable-next-line no-unused-vars
+        for (const _ of c) {
+            let isFound = false;
+            for (const element of c) {
+                if (element.title === chatName + chatNumber.toString()) {
+                    isFound = true;
+                    break;
+                }
             }
-        });
+
+            if (isFound) {
+                chatNumber++;
+            } else {
+                break;
+
+            }
+        }
 
         return chatName + chatNumber.toString();
     }
@@ -273,6 +289,9 @@ function ChatList() {
         setDeleteChatName("");
         setNewChatDialogOpen(false);
         setIsEditing(false);
+
+        setChats(newChats);
+        forceUpdate(newChats);
 
         if (id === sha256(chatName)) {
             navigate("/chat");

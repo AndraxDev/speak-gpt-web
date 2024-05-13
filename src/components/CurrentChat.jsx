@@ -34,7 +34,7 @@ import {
     setDalleVersion,
     getResolution,
     setResolution,
-    getApiHost
+    getApiHost, migrateFromLegacyAPIs, getApiEndpointById, getApiEndpointId, findOpenAIEndpointIdOrNull
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
@@ -212,33 +212,47 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         console.log("Generating image")
 
         try {
-            const openai = new OpenAI({
-                apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true,
-                baseURL: getApiHost(stateSelectedChat)
-            });
+            migrateFromLegacyAPIs();
+            let endpointId = findOpenAIEndpointIdOrNull()
+            if (endpointId !== null) {
+                const openai = new OpenAI({
+                    apiKey: getApiEndpointById(endpointId).key,
+                    dangerouslyAllowBrowser: true,
+                    baseURL: getApiEndpointById(endpointId).url
+                });
 
-            const response = await openai.images.generate({
-                model: "dall-e-" + getDalleVersion(id),
-                prompt: prompt,
-                n: 1,
-                size: getResolution(id),
-            });
-            let image = response.data[0].url;
+                const response = await openai.images.generate({
+                    model: "dall-e-" + getDalleVersion(id),
+                    prompt: prompt,
+                    n: 1,
+                    size: getResolution(id),
+                });
+                let image = response.data[0].url;
 
-            console.log(image)
+                console.log(image)
 
-            let image1 = await convertImageToBase64(image);
+                let image1 = await convertImageToBase64(image);
 
-            let c = conversation;
-            c.push({
-                message: "~file:" + image1,
-                isBot: true
-            });
+                let c = conversation;
+                c.push({
+                    message: "~file:" + image1,
+                    isBot: true
+                });
 
-            setConversation(c)
+                setConversation(c)
 
-            saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            } else {
+                let c = conversation;
+                c.push({
+                    message: "This feature uses OpenAI API. Please add OpenAI endpoint in chat settings.",
+                    isBot: true
+                });
+
+                setConversation(c)
+
+                saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
+            }
         } catch (e) {
             setSelectedFile(null)
             if (e.message.includes("401 Incorrect API key")) {
@@ -267,59 +281,75 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
 
     const sendAIRequest = async (messages) => {
         try {
-            const openai = new OpenAI({
-                apiKey: localStorage.getItem("apiKey"),
+            migrateFromLegacyAPIs()
+            let openai = new OpenAI({
+                apiKey: getApiEndpointById(getApiEndpointId(sha256(stateSelectedChat))).key,
                 dangerouslyAllowBrowser: true,
-                baseURL: getApiHost(stateSelectedChat)
+                baseURL: getApiEndpointById(getApiEndpointId(sha256(stateSelectedChat))).url
             });
 
             if (selectedFile !== null) {
-                let ms = messages;
+                if (findOpenAIEndpointIdOrNull() !== null) {
+                    openai = new OpenAI({
+                        apiKey: getApiEndpointById(findOpenAIEndpointIdOrNull()).key,
+                        dangerouslyAllowBrowser: true,
+                        baseURL: getApiEndpointById(findOpenAIEndpointIdOrNull()).url
+                    });
+                    let ms = messages;
 
-                let prompt = ms[ms.length - 1].content;
+                    let prompt = ms[ms.length - 1].content;
 
-                ms[ms.length - 1].content = [
-                    {type: "text", text: prompt},
-                    {
-                        type: "image_url",
-                        image_url: {
-                            "url": selectedFile,
+                    ms[ms.length - 1].content = [
+                        {type: "text", text: prompt},
+                        {
+                            type: "image_url",
+                            image_url: {
+                                "url": selectedFile,
+                            }
                         }
-                    }
-                ]
+                    ]
 
-                const chatCompletion = await openai.chat.completions.create({
-                    messages: ms,
-                    model: "gpt-4-vision-preview",
-                    stream: true,
-                });
-
-                const m = conversation;
-
-                m.push({
-                    message: "",
-                    isBot: true
-                });
-
-                // setSelectedFile(null)
-
-                setConversation([...m]);
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
-                for await (const chunk of chatCompletion) {
-                    const r = chunk.choices[0].delta;
+                    const chatCompletion = await openai.chat.completions.create({
+                        messages: ms,
+                        model: "gpt-4-vision-preview",
+                        stream: true,
+                    });
 
                     const m = conversation;
 
-                    if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
-                        m[m.length - 1].message += r.content;
+                    m.push({
+                        message: "",
+                        isBot: true
+                    });
 
-                        setConversation([...m]);
+                    // setSelectedFile(null)
+
+                    setConversation([...m]);
+                    saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+
+                    for await (const chunk of chatCompletion) {
+                        const r = chunk.choices[0].delta;
+
+                        const m = conversation;
+
+                        if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
+                            m[m.length - 1].message += r.content;
+
+                            setConversation([...m]);
+                        }
                     }
+
+                    saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
+                } else {
+                    let c = conversation;
+                    c.push({
+                        message: "This feature uses OpenAI API. Please add OpenAI endpoint in chat settings.",
+                        isBot: true
+                    });
+
+                    setConversation([...c])
+                    saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
                 }
-
-                saveConversation(sha256(stateSelectedChat), JSON.stringify(m));
-
                 return "";
             } else {
                 let ms = messages;
@@ -654,7 +684,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             }
             {
                 settingsOpen ? <ChatSettings
-                    chatId={stateSelectedChat}
+                    chatId={sha256(stateSelectedChat)}
                     setIsOpen={setSettingsOpen}
                     apiDialogOpen={setOpenAIKeyChangeDialogIsOpened}
                     setDalleVersion={setUseDalle3}
@@ -675,7 +705,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                 resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={false} /> : null
             }
             {
-                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={false} chatId={stateSelectedChat} /> : null
+                modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={false} chatId={sha256(stateSelectedChat)} /> : null
             }
             {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={false} /> : null
@@ -760,7 +790,6 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     </div>
                 </div>
             </div>
-            <ApiKeyDialog/>
         </div>
     );
 }

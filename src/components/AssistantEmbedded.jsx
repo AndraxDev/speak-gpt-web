@@ -30,7 +30,11 @@ import {
     getGlobalModel,
     getGlobalDalleVersion,
     getGlobalResolution,
-    getGlobalSystemMessage, setGlobalResolution, setGlobalSystemMessage, getApiHost
+    getGlobalSystemMessage,
+    setGlobalResolution,
+    setGlobalSystemMessage,
+    migrateFromLegacyAPIs,
+    getApiEndpointById, getApiEndpointId, findOpenAIEndpointIdOrNull
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
@@ -310,33 +314,46 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         console.log("Generating image")
 
         try {
-            const openai = new OpenAI({
-                apiKey: localStorage.getItem("apiKey"),
-                dangerouslyAllowBrowser: true,
-                baseURL: getApiHost(chatLocation)
-            });
+            migrateFromLegacyAPIs();
+            let endpointId = findOpenAIEndpointIdOrNull()
+            if (endpointId !== null) {
+                const openai = new OpenAI({
+                    apiKey: getApiEndpointById(endpointId).key,
+                    dangerouslyAllowBrowser: true,
+                    baseURL: getApiEndpointById(endpointId).url
+                });
 
-            const response = await openai.images.generate({
-                model: "dall-e-" + getGlobalDalleVersion(),
-                prompt: prompt,
-                n: 1,
-                size: getGlobalResolution(),
-            });
-            let image = response.data[0].url;
+                const response = await openai.images.generate({
+                    model: "dall-e-" + getGlobalDalleVersion(),
+                    prompt: prompt,
+                    n: 1,
+                    size: getGlobalResolution(),
+                });
+                let image = response.data[0].url;
 
-            console.log(image)
+                console.log(image)
 
-            let image1 = await convertImageToBase64(image);
+                let image1 = await convertImageToBase64(image);
 
-            let c = conversation;
-            c.push({
-                message: "~file:" + image1,
-                isBot: true
-            });
+                let c = conversation;
+                c.push({
+                    message: "~file:" + image1,
+                    isBot: true
+                });
 
-            setConversation(c)
+                setConversation(c)
 
-            saveConversation(customChatLocation, JSON.stringify(c));
+                saveConversation(customChatLocation, JSON.stringify(c));
+            } else {
+                let c = conversation;
+                c.push({
+                    message: "This feature uses OpenAI API. Please add OpenAI endpoint in chat settings.",
+                    isBot: true
+                });
+
+                setConversation(c)
+                saveConversation(customChatLocation, JSON.stringify(c));
+            }
         } catch (e) {
             setSelectedFile(null)
             if (e.message.includes("401 Incorrect API key")) {
@@ -365,56 +382,73 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
     const sendAIRequest = async (messages) => {
         try {
-            const openai = new OpenAI({
-                apiKey: localStorage.getItem("apiKey"),
+            migrateFromLegacyAPIs()
+            let openai = new OpenAI({
+                apiKey: getApiEndpointById(getApiEndpointId("")).key,
                 dangerouslyAllowBrowser: true,
-                baseURL: getApiHost(chatLocation)
+                baseURL: getApiEndpointById(getApiEndpointId("")).url
             });
 
             if (selectedFile !== null) {
-                let ms = messages;
+                if (findOpenAIEndpointIdOrNull() !== null) {
+                    openai = new OpenAI({
+                        apiKey: getApiEndpointById(findOpenAIEndpointIdOrNull()).key,
+                        dangerouslyAllowBrowser: true,
+                        baseURL: getApiEndpointById(findOpenAIEndpointIdOrNull()).url
+                    });
+                    let ms = messages;
 
-                let prompt = ms[ms.length - 1].content;
+                    let prompt = ms[ms.length - 1].content;
 
-                ms[ms.length - 1].content = [
-                    {type: "text", text: prompt},
-                    {
-                        type: "image_url",
-                        image_url: {
-                            "url": selectedFile,
+                    ms[ms.length - 1].content = [
+                        {type: "text", text: prompt},
+                        {
+                            type: "image_url",
+                            image_url: {
+                                "url": selectedFile,
+                            }
                         }
-                    }
-                ]
+                    ]
 
-                const chatCompletion = await openai.chat.completions.create({
-                    messages: ms,
-                    model: "gpt-4-vision-preview",
-                    stream: true,
-                });
-
-                const m = conversation;
-
-                m.push({
-                    message: "",
-                    isBot: true
-                });
-
-                setConversation([...m]);
-                saveConversation(customChatLocation, JSON.stringify(m));
-
-                for await (const chunk of chatCompletion) {
-                    const r = chunk.choices[0].delta;
+                    const chatCompletion = await openai.chat.completions.create({
+                        messages: ms,
+                        model: "gpt-4-vision-preview",
+                        stream: true,
+                    });
 
                     const m = conversation;
 
-                    if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
-                        m[m.length - 1].message += r.content;
+                    m.push({
+                        message: "",
+                        isBot: true
+                    });
 
-                        setConversation([...m]);
+                    setConversation([...m]);
+                    saveConversation(customChatLocation, JSON.stringify(m));
+
+                    for await (const chunk of chatCompletion) {
+                        const r = chunk.choices[0].delta;
+
+                        const m = conversation;
+
+                        if (chunk.choices[0] !== undefined && chunk.choices[0].delta !== undefined && r !== undefined && chunk.choices[0].delta.content !== undefined) {
+                            m[m.length - 1].message += r.content;
+
+                            setConversation([...m]);
+                        }
                     }
-                }
 
-                saveConversation(customChatLocation, JSON.stringify(m));
+                    saveConversation(customChatLocation, JSON.stringify(m));
+                } else {
+                    let c = conversation;
+                    c.push({
+                        message: "This feature uses OpenAI API. Please add OpenAI endpoint in chat settings.",
+                        isBot: true
+                    });
+
+                    setConversation([...c])
+                    saveConversation(customChatLocation, JSON.stringify(c));
+                }
 
                 return "";
             } else {
