@@ -1,11 +1,11 @@
 
-tjavascript:S1128"+Remove this unused import of 'BrowserView'.(€Äë‚8´ýˆ’÷1J$8d7e9229-ce9e-48a0-8b07-85e342b686b4
-¢javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(“·¡òûÿÿÿÿ8´ýˆ’÷1J$1b64bb52-f02a-4cac-a9eb-4a4bcff6dde6
-†javascript:S1481$"=Remove the declaration of the unused 'setChatModel' variable.(´‚Ä§8µýˆ’÷1J$58a3ab55-b236-4824-a8bf-e3dfa8238b86
-ƒjavascript:S1854$":Remove this useless assignment to variable "setChatModel".(´‚Ä§8µýˆ’÷1J$75abcf6d-3af3-4039-b862-d6fb90338134
-ˆjavascript:S1481,"?Remove the declaration of the unused 'chatsAreLoaded' variable.(¦˜òœ8¶ýˆ’÷1J$7d51bb30-98a9-436d-9065-1b62b5e45af6
-…javascript:S1854,"<Remove this useless assignment to variable "chatsAreLoaded".(¦˜òœ8¶ýˆ’÷1J$f7b00c68-6d01-4cca-b5fd-49c30e8fdd5a
-‰javascript:S6660”"?'If' statement should not be the only statement in 'else' block(™î‹î8¶ýˆ’÷1J$7a504c5a-2d71-465c-8830-a6ce9c97ff1b
-¢javascript:S4144»"XUpdate this function so that its implementation is not identical to the one on line 180.(Õæ£·8¶ýˆ’÷1J$843b45a2-062f-4def-8060-795bcc4e0ff8
-javascript:S1481Ê"2Remove the declaration of the unused '_' variable.(÷ð”ýÿÿÿÿ8¶ýˆ’÷1J$45f220e3-1b31-4f2a-994f-625fc5fd2ef5
-£javascript:S3776ä"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùëÝ¯ùÿÿÿÿ8¶ýˆ’÷1J$39893005-db15-4159-a220-adc9662c98e0
+tjavascript:S1128"+Remove this unused import of 'BrowserView'.(€Äë‚8Š›¼”÷1J$3df8417b-aa35-44ec-81d2-a89a2e51675a
+¢javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(“·¡òûÿÿÿÿ8‹›¼”÷1J$b7e03bc2-3674-4771-b031-f09b77dcfa21
+†javascript:S1481$"=Remove the declaration of the unused 'setChatModel' variable.(´‚Ä§8‹›¼”÷1J$8bbc5036-6376-4717-9f70-69045c2ecc63
+ƒjavascript:S1854$":Remove this useless assignment to variable "setChatModel".(´‚Ä§8‹›¼”÷1J$00e54e7f-7317-4301-a15c-a8e0b08ee5b4
+ˆjavascript:S1481,"?Remove the declaration of the unused 'chatsAreLoaded' variable.(¦˜òœ8‹›¼”÷1J$e0f1eebe-011b-4ae9-a765-8fd3211de199
+…javascript:S1854,"<Remove this useless assignment to variable "chatsAreLoaded".(¦˜òœ8‹›¼”÷1J$0e8fadbe-6eeb-4f9c-8295-27a981912507
+‰javascript:S6660”"?'If' statement should not be the only statement in 'else' block(™î‹î8‹›¼”÷1J$b7b9e601-9eeb-40e5-bdce-0bb7583ce490
+¢javascript:S4144»"XUpdate this function so that its implementation is not identical to the one on line 180.(Õæ£·8Œ›¼”÷1J$33c782cf-020f-489f-a4f9-a25841893117
+javascript:S1481Ê"2Remove the declaration of the unused '_' variable.(÷ð”ýÿÿÿÿ8Œ›¼”÷1J$c7028fad-3ffc-412f-8b36-4d62cf39cafc
+£javascript:S3776ä"TRefactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùëÝ¯ùÿÿÿÿ8Œ›¼”÷1J$7553645d-270b-492d-be42-fb4d3abca30f

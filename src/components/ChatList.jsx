@@ -239,19 +239,22 @@ function ChatList() {
                 }
 
                 if (!isFoundChat) {
+                    let newChats = []
                     if (localStorage.getItem("chats") === null || localStorage.getItem("chats") === undefined) {
-                        localStorage.setItem("chats", JSON.stringify([{
+                        newChats = [{
                             title: newChatName,
                             model: getModel(sha256(newChatName)),
                             type: modelToType(getModel(sha256(newChatName)))
-                        }]));
+                        }]
                     } else {
-                        localStorage.setItem("chats", JSON.stringify([...JSON.parse(localStorage.getItem("chats")), {
+                        newChats = [...JSON.parse(localStorage.getItem("chats")), {
                             title: newChatName,
                             model: getModel(sha256(newChatName)),
                             type: modelToType(getModel(sha256(newChatName)))
-                        }]));
+                        }]
                     }
+
+                    localStorage.setItem("chats", JSON.stringify(newChats));
 
                     setNewChatDialogOpen(false);
                     setNewChatName("");
@@ -259,6 +262,7 @@ function ChatList() {
                     setChatNameInvalid(false);
                     localStorage.setItem(sha256(newChatName) + ".settings", JSON.stringify(getSettingsJSON("")));
                     updateSearchResults()
+                    forceUpdate(newChats);
                     navigate("/chat/" + sha256(newChatName));
                 } else {
                     setChatNameInvalid(true);
@@ -322,6 +326,8 @@ function ChatList() {
                 });
 
                 localStorage.setItem("chats", JSON.stringify(newChats));
+
+                forceUpdate(newChats);
 
                 const transaction = db.transaction(['chats'], 'readonly');
                 const objectStore = transaction.objectStore('chats');
@@ -435,15 +441,15 @@ function ChatList() {
                 if (result.image !== undefined && result.image !== null && result.message.toString().trim() === "") {
                     cht.push({
                         title: e.title,
-                        model: e.model,
-                        type: e.type,
+                        model: getModel(sha256(e.title)),
+                        type: modelToType(getModel(sha256(e.title))),
                         firstMessage: "Image",
                     });
                 } else {
                     cht.push({
                         title: e.title,
-                        model: e.model,
-                        type: e.type,
+                        model: getModel(sha256(e.title)),
+                        type: modelToType(getModel(sha256(e.title))),
                         firstMessage: result.length === 0 ? "No messages yet." : result[0].message,
                     });
                 }

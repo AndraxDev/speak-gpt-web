@@ -18,7 +18,7 @@ import React, {useEffect} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {CircularProgress} from "@mui/material";
-import {getApiEndpointById, getApiEndpointId, getApiHost} from "../util/Settings";
+import {getApiEndpointById, getApiEndpointId} from "../util/Settings";
 
 function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
 
@@ -40,8 +40,8 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
             label: "GPT 4 Turbo (Most capable model)"
         },
         {
-            model: "gpt-4-32k",
-            label: "GPT 4 (32k tokens context)"
+            model: "gpt-4o",
+            label: "GPT 4o"
         },
         {
             model: "custom",

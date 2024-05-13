@@ -90,7 +90,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
         setGlobalDalleVersion(useDalle3 ? "3" : "2")
         setGlobalResolution(currentImageResolution)
         setGlobalSystemMessage(systemMessage)
-    }, [useDalle3, currentImageResolution, systemMessage]);
+    }, [currentModel, useDalle3, currentImageResolution, systemMessage]);
 
     const getAndroidOS = () => {
         return navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Linux x86_64") > -1;

@@ -46,6 +46,9 @@ Mobile app can be found [here](https://github.com/AndraxDev/speak-gpt).
 - [x] Embedded assistant
 - [x] Custom API endpoint
 - [x] Supported models from OpenRouter like LLama, Gemini, Mistral, Perplexity, Claude and more
+- [x] Playground
+- [x] AI Photo editor
+- [x] GPT 4o
 
 ## Embedded assistant
 

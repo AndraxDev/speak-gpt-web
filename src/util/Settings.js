@@ -42,7 +42,7 @@ const defaultSettings = {
 }
 
 const defaultSettingsMax = {
-    model: "gpt-4-turbo-preview",
+    model: "gpt-4o",
     dalleVersion: "3",
     resolution: "1024x1024",
     systemMessage: "",
