@@ -344,7 +344,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/terms"}>Terms of Service</Link>
                             <Link className={"footer-link"} to={"/privacy"}>Privacy Policy</Link>
                             <Link className={"footer-link"} to={"/api/safety"}>API safety</Link>
-                            <Link className={"footer-link"} to={"/docs"}>Developer documentation</Link>
+                            {/*<Link className={"footer-link"} to={"/docs"}>Developer documentation</Link>*/}
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
@@ -482,7 +482,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/terms"}>Terms of Service</Link>
                             <Link className={"footer-link"} to={"/privacy"}>Privacy Policy</Link>
                             <Link className={"footer-link"} to={"/api/safety"}>API safety</Link>
-                            <Link className={"footer-link"} to={"/docs"}>Developer documentation</Link>
+                            {/*<Link className={"footer-link"} to={"/docs"}>Developer documentation</Link>*/}
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>

@@ -274,7 +274,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
                     const chatCompletion = await openai.chat.completions.create({
                         messages: ms,
-                        model: "gpt-4-vision-preview",
+                        model: "gpt-4o",
                         stream: true,
                     });
 

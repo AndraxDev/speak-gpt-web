@@ -1,17 +1,17 @@
 
-sjavascript:S1128%"*Remove this unused import of 'getApiHost'.(„±ƒº8Æñì÷1J$456e8fe6-ed47-45dc-9670-0460b7c6ec65
-ujavascript:S1128-",Remove this unused import of 'ApiKeyDialog'.(Íœøí8ÄÛõ÷1J$0bb475db-ce1e-4d0d-8eed-601394f76bc0
-¢javascript:S3776;"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$c33d35bc-dc7d-4dfd-ab94-753e3e32d51b
-wjavascript:S6774;")'onUpdate' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$ef051578-7842-4710-b023-bd716f83c643
-tjavascript:S6774;"&'chats' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$79abdf42-f692-4766-b05b-c78a5928101f
-qjavascript:S6774;"#'id' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$37ec6011-418e-4254-9ea3-f46622d2d2f3
-wjavascript:S6774;")'chatName' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$085a0c20-a5d6-439e-bbf5-6e39f825e628
-zjavascript:S6774;",'updateChats' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$f4d6951a-f2f1-44b3-8d29-3cb96da52035
-ƒjavascript:S6754E":useState call is not destructured into value + setter pair(„ šñ8Èñì÷1J$878a0d89-6381-41d6-9c2a-9a1d0e53cbb8
-gjavascript:S125G"Remove this commented out code.(Ÿ‡İ†8Èñì÷1J$2e036f50-0560-46fa-9d64-2f7cc9a5f80b
-wjavascript:S6774S".'chats.forEach' is missing in props validation(„Ìš³8Èñì÷1J$e3173c4f-007e-41bd-8cc0-d708acd473d4
-xjavascript:S6774Œ".'chats.forEach' is missing in props validation(„Ìš³8Èñì÷1J$1e0e48fb-81ec-40b5-a3dc-724639112f0b
-£javascript:S3776š"TRefactor this function to reduce its Cognitive Complexity from 25 to the 15 allowed.(ôæäµıÿÿÿÿ8Èñì÷1J$730e0815-fbea-41c6-9a6f-81fbc34b1b90
-mjavascript:S6479ë"Do not use Array index in keys(Ë«„çşÿÿÿÿ8Éñì÷1J$ba651b49-090f-40ca-8fcd-e706ca0e2285
-’javascript:S6848ø"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8Éñì÷1J$a34bf728-4154-4fe4-a46c-d6ebb323f72a
-®javascript:S1082ø"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8Êñì÷1J$455c7a98-41fd-4490-bd8b-7115dcaa85c9
+sjavascript:S1128%"*Remove this unused import of 'getApiHost'.(„±ƒº8Æñì÷1J$0c3f0418-2cc3-416e-89ca-73c0d06a59f2
+ujavascript:S1128-",Remove this unused import of 'ApiKeyDialog'.(Íœøí8ÄÛõ÷1J$02831af4-e897-47d1-8e26-840d1b7d93d0
+¢javascript:S3776;"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$2c4d1e6a-0ec3-45bf-bad7-00345cf44f73
+wjavascript:S6774;")'onUpdate' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$8c066649-2d7d-469c-8bd5-cfb8f7327c1a
+tjavascript:S6774;"&'chats' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$bfd8ad65-b738-4d5f-9a23-3359668a2ba8
+qjavascript:S6774;"#'id' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$fd4ecbe3-9304-4d9b-88b7-fa25f59e48a3
+wjavascript:S6774;")'chatName' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$716d7535-717e-485b-856d-c4b00c800831
+zjavascript:S6774;",'updateChats' is missing in props validation(ƒ€”ğÿÿÿÿÿ8Çñì÷1J$ceb03b58-a73e-44f3-9d94-7f8b49a62eec
+ƒjavascript:S6754E":useState call is not destructured into value + setter pair(„ šñ8Èñì÷1J$d4c09ac1-5513-4ec2-ade8-56067aedf8d7
+gjavascript:S125G"Remove this commented out code.(Ÿ‡İ†8Èñì÷1J$36616be7-2de0-4aaa-995d-ed755e4a8973
+wjavascript:S6774S".'chats.forEach' is missing in props validation(„Ìš³8Èñì÷1J$6b8b447d-f084-4cb5-b9c3-2b54e5e6e8bd
+xjavascript:S6774Œ".'chats.forEach' is missing in props validation(„Ìš³8Èñì÷1J$6337b337-8a32-4917-92e6-7d56d2693e1f
+£javascript:S3776š"TRefactor this function to reduce its Cognitive Complexity from 25 to the 15 allowed.(ôæäµıÿÿÿÿ8Èñì÷1J$906872f7-3a34-46d2-9b44-fd8b96e054bc
+mjavascript:S6479ë"Do not use Array index in keys(Ë«„çşÿÿÿÿ8Éñì÷1J$33b68128-a728-433a-929e-b8d07bdb6911
+’javascript:S6848ø"ÂAvoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.(Õ¡ÿ·şÿÿÿÿ8Éñì÷1J$95b38b26-8a35-406a-b2ff-73b7b7d45fdd
+®javascript:S1082ø"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(Õ¡ÿ·şÿÿÿÿ8Êñì÷1J$f904be6f-30f4-4564-bb91-2a41fe379735

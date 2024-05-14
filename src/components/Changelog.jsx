@@ -20,6 +20,15 @@ import DocPage from "./DocPage";
 const pageContent = `
 > This version of SpeakGPT is currently experimental. You can try it before official release. Be careful as some rough edges may appear.
 
+## 1.5.4
+- GPT 4o is now default model for image recognition
+
+## 1.5.3
+- Extended FAQ page
+
+## 1.5.2
+- Added FAQ page
+
 ## 1.5.1
 - Added GPT 4o as a default model in models list, removed gpt 4 32k as it's not available for anyone
 

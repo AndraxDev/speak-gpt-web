@@ -1,5 +1,7 @@
 # SpeakGPT Web
 
+<img src="https://assistant.teslasoft.org/SPEAKGPT_BANNER_WEB.png" style="width: 100%;"/>
+
 SpeakGPT is an advanced and highly intuitive open-source AI assistant that utilizes the powerful OpenAI technologies to provide you with unparalleled performance and functionality.
 
 This is a desktop version of SpeakGPT created using ReactJS and Google Material Design 3.

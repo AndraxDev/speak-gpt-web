@@ -1,6 +1,6 @@
 {
   "name": "speakgpt-web",
-  "version": "1.5.1",
+  "version": "1.5.4",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
