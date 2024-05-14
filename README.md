@@ -7,18 +7,16 @@ SpeakGPT is an advanced and highly intuitive open-source AI assistant that utili
 This is a desktop version of SpeakGPT created using ReactJS and Google Material Design 3.
 
 > [!NOTE]
-> 
-> SpeakGPT Desktop is currently early access and may have bugs. Please report any issues you find.
-
+>
 > This project is a part of my Bachelor Thesis. Attribution is required to use this work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
 > 
 > Cite as: Dmytro Ostapenko (2024), "Review Program Automation Using Copilot Services" Bachelor Thesis, Technical University of Košice, 2024.
 
 ## Try it out
 
-[Launch SpeakGPT Web](https://assistant.teslasoft.org/chat)
+Launch SpeakGPT web: [https://assistant.teslasoft.org/](https://assistant.teslasoft.org/)
 
-Mobile app can be found [here](https://github.com/AndraxDev/speak-gpt).
+View SpeakGPT for Android: [https://github.com/AndraxDev/speak-gpt](https://github.com/AndraxDev/speak-gpt).
 
 ## Screenshots
 
