@@ -156,3 +156,5 @@ X
 (src/components/ApiEndpointEditDialog.jsx,7\4\74f60d718080ae78793a9d96fbb1704cd0b2cfbb
 V
 &src/components/ApiEndpointSelector.jsx,0\9\0929f195c0d514eb8b39c324b4cc02776c4e229e
+A
+package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47

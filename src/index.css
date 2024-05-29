@@ -786,6 +786,7 @@ html, body {
 
 .chat-area {
     width: 80%;
+    max-width: 960px;
     height: 100vh;
 }
 
@@ -2026,6 +2027,7 @@ td {
 
 .prompt-frame {
     width: 80%;
+    max-width: 960px;
     display: flex;
     flex-direction: column;
     align-items: center;
