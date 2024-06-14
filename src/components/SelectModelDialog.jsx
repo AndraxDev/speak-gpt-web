@@ -37,11 +37,11 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
         },
         {
             model: "gpt-4-turbo-preview",
-            label: "GPT 4 Turbo (Most capable model)"
+            label: "GPT 4 Turbo"
         },
         {
             model: "gpt-4o",
-            label: "GPT 4o"
+            label: "GPT 4o (Most capable model)"
         },
         {
             model: "custom",
