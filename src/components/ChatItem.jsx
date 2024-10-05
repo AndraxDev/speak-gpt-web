@@ -34,6 +34,8 @@ function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat,
             setIntType(4);
         } else if (type === "GPT 3.5 (0125)") {
             setIntType(5);
+        } else if (type === "O1") {
+            setIntType(5);
         }
     }, [type]);
 

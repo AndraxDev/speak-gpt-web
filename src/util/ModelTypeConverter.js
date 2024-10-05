@@ -23,6 +23,8 @@ export const modelToType = (modelName) => {
         return "GPT 4 Turbo"
     } else if (modelName.includes("gpt-4")) {
         return "GPT 4"
+    } else if (modelName.includes("o1")) {
+        return "O1"
     } else {
         return "FT"
     }

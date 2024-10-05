@@ -126,7 +126,7 @@ html, body {
     display: flex;
     flex-direction: column;
     width: 88px;
-    height: 56px;
+    height: 64px;
     justify-content: center;
     align-items: center;
     color: var(--color-accent-900);
@@ -335,7 +335,7 @@ html, body {
     flex-direction: row;
     align-items: center;
     align-content: center;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 12px;
     width: calc(100vw - 58px);
     justify-content: space-between;
@@ -349,7 +349,7 @@ html, body {
     flex-direction: row;
     align-items: center;
     align-content: center;
-    border-radius: 10px;
+    border-radius: 16px;
     padding: 6px;
     width: 356px;
     justify-content: space-between;
@@ -358,77 +358,77 @@ html, body {
 }
 
 .chat-item-1 {
-    background-color: rgba(135, 114, 73, 0.1);
+    background-color: rgba(140, 127, 102, 0.1);
     transition: 0.15s;
 }
 
 .chat-item-2 {
-    background-color: rgba(115, 150, 101, 0.1);
+    background-color: rgba(119, 145, 108, 0.1);
     transition: 0.15s;
 }
 
 .chat-item-3 {
-    background-color: rgba(150, 80, 80, 0.1);
+    background-color: rgba(156, 109, 109, 0.1);
     transition: 0.15s;
 }
 
 .chat-item-4 {
-    background-color: rgba(95, 124, 167, 0.1);
+    background-color: rgba(112, 132, 161, 0.1);
     transition: 0.15s;
 }
 
 .chat-item-5 {
-    background-color: rgba(121, 88, 150, 0.1);
+    background-color: rgba(126, 104, 145, 0.1);
     transition: 0.15s;
 }
 
 .chat-item-1:hover {
-    background-color: rgba(135, 114, 73, 0.3);
+    background-color: rgba(131, 118, 93, 0.3);
     transition: 0.15s;
 }
 
 .chat-item-2:hover {
-    background-color: rgba(115, 150, 101, 0.3);
+    background-color: rgba(117, 142, 107, 0.3);
     transition: 0.15s;
 }
 
 .chat-item-3:hover {
-    background-color: rgba(150, 80, 80, 0.3);
+    background-color: rgba(149, 100, 100, 0.3);
     transition: 0.15s;
 }
 
 .chat-item-4:hover {
-    background-color: rgba(95, 124, 167, 0.3);
+    background-color: rgba(111, 129, 158, 0.3);
     transition: 0.15s;
 }
 
 .chat-item-5:hover {
-    background-color: rgba(121, 88, 150, 0.3);
+    background-color: rgba(122, 98, 143, 0.3);
     transition: 0.15s;
 }
 
 .chat-item-active-1 {
-    background-color: rgba(135, 114, 73, 0.5);
+    background-color: rgba(138, 127, 104, 0.5);
     transition: 0.15s;
 }
 
 .chat-item-active-2 {
-    background-color: rgba(115, 150, 101, 0.5);
+    background-color: rgba(118, 142, 108, 0.5);
     transition: 0.15s;
 }
 
 .chat-item-active-3 {
-    background-color: rgba(150, 80, 80, 0.5);
+    background-color: rgba(152, 108, 108, 0.5);
     transition: 0.15s;
 }
 
 .chat-item-active-4 {
-    background-color: rgba(95, 124, 167, 0.5);
+    background-color: rgba(108, 126, 152, 0.5);
     transition: 0.15s;
 }
 
 .chat-item-active-5 {
-    background-color: rgba(121, 88, 150, 0.5);
+    background-color: rgba(118, 96, 136, 0.5);
     transition: 0.15s;
 }
 
@@ -438,7 +438,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .chat-icon-frame {
@@ -447,27 +447,27 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .chat-icon-frame-1 {
-    background-color: rgba(135, 114, 73, 0.2);
+    background-color: rgba(188, 168, 129, 0.2);
 }
 
 .chat-icon-frame-2 {
-    background-color: rgba(115, 150, 101, 0.2);
+    background-color: rgba(154, 186, 141, 0.2);
 }
 
 .chat-icon-frame-3 {
-    background-color: rgba(150, 80, 80, 0.2);
+    background-color: rgba(189, 137, 137, 0.2);
 }
 
 .chat-icon-frame-4 {
-    background-color: rgba(95, 124, 167, 0.2);
+    background-color: rgba(138, 159, 189, 0.2);
 }
 
 .chat-icon-frame-5 {
-    background-color: rgba(121, 88, 150, 0.2);
+    background-color: rgba(170, 144, 193, 0.2);
 }
 
 .chat-icon-mob {
@@ -579,7 +579,7 @@ html, body {
     color: var(--color-accent-900);
     width: calc(100% - 8px);
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     padding-top: 8px;
     user-select: none;
 }
@@ -1555,7 +1555,7 @@ td {
     background-color: var(--color-accent-200);
     margin-left: 16px;
     height: 36px;
-    border-radius: 12px;
+    border-radius: 16px;
     user-select: none;
 }
 
@@ -1635,78 +1635,78 @@ td {
 }
 
 .cat-development {
-    background-color: rgba(255, 175, 95, 0.1);
-    color: rgb(255, 176, 134);
+    background-color: rgba(216, 184, 150, 0.1);
+    color: rgb(255, 214, 191);
 }
 
 .cat-music {
-    background-color: rgba(255, 101, 101, 0.1);
-    color: rgb(255, 126, 126);
+    background-color: rgba(234, 163, 190, 0.1);
+    color: rgb(255, 204, 204);
 }
 
 .cat-art {
-    background-color: rgba(87, 113, 255, 0.1);
-    color: rgb(147, 162, 255);
+    background-color: rgba(135, 146, 211, 0.1);
+    color: rgb(201, 208, 255);
 }
 
 .cat-culture {
-    background-color: rgba(115, 255, 131, 0.1);
-    color: rgb(144, 255, 156);
+    background-color: rgba(152, 193, 158, 0.1);
+    color: rgb(192, 255, 199);
 }
 
 .cat-business {
-    background-color: rgba(194, 132, 255, 0.1);
-    color: rgb(211, 159, 255);
+    background-color: rgba(188, 163, 216, 0.1);
+    color: rgb(232, 202, 255);
 }
 
 .cat-gaming {
-    background-color: rgba(207, 255, 123, 0.1);
-    color: rgb(171, 255, 141);
+    background-color: rgba(174, 191, 153, 0.1);
+    color: rgb(205, 255, 187);
 }
 
 .cat-education {
-    background-color: rgba(122, 255, 214, 0.1);
-    color: rgb(153, 249, 255);
+    background-color: rgba(144, 197, 176, 0.1);
+    color: rgb(189, 251, 255);
 }
 
 .cat-history {
-    background-color: rgba(135, 255, 163, 0.1);
-    color: rgb(147, 255, 197);
+    background-color: rgba(128, 175, 146, 0.1);
+    color: rgb(195, 255, 223);
 }
 
 .cat-food {
-    background-color: rgba(255, 134, 227, 0.1);
+    background-color: rgba(186, 134, 174, 0.1);
     color: rgb(255, 143, 229);
 }
 
 .cat-tourism {
-    background-color: rgba(255, 117, 160, 0.1);
-    color: rgb(255, 137, 176);
+    background-color: rgba(181, 132, 146, 0.1);
+    color: rgb(255, 188, 211);
 }
 
 .cat-productivity {
-    background-color: rgba(242, 255, 122, 0.1);
-    color: rgb(245, 255, 148);
+    background-color: rgba(181, 186, 139, 0.1);
+    color: rgb(251, 255, 196);
 }
 
 .cat-tools {
-    background-color: rgba(103, 168, 255, 0.1);
-    color: rgb(147, 197, 255);
+    background-color: rgba(116, 154, 198, 0.1);
+    color: rgb(190, 220, 255);
 }
 
 .cat-entertainment {
-    background-color: rgba(255, 161, 107, 0.1);
-    color: rgb(255, 203, 149);
+    background-color: rgba(154, 128, 110, 0.1);
+    color: rgb(255, 221, 184);
 }
 
 .cat-sport {
-    background-color: rgba(149, 255, 125, 0.1);
-    color: rgb(172, 255, 155);
+    background-color: rgba(108, 145, 102, 0.1);
+    color: rgb(197, 255, 185);
 }
 
 .cat-health {
-    background-color: rgba(126, 255, 141, 0.1);
-    color: rgb(152, 255, 176);
+    background-color: rgba(112, 158, 117, 0.1);
+    color: rgb(183, 255, 200);
 }
 
 .cat-all:hover, .cat-all:focus {
@@ -1782,77 +1782,77 @@ td {
 }
 
 .cat-active-development {
-    background-color: rgb(255, 195, 134);
+    background-color: rgb(255, 214, 191);
     color: var(--color-accent-50);
 }
 
 .cat-active-music {
-    background-color: rgb(255, 126, 126);
+    background-color: rgb(255, 204, 204);
     color: var(--color-accent-50);
 }
 
 .cat-active-art {
-    background-color: rgb(147, 162, 255);
+    background-color: rgb(199, 207, 255);
     color: var(--color-accent-50);
 }
 
 .cat-active-culture {
-    background-color: rgb(144, 255, 156);
+    background-color: rgb(195, 255, 203);
     color: var(--color-accent-50);
 }
 
 .cat-active-business {
-    background-color: rgb(211, 159, 255);
+    background-color: rgb(233, 206, 255);
     color: var(--color-accent-50);
 }
 
 .cat-active-gaming {
-    background-color: rgb(171, 255, 141);
+    background-color: rgb(216, 255, 198);
     color: var(--color-accent-50);
 }
 
 .cat-active-education {
-    background-color: rgb(153, 249, 255);
+    background-color: rgb(197, 252, 255);
     color: var(--color-accent-50);
 }
 
 .cat-active-history {
-    background-color: rgb(147, 255, 197);
+    background-color: rgb(189, 255, 217);
     color: var(--color-accent-50);
 }
 
 .cat-active-food {
-    background-color: rgb(255, 143, 229);
+    background-color: rgb(255, 188, 239);
     color: var(--color-accent-50);
 }
 
 .cat-active-tourism {
-    background-color: rgb(255, 137, 176);
+    background-color: rgb(253, 186, 205);
     color: var(--color-accent-50);
 }
 
 .cat-active-productivity {
-    background-color: rgb(245, 255, 148);
+    background-color: rgb(247, 255, 186);
     color: var(--color-accent-50);
 }
 
 .cat-active-tools {
-    background-color: rgb(147, 197, 255);
+    background-color: rgb(186, 217, 255);
     color: var(--color-accent-50);
 }
 
 .cat-active-entertainment {
-    background-color: rgb(255, 203, 149);
+    background-color: rgb(255, 227, 199);
     color: var(--color-accent-50);
 }
 
 .cat-active-sport {
-    background-color: rgb(172, 255, 155);
+    background-color: rgb(209, 255, 196);
     color: var(--color-accent-50);
 }
 
 .cat-active-health {
-    background-color: rgb(152, 255, 176);
+    background-color: rgb(194, 255, 209);
     color: var(--color-accent-50);
 }
 
@@ -2771,4 +2771,8 @@ td {
     flex-direction: row;
     justify-content: start;
     align-items: center;
+}
+
+.full-height {
+    height: 100%;
 }

@@ -166,7 +166,7 @@ const mobileFeatures = [
     {
         title: "WhisperAI",
         icon: "graphic_eq",
-        description: "Use your voice to access SpeakGPT. Currently is supports WhisperAI and Google Speech recognition. Voice language is detected automatically.",
+        description: "Use your voice to access SpeakGPT. Currently it support WhisperAI and Google Speech recognition. Voice language is detected automatically.",
         tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
@@ -194,12 +194,12 @@ const mobileFeatures = [
     {
         title: "Experiments",
         icon: "science",
-        description: "Sometimes we're rolling out new interesting function for a limited time. Check out 'Experiments' section in the app.",
+        description: "Sometimes we're rolling out new interesting functions for a limited time period. Check out 'Experiments' section in the app.",
         tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
-        title: "Fine-tines",
+        title: "Fine-tunes",
         icon: "token",
         description: "Mobile version allows you to use you fine-tuned models.",
         tintBackground: "rgba(20,20,20,0.8)",
@@ -208,7 +208,7 @@ const mobileFeatures = [
     {
         title: "Dynamic theme",
         icon: "palette",
-        description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT.",
+        description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT (A supported display is required).",
         tintBackground: "rgba(40,40,40,0.8)",
         tintForeground: "rgb(255,255,255)"
     }
@@ -357,9 +357,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt"}
                                   target={"_blank"}>GitHub
                                 (Android)</Link>
-                            <Link className={"footer-link"}
-                                  to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}
-                                  target={"_blank"}>Google Play</Link>
+                            <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}>Get it on Google Play</Link>
                             <Link className={"footer-link"} to={"https://buymeacoffee.com/andrax_dev"}
                                   target={"_blank"}>Buy me a
                                 coffee</Link>
@@ -486,6 +484,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
+                            <Link className={"footer-link"} to={"/debug"}>Debug</Link>
                             <a className={"footer-link"} href={"/sitemap.xml"}>Site map</a>
                         </div>
                         <div className={"vertical-divider-mob"}></div>
@@ -495,9 +494,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt"}
                                   target={"_blank"}>GitHub
                                 (Android)</Link>
-                            <Link className={"footer-link"}
-                                  to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}
-                                  target={"_blank"}>Google Play</Link>
+                            <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}>Get it on Google Play</Link>
                             <Link className={"footer-link"} to={"https://buymeacoffee.com/andrax_dev"}
                                   target={"_blank"}>Buy me a
                                 coffee</Link>

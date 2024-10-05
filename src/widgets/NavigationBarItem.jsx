@@ -25,7 +25,9 @@ function NavigationBarItem({name, icon, isActive, page}) {
                 <Link className={"nav-item-mob"} to={page}>
                 <div className={isActive ? "nav-item-selected-container-mob" : "nav-item-unselected-container-mob"}>
                     <div className={isActive ? "nav-item-selected-mob" : "nav-item-unselected-mob"}>
-                        <span className="material-symbols-outlined">{icon}</span>
+                        <span style={{
+                            fontSize: "22px"
+                        }} className="material-symbols-outlined">{icon}</span>
                     </div>
                 </div>
                 <p className={"nav-item-title-mob"}>{name}</p>
@@ -35,7 +37,9 @@ function NavigationBarItem({name, icon, isActive, page}) {
                 <Link className={"nav-item"} to={page}>
                 <div className={isActive ? "nav-item-selected-container" : "nav-item-unselected-container"}>
                     <div className={isActive ? "nav-item-selected" : "nav-item-unselected"}>
-                        <span className="material-symbols-outlined">{icon}</span>
+                        <span style={{
+                            fontSize: "22px"
+                        }} className="material-symbols-outlined">{icon}</span>
                     </div>
                 </div>
                 <p className={"nav-item-title"}>{name}</p>

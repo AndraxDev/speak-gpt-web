@@ -34,6 +34,7 @@ import Debug from "./documentation/Debug";
 import DeleteData from "./documentation/DeleteData";
 import Playground from "./components/Playground";
 import AIPhotoEditor from "./components/AIPhotoEditor";
+import AssistantDeepLink from "./components/AssistantDeepLink";
 
 function BaseRoutes() {
     return (
@@ -116,6 +117,11 @@ function BaseRoutes() {
             <Route path="/tips" element={
                 <MaterialWindow page={"tips"}>
                     <Tips/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/assistant" element={
+                <MaterialWindow page={"assistant"}>
+                    <AssistantDeepLink/>
                 </MaterialWindow>
             } exact />
             <Route path="/chat/:id" element={

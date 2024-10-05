@@ -28,14 +28,14 @@
     /*--color-accent-800: #99ffbb;*/
     /*--color-accent-900: #d2ffdf;*/
 
-    --color-accent-overlay: rgba(32, 36, 43, 0.8);
-    --color-accent-0: #20242b;
-    --color-accent-50: #191c20;
-    --color-accent-100: #20242b;
-    --color-accent-200: #2c333e;
-    --color-accent-300: #3e4758;
-    --color-accent-400: #555f71;
-    --color-accent-800: #a9c7ff;
+    --color-accent-overlay: rgba(26, 29, 35, 0.8);
+    --color-accent-0: #181b22;
+    --color-accent-50: #121417;
+    --color-accent-100: #181c22;
+    --color-accent-200: #20252e;
+    --color-accent-300: #272f39;
+    --color-accent-400: #374355;
+    --color-accent-800: #bbd3ff;
     --color-accent-900: #d6e3ff;
 
     /*--color-accent-overlay: rgba(43, 32, 32, 0.8);*/
