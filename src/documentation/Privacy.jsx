@@ -38,7 +38,7 @@ const pageContent = `
 - Advertising ID
 - Device info (mode, OS version, etc)
 
-> This info is used for analytics and marketing purposes. We do not share this info with third-party organizations. This info is collected only when &quot;Usage and diagnostics&quot; feature is enabled. You can also send this info manually. You are able to delete this info from our servers, reset or/and delete installation ID. You can also revoke authorization to use this data without losing access to the app.
+> This info is used for analytical purposes only. We do not share this info with third-party organizations. This info is collected only when &quot;Usage and diagnostics&quot; feature is enabled. You can also send this info manually. You are able to delete this info from our servers, reset or/and delete installation ID. You can also revoke authorization to use this data without losing access to the app.
 
 ---
 
