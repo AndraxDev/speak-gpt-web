@@ -6,7 +6,7 @@
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: #121417;
+    background-color: #060606;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,14 +86,14 @@
 @keyframes pure-material-progress-linear {
     0% {
         background-size: 200% 100%;
-        background-position: left -31.25% top 0%;
+        background-position: left -31.25% top 0;
     }
     50% {
         background-size: 800% 100%;
-        background-position: left -49% top 0%;
+        background-position: left -49% top 0;
     }
     100% {
         background-size: 400% 100%;
-        background-position: left -102% top 0%;
+        background-position: left -102% top 0;
     }
 }

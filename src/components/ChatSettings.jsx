@@ -95,18 +95,12 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
                             openResolutionDialog(true);
                         }} icon={"key"} title={"Image resolution"} subtitle={resolution}
                               description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                        {/*<Tile clickAction={() => {*/}
-                        {/*    setApiHostDialogOpen(true);*/}
-                        {/*}} icon={"lan"} title={"Custom API host"} subtitle={"DEPRECATED"}*/}
-                        {/*      description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>*/}
-                        {/*<Tile clickAction={() => {*/}
-                        {/*    apiDialogOpen(true);*/}
-                        {/*}} icon={"key"} title={"API key"} subtitle={"DEPRECATED"}*/}
-                        {/*      description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>*/}
                     </div>
-                    <p className={"credits"}>Software version: {packageJson.name + " " + packageJson.version}</p>
-                    <p className={"credits"}>Copyright: (C) 2024 <a href={"https://andrax.dev/"}
-                                                                    target={"_blank"}>AndraxDev</a>. All rights
+                    <p style={{
+                        marginBottom: "4px"
+                    }} className={"credits"}>App Version: {packageJson.name + "-" + packageJson.version}</p>
+                    <p className={"credits"}>© 2023-2025 <a href={"https://andrax.dev/"}
+                                                                    target={"_blank"} rel="noreferrer">AndraxDev</a>. All rights
                         reserved.</p>
                     <br/>
                 </div>

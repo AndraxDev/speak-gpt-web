@@ -27,7 +27,7 @@ const pageContent = `
 - Audio samples of your voice
 - API keys
 
-> This info is securely stored on your device, but it might be sent to OpenAI to provide basic functionality. This data is not used to train models.
+> This info is securely stored on your device, but it might be sent to OpenAI (or other API providers selected by you) to provide basic functionality. We don't store this info on our servers. To learn more about how your data is used, refer to the Privacy Policy of the API provider you are using.
 
 ---
 
@@ -53,7 +53,7 @@ const pageContent = `
 
 > *. When you install this app an installation ID will be created. This id is a random UUID string and it does not belong to Android id or any of hardware IDs. You can either reset or delete installation ID. In this case we will stop to collect data associated with installation ID.
 
-> **. User-generated content is all content created and published by users using this app. We may review public content for violations and remove inappropriate content. We don't have access to private content (like chats list, conversations, etc)
+> **. User-generated content is all content created and published by users using this app. We may review public content for violations and remove inappropriate content. We don't have access to private content (like chats list, conversations, etc). User-generated content term doesn't include your chat list, chat content or app preferences.
 
 Learn how to delete your data here: [Delete my data](/data/delete)
 `;

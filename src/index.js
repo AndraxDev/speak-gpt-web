@@ -46,10 +46,23 @@ loadStylesheet('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlin
 
 /* Set max global settings */
 window._debug_setMaxSettings = () => {
-    setMaxSettings()
+    setMaxSettings();
+    window.location.reload();
 }
 
 /* Set min global settings */
 window._debug_setMinSettings = () => {
-    setMinSettings()
+    setMinSettings();
+    window.location.reload();
+}
+
+
+window.debug_setExperiment = (experiment) => {
+    window.localStorage.setItem('experiment-' + experiment, "true")
+    window.location.reload();
+}
+
+window.debug_unsetExperiment = (experiment) => {
+    window.localStorage.removeItem('experiment-' + experiment);
+    window.location.reload();
 }

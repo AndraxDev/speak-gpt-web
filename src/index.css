@@ -1239,12 +1239,12 @@ td {
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 16px;
     transition: .15s;
     user-select: none;
     align-items: stretch;
-    margin: 8px;
+    margin: 4px;
 }
 
 .tile-bg {
@@ -1253,12 +1253,12 @@ td {
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 16px;
     transition: .15s;
     user-select: none;
     align-items: stretch;
-    margin: 8px;
+    margin: 4px;
 }
 
 .tile-bg:hover {
@@ -1277,7 +1277,7 @@ td {
     display: flex;
     flex-direction: column;
     padding-left: 8px;
-    width: calc(50vw - 96px);
+    width: calc(50vw - 96px - 8px);
 }
 
 .tile-content-frame {
@@ -1314,7 +1314,7 @@ td {
     flex-wrap: wrap;
     justify-content: start;
     align-items: center;
-    width: calc(100vw - 16px);
+    width: calc(100vw - 32px);
     padding: 16px;
     margin: 8px;
 }
@@ -2085,7 +2085,7 @@ td {
     top: 0;
     transition: 0s;
     box-sizing: border-box;
-    border: dashed 2px rgb(72, 137, 255);
+    border: dashed 2px rgb(126, 172, 255);
     border-radius: 0;
     z-index: 80;
     user-select: none;
@@ -2104,7 +2104,7 @@ td {
     top: 0;
     transition: 0s;
     box-sizing: border-box;
-    border: dashed 2px rgb(72, 137, 255);
+    border: dashed 2px rgb(126, 172, 255);
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
     z-index: 80;
@@ -2124,7 +2124,7 @@ td {
     top: 0;
     transition: 0s;
     box-sizing: border-box;
-    border: dashed 2px rgb(72, 137, 255);
+    border: dashed 2px rgb(126, 172, 255);
     border-radius: 48px;
     z-index: 80;
     user-select: none;

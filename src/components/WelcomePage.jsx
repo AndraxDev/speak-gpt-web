@@ -239,10 +239,7 @@ function WelcomePage() {
                         <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title"}>SpeakGPT</h1>
-                            <p className={"app-desc"}>SpeakGPT is an advanced and highly intuitive open-source AI
-                                assistant that
-                                utilizes the powerful OpenAI technologies to provide you with unparalleled performance
-                                and functionality.</p>
+                            <p className={"app-desc"}>SpeakGPT is an advanced and highly intuitive open-source AI assistant that utilizes the powerful large language models (LLM) to provide you with unparalleled performance and functionality. Officially it supports GPT models, LLAMA, MIXTRAL, GEMMA, Gemini (regular and pro) Vision, DALL-E and other models.</p>
                             <div className={"btn-row"}>
                                 <a href={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -369,7 +366,7 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider"}/>
-                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"}>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>© 2023-2025 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"} rel="noreferrer">AndraxDev</a>. All rights reserved.</p>
                 </div>
             </BrowserView>
             <MobileView className={"v-container-mob"}>
@@ -378,12 +375,7 @@ function WelcomePage() {
                         <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo-mob"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title-mob"}>SpeakGPT</h1>
-                            <p className={"app-desc-mob"}>SpeakGPT is an advanced and highly intuitive open-source AI
-                                assistant
-                                that
-                                utilizes the powerful OpenAI technologies to provide you with unparalleled performance
-                                and
-                                functionality.</p>
+                            <p className={"app-desc-mob"}>SpeakGPT is an advanced and highly intuitive open-source AI assistant that utilizes the powerful large language models (LLM) to provide you with unparalleled performance and functionality. Officially it supports GPT models, LLAMA, MIXTRAL, GEMMA, Gemini (regular and pro) Vision, DALL-E and other models.</p>
                             <div className={"btn-row-mob"}>
                                 <Link to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"} target={"_blank"}><MaterialButton24>Download app</MaterialButton24></Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -506,7 +498,7 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider-mob"}/>
-                    <p className={"copyright"}>© 2023-2024 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"}>AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>© 2023-2025 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"} rel="noreferrer">AndraxDev</a>. All rights reserved.</p>
                 </div>
             </MobileView>
             {

@@ -35,6 +35,7 @@ import DeleteData from "./documentation/DeleteData";
 import Playground from "./components/Playground";
 import AIPhotoEditor from "./components/AIPhotoEditor";
 import AssistantDeepLink from "./components/AssistantDeepLink";
+import PrivacyLite from "./documentation/PrivacyLite";
 
 function BaseRoutes() {
     return (
@@ -50,6 +51,11 @@ function BaseRoutes() {
             <Route path="/data/delete" element={
                 <MaterialWindow page={"delete_data"}>
                     <DeleteData/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/privacy_lite" element={
+                <MaterialWindow page={"privacy_lite"}>
+                    <PrivacyLite/>
                 </MaterialWindow>
             } exact />
             <Route path="/privacy" element={

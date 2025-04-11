@@ -14,7 +14,9 @@ const pageContent = `
 
 1. Go to your browser settings > Browsing data > Select &quot;assistant.teslasoft.org&quot; > Clear all data
 
-Read Privacy Policy here: [Privacy Policy](/privacy)
+> SpeakGPT Lite does not collect any personal data. To delete all local data, go to Device settings > Apps > SpeakGPT > Clear data
+
+Read Privacy Policy here: [Privacy Policy for regular SpeakGPT mobile/web app](/privacy) and [Privacy Policy for SpeakGPT Lite](/privacy_lite)
 `;
 
 function DeleteData() {

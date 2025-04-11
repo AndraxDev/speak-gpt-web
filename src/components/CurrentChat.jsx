@@ -628,32 +628,33 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
 
         dropArea.addEventListener('drop', handleDrop, false);
 
-        /* Temporarily removed due to issues with pasting images
-        document.querySelector(".chat-textarea").addEventListener('paste', function(e) {
-            e.preventDefault();
-            const items = (e.clipboardData || window.clipboardData).items;
-            let containsImage = false;
-            for (const item of items) {
-                if (item.type.indexOf("image") === 0) {
-                    const blob = item.getAsFile();
+        /* Temporarily removed due to issues with pasting images */
+        if (localStorage.getItem("experiment-2502") === "true") {
+            document.querySelector(".chat-textarea").addEventListener('paste', function (e) {
+                e.preventDefault();
+                const items = (e.clipboardData || window.clipboardData).items;
+                let containsImage = false;
+                for (const item of items) {
+                    if (item.type.indexOf("image") === 0) {
+                        const blob = item.getAsFile();
+                        document.querySelector(".chat-textarea").value = ''
+                        document.querySelector(".chat-textarea").innerHTML = ''
+                        processFile(blob);
+                        containsImage = true;
+                    } else if (item.kind === 'string' && !containsImage) {
+                        // Handle non-image content like plain text
+                        item.getAsString(function (s) {
+                            document.execCommand('insertHTML', false, s);
+                        });
+                    }
+                }
+
+                if (containsImage) {
                     document.querySelector(".chat-textarea").value = ''
                     document.querySelector(".chat-textarea").innerHTML = ''
-                    processFile(blob);
-                    containsImage = true;
-                } else if (item.kind === 'string' && !containsImage) {
-                    // Handle non-image content like plain text
-                    item.getAsString(function(s) {
-                        document.execCommand('insertHTML', false, s);
-                    });
                 }
-            }
-
-            if (containsImage) {
-                document.querySelector(".chat-textarea").value = ''
-                document.querySelector(".chat-textarea").innerHTML = ''
-            }
-        });
-        */
+            });
+        }
     }, [])
 
     return (
