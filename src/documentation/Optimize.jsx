@@ -47,7 +47,7 @@ Playground does not remember your messages so you wil be billed only once for ea
 
 ### Chat
 
-> You can use chats for non-bulk actions like asking questions, generating text, performing iterative code generation, etc.
+> You can use chats for non-bulk actions like asking questions, generating text, performing iterative code generation, etc. Don't use single chat for multiple tokens. It will confuse AI model and incurr additional charges. Create a new chat for each topics and you will see how much money you would save.
 
 ### Playground
 
