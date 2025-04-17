@@ -15,6 +15,10 @@ const pageContent = `
 
 > SpeakGPT Lite does not collect any personal data. To delete all local data, go to Device settings > Apps > SpeakGPT > Clear data
 
+## To delete your account from API Provider (Like OpenAI), refer to it's Privacy Policy. Here are some account close links for popular API providers:
+- [OpenAI](https://help.openai.com/en/articles/6378407-how-to-delete-your-account)
+- [OpenRouter](https://openrouter.ai/docs/faq#how-can-i-delete-my-account)
+
 Read Privacy Policy here: [Privacy Policy for regular SpeakGPT mobile/web app](/privacy) and [Privacy Policy for SpeakGPT Lite](/privacy_lite)
 `;
 

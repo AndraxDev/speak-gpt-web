@@ -345,6 +345,7 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
+                            <Link className={"footer-link"} to={"/optimize"}>Optimize costs</Link>
                             <a className={"footer-link"} href={"/sitemap.xml"}>Site map</a>
                         </div>
                         <div className={"vertical-divider"}></div>
@@ -352,12 +353,13 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt-web"}
                                   target={"_blank"}>GitHub</Link>
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt"}
-                                  target={"_blank"}>GitHub
-                                (Android)</Link>
-                            <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}>Get it on Google Play</Link>
+                                  target={"_blank"}>GitHub (Android)
+                            </Link>
+                            <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"} target={"_blank"}>Get it on Google Play</Link>
+                            <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant.lite"}
+                                  target={"_blank"}>Get SpeakGPT Lite (Android)</Link>
                             <Link className={"footer-link"} to={"https://buymeacoffee.com/andrax_dev"}
-                                  target={"_blank"}>Buy me a
-                                coffee</Link>
+                                  target={"_blank"}>Buy me a coffee</Link>
                             <Link className={"footer-link"} to={"https://ko-fi.com/andrax_dev"}
                                   target={"_blank"}>Ko-fi</Link>
                             <Link className={"footer-link"} to={"https://andrax.dev"} target={"_blank"}>AndraxDev</Link>
@@ -476,7 +478,8 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"/faq"}>FAQ</Link>
                             <Link className={"footer-link"} to={"/contact"}>Contact</Link>
                             <Link className={"footer-link"} to={"/changelog"}>Changelog</Link>
-                            <Link className={"footer-link"} to={"/debug"}>Debug</Link>
+                            {/*<Link className={"footer-link"} to={"/debug"}>Debug</Link>*/}
+                            <Link className={"footer-link"} to={"/optimize"}>Optimize costs</Link>
                             <a className={"footer-link"} href={"/sitemap.xml"}>Site map</a>
                         </div>
                         <div className={"vertical-divider-mob"}></div>
@@ -484,12 +487,13 @@ function WelcomePage() {
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt-web"}
                                   target={"_blank"}>GitHub</Link>
                             <Link className={"footer-link"} to={"https://github.com/AndraxDev/speak-gpt"}
-                                  target={"_blank"}>GitHub
-                                (Android)</Link>
+                                  target={"_blank"}>GitHub (Android)</Link>
                             <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"}>Get it on Google Play</Link>
+                            <Link className={"footer-link"} to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant.lite"}>
+                                Get SpeakGPT Lite (Android)
+                            </Link>
                             <Link className={"footer-link"} to={"https://buymeacoffee.com/andrax_dev"}
-                                  target={"_blank"}>Buy me a
-                                coffee</Link>
+                                  target={"_blank"}>Buy me a coffee</Link>
                             <Link className={"footer-link"} to={"https://ko-fi.com/andrax_dev"}
                                   target={"_blank"}>Ko-fi</Link>
                             <Link className={"footer-link"} to={"https://andrax.dev"} target={"_blank"}>AndraxDev</Link>

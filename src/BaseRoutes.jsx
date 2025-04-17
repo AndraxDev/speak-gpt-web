@@ -36,6 +36,7 @@ import Playground from "./components/Playground";
 import AIPhotoEditor from "./components/AIPhotoEditor";
 import AssistantDeepLink from "./components/AssistantDeepLink";
 import PrivacyLite from "./documentation/PrivacyLite";
+import Optimize from "./documentation/Optimize";
 
 function BaseRoutes() {
     return (
@@ -91,6 +92,11 @@ function BaseRoutes() {
             <Route path="/contact" element={
                 <MaterialWindow page={"contact"}>
                     <Contact/>
+                </MaterialWindow>
+            } exact />
+            <Route path="/optimize" element={
+                <MaterialWindow page={"optimize"}>
+                    <Optimize/>
                 </MaterialWindow>
             } exact />
             <Route path="/chat" element={
