@@ -21,6 +21,7 @@ import {BrowserView, isMobile, MobileView} from "react-device-detect";
 import {sha256} from "js-sha256";
 import Assistant from "./Assistant";
 import LazyHydrate from "react-lazy-hydration";
+import {MaterialDialog} from "./MaterialDialog";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -252,12 +253,14 @@ function WelcomePage() {
                         mobileQrOpened ? <div className={"priority dialog-backdrop"} onMouseDown={() => {
                             setMobileQrOpened(false);
                         }}>
-                            <div className={"dialog-paper"} onMouseDown={(e) => {
-                                e.stopPropagation()
-                            }}>
-                                <img src={"./qr.png"} alt={"SpeakGPT"} className={"mobile-qr"}/>
-                                <p className={"get-mobile-app"}>Scan this code from your phone.</p>
-                            </div>
+                            <MaterialDialog open={true}>
+                                <div className={"dialog-paper"} onMouseDown={(e) => {
+                                    e.stopPropagation()
+                                }}>
+                                    <img src={"./qr.png"} alt={"SpeakGPT"} className={"mobile-qr"}/>
+                                    <p className={"get-mobile-app"}>Scan this code from your phone.</p>
+                                </div>
+                            </MaterialDialog>
                         </div> : null
                     }
                 </div>
