@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-import { LicenseInfo } from '@mui/x-license';
-import {LICENSE_KEY} from "./LicenseKey";
 import {setMaxSettings, setMinSettings} from "./util/Settings";
 
 function loadStylesheet(path) {
@@ -32,8 +30,6 @@ function loadStylesheet(path) {
 
     document.head.appendChild(link);
 }
-
-LicenseInfo.setLicenseKey(LICENSE_KEY);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

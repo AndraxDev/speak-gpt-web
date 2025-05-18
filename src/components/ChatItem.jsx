@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat,
                 <div className={isMobile ? "chat-item-info-mob" : "chat-item-info"}>
                     <h3 className={isMobile ? "chat-item-title-mob" : "chat-item-title"}>{name}</h3>
                     <p className={isMobile ? "chat-item-message-mob" : "chat-item-message"}>{firstMessage}</p>
-                    <p className={isMobile ? "chat-item-model-mob" : "chat-item-model"}>{model}</p>
+                    {/*<p className={isMobile ? "chat-item-model-mob" : "chat-item-model"}>{model}</p>*/}
                 </div>
                 <div className={"chat-actions"}><span onClick={(e) => {
                     e.preventDefault()

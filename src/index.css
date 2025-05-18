@@ -308,7 +308,8 @@ html, body {
 }
 
 .chat-content {
-    background-color: var(--color-accent-50);
+    /*background-color: var(--color-accent-50);*/
+    border: 1px solid rgba(255, 255, 255, 0.07);
     width: calc(100vw - 488px);
     height: 100vh;
     overflow-x: hidden;
@@ -433,8 +434,8 @@ html, body {
 }
 
 .chat-icon-frame-mob {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -442,8 +443,8 @@ html, body {
 }
 
 .chat-icon-frame {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -471,29 +472,29 @@ html, body {
 }
 
 .chat-icon-mob {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
 }
 
 .chat-icon {
-    width: 36px;
-    height: 36px;
+    width: 24px;
+    height: 24px;
 }
 
 .chat-item-info-mob {
     text-decoration: none;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
     flex-grow: 4;
-    max-width: calc(100vw - 190px);
+    max-width: calc(100vw - 182px);
 }
 
 .chat-item-info {
     text-decoration: none;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
     flex-grow: 4;
-    max-width: 244px;
+    max-width: 252px;
 }
 
 .chat-item-title-mob {
@@ -593,6 +594,7 @@ html, body {
 }
 
 .write-bar-mob {
+    border: 1px solid rgba(255, 255, 255, 0.05);
     width: calc(100vw - 48px);
     background-color: var(--color-accent-100);
     margin-bottom: 16px;
@@ -605,6 +607,7 @@ html, body {
 }
 
 .write-bar {
+    border: 1px solid rgba(255, 255, 255, 0.05);
     width: calc(100% - 24px);
     background-color: var(--color-accent-100);
     margin-bottom: 16px;
@@ -682,9 +685,10 @@ html, body {
     margin-top: 8px;
     margin-bottom: 24px;
     margin-left: 40px;
+    /*letter-spacing: 0.4px;*/
     color: rgba(255, 255, 255, 0.7);
     white-space: pre-wrap;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .message-icon {
@@ -981,7 +985,7 @@ html, body {
 }
 
 .chat-actions {
-    height: 60px;
+    height: 56px;
     user-select: none;
 }
 
@@ -1096,6 +1100,7 @@ ul {
 }
 
 ul li {
+    margin: -8px 0 0;
     position: relative;
     padding-left: 40px;
 }
@@ -1105,16 +1110,9 @@ ul li::before {
     position: absolute;
     left: 20px;
 }
-
-li ul li::before {
-    content: "●";
-    position: absolute;
-    left: 20px;
-    top: 18px;
-}
-
 li > p {
-    margin: 0;
+    margin: -20px 0 -20px 0;
+    width: 100%;
     padding: 0;
     overflow: hidden;
 }
@@ -1131,6 +1129,7 @@ blockquote > p {
 
 .code-block {
     border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     background-color: var(--color-accent-100);
     overflow-x: auto;
     padding: 16px;
@@ -2675,7 +2674,6 @@ td {
     align-items: center;
     width: 100%;
     padding: 0 8px;
-    background-color: var(--color-accent-100);
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
     color: var(--color-accent-900);

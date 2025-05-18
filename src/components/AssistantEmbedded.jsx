@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,9 +40,8 @@ import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
-import {useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {supportedFileTypes} from "../util/ModelTypeConverter";
-import {sha256} from "js-sha256";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -79,7 +78,7 @@ window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
-    const [getParams, setParams] = useSearchParams();
+    const [getParams] = useSearchParams();
 
     const payload = getParams.get("payload");
 
@@ -189,7 +188,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         request.onsuccess = function(event) {
             db = event.target.result;
             setDb(db)
-            console.log("Database opened successfully");
         };
 
         request.onerror = function(event) {
@@ -227,9 +225,9 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         const objectStore = transaction.objectStore('chats');
         const request = objectStore.put({ chatId: chatId, content: conversation });
 
-        request.onsuccess = function() {
-            console.log("Conversation saved successfully");
-        };
+        // request.onsuccess = function() {
+            // console.log("Conversation saved successfully");
+        // };
 
         request.onerror = function(event) {
             console.log("Error saving conversation", event);
@@ -311,7 +309,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
     }
 
     const generateImage = async (prompt) => {
-        console.log("Generating image")
+        // console.log("Generating image")
 
         try {
             migrateFromLegacyAPIs();
@@ -658,34 +656,24 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
         dropArea.addEventListener('drop', handleDrop, false);
 
-        /* Temporarily removed due to a bug */
-        /* Moved to experiment */
-        if (localStorage.getItem("experiment-2502") === "true") {
-            document.querySelector(".chat-textarea").addEventListener('paste', function (e) {
-                e.preventDefault();
-                const items = (e.clipboardData || window.clipboardData).items;
-                let containsImage = false;
-                for (const item of items) {
-                    if (item.type.indexOf("image") === 0) {
-                        const blob = item.getAsFile();
-                        document.querySelector(".chat-textarea").value = ''
-                        document.querySelector(".chat-textarea").innerHTML = ''
-                        processFile(blob);
-                        containsImage = true;
-                    } else if (item.kind === 'string' && !containsImage) {
-                        // Handle non-image content like plain text
-                        item.getAsString(function (s) {
-                            document.execCommand('insertHTML', false, s);
-                        });
-                    }
-                }
-
-                if (containsImage) {
+        document.querySelector(".chat-textarea").addEventListener('paste', function (e) {
+            const items = (e.clipboardData || window.clipboardData).items;
+            let containsImage = false;
+            for (const item of items) {
+                if (item.type.indexOf("image") === 0) {
+                    const blob = item.getAsFile();
                     document.querySelector(".chat-textarea").value = ''
                     document.querySelector(".chat-textarea").innerHTML = ''
+                    processFile(blob);
+                    containsImage = true;
                 }
-            });
-        }
+            }
+
+            if (containsImage) {
+                document.querySelector(".chat-textarea").value = ''
+                document.querySelector(".chat-textarea").innerHTML = ''
+            }
+        });
     }, [])
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,13 @@ function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
     const [label, setLabel] = React.useState(endpointId === "" ? "" : getApiEndpointById(endpointId).label);
     const [url, setUrl] = React.useState(endpointId === "" ? "" : getApiEndpointById(endpointId).url);
     const [key, setKey] = React.useState("");
+    const previousKey = endpointId === "" ? "" : getApiEndpointById(endpointId).key;
 
     const setApiEndpoint = () => {
         if (label !== getApiEndpointById(endpointId).label) {
             renameEndpoint(endpointId, label)
         } else {
-            setApiEndpointById(label, url, key)
+            setApiEndpointById(label, url, key === "" ? previousKey : key);
         }
         setIsOpened(false);
     }

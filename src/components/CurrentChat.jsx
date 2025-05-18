@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,10 @@
 
 import React, {useEffect} from 'react';
 import {
-    MaterialButtonError, MaterialButtonTonal24Icon, MaterialButtonTonalIcon, MaterialButtonTonalIconV2
+    MaterialButtonError,
+    MaterialButtonTonal24Icon,
+    MaterialButtonTonalIcon,
+    MaterialButtonTonalIconV2
 } from "../widgets/MaterialButton";
 import Message from "./Message";
 import OpenAI from "openai";
@@ -26,15 +29,18 @@ import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
 import {
-    getModel,
-    setModel,
-    getSystemMessage,
-    setSystemMessage,
+    findOpenAIEndpointIdOrNull,
+    getApiEndpointById,
+    getApiEndpointId,
     getDalleVersion,
-    setDalleVersion,
+    getModel,
     getResolution,
+    getSystemMessage,
+    migrateFromLegacyAPIs,
+    setDalleVersion,
+    setModel,
     setResolution,
-    getApiHost, migrateFromLegacyAPIs, getApiEndpointById, getApiEndpointId, findOpenAIEndpointIdOrNull
+    setSystemMessage
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
@@ -42,7 +48,6 @@ import {modelToType, supportedFileTypes} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile, MobileView} from 'react-device-detect';
 import {Link} from "react-router-dom";
-import ApiKeyDialog from "./ApiKeyDialog";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -354,8 +359,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             } else {
                 let ms = messages;
 
-                console.log("[SENDING COMPLETION REQUEST]")
-                console.log(ms)
+                // console.log("[SENDING COMPLETION REQUEST]")
+                // console.log(ms)
 
                 if (getSystemMessage(id) !== "") {
                     ms.push({
@@ -479,7 +484,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         request.onsuccess = function(event) {
             db = event.target.result;
             setDb(db)
-            console.log("Database opened successfully");
+            // console.log("Database opened successfully");
         };
 
         request.onerror = function(event) {
@@ -518,7 +523,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         const request = objectStore.put({ chatId: chatId, content: conversation });
 
         request.onsuccess = function() {
-            console.log("Conversation saved successfully");
+            // console.log("Conversation saved successfully");
             onUpdate();
         };
 
@@ -628,33 +633,24 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
 
         dropArea.addEventListener('drop', handleDrop, false);
 
-        /* Temporarily removed due to issues with pasting images */
-        if (localStorage.getItem("experiment-2502") === "true") {
-            document.querySelector(".chat-textarea").addEventListener('paste', function (e) {
-                e.preventDefault();
-                const items = (e.clipboardData || window.clipboardData).items;
-                let containsImage = false;
-                for (const item of items) {
-                    if (item.type.indexOf("image") === 0) {
-                        const blob = item.getAsFile();
-                        document.querySelector(".chat-textarea").value = ''
-                        document.querySelector(".chat-textarea").innerHTML = ''
-                        processFile(blob);
-                        containsImage = true;
-                    } else if (item.kind === 'string' && !containsImage) {
-                        // Handle non-image content like plain text
-                        item.getAsString(function (s) {
-                            document.execCommand('insertHTML', false, s);
-                        });
-                    }
-                }
-
-                if (containsImage) {
+        document.querySelector(".chat-textarea").addEventListener('paste', function (e) {
+            const items = (e.clipboardData || window.clipboardData).items;
+            let containsImage = false;
+            for (const item of items) {
+                if (item.type.indexOf("image") === 0) {
+                    const blob = item.getAsFile();
                     document.querySelector(".chat-textarea").value = ''
                     document.querySelector(".chat-textarea").innerHTML = ''
+                    processFile(blob);
+                    containsImage = true;
                 }
-            });
-        }
+            }
+
+            if (containsImage) {
+                document.querySelector(".chat-textarea").value = ''
+                document.querySelector(".chat-textarea").innerHTML = ''
+            }
+        });
     }, [])
 
     return (

@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,18 +24,18 @@ const defaultApiEndpoint = {
 }
 
 const globalSettings = window.localStorage.getItem("globalSettings") == null ? {
-    model: "gpt-3.5-turbo",
+    model: "gpt-4o",
     dalleVersion: "2",
-    resolution: "256x256",
+    resolution: "1024x1024",
     systemMessage: "",
     apiHost: "https://api.openai.com/v1/", /* @deprecated */
     apiEndpointId: localStorage.getItem("api__label") === null ? sha256("Default") : sha256(defaultApiEndpoint.label)
 } : JSON.parse(window.localStorage.getItem("globalSettings"));
 
 const defaultSettings = {
-    model: "gpt-3.5-turbo",
-    dalleVersion: "2",
-    resolution: "256x256",
+    model: "gpt-4o",
+    dalleVersion: "3",
+    resolution: "1024x1024",
     systemMessage: "",
     apiHost: "https://api.openai.com/v1/", /* @deprecated */
     apiEndpointId: globalSettings.apiEndpointId === null ? sha256("Default") : globalSettings.apiEndpointId

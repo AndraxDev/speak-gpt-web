@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************/
+
 import React from 'react';
 import DocPage from "../components/DocPage";
 
@@ -47,7 +48,7 @@ Playground does not remember your messages so you wil be billed only once for ea
 
 ### Chat
 
-> You can use chats for non-bulk actions like asking questions, generating text, performing iterative code generation, etc. Don't use single chat for multiple tokens. It will confuse AI model and incurr additional charges. Create a new chat for each topics and you will see how much money you would save.
+> You can use chats for non-bulk actions like asking questions, generating text, performing iterative code generation, etc. Don't use single chat for multiple topics. It will confuse AI model and incur additional charges. Create a new chat for each topics and you will see how much money you would save.
 
 ### Playground
 
