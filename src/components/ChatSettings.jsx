@@ -112,9 +112,9 @@ function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3
                     apiHostDialogOpen ? <ApiHostChangeDialog chatId={chatId} setOpen={setApiHostDialogOpen}/> : null
                 }
                 <BrowserView>
-                    <MaterialDialog open={true}>
+                    {isAssistant ? <SettingsComponent /> : <MaterialDialog open={true}>
                         <SettingsComponent/>
-                    </MaterialDialog>
+                    </MaterialDialog>}
                 </BrowserView>
                 <MobileView>
                     <SettingsComponent/>
