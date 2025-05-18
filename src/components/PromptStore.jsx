@@ -271,13 +271,24 @@ function PromptStore() {
                     }}/>
                 </div>
                 <div className={isMobile ? "fab-area-mob" : "fw-2"}>
-                    <MaterialButton16 className={"fab"} style={{
-                        marginLeft: "16px",
-                        marginRight: "16px"
-                    }} onClick={() => {
+                    <BrowserView>
+                        <MaterialButton16 className={"fab"} style={{
+                            marginLeft: "10px",
+                            marginRight: "10px"
+                        }} onClick={() => {
 
-                    }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
-                        <span>Post your prompt</span>&nbsp;&nbsp;</MaterialButton16>
+                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                            <span>Post your prompt</span>&nbsp;&nbsp;</MaterialButton16>
+                    </BrowserView>
+                    <MobileView>
+                        <MaterialButton16 className={"fab"} style={{
+                            marginLeft: "16px",
+                            marginRight: "16px"
+                        }} onClick={() => {
+
+                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                            <span>Post your prompt</span>&nbsp;&nbsp;</MaterialButton16>
+                    </MobileView>
                 </div>
                 {
                     prompts.length === 0 ? <div className={isMobile ? "prompt-loader-mob" : "prompt-loader"}>

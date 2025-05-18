@@ -19,6 +19,7 @@ import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialBut
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {CircularProgress} from "@mui/material";
 import {getApiEndpointById, getApiEndpointId} from "../util/Settings";
+import {MaterialDialog} from "./MaterialDialog";
 
 function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
 
@@ -96,6 +97,7 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
         <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
@@ -191,6 +193,7 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
                     }}>Save</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

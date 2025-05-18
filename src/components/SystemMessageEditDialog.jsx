@@ -17,6 +17,7 @@
 import React from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialDialog} from "./MaterialDialog";
 
 function SystemMessageEditDialog({setIsOpen, message, setMessage, isAssistant}) {
 
@@ -26,6 +27,7 @@ function SystemMessageEditDialog({setIsOpen, message, setMessage, isAssistant}) 
         <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
@@ -44,6 +46,7 @@ function SystemMessageEditDialog({setIsOpen, message, setMessage, isAssistant}) 
                     }}>Save</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

@@ -17,6 +17,7 @@
 import React, {useEffect} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialDialog} from "./MaterialDialog";
 
 /*
 * @deprecated This component is deprecated and will be removed in the future versions. Use ApiEndpointEditDialog instead.
@@ -40,6 +41,7 @@ function ApiKeyDialog(props) {
             {
                 (localStorage.getItem('apiKey') === null || localStorage.getItem('apiKey') === undefined || localStorage.getItem('apiKey') === "") && localStorage.getItem("skipApiKeyCheck") !== "true" ?
                     <div className={"priority dialog-backdrop"}>
+                        <MaterialDialog open={true}>
                         <div className={"dialog-paper"}>
                             <h3 className={"dialog-title"}>Setup</h3>
                             <div className={"dialog-content"}>
@@ -63,6 +65,7 @@ function ApiKeyDialog(props) {
                                 <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                             </div>
                         </div>
+                        </MaterialDialog>
                     </div>
                     : null
             }

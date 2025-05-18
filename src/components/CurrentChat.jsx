@@ -564,7 +564,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     function autoresize(textarea) {
         // Initial setup
         const singleLineHeight = 16;  // This should match line-height in your CSS
-        const maxLines = 4;
+        const maxLines = 30;
         const minHeight = 16;
 
         // Ensure that we calculate based on a minimal state
@@ -759,6 +759,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                         }}><span className={"material-symbols-outlined"}>cancel</span></div>
                     </div>: null
                 }
+            </div>
+            <div className={isMobile ? "write-bar-container-mob" : "write-bar-container"}>
                 <div className={isMobile ? "write-bar-mob" : "write-bar"}>
                     <textarea onInput={() => {
                         autoresize(document.querySelector(".chat-textarea"))
@@ -774,8 +776,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     <div>
                         {
                             lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                processRequest();
-                            }}><CircularProgress style={{
+                                    processRequest();
+                                }}><CircularProgress style={{
                                     color: "var(--color-accent-900)",
                                 }}/></MaterialButtonTonalIcon>
                                 :

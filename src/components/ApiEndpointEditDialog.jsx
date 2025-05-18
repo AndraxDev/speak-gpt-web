@@ -18,6 +18,7 @@ import React from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {deleteEndpoint, getApiEndpointById, renameEndpoint, setApiEndpointById} from "../util/Settings";
+import {MaterialDialog} from "./MaterialDialog";
 
 function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
     const [label, setLabel] = React.useState(endpointId === "" ? "" : getApiEndpointById(endpointId).label);
@@ -39,6 +40,7 @@ function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
             e.stopPropagation();
             setIsOpened(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation();
             }}>
@@ -88,6 +90,7 @@ function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
                     }}>Save</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

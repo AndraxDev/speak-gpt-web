@@ -17,6 +17,7 @@
 import React, {useEffect} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialDialog} from "./MaterialDialog";
 
 function NewChatDialog({chatName, setChatName, invalidState, invalidMessage, setChatDialogOpen, isEdit, chatModel, setIsEditing, ...props}) {
     const [tempChatName, setTempChatName] = React.useState("");
@@ -29,6 +30,7 @@ function NewChatDialog({chatName, setChatName, invalidState, invalidMessage, set
         <div className={"dialog-backdrop"} onMouseDown={() => {
             setChatDialogOpen(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation();
             }}>
@@ -47,6 +49,7 @@ function NewChatDialog({chatName, setChatName, invalidState, invalidMessage, set
                     }}>{isEdit ? "Save" : "Create"}</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

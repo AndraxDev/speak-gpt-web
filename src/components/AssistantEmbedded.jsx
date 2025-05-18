@@ -680,6 +680,31 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         document.querySelector(".chat-textarea").focus();
     }, [])
 
+    function autoresize(textarea) {
+        // Initial setup
+        const singleLineHeight = 16;  // This should match line-height in your CSS
+        const maxLines = 30;
+        const minHeight = 16;
+
+        // Ensure that we calculate based on a minimal state
+        textarea.style.height = 'auto';  // Temporarily make height auto
+
+        const lines = textarea.value.split('\n').length;
+
+        // Check if the current content is less than the minimum height
+        if (lines === 0) {
+            textarea.style.height = `${minHeight}px`;
+        } else if (lines < maxLines) {
+            textarea.style.height = `${minHeight*lines}px`;
+        } else if (lines > maxLines) {
+            textarea.style.overflowY = 'auto';  // Enable scrolling when content exceeds max height
+            textarea.style.height = `${singleLineHeight*maxLines}px`;
+        } else {
+            textarea.style.overflowY = 'hidden';  // Hide scrollbar when content is below max height
+            textarea.style.height = `${singleLineHeight*lines}px`;
+        }
+    }
+
     return (
         <div className={"assistant-container-embedded"}>
             <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={errorSnackBar} autoHideDuration={6000} onClose={() => {
@@ -797,32 +822,36 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                             }}><span className={"material-symbols-outlined"}>cancel</span></div>
                         </div> : null
                     }
-                    <div className={"write-bar-assistant"}>
-                        <textarea onKeyDown={handleKeyDown} className={"chat-textarea"}
-                                  id={"assistant-textarea"} placeholder={"Start typing here..."}/>
-                        <div>
-                            <MaterialButtonTonalIconV3 className={"chat-send"}><span
-                                className={"material-symbols-outlined"}>photo</span><input
-                                className={"visually-hidden-input"} onChange={(e) => {
-                                if (e.target.files.length !== 0) {
-                                    processFile(e.target.files[0])
+                    <div className={"write-bar-container-assistant"}>
+                        <div className={"write-bar-assistant"}>
+                            <textarea onInput={() => {
+                                autoresize(document.querySelector(".chat-textarea"))
+                            }} onKeyDown={handleKeyDown} className={"chat-textarea"}
+                                      id={"assistant-textarea"} placeholder={"Start typing here..."}/>
+                            <div>
+                                <MaterialButtonTonalIconV3 className={"chat-send"}><span
+                                    className={"material-symbols-outlined"}>photo</span><input
+                                    className={"visually-hidden-input"} onChange={(e) => {
+                                    if (e.target.files.length !== 0) {
+                                        processFile(e.target.files[0])
+                                    }
+                                }} type="file"/></MaterialButtonTonalIconV3>
+                            </div>
+                            &nbsp;&nbsp;&nbsp;
+                            <div>
+                                {
+                                    lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
+                                            processRequest();
+                                        }}><CircularProgress style={{
+                                            color: "var(--color-accent-900)",
+                                        }}/></MaterialButtonTonalIconV3>
+                                        :
+                                        <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
+                                            processRequest();
+                                        }}><span
+                                            className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
                                 }
-                            }} type="file"/></MaterialButtonTonalIconV3>
-                        </div>
-                        &nbsp;&nbsp;&nbsp;
-                        <div>
-                            {
-                                lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
-                                        processRequest();
-                                    }}><CircularProgress style={{
-                                        color: "var(--color-accent-900)",
-                                    }}/></MaterialButtonTonalIconV3>
-                                    :
-                                    <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
-                                        processRequest();
-                                    }}><span
-                                        className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
-                            }
+                            </div>
                         </div>
                     </div>
                 </div>

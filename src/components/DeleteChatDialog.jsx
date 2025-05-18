@@ -16,6 +16,7 @@
 
 import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialDialog} from "./MaterialDialog";
 
 function DeleteChatDialog({setOpenState, chatName, setChatName, ...props}) {
     return (
@@ -23,6 +24,7 @@ function DeleteChatDialog({setOpenState, chatName, setChatName, ...props}) {
             setChatName("");
             setOpenState(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation();
             }}>
@@ -40,6 +42,7 @@ function DeleteChatDialog({setOpenState, chatName, setChatName, ...props}) {
                     }}>Delete</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

@@ -17,6 +17,7 @@
 import React from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialDialog} from "./MaterialDialog";
 
 function ApiKeyChangeDialog(props) {
     const [apiKey, setApiKey] = React.useState("");
@@ -33,6 +34,7 @@ function ApiKeyChangeDialog(props) {
         <div className={props.isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             props.setIsOpen(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
@@ -54,6 +56,7 @@ function ApiKeyChangeDialog(props) {
                     <MaterialButton24 onClick={saveApiKey}>Save</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

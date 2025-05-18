@@ -256,7 +256,7 @@ function AiPhotoEditor(props) {
                     }} className={"hint"}>To use photo editor you will need to draw a mask over the image. Erase object you want to change and write a prompt. Currently DALL-e 2 only is supported.</p>
                 </div>
                 <div className={"photo-block"}>
-                    <p>Edited photo will appear here</p>
+                    <p className={"ai-photo-result-title"}>Edited photo will appear here</p>
                     <div className={"photo-container"}>
                         {loading ? <CircularProgress style={{color: "var(--color-accent-900)"}}/> :
                             <>

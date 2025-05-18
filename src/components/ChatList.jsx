@@ -25,7 +25,7 @@ import {modelToType} from "../util/ModelTypeConverter";
 import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
 import {copySettings, getModel, getSettingsJSON} from "../util/Settings";
-import {BrowserView, isMobile} from "react-device-detect";
+import {BrowserView, isMobile, MobileView} from "react-device-detect";
 
 function ChatList() {
     const [selectedChat, setSelectedChat] = React.useState("");
@@ -492,13 +492,24 @@ function ChatList() {
                     </div>
                 </div>
                 <div className={isMobile ? "fab-area-mob" : "fw"}>
-                    <MaterialButton16 className={"fab"} style={{
-                        marginLeft: "16px",
-                        marginRight: "16px"
-                    }} onClick={() => {
-                        setNewChatDialogOpen(true)
-                    }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
-                        <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
+                    <BrowserView>
+                        <MaterialButton16 className={"fab"} style={{
+                            marginLeft: "10px",
+                            marginRight: "10px"
+                        }} onClick={() => {
+                            setNewChatDialogOpen(true)
+                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                            <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
+                    </BrowserView>
+                    <MobileView>
+                        <MaterialButton16 className={"fab"} style={{
+                            marginLeft: "16px",
+                            marginRight: "16px"
+                        }} onClick={() => {
+                            setNewChatDialogOpen(true)
+                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                            <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
+                    </MobileView>
                 </div>
                 <div style={isMobile ? {
                     height: "calc(calc(var(--vh, 1vh) * 100) - 220px)",

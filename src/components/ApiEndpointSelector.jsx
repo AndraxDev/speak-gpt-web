@@ -20,6 +20,7 @@ import {CircularProgress} from "@mui/material";
 import {sha256} from "js-sha256";
 import {MaterialButton24, MaterialButtonOutlined24, MaterialButtonTonal24} from "../widgets/MaterialButton";
 import ApiEndpointEditDialog from "./ApiEndpointEditDialog";
+import {MaterialDialog} from "./MaterialDialog";
 
 function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, isOpened, setIsOpened, isAssistant, ...props}) {
     const [selectedApiEndpoint, setSelectedApiEndpoint] = React.useState(selectedApiEndpointId);
@@ -40,6 +41,7 @@ function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, i
              }}>
             {editDialogOpened ? <ApiEndpointEditDialog endpointId={apiEndpointForEdit} isOpened={editDialogOpened} setIsOpened={setEditDialogOpened} /> : null }
             {addDialogOpened ? <ApiEndpointEditDialog endpointId={""} isOpened={addDialogOpened} setIsOpened={setAddDialogOpened} /> : null }
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
@@ -94,7 +96,7 @@ function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, i
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButtonTonal24 onClick={() => {
                         setAddDialogOpened(true);
-                    }}>Add new endpoint</MaterialButtonTonal24>
+                    }}>Add endpoint</MaterialButtonTonal24>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={() => {
                         if (selectedApiEndpoint !== "") {
@@ -104,6 +106,7 @@ function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, i
                     }}>Save</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

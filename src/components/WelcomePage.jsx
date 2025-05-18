@@ -115,7 +115,7 @@ const features = [
     {
         title: "Privacy",
         icon: "visibility_off",
-        description: "Your data is not used for training AI models. All your conversation and credentials are stored locally and no other apps have access to these data.",
+        description: "Your data is not used for training AI models. All your conversation and credentials are stored locally and no other apps have access to this data.",
         buttonLink: "/chat",
         buttonLabel: "Start a chat",
         buttonType: "link",
@@ -160,56 +160,56 @@ const mobileFeatures = [
         title: "Assistant",
         icon: "group_work",
         description: "Make SpeakGPT your default assistant and access SpeakGPT from any app or site.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "WhisperAI",
         icon: "graphic_eq",
         description: "Use your voice to access SpeakGPT. Currently it support WhisperAI and Google Speech recognition. Voice language is detected automatically.",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Text-To-Speech",
         icon: "text_to_speech",
         description: "Mobile app supports pronouncing text using OpenAI TTS and Google TTS.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Offline mode",
         icon: "cloud_off",
         description: "Access your saved chats while you're offline.",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Context menu",
         icon: "lists",
         description: "Select text in any app and select 'SpeakGPT' in your context menu to use this text with assistant. Currently you can summarize, explain, translate text, use it as prompt or generate images.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Experiments",
         icon: "science",
         description: "Sometimes we're rolling out new interesting functions for a limited time period. Check out 'Experiments' section in the app.",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Fine-tunes",
         icon: "token",
         description: "Mobile version allows you to use you fine-tuned models.",
-        tintBackground: "rgba(20,20,20,0.8)",
+        tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Dynamic theme",
         icon: "palette",
         description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT (A supported display is required).",
-        tintBackground: "rgba(40,40,40,0.8)",
+        tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     }
 ]
@@ -239,7 +239,7 @@ function WelcomePage() {
                         <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title"}>SpeakGPT</h1>
-                            <p className={"app-desc"}>SpeakGPT is an advanced and highly intuitive open-source AI assistant that utilizes the powerful large language models (LLM) to provide you with unparalleled performance and functionality. Officially it supports GPT models, LLAMA, MIXTRAL, GEMMA, Gemini (regular and pro) Vision, DALL-E and other models.</p>
+                            <p className={"app-desc"}>The best open-source client to access your favorite AI models and APIs.</p>
                             <div className={"btn-row"}>
                                 <a href={"/chat"}><MaterialButton24>Launch SpeakGPT</MaterialButton24></a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -270,9 +270,9 @@ function WelcomePage() {
                             }} className={"feature-card"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
-                                    fontSize: "48px",
-                                    width: "48px",
-                                    height: "48px"
+                                    fontSize: "42px",
+                                    width: "42px",
+                                    height: "42px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -293,10 +293,8 @@ function WelcomePage() {
                                                     }}>{feature.buttonLabel}</MaterialButton24></Link> :
                                                 <MaterialButton24 sx={{
                                                     backgroundColor: feature.tintForeground,
-                                                    border: "none",
                                                     "&:hover": {
                                                         backgroundColor: "#fff",
-                                                        border: "none"
                                                     }
                                                 }} onClick={() => {
                                                     setPrompt(feature.buttonLink);
@@ -316,9 +314,9 @@ function WelcomePage() {
                             }} className={"feature-card"} key={sha256(feature.title)}>
                                 <div><span style={{
                                     color: feature.tintForeground,
-                                    fontSize: "48px",
-                                    width: "48px",
-                                    height: "48px"
+                                    fontSize: "42px",
+                                    width: "42px",
+                                    height: "42px"
                                 }} className={"feature-card-icon material-symbols-outlined"}>{feature.icon}</span></div>
                                 <div className={"feature-info"}>
                                     <h3 className={"feature-card-title"} style={{
@@ -332,7 +330,7 @@ function WelcomePage() {
                 </div>
                 <div className={"footer"}>
                     <p className={"api-disclaimer"}>
-                        This app requires an OpenAI key to work. You can get it by visiting <a
+                        To provide GPT functionality this app requires a valid OpenAI API key. You can get it by visiting <a
                         href={"https://platform.openai.com/api-keys"} target={"_blank"} className={"link-special"}>OpenAI</a>. Learn more about API <Link className={"link-special"} to={"/api/safety"}>safety principles</Link>.
                     </p>
                     <hr className={"footer-divider"}/>
@@ -377,7 +375,7 @@ function WelcomePage() {
                         <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo-mob"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title-mob"}>SpeakGPT</h1>
-                            <p className={"app-desc-mob"}>SpeakGPT is an advanced and highly intuitive open-source AI assistant that utilizes the powerful large language models (LLM) to provide you with unparalleled performance and functionality. Officially it supports GPT models, LLAMA, MIXTRAL, GEMMA, Gemini (regular and pro) Vision, DALL-E and other models.</p>
+                            <p className={"app-desc-mob"}>The best open-source client to access your favorite AI models and APIs.</p>
                             <div className={"btn-row-mob"}>
                                 <Link to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"} target={"_blank"}><MaterialButton24>Download app</MaterialButton24></Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -465,7 +463,7 @@ function WelcomePage() {
                 </div>
                 <div className={"footer-mob"}>
                     <p className={"api-disclaimer-mob"}>
-                        This app requires an OpenAI key to work. You can get it by visiting <a
+                        To provide GPT functionality this app requires a valid OpenAI API key. You can get it by visiting <a
                         href={"https://platform.openai.com/api-keys"} target={"_blank"} className={"link-special"}>OpenAI</a>. Learn more about API <Link className={"link-special"} to={"/api/safety"}>safety principles</Link>.
                     </p>
                     <hr className={"footer-divider-mob"}/>

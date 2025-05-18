@@ -16,6 +16,7 @@
 
 import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
+import {MaterialDialog} from "./MaterialDialog";
 
 function ConfirmChatClear({setOpenState, confirm, isAssistant}) {
     return (
@@ -23,6 +24,7 @@ function ConfirmChatClear({setOpenState, confirm, isAssistant}) {
             confirm(false);
             setOpenState(false);
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation();
             }}>
@@ -40,6 +42,7 @@ function ConfirmChatClear({setOpenState, confirm, isAssistant}) {
                     }}>Delete</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }

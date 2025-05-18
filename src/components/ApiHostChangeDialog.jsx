@@ -18,6 +18,7 @@ import React from 'react';
 import {MaterialButton24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {getApiHost, setApiHost} from "../util/Settings";
+import {MaterialDialog} from "./MaterialDialog";
 
 function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
     const [apiHostX, setApiHostX] = React.useState(getApiHost(chatId));
@@ -27,6 +28,7 @@ function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
             e.stopPropagation();
             setOpen(false)
         }}>
+            <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => e.stopPropagation()}>
                 <h3 className={"dialog-title"}>API Host</h3>
                 <div className={"dialog-content"}>
@@ -41,6 +43,7 @@ function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
                     }}>Save</MaterialButton24>
                 </div>
             </div>
+            </MaterialDialog>
         </div>
     );
 }
