@@ -621,6 +621,7 @@ html, body {
 
 .write-bar-container-home {
     width: 492px;
+    max-width: calc(100vw - 8px);
     left: 4px;
     bottom: 0;
     position: fixed;
