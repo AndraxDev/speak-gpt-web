@@ -2844,8 +2844,12 @@ td {
     padding: 0;
 }
 
-.MuiPaper-root {
+.MuiDialog-paper {
     border-radius: 24px !important;
     background-color: var(--color-accent-100) !important;
     background-image: none !important;
+}
+
+.MuiPaper-root {
+    border-radius: 24px !important;
 }
