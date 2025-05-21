@@ -572,6 +572,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     const insertImagineCommand = () => {
         let message = document.querySelector(".chat-textarea").value
         document.querySelector(".chat-textarea").value = "/imagine " + message.trim();
+        document.querySelector(".chat-textarea").focus();
     }
 
     return (
