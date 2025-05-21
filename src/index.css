@@ -1182,7 +1182,7 @@ blockquote > p {
 .code-block {
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    background-color: var(--color-accent-100);
+    background-color: var(--color-accent-200);
     overflow-x: auto;
     padding: 16px;
     width: calc(100% - 32px);
@@ -2854,4 +2854,8 @@ td {
 
 .MuiPaper-root {
     border-radius: 24px !important;
+}
+
+.cancel-cross {
+    position: absolute;
 }

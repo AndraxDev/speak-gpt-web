@@ -61,6 +61,8 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
+let activeControllers = [];
+
 function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     const [conversation, setConversation] = React.useState([]);
     const [lockedState, setLockedState] = React.useState(false);
@@ -81,6 +83,14 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [errorSnackBar, setErrorSnackBar] = React.useState(false);
     const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
+
+
+
+    const openai = new OpenAI({
+        apiKey: getApiEndpointById(getApiEndpointId(findOpenAIEndpointIdOrNull() != null ? findOpenAIEndpointIdOrNull() : sha256(stateSelectedChat))).key,
+        dangerouslyAllowBrowser: true,
+        baseURL: getApiEndpointById(getApiEndpointId(findOpenAIEndpointIdOrNull() != null ? findOpenAIEndpointIdOrNull() : sha256(stateSelectedChat))).url
+    });
 
     useEffect(() => {
         let c = [];
@@ -287,19 +297,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     const sendAIRequest = async (messages) => {
         try {
             migrateFromLegacyAPIs()
-            let openai = new OpenAI({
-                apiKey: getApiEndpointById(getApiEndpointId(sha256(stateSelectedChat))).key,
-                dangerouslyAllowBrowser: true,
-                baseURL: getApiEndpointById(getApiEndpointId(sha256(stateSelectedChat))).url
-            });
-
             if (selectedFile !== null) {
                 if (findOpenAIEndpointIdOrNull() !== null) {
-                    openai = new OpenAI({
-                        apiKey: getApiEndpointById(findOpenAIEndpointIdOrNull()).key,
-                        dangerouslyAllowBrowser: true,
-                        baseURL: getApiEndpointById(findOpenAIEndpointIdOrNull()).url
-                    });
                     let ms = messages;
 
                     let prompt = ms[ms.length - 1].content;
@@ -314,10 +313,17 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                         }
                     ]
 
+                    const controller = new AbortController();
+                    const { signal } = controller;
+
+                    activeControllers.push(controller);
+
                     const chatCompletion = await openai.chat.completions.create({
                         messages: ms,
-                        model: "gpt-4o",
+                        model: "gpt-4o", // gpt-4o
                         stream: true,
+                    }, {
+                        signal: signal
                     });
 
                     const m = conversation;
@@ -369,10 +375,17 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     });
                 }
 
+                const controller = new AbortController();
+                const { signal } = controller;
+
+                activeControllers.push(controller);
+
                 const chatCompletion = await openai.chat.completions.create({
                     messages: ms,
                     model: getModel(id),
-                    stream: true,
+                    stream: true
+                }, {
+                    signal: signal
                 });
 
                 const m = conversation;
@@ -425,6 +438,11 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                 saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
             }
         }
+    }
+
+    const cancelRequest = () => {
+        activeControllers.forEach(controller => controller.abort());
+        activeControllers = []; // clear the list after aborting
     }
 
     const processRequest = () => {
@@ -776,10 +794,10 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     <div>
                         {
                             lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                    processRequest();
+                                    cancelRequest();
                                 }}><CircularProgress style={{
                                     color: "var(--color-accent-900)",
-                                }}/></MaterialButtonTonalIcon>
+                                }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIcon>
                                 :
                                 <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                                     processRequest();

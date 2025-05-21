@@ -48,6 +48,8 @@ function setFullHeight() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
+let activeControllers = [];
+
 // Set the height initially
 setFullHeight();
 
@@ -408,10 +410,17 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                         }
                     ]
 
+                    const controller = new AbortController();
+                    const { signal } = controller;
+
+                    activeControllers.push(controller);
+
                     const chatCompletion = await openai.chat.completions.create({
                         messages: ms,
                         model: "gpt-4o",
                         stream: true,
+                    }, {
+                        signal: signal
                     });
 
                     const m = conversation;
@@ -483,10 +492,17 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                     });
                 }
 
+                const controller = new AbortController();
+                const { signal } = controller;
+
+                activeControllers.push(controller);
+
                 const chatCompletion = await openai.chat.completions.create({
                     messages: ms,
                     model: getGlobalModel(),
                     stream: true,
+                }, {
+                    signal: signal
                 });
 
                 const m = conversation;
@@ -537,6 +553,11 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 saveConversation(customChatLocation, JSON.stringify(c));
             }
         }
+    }
+
+    const cancelRequest = () => {
+        activeControllers.forEach(controller => controller.abort());
+        activeControllers = []; // clear the list after aborting
     }
 
     const processRequest = () => {
@@ -841,10 +862,10 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                             <div>
                                 {
                                     lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
-                                            processRequest();
+                                            cancelRequest();
                                         }}><CircularProgress style={{
                                             color: "var(--color-accent-900)",
-                                        }}/></MaterialButtonTonalIconV3>
+                                        }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
                                         :
                                         <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                             processRequest();

@@ -34,14 +34,13 @@ import {
     setGlobalResolution,
     setGlobalSystemMessage,
     migrateFromLegacyAPIs,
-    getApiEndpointById, getApiEndpointId, findOpenAIEndpointIdOrNull, getGlobalEndpointId
+    getApiEndpointById, findOpenAIEndpointIdOrNull, getGlobalEndpointId
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {supportedFileTypes} from "../util/ModelTypeConverter";
-import ApiKeyDialog from "./ApiKeyDialog";
 
 const getDefaultDescription = () => {
     return (`
@@ -59,6 +58,8 @@ function setFullHeight() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
+
+let activeControllers = [];
 
 // Set the height initially
 setFullHeight();
@@ -272,10 +273,17 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                         }
                     ]
 
+                    const controller = new AbortController();
+                    const { signal } = controller;
+
+                    activeControllers.push(controller);
+
                     const chatCompletion = await openai.chat.completions.create({
                         messages: ms,
                         model: "gpt-4o",
                         stream: true,
+                    }, {
+                        signal: signal
                     });
 
                     const m = conversation;
@@ -319,10 +327,17 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     });
                 }
 
+                const controller = new AbortController();
+                const { signal } = controller;
+
+                activeControllers.push(controller);
+
                 const chatCompletion = await openai.chat.completions.create({
                     messages: ms,
                     model: getGlobalModel(),
                     stream: true,
+                }, {
+                    signal: signal
                 });
 
                 const m = conversation;
@@ -368,6 +383,11 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 setConversation(c)
             }
         }
+    }
+
+    const cancelRequest = () => {
+        activeControllers.forEach(controller => controller.abort());
+        activeControllers = []; // clear the list after aborting
     }
 
     const processRequest = () => {
@@ -666,10 +686,10 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                         <div>
                             {
                                 lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
-                                        processRequest();
+                                        cancelRequest();
                                     }}><CircularProgress style={{
                                         color: "var(--color-accent-900)",
-                                    }}/></MaterialButtonTonalIconV3>
+                                    }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
                                     :
                                     <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                         processRequest();
