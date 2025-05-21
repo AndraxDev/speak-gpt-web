@@ -16,6 +16,7 @@
 
 import React, {useEffect} from 'react';
 import {
+    MaterialButtonTonalIcon,
     MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
 } from "../widgets/MaterialButton";
 import Message from "./Message";
@@ -598,6 +599,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         }
 
         document.querySelector(".chat-textarea").value = "";
+        autoresize(document.querySelector(".chat-textarea"));
     }
 
     const clearConversation = () => {
@@ -726,6 +728,11 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         }
     }
 
+    const insertImagineCommand = () => {
+        let message = document.querySelector(".chat-textarea").value
+        document.querySelector(".chat-textarea").value = "/imagine " + message.trim();
+    }
+
     return (
         <div className={"assistant-container-embedded"}>
             <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={errorSnackBar} autoHideDuration={6000} onClose={() => {
@@ -849,29 +856,39 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                                 autoresize(document.querySelector(".chat-textarea"))
                             }} onKeyDown={handleKeyDown} className={"chat-textarea"}
                                       id={"assistant-textarea"} placeholder={"Start typing here..."}/>
-                            <div>
-                                <MaterialButtonTonalIconV3 className={"chat-send"}><span
-                                    className={"material-symbols-outlined"}>photo</span><input
-                                    className={"visually-hidden-input"} onChange={(e) => {
-                                    if (e.target.files.length !== 0) {
-                                        processFile(e.target.files[0])
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                            }}>
+                                <div><MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                    insertImagineCommand()
+                                }}><span
+                                    className={"material-symbols-outlined"}>draw</span></MaterialButtonTonalIcon></div>
+                                &nbsp;&nbsp;&nbsp;
+                                <div>
+                                    <MaterialButtonTonalIconV3 className={"chat-send"}><span
+                                        className={"material-symbols-outlined"}>photo</span><input
+                                        className={"visually-hidden-input"} onChange={(e) => {
+                                        if (e.target.files.length !== 0) {
+                                            processFile(e.target.files[0])
+                                        }
+                                    }} type="file"/></MaterialButtonTonalIconV3>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;
+                                <div>
+                                    {
+                                        lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
+                                                cancelRequest();
+                                            }}><CircularProgress style={{
+                                                color: "var(--color-accent-900)",
+                                            }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
+                                            :
+                                            <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
+                                                processRequest();
+                                            }}><span
+                                                className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
                                     }
-                                }} type="file"/></MaterialButtonTonalIconV3>
-                            </div>
-                            &nbsp;&nbsp;&nbsp;
-                            <div>
-                                {
-                                    lockedState ? <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
-                                            cancelRequest();
-                                        }}><CircularProgress style={{
-                                            color: "var(--color-accent-900)",
-                                        }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
-                                        :
-                                        <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
-                                            processRequest();
-                                        }}><span
-                                            className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
-                                }
+                                </div>
                             </div>
                         </div>
                     </div>

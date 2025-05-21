@@ -482,6 +482,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         }
 
         document.querySelector(".chat-textarea").value = "";
+        autoresize(document.querySelector(".chat-textarea"));
     }
 
     const getDatabase = () => {
@@ -671,6 +672,11 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         });
     }, [])
 
+    const insertImagineCommand = () => {
+        let message = document.querySelector(".chat-textarea").value
+        document.querySelector(".chat-textarea").value = "/imagine " + message.trim();
+    }
+
     return (
         <div style={isMobile ? {
             height: "calc(var(--vh, 1vh) * 100)"
@@ -783,27 +789,37 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     <textarea onInput={() => {
                         autoresize(document.querySelector(".chat-textarea"))
                     }} onKeyDown={handleKeyDown} className={"chat-textarea"} placeholder={"Start typing here..."}/>
-                    <div>
-                        <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
-                            if (e.target.files.length !== 0) {
-                                processFile(e.target.files[0])
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                    }}>
+                        <div><MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                            insertImagineCommand()
+                        }}><span
+                            className={"material-symbols-outlined"}>draw</span></MaterialButtonTonalIcon></div>
+                        &nbsp;&nbsp;&nbsp;
+                        <div>
+                            <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
+                                if (e.target.files.length !== 0) {
+                                    processFile(e.target.files[0])
+                                }
+                            }} type="file" /></MaterialButtonTonalIcon>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;
+                        <div>
+                            {
+                                lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                        cancelRequest();
+                                    }}><CircularProgress style={{
+                                        color: "var(--color-accent-900)",
+                                    }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIcon>
+                                    :
+                                    <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
+                                        processRequest();
+                                    }}><span
+                                        className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
                             }
-                        }} type="file" /></MaterialButtonTonalIcon>
-                    </div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div>
-                        {
-                            lockedState ? <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                    cancelRequest();
-                                }}><CircularProgress style={{
-                                    color: "var(--color-accent-900)",
-                                }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIcon>
-                                :
-                                <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
-                                    processRequest();
-                                }}><span
-                                    className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
