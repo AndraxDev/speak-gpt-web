@@ -20,15 +20,12 @@ View SpeakGPT for Android: [https://github.com/AndraxDev/speak-gpt](https://gith
 
 ## Screenshots
 
-<img src="https://gpt.teslasoft.org/d/1.png" style="max-height: 300px"/>
-<img src="https://gpt.teslasoft.org/d/2.png" style="max-height: 300px"/>
-<img src="https://gpt.teslasoft.org/d/3.png" style="max-height: 300px"/>
-<img src="https://gpt.teslasoft.org/d/4.png" style="max-height: 300px"/>
-<img src="https://gpt.teslasoft.org/d/5.png" style="max-height: 300px"/>
-<img src="https://gpt.teslasoft.org/d/6.png" style="max-height: 300px"/>
-<img src="https://gpt.teslasoft.org/d/7.png" style="max-height: 300px"/>
-<br/>
-<img src="https://gpt.teslasoft.org/d/8.png" style="max-height: 300px"/>
+<img src="https://assistant.teslasoft.org/scr1.png" style="max-height: 300px"/>
+<img src="https://assistant.teslasoft.org/scr2.png" style="max-height: 300px"/>
+<img src="https://assistant.teslasoft.org/scr3.png" style="max-height: 300px"/>
+<img src="https://assistant.teslasoft.org/scr4.png" style="max-height: 300px"/>
+<img src="https://assistant.teslasoft.org/scr5.png" style="max-height: 300px"/>
+<img src="https://assistant.teslasoft.org/scr6.png" style="max-height: 300px"/>
 
 ## Features
 
