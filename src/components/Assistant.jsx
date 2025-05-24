@@ -122,6 +122,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
             processRequest();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [runtimePrompt, type]);
 
     useEffect(() => {
@@ -536,6 +537,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 }
             });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -667,6 +669,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                         }
                     </div>
                     <div id={"bottom"}></div>
+                    <br/>
                 </div>
                 {
                     selectedFile !== null && !lockedState ? <div className={"selected-image-frame-assistant"}>
@@ -706,7 +709,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                                             cancelRequest();
                                         }}><CircularProgress style={{
                                             color: "var(--color-accent-900)",
-                                        }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
+                                        }}/><img alt={"Cancel"} src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
                                         :
                                         <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                             processRequest();

@@ -54,16 +54,6 @@ let activeControllers = [];
 // Set the height initially
 setFullHeight();
 
-const examplePayload = {
-    name: "Example Chat",
-    initialMessage: "Hello, how are you?",
-    initialResponse: "I'm fine, thank you.",
-    systemMessage: "This is an example chat. Please be polite.",
-    chatLocation: "exampleChat",
-    icon: "https://teslasoft.org/res/logo.webp",
-    description: "This is an example chat. Please be polite.<br>You can use <b>HTML</b> in the description."
-}
-
 const getDefaultDescription = () => {
     return (`
         What can this assistant do:<br/><br/>
@@ -116,6 +106,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         setGlobalDalleVersion(useDalle3 ? "3" : "2")
         setGlobalResolution(currentImageResolution)
         setGlobalSystemMessage(systemMessage)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [useDalle3, currentImageResolution, systemMessage]);
 
     useEffect(() => {
@@ -130,6 +121,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         } else {
             getDatabase()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [payload]);
 
     useEffect(() => {
@@ -171,6 +163,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         if (db !== undefined && db !== null) {
             getConversation(customChatLocation);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db]);
 
     const getDatabase = () => {
@@ -260,6 +253,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
             setConfirmClear(false);
             setClearDialogOpen(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmClear])
 
     useEffect(() => {
@@ -697,6 +691,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -840,6 +835,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                             }
                         </div>
                         <div id={"bottom"}></div>
+                        <br/>
                     </div>
                     {
                         selectedFile !== null && !lockedState ? <div className={"selected-image-frame-assistant"}>
@@ -882,7 +878,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                                                 cancelRequest();
                                             }}><CircularProgress style={{
                                                 color: "var(--color-accent-900)",
-                                            }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
+                                            }}/><img alt={"Cancel"} src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIconV3>
                                             :
                                             <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                                 processRequest();

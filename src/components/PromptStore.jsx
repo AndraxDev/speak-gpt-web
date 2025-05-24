@@ -111,6 +111,7 @@ function PromptStore() {
     const [searchQuery, setSearchQuery] = React.useState("");
     const [selectedPrompt, setSelectedPrompt] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
+    //eslint-disable-next-line no-unused-vars
     const [uid, setUid] = React.useState(null);
 
     let { id } = useParams();

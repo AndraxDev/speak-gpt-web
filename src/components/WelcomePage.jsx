@@ -333,7 +333,7 @@ function WelcomePage() {
                 </div>
                 <div className={"footer"}>
                     <p className={"api-disclaimer"}>
-                        To provide GPT functionality this app requires a valid OpenAI API key. You can get it by visiting <a
+                        To provide GPT functionality this app requires a valid OpenAI API key. You can get it by visiting <a rel={"noreferrer"}
                         href={"https://platform.openai.com/api-keys"} target={"_blank"} className={"link-special"}>OpenAI</a>. Learn more about API <Link className={"link-special"} to={"/api/safety"}>safety principles</Link>.
                     </p>
                     <hr className={"footer-divider"}/>
@@ -466,7 +466,7 @@ function WelcomePage() {
                 </div>
                 <div className={"footer-mob"}>
                     <p className={"api-disclaimer-mob"}>
-                        To provide GPT functionality this app requires a valid OpenAI API key. You can get it by visiting <a
+                        To provide GPT functionality this app requires a valid OpenAI API key. You can get it by visiting <a rel={"noreferrer"}
                         href={"https://platform.openai.com/api-keys"} target={"_blank"} className={"link-special"}>OpenAI</a>. Learn more about API <Link className={"link-special"} to={"/api/safety"}>safety principles</Link>.
                     </p>
                     <hr className={"footer-divider-mob"}/>

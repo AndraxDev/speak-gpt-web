@@ -735,9 +735,16 @@ html, body {
 }
 
 .message-content {
-    margin-top: 8px;
-    margin-bottom: 24px;
-    margin-left: 40px;
+    margin: 8px 40px 24px;
+    color: rgba(255, 255, 255, 0.8);
+    white-space: pre-wrap;
+    font-size: 17px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.message-content-mob {
+    margin: 8px 2px 24px;
     color: rgba(255, 255, 255, 0.8);
     white-space: pre-wrap;
     font-size: 17px;
@@ -856,7 +863,8 @@ html, body {
     height: calc(100vh - 130px);
     overflow-x: hidden;
     overflow-y: scroll;
-    width: calc(100vw - 24px);
+    width: calc(100vw - 8px);
+    margin-left: 16px;
 }
 
 .chat-history {
@@ -870,6 +878,8 @@ html, body {
     height: calc(100vh - 248px);
     overflow-x: hidden;
     overflow-y: auto;
+    width: 100%;
+    margin-left: 8px;
 }
 
 .chat-history-assistant-embedded {
@@ -877,6 +887,8 @@ html, body {
     height: calc(100vh - 200px);
     overflow-x: hidden;
     overflow-y: auto;
+    width: 100%;
+    margin-left: 8px;
 }
 
 .fw {
@@ -1182,7 +1194,7 @@ blockquote > p {
 .code-block {
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    background-color: var(--color-accent-200);
+    background-color: var(--color-accent-0);
     overflow-x: auto;
     padding: 16px;
     width: calc(100% - 32px);
@@ -2858,4 +2870,47 @@ td {
 
 .cancel-cross {
     position: absolute;
+}
+
+.message_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.btn_copy {
+    color: #fff;
+    background-color: var(--color-accent-100);
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    border-radius: 24px;
+    transition: 0.2s;
+}
+
+.btn_copy:hover {
+    background-color: var(--color-accent-200);
+    transition: 0.2s;
+}
+
+.btn_copy_success {
+    background-color: #21b13c !important;
+    transition: 0.2s;
+}
+
+.btn_copy:active {
+    background-color: var(--color-accent-900);
+    color: var(--color-accent-100);
+    transition: 0.2s;
+}
+
+.btn_copy:focus {
+    outline: none;
+}
+
+.message-bot-bg {
+    background-color: var(--color-accent-100);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }

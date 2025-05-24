@@ -79,7 +79,8 @@ You can embed SpeakGPT into your website or app. Just use the following code:
 ...
 
 <div class="assistant-embedded" id="speakgpt" style="display: none;">
-    <iframe src="https://assistant.teslasoft.org/embedded" class="assistant-iframe"></iframe>
+    <!-- Don't forget to include clipboard access otherwise you will not be able to copy bot responses. -->
+    <iframe allow="clipboard-write" src="https://assistant.teslasoft.org/embedded" class="assistant-iframe"></iframe>
 </div>
 
 ...
@@ -144,7 +145,7 @@ Assistant can be customized with a payload. Payload is a base64-encoded JSON str
 Payload goes after /embedded/ in the URL. Example: 
 
 ```html
-<iframe src="https://assistant.teslasoft.org/embedded?payload=eyJuYW1lIjoiRXhhbXBsZSBDaGF0IiwiaW5pdGlhbE1lc3NhZ2UiOiJIZWxsbywgaG93IGFyZSB5b3U%2FIiwiaW5pdGlhbFJlc3BvbnNlIjoiSSdtIGZpbmUsIHRoYW5rIHlvdS4iLCJzeXN0ZW1NZXNzYWdlIjoiVGhpcyBpcyBhbiBleGFtcGxlIGNoYXQuIFBsZWFzZSBiZSBwb2xpdGUuIiwiY2hhdExvY2F0aW9uIjoiZXhhbXBsZUNoYXQifQ%3D%3D"></iframe>
+<iframe allow="clipboard-write" src="https://assistant.teslasoft.org/embedded?payload=eyJuYW1lIjoiRXhhbXBsZSBDaGF0IiwiaW5pdGlhbE1lc3NhZ2UiOiJIZWxsbywgaG93IGFyZSB5b3U%2FIiwiaW5pdGlhbFJlc3BvbnNlIjoiSSdtIGZpbmUsIHRoYW5rIHlvdS4iLCJzeXN0ZW1NZXNzYWdlIjoiVGhpcyBpcyBhbiBleGFtcGxlIGNoYXQuIFBsZWFzZSBiZSBwb2xpdGUuIiwiY2hhdExvY2F0aW9uIjoiZXhhbXBsZUNoYXQifQ%3D%3D"></iframe>
 ```
 
 To make assistant working properly you must URL encode your payload.
@@ -175,6 +176,15 @@ Example of payload:
 - `chatLocation` - location of the chat in the indexed database, don't use whitespaces or special characters
 
 More params will be added in the future.
+
+## Want to use SpeakGPT directly in Google Chrome browser?
+
+> [!NOTE]
+> 
+> Check Directory "Chrome Extension" which contains an unpacked version of
+> SpeakGPT for Google Chrome browser. Likely we would not publish it to the
+> Chrome Web Store, because it is pretty simple and uses iframe to load an
+> embedded version of SpeakGPT which is not allowed by Google.
 
 ## API key safety:
 

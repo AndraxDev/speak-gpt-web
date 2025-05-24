@@ -238,7 +238,7 @@ function AiPhotoEditor(props) {
                     </div>
 
                     <div className={"photo-container"}>
-                        {inPhoto ? <img style={{display: "none"}} id={"image"} src={inPhoto}
+                        {inPhoto ? <img alt={"User input"} style={{display: "none"}} id={"image"} src={inPhoto}
                                         className={"photo-editor-image"}/> : <></>}
                         <canvas id={"canvas"} className={"photo-editor-image"}></canvas>
                     </div>
@@ -260,7 +260,7 @@ function AiPhotoEditor(props) {
                     <div className={"photo-container"}>
                         {loading ? <CircularProgress style={{color: "var(--color-accent-900)"}}/> :
                             <>
-                                {outPhoto ? <img src={outPhoto} className={"photo-editor-image"}/> : <></>}
+                                {outPhoto ? <img alt={"AI Generated output"} src={outPhoto} className={"photo-editor-image"}/> : <></>}
                             </>
                         }
                     </div>

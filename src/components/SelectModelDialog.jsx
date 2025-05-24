@@ -91,6 +91,7 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
             setChatModelsProjection(mm);
         }) // Log the data
         .catch(error => console.error('Error:', error)); // Log errors, if any
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

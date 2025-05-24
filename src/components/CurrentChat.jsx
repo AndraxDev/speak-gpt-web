@@ -108,6 +108,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         })
 
         updateChats(c);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentModel, modelDialogOpened])
 
     // Load settings
@@ -148,6 +149,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             setConfirmClear(false);
             setClearDialogOpen(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmClear])
 
     useEffect(() => {
@@ -172,6 +174,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         if (db !== undefined && db !== null) {
             getConversation(sha256(stateSelectedChat));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db, stateSelectedChat]);
 
     useEffect(() => {
@@ -670,6 +673,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const insertImagineCommand = () => {
@@ -773,6 +777,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                         }
                     </div>
                     <div id={"bottom"}></div>
+                    <br/><br/><br/>
                 </div>
                 {
                     selectedFile !== null && !lockedState ? <div className={"selected-image-frame"}>
@@ -813,7 +818,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                                         cancelRequest();
                                     }}><CircularProgress style={{
                                         color: "var(--color-accent-900)",
-                                    }}/><img src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIcon>
+                                    }}/><img alt={"Cancel"} src={"/cancel.svg"} className={"cancel-cross"}/></MaterialButtonTonalIcon>
                                     :
                                     <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                                         processRequest();

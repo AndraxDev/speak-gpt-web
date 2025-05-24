@@ -22,7 +22,6 @@ import {MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
 import ApiHostChangeDialog from "./ApiHostChangeDialog";
 import ApiEndpointSelector from "./ApiEndpointSelector";
 import {getApiEndpointId, getGlobalEndpointId, setApiEndpointId, setGlobalEndpointId} from "../util/Settings";
-import {Dialog} from "@mui/material";
 import {MaterialDialog} from "./MaterialDialog";
 
 function setFullHeight() {
@@ -37,7 +36,7 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function ChatSettings({chatId, setIsOpen, apiDialogOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
+function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
     const [apiHostDialogOpen, setApiHostDialogOpen] = React.useState(false);
     const [apiEndpointSelector, setApiEndpointSelector] = React.useState(false);
 

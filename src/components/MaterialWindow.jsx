@@ -15,7 +15,6 @@
  *****************************************************************/
 
 import React from 'react';
-import ApiKeyDialog from "./ApiKeyDialog";
 import NavigationBar from "../widgets/NavigationBar";
 import Assistant from "./Assistant";
 import {BrowserView, MobileView, isMobile} from "react-device-detect";

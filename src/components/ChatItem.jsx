@@ -22,23 +22,6 @@ import {isMobile} from "react-device-detect";
 function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit, ...props}) {
 
     const [intType, setIntType] = React.useState(0);
-    const [color, setColor] = React.useState("#ff0000");
-
-    const generateSvgBase64 = (color) => {
-        let template = ` 
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 184 184"
-    id="vector">
-    <path
-        id="path"
-        d="M 92 12 C 80.568 12 69.903 6.628 59.172 2.686 C 54.443 0.948 49.332 0 44 0 C 19.7 0 0 19.7 0 44 C 0 49.332 0.948 54.443 2.686 59.172 C 6.628 69.903 12 80.568 12 92 C 12 103.432 6.628 114.097 2.686 124.828 C 0.948 129.557 0 134.668 0 140 C 0 164.301 19.7 184 44 184 C 49.332 184 54.443 183.052 59.172 181.314 C 69.903 177.372 80.568 172 92 172 C 103.432 172 114.097 177.372 124.828 181.314 C 129.557 183.052 134.668 184 140 184 C 164.301 184 184 164.301 184 140 C 184 134.668 183.052 129.557 181.314 124.828 C 177.372 114.097 172 103.432 172 92 C 172 80.568 177.372 69.903 181.314 59.172 C 183.052 54.443 184 49.332 184 44 C 184 19.7 164.301 0 140 0 C 134.668 0 129.557 0.948 124.828 2.686 C 114.097 6.628 103.432 12 92 12 Z"
-        fill="COLOR" fill-opacity="0.4"/>
-</svg>
-        `
-        template = template.replace("COLOR", color);
-        return "data:image/svg+xml;base64," + btoa(template);
-    }
 
     useEffect(() => {
         if (type === "GPT 3.5") {

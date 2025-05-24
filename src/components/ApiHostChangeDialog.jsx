@@ -38,7 +38,7 @@ function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
                 <div className={"dialog-actions"}>
                     <MaterialButton24 onClick={() => {
                         setApiHost(chatId, apiHostX);
-                        if (setApiHostD != undefined) setApiHostD(apiHostX);
+                        if (setApiHostD !== undefined) setApiHostD(apiHostX);
                         setOpen(false);
                     }}>Save</MaterialButton24>
                 </div>

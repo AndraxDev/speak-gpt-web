@@ -33,6 +33,7 @@ function ChatList() {
     const [newChatName, setNewChatName] = React.useState("");
     const [chatNameInvalid, setChatNameInvalid] = React.useState(false);
     const [invalidMessage, setInvalidMessage] = React.useState("");
+    // eslint-disable-next-line no-unused-vars
     const [chatModel, setChatModel] = React.useState(localStorage.getItem("globalSettings") === null ? "gpt-3.5-turbo" : JSON.parse(localStorage.getItem("globalSettings")).model);
     const [selectedChatForDeletion, setSelectedChatForDeletion] = React.useState("");
     const [selectedChatForEdit, setSelectedChatForEdit] = React.useState("");
@@ -41,6 +42,7 @@ function ChatList() {
     const [deleteChatName, setDeleteChatName] = React.useState("");
     const [db, setDb] = React.useState(null);
     const [searchTerm, setSearchTerm] = React.useState("");
+    // eslint-disable-next-line no-unused-vars
     const [chatsAreLoaded, setChatsAreLoaded] = React.useState(false);
     const [updateCounter, setUpdateCounter] = React.useState(0);
 
@@ -56,6 +58,7 @@ function ChatList() {
         if (db !== null) {
             requestUpdate();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db, selectedChat])
 
     const getChatsList = () => {
@@ -107,6 +110,7 @@ function ChatList() {
                 forceUpdate(getChatsListWithModels(JSON.parse(localStorage.getItem("chats"))));
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db, searchTerm]);
 
     const getDatabase = () => {
@@ -163,6 +167,7 @@ function ChatList() {
         } else if (id === undefined) {
             setSelectedChat("");
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     const deleteConversation = (chatId) => {
@@ -223,6 +228,7 @@ function ChatList() {
 
     useEffect(() => {
         setLatestAvailableChatName(receiveLatestAvailableChatName());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chats]);
 
     useEffect(() => {
@@ -273,6 +279,7 @@ function ChatList() {
                 setInvalidMessage("Please enter chat name.");
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chats, newChatName, newChatDialogOpen]);
 
     const deleteChat = (chatName) => {
@@ -385,6 +392,7 @@ function ChatList() {
         if (selectedChatForEdit !== "" && isEditing) {
             renameChat(selectedChatForEdit, newChatName);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedChatForEdit, newChatName]);
 
     useEffect(() => {
@@ -415,6 +423,7 @@ function ChatList() {
             setDeleteChatName("");
             setDeletionDialogOpen(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleteChatName, deletionDialogOpen]);
 
     const getConversation = async (chatId) => {
@@ -468,6 +477,7 @@ function ChatList() {
                 setUpdateCounter(updateCounter + 1);
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db, chats, updateCounter]);
 
     return (

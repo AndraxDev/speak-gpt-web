@@ -1,0 +1,36 @@
+{
+    "name": "SpeakGPT",
+    "description": "SpeakGPT extension allow you to switch between Chrome and SpeakGPT with a single click.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "speakgpt.png"
+    },
+    "permissions": [
+        "contextMenus",
+        "storage",
+        "nativeMessaging",
+        "tabs"
+    ],
+    "host_permissions": ["https://*.teslasoft.org/"],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; frame-src https://*.teslasoft.org;"
+    },
+    "icons": {
+        "16": "speakgpt.png",
+        "48": "speakgpt.png",
+        "128": "speakgpt.png"
+    },
+    "background": {
+        "service_worker": "menu.js"
+    },
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+L",
+                "mac": "MacCtrl+Command+L"
+            }
+        }
+    }
+}
