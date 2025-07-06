@@ -17,7 +17,7 @@
 import React from 'react';
 import {isMobile} from "react-device-detect";
 import {Link} from "react-router-dom";
-import Prism from "../prism";
+import Prism from "../prism.js";
 import {highlightCode, linesNumbers} from "../util/MarkDownCode";
 import remarkGfm from "remark-gfm";
 import Markdown from "react-markdown";

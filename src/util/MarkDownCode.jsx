@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import Prism from "../prism";
+import Prism from "../prism.js";
 
 export const linesNumbers = (str) => {
     let lines = str.split("\n").length - 1;

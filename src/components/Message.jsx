@@ -18,7 +18,7 @@ import React from 'react';
 import Markdown from 'react-markdown'
 import remarkGfm from "remark-gfm";
 import {sha256} from "js-sha256";
-import Prism from './../prism';
+import Prism from '../prism.js';
 import {isMobile} from "react-device-detect";
 import {highlightCode, linesNumbers} from "../util/MarkDownCode";
 

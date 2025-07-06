@@ -21480,3 +21480,4 @@ Prism.languages.yang = {
 
 }(Prism));
 
+export default Prism;

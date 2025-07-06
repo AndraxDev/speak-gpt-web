@@ -11,5 +11,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="prism" level="application" />
     <orderEntry type="library" name="jimp" level="application" />
+    <orderEntry type="library" name="jimp" level="application" />
   </component>
 </module>
