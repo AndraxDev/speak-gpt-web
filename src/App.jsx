@@ -16,7 +16,8 @@
 
 import { BrowserRouter as Router } from "react-router-dom";
 import BaseRoutes from "./BaseRoutes";
-import {createTheme, ThemeProvider} from "@mui/material";
+import createTheme from "@mui/material/styles/createTheme";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import {BaseTheme} from "./Theme";
 import {useEffect} from "react";
 import {migrateFromLegacyAPIs} from "./util/Settings";

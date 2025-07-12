@@ -17,7 +17,7 @@
 import React, {useEffect} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {getApiEndpointById, getApiEndpointId} from "../util/Settings";
 import {MaterialDialog} from "./MaterialDialog";
 

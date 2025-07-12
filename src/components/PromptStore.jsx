@@ -18,7 +18,7 @@ import React, {useEffect} from 'react';
 import {MaterialButton16, MaterialButton24, MaterialButtonTonal24} from "../widgets/MaterialButton";
 import {sha256} from "js-sha256";
 import PromptCard from "./PromptCard";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import PromptView from "./PromptView";
 import Placeholder from "./Placeholder";
 import {useNavigate, useParams} from "react-router-dom";

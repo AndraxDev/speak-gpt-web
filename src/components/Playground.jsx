@@ -17,7 +17,7 @@
 import React, {useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError} from "../widgets/MaterialButton";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {getApiEndpointById, getGlobalEndpointId, getModel, setGlobalEndpointId, setGlobalModel} from "../util/Settings";
 import SelectModelDialog from "./SelectModelDialog";
 import OpenAI from "openai";

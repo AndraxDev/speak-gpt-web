@@ -18,7 +18,7 @@ import React, {useEffect} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import Assistant from "./Assistant";
 import {MaterialButton24, MaterialButtonTonal24, MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {isMobile, MobileView} from "react-device-detect";
 import {Link} from "react-router-dom";
 

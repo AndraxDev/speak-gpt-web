@@ -16,7 +16,7 @@
 
 import React, {useEffect} from 'react';
 import {getAllApiEndpoints} from "../util/Settings";
-import {CircularProgress} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import {sha256} from "js-sha256";
 import {MaterialButton24, MaterialButtonOutlined24, MaterialButtonTonal24} from "../widgets/MaterialButton";
 import ApiEndpointEditDialog from "./ApiEndpointEditDialog";

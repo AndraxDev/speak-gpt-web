@@ -17,7 +17,7 @@
 import React from 'react';
 import NavigationBarItem from "./NavigationBarItem";
 import {MaterialButtonTonal16, MaterialButtonTonal16V2} from "./MaterialButton";
-import {Tooltip} from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import {Link} from "react-router-dom";
 
 function NavigationBar({page, openAssistant}) {

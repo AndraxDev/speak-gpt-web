@@ -17,7 +17,9 @@
 import React, {useEffect, useState} from 'react';
 import {MaterialButton24, MaterialButtonTonal24,} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
-import {Alert, CircularProgress, Snackbar} from "@mui/material";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
 import {supportedFileTypes} from "../util/ModelTypeConverter";
 import OpenAI from "openai";
 import {findOpenAIEndpointIdOrNull, getApiEndpointById, migrateFromLegacyAPIs} from "../util/Settings";

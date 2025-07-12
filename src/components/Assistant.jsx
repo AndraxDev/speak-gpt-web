@@ -22,7 +22,9 @@ import {
 import Message from "./Message";
 import OpenAI from "openai";
 import ConfirmChatClear from "./ConfirmChatClear";
-import {Alert, CircularProgress, Snackbar} from "@mui/material";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
 import ChatSettings from "./ChatSettings";
 import ApiKeyChangeDialog from "./ApiKeyChangeDialog";
 import {

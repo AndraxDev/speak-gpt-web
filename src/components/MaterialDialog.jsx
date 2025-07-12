@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 import {styled} from "@mui/material/styles";
-import {Dialog} from "@mui/material";
+import Dialog from "@mui/material/Dialog";
 
 export const MaterialDialog = styled(Dialog)(({ theme }) => ({
     '&:MuiPaper-root': {
