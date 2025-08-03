@@ -378,7 +378,7 @@ function WelcomePage() {
                         <img src={"./logo192.webp"} alt={"SpeakGPT"} className={"app-logo-mob"}/>
                         <div className={"app-info-text"}>
                             <h1 className={"app-title-mob"}>SpeakGPT</h1>
-                            <p className={"app-desc-mob"}>The best open-source client to access your favorite AI models and APIs.</p>
+                            <p className={"app-desc-mob"}>Access hundreds of AI models - right in your pocket.</p>
                             <div className={"btn-row-mob"}>
                                 <Link to={"https://play.google.com/store/apps/details?id=org.teslasoft.assistant"} target={"_blank"}><MaterialButton24>Download app</MaterialButton24></Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
