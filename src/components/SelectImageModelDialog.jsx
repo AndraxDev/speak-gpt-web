@@ -18,14 +18,14 @@ import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
 
-function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssistant}) {
-    const availableResolutions = [
-        "256x256",
-        "512x512",
-        "1024x1024",
+function SelectImageModelDialog({setIsOpen, setImageModel, imageModel, isAssistant}) {
+    const availableImageModels = [
+        "dall-e-2",
+        "dall-e-3",
+        "gpt-image-1",
     ]
 
-    const [selectedResolution, setSelectedResolution] = React.useState(resolution);
+    const [selectedImageModel, setSelectedImageModel] = React.useState(imageModel);
     return (
         <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
@@ -37,10 +37,10 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssista
                 <h3 className={"dialog-title"}>Select images resolution</h3>
                 <div className={isAssistant ? "dialog-content-assistant" : "dialog-content"}>
                     {
-                        availableResolutions.map((res, index) => {
+                        availableImageModels.map((res, index) => {
                             return (
-                                <div key={index} className={res === selectedResolution ? "selector-item-active" : "selector-item"} onClick={() => {
-                                    setSelectedResolution(res);
+                                <div key={index} className={res === selectedImageModel ? "selector-item-active" : "selector-item"} onClick={() => {
+                                    setSelectedImageModel(res);
                                 }}>{res}</div>
                             )
                         })
@@ -48,7 +48,7 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssista
                     <p className={"warning"} style={{
                         width: "calc(100% - 32px)",
                         marginBottom: "0"
-                    }}>Getting error while generating image? Try to change resolution. Some models support fewer resolutions.</p>
+                    }}>Model gpt-image-1 may require additional identity verification.</p>
                 </div>
                 <div className={"dialog-actions"}>
                     <MaterialButtonOutlined24 onClick={() => {
@@ -56,7 +56,7 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssista
                     }}>Cancel</MaterialButtonOutlined24>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButton24 onClick={() => {
-                        setResolution(selectedResolution)
+                        setImageModel(selectedImageModel)
                         setIsOpen(false);
                     }}>Save</MaterialButton24>
                 </div>
@@ -66,4 +66,4 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssista
     );
 }
 
-export default SelectResolutionDialog;
+export default SelectImageModelDialog;

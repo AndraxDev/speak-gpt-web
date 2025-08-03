@@ -7899,7 +7899,7 @@ Prism.languages.git = {
 	/*
 	 * a git command. It starts with a random prompt finishing by a $, then "git" then some other parameters
 	 * For instance:
-	 * $ git add file.txt
+	 * $ git add file.html
 	 */
 	'command': {
 		pattern: /^.*\$ git .*$/m,
@@ -7918,10 +7918,10 @@ Prism.languages.git = {
 	 * Coordinates displayed in a git diff command
 	 * For instance:
 	 * $ git diff
-	 * diff --git file.txt file.txt
+	 * diff --git file.html file.html
 	 * index 6214953..1d54a52 100644
-	 * --- file.txt
-	 * +++ file.txt
+	 * --- file.html
+	 * +++ file.html
 	 * @@ -1 +1,2 @@
 	 * -Here's my tetx file
 	 * +Here's my text file

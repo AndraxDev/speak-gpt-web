@@ -18,7 +18,7 @@ import React from 'react';
 import Placeholder from "./Placeholder";
 import Chats from "./Chats";
 
-function Chat(props) {
+function Chat() {
     return (
         <div className={"chat-window"}>
             <div className={"chat-list"}>

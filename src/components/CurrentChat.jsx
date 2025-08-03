@@ -42,7 +42,9 @@ import {
     setDalleVersion,
     setModel,
     setResolution,
-    setSystemMessage
+    setSystemMessage,
+    setImageModelX,
+    getImageModelX
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
@@ -50,6 +52,7 @@ import {modelToType, supportedFileTypes} from "../util/ModelTypeConverter";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile, MobileView} from 'react-device-detect';
 import {Link} from "react-router-dom";
+import SelectImageModelDialog from "./SelectImageModelDialog.jsx";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -85,8 +88,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [errorSnackBar, setErrorSnackBar] = React.useState(false);
     const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
-
-
+    const [imageModelDialogOpened, setImageModelDialogOpened] = React.useState(false);
+    const [imageModel, setImageModel] = React.useState(getImageModelX(id));
 
     const openai = new OpenAI({
         apiKey: getApiEndpointById(getApiEndpointId(findOpenAIEndpointIdOrNull() != null ? findOpenAIEndpointIdOrNull() : sha256(stateSelectedChat))).key,
@@ -119,6 +122,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         setCurrentImageResolution(getResolution(id))
         setUseDalle3(getDalleVersion(id) === "3")
         setSystemMessageX(getSystemMessage(id))
+        setImageModel(getImageModelX(id))
     }, [id]);
     
     useEffect(() => {
@@ -126,7 +130,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         setDalleVersion(id, useDalle3 ? "3" : "2")
         setResolution(id, currentImageResolution)
         setSystemMessage(id, systemMessage)
-    }, [currentModel, useDalle3, currentImageResolution, systemMessage, id]);
+        setImageModelX(id, imageModel);
+    }, [currentModel, useDalle3, currentImageResolution, systemMessage, id, imageModel]);
 
     const getAndroidOS = () => {
         return navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Linux x86_64") > -1;
@@ -242,25 +247,33 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                 });
 
                 const response = await openai.images.generate({
-                    model: "dall-e-" + getDalleVersion(id),
+                    model: getImageModelX(id),
                     prompt: prompt,
                     n: 1,
                     size: getResolution(id),
                 });
-                let image = response.data[0].url;
-
-                console.log(image)
-
-                let image1 = await convertImageToBase64(image);
 
                 let c = conversation;
-                c.push({
-                    message: "~file:" + image1,
-                    isBot: true
-                });
+                if (getImageModelX(id) === "gpt-image-1") {
+                    let image1 = response.data[0].b64_json;
 
-                setConversation(c)
+                    c.push({
+                        message: "~file:" + image1,
+                        isBot: true
+                    });
+                } else {
+                    let image = response.data[0].url;
 
+                    console.log(image)
+
+                    let image1 = await convertImageToBase64(image);
+
+                    c.push({
+                        message: "~file:" + image1,
+                        isBot: true
+                    });
+                }
+                setConversation(c);
                 saveConversation(sha256(stateSelectedChat), JSON.stringify(c));
             } else {
                 let c = conversation;
@@ -724,6 +737,8 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     systemMessage={systemMessage}
                     openSystemMessageDialog={setSystemMessageDialogOpened}
                     isAssistant={false}
+                    imageModel={imageModel}
+                    openImageModelDialog={setImageModelDialogOpened}
                 /> : null
             }
             {
@@ -734,6 +749,9 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             }
             {
                 modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={false} chatId={sha256(stateSelectedChat)} /> : null
+            }
+            {
+                imageModelDialogOpened ? <SelectImageModelDialog setImageModel={setImageModel} imageModel={imageModel} setIsOpen={setImageModelDialogOpened} isAssistant={true} /> : null
             }
             {
                 systemMessageDialogOpened ? <SystemMessageEditDialog message={systemMessage} setIsOpen={setSystemMessageDialogOpened} setMessage={setSystemMessageX} isAssistant={false} /> : null

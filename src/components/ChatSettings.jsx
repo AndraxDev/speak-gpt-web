@@ -36,7 +36,7 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant}) {
+function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant, openImageModelDialog, imageModel}) {
     const [apiHostDialogOpen, setApiHostDialogOpen] = React.useState(false);
     const [apiEndpointSelector, setApiEndpointSelector] = React.useState(false);
 
@@ -66,10 +66,15 @@ function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openMo
                         openSystemMessageDialog(true);
                     }} icon={"key"} title={"System message"} subtitle={"Click to set"}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                    <Tile icon={"key"} title={"Use DALL-e 3"}
-                          subtitle={dalle3 ? "DALL-e 3 is using" : "DALL-e 2 is using"}
-                          description={"Lorem ipsum dolor sit amet."} checkable={true} checked={dalle3}
-                          setChecked={setDalleVersion}/>
+                    <Tile clickAction={() => {
+                        console.log("Open image model dialog");
+                        openImageModelDialog(true);
+                    }} icon={"key"} title={"Image generation model"} subtitle={imageModel}
+                          description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
+                    {/*<Tile icon={"key"} title={"Use DALL-e 3"}*/}
+                    {/*      subtitle={dalle3 ? "DALL-e 3 is using" : "DALL-e 2 is using"}*/}
+                    {/*      description={"Lorem ipsum dolor sit amet."} checkable={true} checked={dalle3}*/}
+                    {/*      setChecked={setDalleVersion}/>*/}
                     <Tile clickAction={() => {
                         openResolutionDialog(true);
                     }} icon={"key"} title={"Image resolution"} subtitle={resolution}

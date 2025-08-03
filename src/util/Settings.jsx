@@ -26,6 +26,7 @@ const defaultApiEndpoint = {
 const globalSettings = window.localStorage.getItem("globalSettings") == null ? {
     model: "gpt-4o",
     dalleVersion: "2",
+    imageModel: "dall-e-2",
     resolution: "1024x1024",
     systemMessage: "",
     apiHost: "https://api.openai.com/v1/", /* @deprecated */
@@ -35,6 +36,7 @@ const globalSettings = window.localStorage.getItem("globalSettings") == null ? {
 const defaultSettings = {
     model: "gpt-4o",
     dalleVersion: "3",
+    imageModel: "dall-e-3",
     resolution: "1024x1024",
     systemMessage: "",
     apiHost: "https://api.openai.com/v1/", /* @deprecated */
@@ -44,6 +46,7 @@ const defaultSettings = {
 const defaultSettingsMax = {
     model: "gpt-4o",
     dalleVersion: "3",
+    imageModel: "gpt-image-1",
     resolution: "1024x1024",
     systemMessage: "",
     apiHost: "https://api.openai.com/v1/", /* @deprecated */
@@ -116,6 +119,26 @@ export const getDalleVersion = (chatId) => {
 export const setDalleVersion = (chatId, dalleVersion) => {
     let settings = getSettingsJSON(chatId);
     settings.dalleVersion = dalleVersion;
+    setSettingsJSON(chatId, settings);
+}
+
+export const getGlobalImageModel = () => {
+    return getDefaultSettings().imageModel ? getDefaultSettings().imageModel : defaultSettings.imageModel;
+}
+
+export const setGlobalImageModel = (imageModel) => {
+    let settings = getDefaultSettings();
+    settings.imageModel = imageModel;
+    window.localStorage.setItem("globalSettings", JSON.stringify(settings));
+}
+
+export const getImageModelX = (chatId) => {
+    return getSettingsJSON(chatId).imageModel ? getSettingsJSON(chatId).imageModel : (getDefaultSettings().imageModel ? getDefaultSettings().imageModel : defaultSettings.imageModel);
+}
+
+export const setImageModelX = (chatId, imageModel) => {
+    let settings = getDefaultSettings();
+    settings.imageModel = imageModel;
     setSettingsJSON(chatId, settings);
 }
 

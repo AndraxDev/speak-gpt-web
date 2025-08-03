@@ -51,6 +51,13 @@ const pageContent = `
 
 ---
 
+## Data sharing
+
+- When you use our services, we may share your conversations with AI providers you selected. Some providers may store your conversation for a limited time to improve their models. We do not have access to this data and we do not store it on our servers. To learn more about how your data is used, refer to the Privacy Policy of the API provider you are using.
+- Some of AI providers may also store your data indefinitely due to legal holds. And example is OpenAI which received lawsuit from the New Your Times and now has to store all of user data regardless of the laws and their own policies (Except Enterprise and Edu versions or Zero data retention agreements).
+
+---
+
 > *. When you install this app an installation ID will be created. This id is a random UUID string and it does not belong to Android id or any of hardware IDs. You can either reset or delete installation ID. In this case we will stop to collect data associated with installation ID.
 
 > **. User-generated content is all content created and published by users using this app. We may review public content for violations and remove inappropriate content. We don't have access to private content (like chats list, conversations, etc). User-generated content term doesn't include your chat list, chat content or app preferences.

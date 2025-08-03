@@ -37,13 +37,14 @@ import {
     setGlobalResolution,
     setGlobalSystemMessage,
     migrateFromLegacyAPIs,
-    getApiEndpointById, findOpenAIEndpointIdOrNull, getGlobalEndpointId
+    getApiEndpointById, findOpenAIEndpointIdOrNull, getGlobalEndpointId, getGlobalImageModel, setGlobalImageModel
 } from "../util/Settings";
 import SelectResolutionDialog from "./SelectResolutionDialog";
 import SelectModelDialog from "./SelectModelDialog";
 import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {supportedFileTypes} from "../util/ModelTypeConverter";
+import SelectImageModelDialog from "./SelectImageModelDialog.jsx";
 
 const getDefaultDescription = () => {
     return (`
@@ -88,13 +89,16 @@ function Assistant({runtimePrompt, type, closeWindow}) {
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [errorSnackBar, setErrorSnackBar] = React.useState(false);
     const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
+    const [imageModelDialogOpened, setImageModelDialogOpened] = React.useState(false);
+    const [imageModel, setImageModel] = React.useState(getGlobalImageModel());
 
     useEffect(() => {
         setGlobalModel(currentModel)
         setGlobalDalleVersion(useDalle3 ? "3" : "2")
         setGlobalResolution(currentImageResolution)
         setGlobalSystemMessage(systemMessage)
-    }, [currentModel, useDalle3, currentImageResolution, systemMessage]);
+        setGlobalImageModel(imageModel);
+    }, [currentModel, useDalle3, currentImageResolution, systemMessage, imageModel]);
 
     const getAndroidOS = () => {
         return navigator.userAgent.indexOf("Android") > -1 || navigator.userAgent.indexOf("Linux x86_64") > -1;
@@ -198,24 +202,35 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 });
 
                 const response = await openai.images.generate({
-                    model: "dall-e-" + getGlobalDalleVersion(),
+                    // model: "dall-e-" + getGlobalDalleVersion(),
+                    model: getGlobalImageModel(),
                     prompt: prompt,
                     n: 1,
                     size: getGlobalResolution(),
                 });
-                let image = response.data[0].url;
-
-                console.log(image)
-
-                let image1 = await convertImageToBase64(image);
 
                 let c = conversation;
-                c.push({
-                    message: "~file:" + image1,
-                    isBot: true
-                });
+                if (getGlobalImageModel() === "gpt-image-1") {
+                    let image1 = response.data[0].b64_json;
 
-                setConversation(c)
+                    c.push({
+                        message: "~file:" + image1,
+                        isBot: true
+                    });
+                } else {
+                    let image = response.data[0].url;
+
+                    console.log(image)
+
+                    let image1 = await convertImageToBase64(image);
+
+                    c.push({
+                        message: "~file:" + image1,
+                        isBot: true
+                    });
+                }
+
+                setConversation(c);
             } else {
                 let c = conversation;
                 c.push({
@@ -612,6 +627,8 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                     systemMessage={systemMessage}
                     openSystemMessageDialog={setSystemMessageDialogOpened}
                     isAssistant={true}
+                    imageModel={imageModel}
+                    openImageModelDialog={setImageModelDialogOpened}
                 /> : null
             }
             {
@@ -619,6 +636,9 @@ function Assistant({runtimePrompt, type, closeWindow}) {
             }
             {
                 resolutionDialogOpened ? <SelectResolutionDialog setResolution={setCurrentImageResolution} resolution={currentImageResolution} setIsOpen={setResolutionDialogOpened} isAssistant={true} /> : null
+            }
+            {
+                imageModelDialogOpened ? <SelectImageModelDialog setImageModel={setImageModel} imageModel={imageModel} setIsOpen={setImageModelDialogOpened} isAssistant={true} /> : null
             }
             {
                 modelDialogOpened ? <SelectModelDialog setModel={setCurrentModel} model={currentModel} setIsOpen={setModelDialogOpened} isAssistant={true} chatId={""} /> : null
