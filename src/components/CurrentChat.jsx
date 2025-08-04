@@ -90,6 +90,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
     const [imageModelDialogOpened, setImageModelDialogOpened] = React.useState(false);
     const [imageModel, setImageModel] = React.useState(getImageModelX(id));
+    const [settingsAreInitialized, setSettingsAreInitialized] = React.useState(false);
 
     const openai = new OpenAI({
         apiKey: getApiEndpointById(getApiEndpointId(findOpenAIEndpointIdOrNull() != null ? findOpenAIEndpointIdOrNull() : sha256(stateSelectedChat))).key,
@@ -126,11 +127,17 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
     }, [id]);
     
     useEffect(() => {
-        setModel(id, currentModel)
-        setDalleVersion(id, useDalle3 ? "3" : "2")
-        setResolution(id, currentImageResolution)
-        setSystemMessage(id, systemMessage)
-        setImageModelX(id, imageModel);
+        if (settingsAreInitialized) {
+            setModel(id, currentModel)
+            setDalleVersion(id, useDalle3 ? "3" : "2")
+            setResolution(id, currentImageResolution)
+            setSystemMessage(id, systemMessage)
+            setImageModelX(id, imageModel);
+        } else {
+            setSettingsAreInitialized(true);
+        }
+        // Ignore settingsAreInitialized. If I include it here, it will make no sense, as the whole iteration must be skipped.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentModel, useDalle3, currentImageResolution, systemMessage, id, imageModel]);
 
     const getAndroidOS = () => {

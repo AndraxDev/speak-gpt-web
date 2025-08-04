@@ -63,6 +63,7 @@ const getSettingsString = (chatId) => {
 }
 
 const setSettingsString = (chatId, settings) => {
+    console.log(chatId, settings);
     if (chatId === "") {
         window.localStorage.setItem("globalSettings", settings);
     } else {
@@ -137,7 +138,7 @@ export const getImageModelX = (chatId) => {
 }
 
 export const setImageModelX = (chatId, imageModel) => {
-    let settings = getDefaultSettings();
+    let settings = getSettingsJSON(chatId);
     settings.imageModel = imageModel;
     setSettingsJSON(chatId, settings);
 }
