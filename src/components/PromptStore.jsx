@@ -187,7 +187,7 @@ function PromptStore() {
         } : {}} className={"prompt-window"}>
             <div className={isMobile ? "prompt-list-container-mob" : "prompt-list-container"}>
                 <div className={isMobile ? "prompts-filter-mob" : "prompts-filter"}>
-                    <h2 className={"page-title"}>Prompts Store</h2>
+                    <h2 className={"page-title"}>Prompt Library</h2>
                     <div className={isMobile ? "search-box-mob" : "search-box-2"}>
                         <input className={"search-input"} type={"text"} placeholder={"Search prompts..."}
                                onChange={(e) => {
