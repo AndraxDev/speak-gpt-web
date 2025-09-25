@@ -25,13 +25,13 @@ function AssistantDeepLink() {
         <>
             <BrowserView className={"full-height"}>
                 <Placeholder icon={"cancel"}>
-                    <p className={"placeholder-text"}>This feature is only available on mobile devices.</p>
-                    <Link to={"/"}><MaterialButton24>Go to home</MaterialButton24></Link>
+                    <p className={"placeholder-text"}>This feature is only available on devices with Android version 10 and higher.</p>
+                    <Link to={"/"}><MaterialButton24>Back to home</MaterialButton24></Link>
                 </Placeholder>
             </BrowserView>
             <MobileView className={"full-height"}>
                 <Placeholder icon={"cancel"}>
-                    <p className={"placeholder-text"}>You need to install SpeakGPT version 3.23 or above and allow it open external links to use this feature.</p>
+                    <p className={"placeholder-text"}>You need to install SpeakGPT version 3.23 or higher and allow it open external links to use this feature. Additionally, you cannot open SpeakGPT by directly accessing this URL.</p>
                     <div style={{
                         display: "flex",
                         flexDirection: "row",
@@ -40,7 +40,7 @@ function AssistantDeepLink() {
                     }}>
                         <a href={"/assistant"}><MaterialButton24>Launch SpeakGPT for Android</MaterialButton24></a>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to={"/"}><MaterialButtonOutlined24>Go to home</MaterialButtonOutlined24></Link>
+                        <Link to={"/"}><MaterialButtonOutlined24>Back to home</MaterialButtonOutlined24></Link>
                     </div>
                 </Placeholder>
             </MobileView>

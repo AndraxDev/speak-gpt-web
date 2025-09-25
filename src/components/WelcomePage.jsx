@@ -414,7 +414,7 @@ function WelcomePage() {
                                                         border: "none",
                                                         borderRadius: "12px",
                                                         transition: "border-radius 0.2s",
-                                                        "&:hover": {
+                                                        "&:active": {
                                                             backgroundColor: "#fff",
                                                             border: "none",
                                                             borderRadius: "24px",
@@ -426,7 +426,7 @@ function WelcomePage() {
                                                     border: "none",
                                                     borderRadius: "12px",
                                                     transition: "border-radius 0.2s",
-                                                    "&:hover": {
+                                                    "&:active": {
                                                         backgroundColor: "#fff",
                                                         border: "none",
                                                         borderRadius: "24px",
