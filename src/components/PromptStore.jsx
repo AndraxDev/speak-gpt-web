@@ -24,71 +24,90 @@ import Placeholder from "./Placeholder";
 import {useNavigate, useParams} from "react-router-dom";
 import PlaceholderLoading from "./PlaceholderLoading";
 import {BrowserView, isMobile, MobileView} from 'react-device-detect';
+import Add from "@mui/icons-material/Add";
+import Attractions from "@mui/icons-material/Attractions";
+import BarChart from "@mui/icons-material/BarChart";
+import DataObject from "@mui/icons-material/DataObject";
+import DoneAll from "@mui/icons-material/DoneAll";
+import FitnessCenter from "@mui/icons-material/FitnessCenter";
+import Group from "@mui/icons-material/Group";
+import Handyman from "@mui/icons-material/Handyman";
+import Hiking from "@mui/icons-material/Hiking";
+import HistoryEdu from "@mui/icons-material/HistoryEdu";
+import LocalHospital from "@mui/icons-material/LocalHospital";
+import Museum from "@mui/icons-material/Museum";
+import MusicNote from "@mui/icons-material/MusicNote";
+import Palette from "@mui/icons-material/Palette";
+import Restaurant from "@mui/icons-material/Restaurant";
+import School from "@mui/icons-material/School";
+import SearchRounded from "@mui/icons-material/SearchRounded";
+import SportsEsports from "@mui/icons-material/SportsEsports";
+import ViewCozy from "@mui/icons-material/ViewCozy";
 
 const categories = [
     {
         "cat": "all",
-        "icon": "done_all"
+        "icon": <DoneAll/>
     },
     {
         "cat": "development",
-        "icon": "data_object"
+        "icon": <DataObject/>
     },
     {
         "cat": "music",
-        "icon": "music_note"
+        "icon": <MusicNote/>
     },
     {
         "cat": "art",
-        "icon": "palette"
+        "icon": <Palette/>
     },
     {
         "cat": "culture",
-        "icon": "museum"
+        "icon": <Museum/>
     },
     {
         "cat": "business",
-        "icon": "monitoring"
+        "icon": <BarChart/>
     },
     {
         "cat": "gaming",
-        "icon": "sports_esports"
+        "icon": <SportsEsports/>
     },
     {
         "cat": "education",
-        "icon": "school"
+        "icon": <School/>
     },
     {
         "cat": "history",
-        "icon": "history_edu"
+        "icon": <HistoryEdu/>
     },
     {
         "cat": "food",
-        "icon": "restaurant"
+        "icon": <Restaurant/>
     },
     {
         "cat": "tourism",
-        "icon": "hiking"
+        "icon": <Hiking/>
     },
     {
         "cat": "productivity",
-        "icon": "group"
+        "icon": <Group/>
     },
     {
         "cat": "tools",
-        "icon": "handyman"
+        "icon": <Handyman/>
     },
     {
         "cat": "entertainment",
-        "icon": "attractions"
+        "icon": <Attractions/>
     },
     {
         "cat": "sport",
-        "icon": "fitness_center"
+        "icon": <FitnessCenter/>
     },
     {
         "cat": "health",
-        "icon": "local_hospital"
+        "icon": <LocalHospital/>
     }
 ];
 
@@ -183,7 +202,7 @@ function PromptStore() {
 
     return (
         <div style={isMobile ? {
-            height: "calc(calc(var(--vh, 1vh) * 100) - 80px)",
+            height: "calc(100dvh - 80px)",
         } : {}} className={"prompt-window"}>
             <div className={isMobile ? "prompt-list-container-mob" : "prompt-list-container"}>
                 <div className={isMobile ? "prompts-filter-mob" : "prompts-filter"}>
@@ -193,7 +212,7 @@ function PromptStore() {
                                onChange={(e) => {
                                    setSearchQuery(e.target.value)
                                }}/>
-                        <span className={"search-icon material-symbols-outlined"}>search</span>
+                        <span className={"search-icon material-symbols-outlined"}><SearchRounded/></span>
                     </div>
                     <div style={{
                         height: "12px",
@@ -206,7 +225,7 @@ function PromptStore() {
                                     setSelectedCategory(e.cat === "" ? "uncategorized" : e.cat);
                                 }}
                                      className={e.cat === selectedCategory ? "category-tile cat-active-" + e.cat : "category-tile cat-" + e.cat}
-                                     key={sha256(e.icon)}>
+                                     key={sha256(e.cat)}>
                                     <span className={"material-symbols-outlined"}>{e.icon}</span>
                                 </div>
                             ))
@@ -278,7 +297,7 @@ function PromptStore() {
                             marginRight: "10px"
                         }} onClick={() => {
 
-                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                        }}>&nbsp;<span className={"material-symbols-outlined"}><Add/></span>&nbsp;
                             <span>Post your prompt</span>&nbsp;&nbsp;</MaterialButton16>
                     </BrowserView>
                     <MobileView>
@@ -287,7 +306,7 @@ function PromptStore() {
                             marginRight: "16px"
                         }} onClick={() => {
 
-                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                        }}>&nbsp;<span className={"material-symbols-outlined"}><Add/></span>&nbsp;
                             <span>Post your prompt</span>&nbsp;&nbsp;</MaterialButton16>
                     </MobileView>
                 </div>
@@ -299,7 +318,7 @@ function PromptStore() {
                             height: "64px"
                         }}/>
                     </div> : <div style={isMobile ? {
-                        height: "calc(calc(var(--vh, 1vh) * 100) - 80px - 268px)",
+                        height: "calc(100dvh - 94px - 268px)",
                     } : {}} className={isMobile ? "prompt-list-mob" : "prompt-list"}>
                         {
                             prompts.map((e) =>
@@ -330,7 +349,7 @@ function PromptStore() {
                     }
                 </div> : <BrowserView>
                     <div className={"prompt-content"}>
-                        <Placeholder message={"Select a prompt to view more info."} icon={"view_cozy"}/>
+                        <Placeholder message={"Select a prompt to view more info."} icon={<ViewCozy fontSize={"inherit"} />}/>
                     </div>
                 </BrowserView> }
         </div>

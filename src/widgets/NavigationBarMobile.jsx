@@ -16,13 +16,16 @@
 
 import React from 'react';
 import NavigationBarItem from "./NavigationBarItem";
+import Apps from "@mui/icons-material/Apps";
+import Lightbulb from "@mui/icons-material/Lightbulb";
+import MessageRounded from "@mui/icons-material/MessageRounded";
 
 function NavigationBar({page, openAssistant}) {
     return (
         <div className={"nav-bar-mobile"}>
-            <NavigationBarItem name="Chat" icon="chat" isActive={page === "chat"} page={"/chat"}/>
-            <NavigationBarItem name="Prompts" icon="apps" isActive={page === "prompts"} page={"/prompts"}/>
-            <NavigationBarItem name="Tips" icon="lightbulb" isActive={page === "tips"} page={"/tips"}/>
+            <NavigationBarItem name="Chat" icon={<MessageRounded fontSize={"small"}/>} isActive={page === "chat"} page={"/chat"}/>
+            <NavigationBarItem name="Prompts" icon={<Apps fontSize={"small"}/>} isActive={page === "prompts"} page={"/prompts"}/>
+            <NavigationBarItem name="Tips" icon={<Lightbulb fontSize={"small"}/>} isActive={page === "tips"} page={"/tips"}/>
         </div>
     );
 }

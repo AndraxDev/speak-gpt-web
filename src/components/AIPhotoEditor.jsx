@@ -23,6 +23,7 @@ import Snackbar from "@mui/material/Snackbar";
 import {supportedFileTypes} from "../util/ModelTypeConverter";
 import OpenAI from "openai";
 import {findOpenAIEndpointIdOrNull, getApiEndpointById, migrateFromLegacyAPIs} from "../util/Settings";
+import Photo from "@mui/icons-material/Photo";
 
 function AiPhotoEditor(props) {
 
@@ -225,9 +226,11 @@ function AiPhotoEditor(props) {
             <div className={"photo-panel"}>
                 <div className={"photo-block"}>
                     <div className={"container-actions"}>
-                        <MaterialButtonTonal24 className={"select-file"}><span style={{
+                        <MaterialButtonTonal24 style={{
+                            width: "200px",
+                        }} className={"select-file"}><span style={{
                             fontSize: "20px",
-                        }} className={"material-symbols-outlined"}>photo</span>&nbsp;&nbsp;Select a photo<input
+                        }} className={"material-symbols-outlined"}><Photo/></span>&nbsp;&nbsp;Select a photo<input
                             className={"visually-hidden-input-v2"} onChange={(e) => {
                             if (e.target.files.length !== 0) {
                                 processFile(e.target.files[0])

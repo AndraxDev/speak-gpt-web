@@ -17,6 +17,7 @@
 import React from 'react';
 
 import {isMobile} from "react-device-detect";
+import ThumbUp from "@mui/icons-material/ThumbUp";
 
 function PromptCard({prompt, onPromptClick}) {
     return (
@@ -28,7 +29,7 @@ function PromptCard({prompt, onPromptClick}) {
             <div className={"card-third-line"}><p className={"card-author"}>{prompt.author}</p><div className={"like"}><span style={{
                 paddingTop: "2px"
             }}>{prompt.likes}</span>&nbsp;&nbsp;<span
-                className={"material-symbols-outlined"}>thumb_up</span></div>
+                className={"material-symbols-outlined"}><ThumbUp fontSize={"medium"}/></span></div>
             </div>
         </div>
     );

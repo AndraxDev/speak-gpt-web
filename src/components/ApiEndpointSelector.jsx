@@ -21,6 +21,7 @@ import {sha256} from "js-sha256";
 import {MaterialButton24, MaterialButtonOutlined24, MaterialButtonTonal24} from "../widgets/MaterialButton";
 import ApiEndpointEditDialog from "./ApiEndpointEditDialog";
 import {MaterialDialog} from "./MaterialDialog";
+import Edit from "@mui/icons-material/Edit";
 
 function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, isOpened, setIsOpened, isAssistant, ...props}) {
     const [selectedApiEndpoint, setSelectedApiEndpoint] = React.useState(selectedApiEndpointId);
@@ -72,7 +73,7 @@ function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, i
                                             <span onClick={() => {
                                                 setApiEndpointForEdit(sha256(e.label));
                                                 setEditDialogOpened(true);
-                                            }} className={"material-symbols-outlined"}>edit</span>
+                                            }} className={"material-symbols-outlined"}><Edit/></span>
                                         </div>
                                     </div>
                                 )

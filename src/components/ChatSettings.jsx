@@ -23,6 +23,13 @@ import ApiHostChangeDialog from "./ApiHostChangeDialog";
 import ApiEndpointSelector from "./ApiEndpointSelector";
 import {getApiEndpointId, getGlobalEndpointId, setApiEndpointId, setGlobalEndpointId} from "../util/Settings";
 import {MaterialDialog} from "./MaterialDialog";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import CancelRounded from "@mui/icons-material/CancelRounded";
+import Lan from "@mui/icons-material/Lan";
+import Photo from "@mui/icons-material/Photo";
+import PhotoSizeSelectActual from "@mui/icons-material/PhotoSizeSelectActual";
+import SmartToyRounded from "@mui/icons-material/SmartToyRounded";
+import TextFormatRounded from "@mui/icons-material/TextFormatRounded";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -43,7 +50,7 @@ function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openMo
     const SettingsComponent = () => {
         return (
             <div style={isMobile ? {
-                height: "calc(var(--vh, 1vh) * 100)",
+                height: "100dvh",
             } : {}} className={isMobile ? "dialog-paper-settings-mob" : "dialog-paper-settings"}
                  onMouseDown={(e) => {
                      e.stopPropagation();
@@ -52,32 +59,28 @@ function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openMo
                 <div className={isMobile ? "tiles-mob" : "tiles"}>
                     <Tile clickAction={() => {
                         window.open("https://platform.openai.com/account", "_blank")
-                    }} icon={"account_circle"} title={"Account"} subtitle={"Manage OpenAI account"}
+                    }} icon={<AccountCircle/>} title={"Account"} subtitle={"Manage OpenAI account"}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                     <Tile clickAction={() => {
                         setApiEndpointSelector(true);
-                    }} icon={"lan"} title={"API Endpoint"} subtitle={"Click to set"}
+                    }} icon={<Lan/>} title={"API Endpoint"} subtitle={"Click to set"}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                     <Tile clickAction={() => {
                         openModelDialog(true);
-                    }} icon={"key"} title={"AI model"} subtitle={model}
+                    }} icon={<SmartToyRounded/>} title={"AI model"} subtitle={model}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                     <Tile clickAction={() => {
                         openSystemMessageDialog(true);
-                    }} icon={"key"} title={"System message"} subtitle={"Click to set"}
+                    }} icon={<TextFormatRounded/>} title={"System message"} subtitle={"Click to set"}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                     <Tile clickAction={() => {
                         console.log("Open image model dialog");
                         openImageModelDialog(true);
-                    }} icon={"key"} title={"Image generation model"} subtitle={imageModel}
+                    }} icon={<Photo/>} title={"Image generation model"} subtitle={imageModel}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
-                    {/*<Tile icon={"key"} title={"Use DALL-e 3"}*/}
-                    {/*      subtitle={dalle3 ? "DALL-e 3 is using" : "DALL-e 2 is using"}*/}
-                    {/*      description={"Lorem ipsum dolor sit amet."} checkable={true} checked={dalle3}*/}
-                    {/*      setChecked={setDalleVersion}/>*/}
                     <Tile clickAction={() => {
                         openResolutionDialog(true);
-                    }} icon={"key"} title={"Image resolution"} subtitle={resolution}
+                    }} icon={<PhotoSizeSelectActual/>} title={"Image resolution"} subtitle={resolution}
                           description={"Lorem ipsum dolor sit amet."} checkable={false} checked={false}/>
                 </div>
                 <p style={{
@@ -96,7 +99,7 @@ function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openMo
             <MobileView>
                 <div className={"back-button-priority-1"}>
                     <MaterialButtonTonalIconV2 onClick={() => setIsOpen(false)}><span
-                        className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
+                        className={"material-symbols-outlined"}><CancelRounded/></span></MaterialButtonTonalIconV2>
                 </div>
             </MobileView>
             <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={(e) => {

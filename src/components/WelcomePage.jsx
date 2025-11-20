@@ -22,6 +22,24 @@ import {sha256} from "js-sha256";
 import Assistant from "./Assistant";
 import LazyHydrate from "react-lazy-hydration";
 import {MaterialDialog} from "./MaterialDialog";
+import Apps from "@mui/icons-material/Apps";
+import CloudOff from "@mui/icons-material/CloudOff";
+import Code from "@mui/icons-material/Code";
+import Extension from "@mui/icons-material/Extension";
+import Folder from "@mui/icons-material/Folder";
+import Functions from "@mui/icons-material/Functions";
+import GraphicEq from "@mui/icons-material/GraphicEq";
+import GroupWork from "@mui/icons-material/GroupWork";
+import Help from "@mui/icons-material/Help";
+import ListRounded from "@mui/icons-material/ListRounded";
+import MicRounded from "@mui/icons-material/MicRounded";
+import Palette from "@mui/icons-material/Palette";
+import Photo from "@mui/icons-material/Photo";
+import Science from "@mui/icons-material/Science";
+import Terminal from "@mui/icons-material/Terminal";
+import TokenRounded from "@mui/icons-material/TokenRounded";
+import Translate from "@mui/icons-material/Translate";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -31,7 +49,7 @@ function setFullHeight() {
 const features = [
     {
         title: "Answer your question",
-        icon: "help",
+        icon: <Help fontSize={"large"}/>,
         description: "Get comprehensive answers from a vast knowledge base on a multitude of topics and queries.",
         buttonLink: "/chat",
         buttonLabel: "Start a chat",
@@ -42,7 +60,7 @@ const features = [
     },
     {
         title: "Generate code",
-        icon: "code",
+        icon: <Code fontSize={"large"}/>,
         description: "Create efficient and customizable code snippets tailored to your specific programming needs.",
         buttonLink: "Generate code snippet for a Python function that calculates the factorial of a number.",
         buttonLabel: "Try an example",
@@ -52,7 +70,7 @@ const features = [
     },
     {
         title: "Solve math problems",
-        icon: "function",
+        icon: <Functions fontSize={"large"}/>,
         description: "Solve complex mathematical equations and problems with precision, from basic arithmetic to advanced calculus.",
         buttonLink: "Solve the integral of x^2 from 0 to 1.",
         buttonLabel: "Try an example",
@@ -62,7 +80,7 @@ const features = [
     },
     {
         title: "Translate text",
-        icon: "translate",
+        icon: <Translate fontSize={"large"}/>,
         description: "Translate text from over 170 languages, ensuring accurate and context-aware communication.",
         buttonLink: "Translate the phrase 'Hello, how are you?' to French.",
         buttonLabel: "Try an example",
@@ -72,7 +90,7 @@ const features = [
     },
     {
         title: "Generate images",
-        icon: "imagesmode",
+        icon: <Palette fontSize={"large"}/>,
         description: "Generate unique images and digital artworks from textual descriptions for your creative projects.",
         buttonLink: "/imagine Generate an image of a sunset over the ocean.",
         buttonLabel: "Try an example",
@@ -82,7 +100,7 @@ const features = [
     },
     {
         title: "Process png/jpg images",
-        icon: "folder",
+        icon: <Folder fontSize={"large"}/>,
         description: "Include images in your queries and receive detailed information, analysis, and processing of the image content.",
         buttonLink: "/chat",
         buttonLabel: "Start a chat",
@@ -93,7 +111,7 @@ const features = [
     },
     {
         title: "Custom assistants",
-        icon: "group_work",
+        icon: <GroupWork fontSize={"large"}/>,
         description: "Embed personalized assistant to your site using just 1 line of code.",
         buttonLink: "https://github.com/AndraxDev/speak-gpt-web",
         buttonLabel: "Open documentation",
@@ -104,7 +122,7 @@ const features = [
     },
     {
         title: "Prompts Store",
-        icon: "apps",
+        icon: <Apps fontSize={"large"}/>,
         description: "Explore and share AI-driven prompts in a collaborative community, enhancing creativity and inspiration among users and share your own.",
         buttonLink: "/prompts",
         buttonLabel: "Explore prompts",
@@ -115,7 +133,7 @@ const features = [
     },
     {
         title: "Privacy",
-        icon: "visibility_off",
+        icon: <VisibilityOff fontSize={"large"}/>,
         description: "Your data is not used for training AI models. All your conversation and credentials are stored locally and no other apps have access to this data.",
         buttonLink: "/chat",
         buttonLabel: "Start a chat",
@@ -126,7 +144,7 @@ const features = [
     },
     {
         title: "Different AI models",
-        icon: "extension",
+        icon: <Extension fontSize={"large"}/>,
         description: "Access GPT, Gemini, Claude, Mistral, LLama and other powerful AI models.",
         buttonLink: "/chat",
         buttonLabel: "Start a chat",
@@ -136,7 +154,7 @@ const features = [
     },
     {
         title: "Playground",
-        icon: "terminal",
+        icon: <Terminal fontSize={"large"}/>,
         description: "Play with different AI models and see how they work.",
         buttonLink: "/playground",
         buttonLabel: "Launch playground",
@@ -146,7 +164,7 @@ const features = [
     },
     {
         title: "AI Photo Editor",
-        icon: "photo",
+        icon: <Photo fontSize={"large"}/>,
         description: "Edit your photos using DALL-e.",
         buttonLink: "/editor",
         buttonLabel: "Launch AI Photo Editor",
@@ -159,56 +177,56 @@ const features = [
 const mobileFeatures = [
     {
         title: "Assistant",
-        icon: "group_work",
+        icon: <GroupWork fontSize={"large"}/>,
         description: "Make SpeakGPT your default assistant and access SpeakGPT from any app or site.",
         tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "WhisperAI",
-        icon: "graphic_eq",
+        icon: <GraphicEq fontSize={"large"}/>,
         description: "Use your voice to access SpeakGPT. Currently it support WhisperAI and Google Speech recognition. Voice language is detected automatically.",
         tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Text-To-Speech",
-        icon: "text_to_speech",
+        icon: <MicRounded fontSize={"large"}/>,
         description: "Mobile app supports pronouncing text using OpenAI TTS and Google TTS.",
         tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Offline mode",
-        icon: "cloud_off",
+        icon: <CloudOff fontSize={"large"}/>,
         description: "Access your saved chats while you're offline.",
         tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Context menu",
-        icon: "lists",
+        icon: <ListRounded fontSize={"large"}/>,
         description: "Select text in any app and select 'SpeakGPT' in your context menu to use this text with assistant. Currently you can summarize, explain, translate text, use it as prompt or generate images.",
         tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Experiments",
-        icon: "science",
+        icon: <Science fontSize={"large"}/>,
         description: "Sometimes we're rolling out new interesting functions for a limited time period. Check out 'Experiments' section in the app.",
         tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Fine-tunes",
-        icon: "token",
+        icon: <TokenRounded fontSize={"large"}/>,
         description: "Mobile version allows you to use you fine-tuned models.",
         tintBackground: "rgba(30, 30, 30,0.8)",
         tintForeground: "rgb(255,255,255)"
     },
     {
         title: "Dynamic theme",
-        icon: "palette",
+        icon: <Palette fontSize={"large"}/>,
         description: "Theme depends on you wallpaper and settings (requires Android 12+ and supported device). Also you can use AMOLED mode to save power while using SpeakGPT (A supported display is required).",
         tintBackground: "rgba(50,50,50,0.8)",
         tintForeground: "rgb(255,255,255)"

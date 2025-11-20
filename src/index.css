@@ -31,6 +31,9 @@ code {
 }
 
 .material-symbols-outlined {
+    display: flex;
+    padding: 0;
+    margin: 0;
     font-variation-settings:
             'FILL' 1,
             'wght' 500,
@@ -488,7 +491,7 @@ html, body {
     padding-left: 4px;
     padding-right: 4px;
     flex-grow: 4;
-    max-width: calc(100vw - 182px);
+    max-width: calc(100vw - 166px);
 }
 
 .chat-item-info {
@@ -496,7 +499,7 @@ html, body {
     padding-left: 4px;
     padding-right: 4px;
     flex-grow: 4;
-    max-width: 252px;
+    max-width: 256px;
 }
 
 .chat-item-title-mob {
@@ -1051,6 +1054,9 @@ html, body {
 .chat-actions {
     height: 56px;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .dialog-content {
@@ -2615,7 +2621,7 @@ td {
 
 .feature-card-title {
     font-size: 24px;
-    margin-top: 5px;
+    margin-top: 4px;
     margin-bottom: 8px;
     padding: 0;
 }

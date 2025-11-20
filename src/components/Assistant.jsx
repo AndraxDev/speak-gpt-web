@@ -45,6 +45,11 @@ import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile} from 'react-device-detect';
 import {supportedFileTypes} from "../util/ModelTypeConverter";
 import SelectImageModelDialog from "./SelectImageModelDialog.jsx";
+import CancelRounded from "@mui/icons-material/CancelRounded";
+import DrawRounded from "@mui/icons-material/DrawRounded";
+import PhotoRounded from "@mui/icons-material/PhotoRounded";
+import SendRounded from "@mui/icons-material/SendRounded";
+import SettingsRounded from "@mui/icons-material/SettingsRounded";
 
 const getDefaultDescription = () => {
     return (`
@@ -660,13 +665,13 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                         <div className={"chat-ab-actions-assistant"}>
                             <MaterialButtonTonalIconV2 onClick={() => {
                                 closeWindow(false);
-                            }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonTonalIconV2>
+                            }}><span className={"material-symbols-outlined"}><CancelRounded/></span></MaterialButtonTonalIconV2>
                             &nbsp;&nbsp;&nbsp;
                             <h3 className={"chat-title"}>SpeakGPT Quick Assistant</h3>
                             &nbsp;&nbsp;&nbsp;
                             <MaterialButtonTonalIconV2 onClick={() => {
                                 setSettingsOpen(true);
-                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonalIconV2>
+                            }}><span className={"material-symbols-outlined"}><SettingsRounded/></span></MaterialButtonTonalIconV2>
                         </div>
                     </div>
                     <div style={{
@@ -700,7 +705,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                         }}/>
                         <div className={"discard-image"} onClick={() => {
                             setSelectedFile(null);
-                        }}><span className={"material-symbols-outlined"}>cancel</span></div>
+                        }}><span className={"material-symbols-outlined"}><CancelRounded/></span></div>
                     </div>: null
                 }
                 <div className={"write-bar-container-home"}>
@@ -715,10 +720,10 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                             <div><MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                                 insertImagineCommand()
                             }}><span
-                                className={"material-symbols-outlined"}>draw</span></MaterialButtonTonalIcon></div>
+                                className={"material-symbols-outlined"}><DrawRounded/></span></MaterialButtonTonalIcon></div>
                             &nbsp;&nbsp;&nbsp;
                             <div>
-                                <MaterialButtonTonalIconV3 className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
+                                <MaterialButtonTonalIconV3 className={"chat-send"}><span className={"material-symbols-outlined"}><PhotoRounded/></span><input className={"visually-hidden-input"} onChange={(e) => {
                                     if (e.target.files.length !== 0) {
                                         processFile(e.target.files[0])
                                     }
@@ -736,7 +741,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                                         <MaterialButtonTonalIconV3 className={"chat-send"} onClick={() => {
                                             processRequest();
                                         }}><span
-                                            className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIconV3>
+                                            className={"material-symbols-outlined"}><SendRounded/></span></MaterialButtonTonalIconV3>
                                 }
                             </div>
                         </div>

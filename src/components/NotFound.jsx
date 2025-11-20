@@ -18,10 +18,11 @@ import React from 'react';
 import Placeholder from "./Placeholder";
 import {MaterialButton24} from "../widgets/MaterialButton";
 import {Link} from "react-router-dom";
+import {Cancel} from "@mui/icons-material/Cancel";
 
 function NotFound() {
     return (
-        <Placeholder icon={"cancel"}>
+        <Placeholder icon={<Cancel fontSize={"inherit"}/>}>
             <p className={"placeholder-text"}>The page you are looking for does not exist.</p>
             <Link to={"/"}><MaterialButton24>Go to home</MaterialButton24></Link>
         </Placeholder>

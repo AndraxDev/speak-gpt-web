@@ -22,6 +22,7 @@ import {getApiEndpointById, getGlobalEndpointId, getModel, setGlobalEndpointId, 
 import SelectModelDialog from "./SelectModelDialog";
 import OpenAI from "openai";
 import ApiEndpointSelector from "./ApiEndpointSelector";
+import {PlayArrow} from "@mui/icons-material/PlayArrow";
 
 function Playground() {
     const [apiEndpoint, setApiEndpoint] = useState(getGlobalEndpointId());
@@ -162,7 +163,7 @@ function Playground() {
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "16px",
-                }}><span className={"material-symbols-outlined"}>play_arrow</span>&nbsp;&nbsp;Run&nbsp;</div>{loading ? <>
+                }}><span className={"material-symbols-outlined"}><PlayArrow/></span>&nbsp;&nbsp;Run&nbsp;</div>{loading ? <>
                     &nbsp;
                     <CircularProgress style={{
                         color: "var(--color-accent-100)",

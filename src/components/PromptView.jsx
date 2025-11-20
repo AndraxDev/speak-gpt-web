@@ -21,6 +21,9 @@ import {MaterialButton24, MaterialButtonTonal24, MaterialButtonTonalIconV2} from
 import CircularProgress from "@mui/material/CircularProgress";
 import {isMobile, MobileView} from "react-device-detect";
 import {Link} from "react-router-dom";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import PlayArrow from "@mui/icons-material/PlayArrow";
+import ThumbUp from "@mui/icons-material/ThumbUp";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -88,7 +91,7 @@ function PromptView({prompt, updatePrompts}) {
         } : {}} className={isMobile ? "prompt-cont-mob" : "prompt-cont"}>
             <MobileView>
                 <Link to={"/prompts"} className={"back-button-v2"}>
-                    <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}>arrow_back</span></MaterialButtonTonalIconV2>
+                    <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}><ArrowBack/></span></MaterialButtonTonalIconV2>
                 </Link>
             </MobileView>
             <div className={"prompt-frame"}>
@@ -121,7 +124,7 @@ function PromptView({prompt, updatePrompts}) {
                         width: "110px",
                         height: "64px",
                         borderRadius: "16px",
-                    }}><span className={"material-symbols-outlined"}>play_arrow</span>&nbsp;&nbsp;<span>Try it</span></MaterialButton24>
+                    }}><span className={"material-symbols-outlined"}><PlayArrow/></span>&nbsp;&nbsp;<span>Try it</span></MaterialButton24>
 
                     {
                         likeRequest ? <MaterialButtonTonal24 sx={isMobile ? {
@@ -148,7 +151,7 @@ function PromptView({prompt, updatePrompts}) {
                             }} onClick={() => {
                                 setLikeRequest(true);
                                 likePrompt();
-                            }}><span className={"material-symbols-outlined"}>thumb_up</span>&nbsp;&nbsp;<span>{prompt.likes}</span></MaterialButtonTonal24>
+                            }}><span className={"material-symbols-outlined"}><ThumbUp/></span>&nbsp;&nbsp;<span>{prompt.likes}</span></MaterialButtonTonal24>
                     }
                 </div>
             </div>

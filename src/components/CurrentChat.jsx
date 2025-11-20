@@ -53,6 +53,12 @@ import SystemMessageEditDialog from "./SystemMessageEditDialog";
 import {isMobile, MobileView} from 'react-device-detect';
 import {Link} from "react-router-dom";
 import SelectImageModelDialog from "./SelectImageModelDialog.jsx";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import CancelRounded from "@mui/icons-material/CancelRounded";
+import DrawRounded from "@mui/icons-material/DrawRounded";
+import PhotoRounded from "@mui/icons-material/PhotoRounded";
+import Send from "@mui/icons-material/Send";
+import SettingsRounded from "@mui/icons-material/SettingsRounded";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -706,7 +712,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
 
     return (
         <div style={isMobile ? {
-            height: "calc(var(--vh, 1vh) * 100)"
+            height: "100dvh",
         } : {}} className={isMobile ? "chat-fixed chat-frame-mob" : "chat-frame"}>
             <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={errorSnackBar} autoHideDuration={6000} onClose={() => {
                 setErrorSnackBar(false);
@@ -724,7 +730,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             </Snackbar>
             <MobileView>
                 <Link to={"/chat"} className={"back-button"}>
-                    <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}>arrow_back</span></MaterialButtonTonalIconV2>
+                    <MaterialButtonTonalIconV2><span className={"material-symbols-outlined"}><ArrowBack/></span></MaterialButtonTonalIconV2>
                 </Link>
             </MobileView>
             {
@@ -765,7 +771,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             }
             <div className={isMobile ? "" : "chat-area"}>
                 <div style={isMobile ? {
-                    height: "calc(calc(var(--vh, 1vh) * 100) - 90px)"
+                    height: "calc(100dvh - 90px)"
                 } : {}} className={isMobile ? "chat-history-mob" : "chat-history"} id={"drop-area"}>
                     <div className={isMobile ? "unhiglighted drop-frame-mob" : "unhiglighted drop-frame"} id={"drop-area-2"}>
                         <span style={{
@@ -781,13 +787,13 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                             <MaterialButtonError onClick={() => {
                                 setConfirmClear(false);
                                 setClearDialogOpen(true);
-                            }}><span className={"material-symbols-outlined"}>cancel</span></MaterialButtonError>
+                            }}><span className={"material-symbols-outlined"}><CancelRounded/></span></MaterialButtonError>
                             &nbsp;&nbsp;&nbsp;
                             <h3 className={isMobile ? "chat-title-mob" : "chat-title"}>{stateSelectedChat}</h3>
                             &nbsp;&nbsp;&nbsp;
                             <MaterialButtonTonal24Icon onClick={() => {
                                 setSettingsOpen(true);
-                            }}><span className={"material-symbols-outlined"}>settings</span></MaterialButtonTonal24Icon>
+                            }}><span className={"material-symbols-outlined"}><SettingsRounded/></span></MaterialButtonTonal24Icon>
                         </div>
                     </div>
                     <div style={{
@@ -813,7 +819,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                         }}/>
                         <div className={"discard-image"} onClick={() => {
                             setSelectedFile(null);
-                        }}><span className={"material-symbols-outlined"}>cancel</span></div>
+                        }}><span className={"material-symbols-outlined"}><CancelRounded/></span></div>
                     </div>: null
                 }
             </div>
@@ -829,10 +835,10 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                         <div><MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                             insertImagineCommand()
                         }}><span
-                            className={"material-symbols-outlined"}>draw</span></MaterialButtonTonalIcon></div>
+                            className={"material-symbols-outlined"}><DrawRounded/></span></MaterialButtonTonalIcon></div>
                         &nbsp;&nbsp;&nbsp;
                         <div>
-                            <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}>photo</span><input className={"visually-hidden-input"} onChange={(e) => {
+                            <MaterialButtonTonalIcon className={"chat-send"}><span className={"material-symbols-outlined"}><PhotoRounded/></span><input className={"visually-hidden-input"} onChange={(e) => {
                                 if (e.target.files.length !== 0) {
                                     processFile(e.target.files[0])
                                 }
@@ -850,7 +856,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                                     <MaterialButtonTonalIcon className={"chat-send"} onClick={() => {
                                         processRequest();
                                     }}><span
-                                        className={"material-symbols-outlined"}>send</span></MaterialButtonTonalIcon>
+                                        className={"material-symbols-outlined"}><Send/></span></MaterialButtonTonalIcon>
                             }
                         </div>
                     </div>

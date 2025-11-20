@@ -26,6 +26,9 @@ import {sha256} from "js-sha256";
 import DeleteChatDialog from "./DeleteChatDialog";
 import {copySettings, getModel, getSettingsJSON} from "../util/Settings";
 import {BrowserView, isMobile, MobileView} from "react-device-detect";
+import Add from "@mui/icons-material/Add";
+import MessageRounded from "@mui/icons-material/MessageRounded";
+import SearchOutlined from "@mui/icons-material/SearchOutlined";
 
 function ChatList() {
     const [selectedChat, setSelectedChat] = React.useState("");
@@ -498,7 +501,7 @@ function ChatList() {
                         <input className={"search-input"} type={"text"} placeholder={"Search chats..."} onChange={(e) => {
                             setSearchTerm(e.target.value)
                         }}/>
-                        <span className={"search-icon material-symbols-outlined"}>search</span>
+                        <span className={"search-icon material-symbols-outlined"}><SearchOutlined /></span>
                     </div>
                 </div>
                 <div className={isMobile ? "fab-area-mob" : "fw"}>
@@ -508,7 +511,7 @@ function ChatList() {
                             marginRight: "10px"
                         }} onClick={() => {
                             setNewChatDialogOpen(true)
-                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                        }}>&nbsp;<span className={"material-symbols-outlined"}><Add fontSize={"medium"}/></span>&nbsp;
                             <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                     </BrowserView>
                     <MobileView>
@@ -517,12 +520,12 @@ function ChatList() {
                             marginRight: "16px"
                         }} onClick={() => {
                             setNewChatDialogOpen(true)
-                        }}>&nbsp;<span className={"material-symbols-outlined"}>add</span>&nbsp;
+                        }}>&nbsp;<span className={"material-symbols-outlined"}><Add fontSize={"medium"}/></span>&nbsp;
                             <span>New chat</span>&nbsp;&nbsp;</MaterialButton16>
                     </MobileView>
                 </div>
                 <div style={isMobile ? {
-                    height: "calc(calc(var(--vh, 1vh) * 100) - 220px)",
+                    height: "calc(100dvh - 234px)",
                 } : {}} className={isMobile ? "chat-list-mob" : "chat-list"}>
                     {id === undefined ? <Chats chats={chats} id={""} setSelected={setSelectedChat} selectedChat={""}
                                                setSelectedChatForDeletion={setSelectedChatForDeletion}
@@ -534,7 +537,7 @@ function ChatList() {
             </div>
             <div className={isMobile ? "" : "chat-content"}>
                 {id === undefined ? <>
-                    { isMobile ? null : <Placeholder icon={"chat"} message={"Create or select a chat to start conversation."}/> }
+                    { isMobile ? null : <Placeholder icon={<MessageRounded fontSize={"inherit"}/>} message={"Create or select a chat to start conversation."}/> }
                     </> :
                     <CurrentChat onUpdate={requestUpdate} chats={chats} id={id} chatName={selectedChat} updateChats={setChats}/>}
             </div>

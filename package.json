@@ -1,12 +1,17 @@
 {
   "name": "speakgpt-web",
-  "version": "1.9.5",
+  "version": "1.9.6",
+  "description": "SpeakGPT Web Application",
+  "main": "index.js",
+  "author": "AndraxDev",
+  "license": "Apache-2.0",
   "private": true,
   "type": "module",
   "dependencies": {
     "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.18.0",
     "@mui/material": "^5.15.15",
     "@mui/system": "^7.2.0",
     "babel-preset-gatsby": "^3.13.1",

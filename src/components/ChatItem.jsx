@@ -18,6 +18,8 @@ import React, {useEffect} from 'react';
 import gpt from "./../gpt.svg";
 import {Link} from "react-router-dom";
 import {isMobile} from "react-device-detect";
+import CancelRounded from "@mui/icons-material/CancelRounded";
+import Edit from "@mui/icons-material/Edit";
 
 function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit, ...props}) {
 
@@ -45,15 +47,12 @@ function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat,
             color: 'inherit'
         }}>
             <div className={isActive && !isMobile ? "chat-item-active-" + intType.toString() + " " + (isMobile ? "chat-item-mob" : "chat-item") : "chat-item-" + intType.toString() + " " + (isMobile ? "chat-item-mob" : "chat-item")}>
-                <div className={"chat-icon-frame-" + intType.toString() + " " + (isMobile ? "chat-icon-frame-mob" : "chat-icon-frame")} style={{
-                    // background: "url(" + generateSvgBase64(color) + ")", backgroundSize: "cover"
-                }}>
+                <div className={"chat-icon-frame-" + intType.toString() + " " + (isMobile ? "chat-icon-frame-mob" : "chat-icon-frame")}>
                     <img className={isMobile ? "chat-icon-mob" : "chat-icon"} src={gpt} alt={"GPT"}/>
                 </div>
                 <div className={isMobile ? "chat-item-info-mob" : "chat-item-info"}>
                     <h3 className={isMobile ? "chat-item-title-mob" : "chat-item-title"}>{name}</h3>
                     <p className={isMobile ? "chat-item-message-mob" : "chat-item-message"}>{firstMessage}</p>
-                    {/*<p className={isMobile ? "chat-item-model-mob" : "chat-item-model"}>{model}</p>*/}
                 </div>
                 <div className={"chat-actions"}><span onClick={(e) => {
                     e.preventDefault()
@@ -65,7 +64,7 @@ function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat,
                     fontSize: "20px",
                 } : {
                     fontSize: "14px"
-                }} className={(isMobile ? "action-mob" : "action") + " material-symbols-outlined"}>edit</span>&nbsp;<span onClick={(e) => {
+                }} className={(isMobile ? "action-mob" : "action") + " material-symbols-outlined"}><Edit fontSize={"small"}/></span><span onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
                     setIsDelete(true)
@@ -75,7 +74,7 @@ function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat,
                     fontSize: "20px",
                 } : {
                     fontSize: "14px"
-                }} className={(isMobile ? "action-dangerous-mob" : "action-dangerous") + " material-symbols-outlined"}>cancel</span></div>
+                }} className={(isMobile ? "action-dangerous-mob" : "action-dangerous") + " material-symbols-outlined"}><CancelRounded fontSize={"small"}/></span></div>
             </div>
         </Link>
     );
