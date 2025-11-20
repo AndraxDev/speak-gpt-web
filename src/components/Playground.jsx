@@ -22,7 +22,7 @@ import {getApiEndpointById, getGlobalEndpointId, getModel, setGlobalEndpointId, 
 import SelectModelDialog from "./SelectModelDialog";
 import OpenAI from "openai";
 import ApiEndpointSelector from "./ApiEndpointSelector";
-import {PlayArrow} from "@mui/icons-material/PlayArrow";
+import PlayArrow from "@mui/icons-material/PlayArrow";
 
 function Playground() {
     const [apiEndpoint, setApiEndpoint] = useState(getGlobalEndpointId());
