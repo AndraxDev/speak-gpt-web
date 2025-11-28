@@ -51,6 +51,7 @@ import DrawRounded from "@mui/icons-material/DrawRounded";
 import PhotoRounded from "@mui/icons-material/PhotoRounded";
 import SendRounded from "@mui/icons-material/SendRounded";
 import SettingsRounded from "@mui/icons-material/SettingsRounded";
+import Photo from "@mui/icons-material/Photo";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -817,7 +818,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                         <div className={"unhiglighted drop-frame"} id={"drop-area-2"}>
                             <span style={{
                                 fontSize: "120px"
-                            }} className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                            }} className={"placeholder-icon material-symbols-outlined"}><Photo fontSize={"inherit"}/></span>
                             <p className={"placeholder-text"}>Drag your images here to use it with assistant.</p>
                         </div>
                         <div className={"chat-ab-actions-container-assistant"}>

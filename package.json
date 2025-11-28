@@ -1,6 +1,6 @@
 {
   "name": "speakgpt-web",
-  "version": "1.9.7",
+  "version": "1.9.8",
   "description": "SpeakGPT Web Application",
   "main": "index.js",
   "author": "AndraxDev",

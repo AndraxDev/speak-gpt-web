@@ -59,6 +59,7 @@ import DrawRounded from "@mui/icons-material/DrawRounded";
 import PhotoRounded from "@mui/icons-material/PhotoRounded";
 import Send from "@mui/icons-material/Send";
 import SettingsRounded from "@mui/icons-material/SettingsRounded";
+import Photo from "@mui/icons-material/Photo";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -776,7 +777,7 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                     <div className={isMobile ? "unhiglighted drop-frame-mob" : "unhiglighted drop-frame"} id={"drop-area-2"}>
                         <span style={{
                             fontSize: "120px"
-                        }} className={"placeholder-icon material-symbols-outlined"}>photo</span>
+                        }} className={"placeholder-icon material-symbols-outlined"}><Photo fontSize={"inherit"}/></span>
                         <p className={"placeholder-text"}>Drag your images here to use it with SpeakGPT.</p>
                     </div>
                     <div className={isMobile ? "chat-ab-actions-container-mob" : "chat-ab-actions-container"}>

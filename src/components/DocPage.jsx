@@ -21,6 +21,7 @@ import Prism from "../prism.js";
 import {highlightCode, linesNumbers} from "../util/MarkDownCode";
 import remarkGfm from "remark-gfm";
 import Markdown from "react-markdown";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -46,7 +47,7 @@ function DocPage({children, title}) {
             height: "calc(100vh - 48px)"
         }}>
             <div className={isMobile ? "doc-header-mob" : "doc-header"}>
-                <Link to={"/"}><span className={"doc-title material-symbols-outlined"}>arrow_back</span></Link>
+                <Link to={"/"}><span className={"doc-title material-symbols-outlined"}><ArrowBack/></span></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <h2 className={"doc-title"}>{title}</h2>
             </div>
