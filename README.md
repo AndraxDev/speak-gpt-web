@@ -215,8 +215,6 @@ To secure your API key perform the following steps:
 
 ## Buy me a coffee:
 
-<a href="https://buymeacoffee.com/andrax_dev"><img src="https://andrax.dev/bmc_qr.png" width="200"/></a>
-
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S6X3NCE)
 
 ## License
