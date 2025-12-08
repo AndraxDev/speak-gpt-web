@@ -18,7 +18,7 @@ import React from 'react';
 import Placeholder from "./Placeholder";
 import {MaterialButton24} from "../widgets/MaterialButton";
 import {Link} from "react-router-dom";
-import {Cancel} from "@mui/icons-material/Cancel";
+import Cancel from "@mui/icons-material/Cancel";
 
 function NotFound() {
     return (
