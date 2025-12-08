@@ -8,7 +8,7 @@ This is a desktop version of SpeakGPT created using ReactJS and Google Material 
 
 > [!NOTE]
 >
-> This project is a part of my Bachelor Thesis. Attribution is required to use this work. Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+> This project is a part of my Bachelor Thesis. Attribution is required to use this work. Copyright (c) 2023-2026 Dmytro Ostapenko. All rights reserved.
 > 
 > Cite as: Dmytro Ostapenko (2024), "Review Program Automation Using Copilot Services" Bachelor Thesis, Technical University of Košice, 2024.
 
@@ -204,8 +204,7 @@ To secure your API key perform the following steps:
 >
 > Developer name: Dmytro Ostapenko (AndraxDev)\
 > Contact: dostapenko82@gmail.com, +421951829517\
-> Legal address: Južná trieda 4B, 04001 Košice, Slovakia 04001\
-> Legal entity ID: 55545386
+> Legal address: Dunajska 7, 04001 Košice, Slovakia 04001
 
 ## You are appreciated to:
 
@@ -223,7 +222,7 @@ To secure your API key perform the following steps:
 ## License
 
 ```
-Copyright (c) 2023-2024 Dmytro Ostapenko. All rights reserved.
+Copyright (c) 2023-2026 Dmytro Ostapenko. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
