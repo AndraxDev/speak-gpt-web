@@ -1,6 +1,6 @@
 {
   "name": "speakgpt-web",
-  "version": "1.9.8",
+  "version": "1.9.9",
   "description": "SpeakGPT Web Application",
   "main": "index.js",
   "author": "AndraxDev",
@@ -74,7 +74,7 @@
     "http-proxy-middleware": ">=2.0.9",
     "nth-check": ">=2.0.1",
     "postcss": ">=8.4.31",
-    "vite": "^6.3.5",
+    "vite": "^7.3.0",
     "vite-plugin-eslint": "^1.8.1"
   }
 }
