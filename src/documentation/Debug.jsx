@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import React from 'react';
 import {MaterialButton24} from "../widgets/MaterialButton.jsx";
 import {isMobile} from "react-device-detect";
 import {Link} from "react-router-dom";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function Debug() {
     return (
@@ -31,7 +32,7 @@ function Debug() {
             height: "calc(100vh - 48px)"
         }}>
             <div className={isMobile ? "doc-header-mob" : "doc-header"}>
-                <Link to={"/"}><span className={"doc-title material-symbols-outlined"}>arrow_back</span></Link>
+                <Link to={"/"}><span className={"doc-title material-symbols-outlined"}><ArrowBack/></span></Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <h2 className={"doc-title"}>Debug</h2>
             </div>

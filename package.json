@@ -1,9 +1,11 @@
 {
   "name": "speakgpt-web",
-  "version": "1.9.10",
+  "version": "1.9.11",
+  "copyright": "© 2023-2026",
   "description": "SpeakGPT Web Application",
   "main": "index.js",
   "author": "AndraxDev",
+  "authorWebsite": "https://andrax.dev",
   "license": "Apache-2.0",
   "private": true,
   "type": "module",

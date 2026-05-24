@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,8 +86,8 @@ function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openMo
                 <p style={{
                     marginBottom: "4px"
                 }} className={"credits"}>App Version: {packageJson.name + "-" + packageJson.version}</p>
-                <p className={"credits"}>© 2023-2025 <a href={"https://andrax.dev/"}
-                                                        target={"_blank"} rel="noreferrer">AndraxDev</a>. All rights
+                <p className={"credits"}>{packageJson.copyright} <a href={packageJson.authorWebsite}
+                                                        target={"_blank"} rel="noreferrer">{packageJson.author}</a>. All rights
                     reserved.</p>
                 <br/>
             </div>

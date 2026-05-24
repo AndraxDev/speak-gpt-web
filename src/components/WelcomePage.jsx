@@ -1,5 +1,5 @@
 /****************************************************************
- * Copyright (c) 2023-2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2023-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import React from 'react';
 import {Link} from "react-router-dom";
+import packageJson from '../../package.json';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {BrowserView, isMobile, MobileView} from "react-device-detect";
 import {sha256} from "js-sha256";
@@ -387,7 +388,8 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider"}/>
-                    <p className={"copyright"}>© 2023-2025 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"} rel="noreferrer">AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>{packageJson.copyright} <a href={packageJson.authorWebsite}
+                                                                          target={"_blank"} rel="noreferrer">{packageJson.author}</a>. All rights reserved.</p>
                 </div>
             </BrowserView>
             <MobileView className={"v-container-mob"}>
@@ -521,7 +523,8 @@ function WelcomePage() {
                         </div>
                     </div>
                     <hr className={"footer-divider-mob"}/>
-                    <p className={"copyright"}>© 2023-2025 <a href={"https://andrax.dev/"} target={"_blank"} className={"link-special"} rel="noreferrer">AndraxDev</a>. All rights reserved.</p>
+                    <p className={"copyright"}>{packageJson.copyright} <a href={packageJson.authorWebsite}
+                                                                          target={"_blank"} rel="noreferrer">{packageJson.author}</a>. All rights reserved.</p>
                 </div>
             </MobileView>
             {
