@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import CircularProgress from "@mui/material/CircularProgress";
 import {isMobile} from "react-device-detect";
 

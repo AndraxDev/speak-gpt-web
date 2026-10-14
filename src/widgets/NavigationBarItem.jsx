@@ -14,9 +14,9 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {Link} from "react-router-dom";
 import {BrowserView, MobileView} from "react-device-detect";
+import PropTypes from "prop-types";
 
 function NavigationBarItem({name, icon, isActive, page}) {
     return (
@@ -47,6 +47,13 @@ function NavigationBarItem({name, icon, isActive, page}) {
             </BrowserView>
         </>
     );
+}
+
+NavigationBarItem.propTypes = {
+    name: PropTypes.string,
+    icon: PropTypes.string,
+    isActive: PropTypes.bool,
+    page: PropTypes.string
 }
 
 export default NavigationBarItem;

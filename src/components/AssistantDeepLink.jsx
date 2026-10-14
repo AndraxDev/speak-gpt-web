@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {BrowserView, MobileView} from "react-device-detect";
 import Placeholder from "./Placeholder";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";

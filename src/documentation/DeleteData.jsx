@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import DocPage from "../components/DocPage";
 
 const pageContent = `

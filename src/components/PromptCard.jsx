@@ -14,10 +14,9 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
-
 import {isMobile} from "react-device-detect";
 import ThumbUp from "@mui/icons-material/ThumbUp";
+import PropTypes from "prop-types";
 
 function PromptCard({prompt, onPromptClick}) {
     return (
@@ -33,6 +32,17 @@ function PromptCard({prompt, onPromptClick}) {
             </div>
         </div>
     );
+}
+
+PromptCard.propTypes = {
+    prompt: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        desc: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        likes: PropTypes.number.isRequired,
+        category: PropTypes.string.isRequired
+    }),
+    onPromptClick: PropTypes.func.isRequired
 }
 
 export default PromptCard;

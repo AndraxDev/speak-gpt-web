@@ -16,7 +16,7 @@
 import {styled} from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 
-export const MaterialDialog = styled(Dialog)(({ theme }) => ({
+export const MaterialDialog = styled(Dialog)(() => ({
     '&:MuiPaper-root': {
         borderRadius: "24px",
     }

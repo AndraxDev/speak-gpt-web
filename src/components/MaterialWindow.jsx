@@ -14,11 +14,12 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import NavigationBar from "../widgets/NavigationBar";
 import Assistant from "./Assistant";
 import {BrowserView, MobileView, isMobile} from "react-device-detect";
 import NavigationBarMobile from "../widgets/NavigationBarMobile";
+import PropTypes from "prop-types";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -32,9 +33,9 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function MaterialWindow({children, page, ...props}) {
+function MaterialWindow({children, page}) {
 
-    const [assistantOpened, setAssistantOpened] = React.useState(false);
+    const [assistantOpened, setAssistantOpened] = useState(false);
 
     return (
         <div style={{
@@ -68,6 +69,11 @@ function MaterialWindow({children, page, ...props}) {
             </div>
         </div>
     );
+}
+
+MaterialWindow.propTypes = {
+    children: PropTypes.node.isRequired,
+    page: PropTypes.string.isRequired
 }
 
 export default MaterialWindow;

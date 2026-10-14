@@ -14,14 +14,15 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
 function SystemMessageEditDialog({setIsOpen, message, setMessage, isAssistant}) {
 
-    const [currentMessage, setCurrentMessage] = React.useState(message);
+    const [currentMessage, setCurrentMessage] = useState(message);
 
     return (
         <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
@@ -49,6 +50,13 @@ function SystemMessageEditDialog({setIsOpen, message, setMessage, isAssistant}) 
             </MaterialDialog>
         </div>
     );
+}
+
+SystemMessageEditDialog.propTypes = {
+    setIsOpen: PropTypes.func,
+    message: PropTypes.string.isRequired,
+    setMessage: PropTypes.func.isRequired,
+    isAssistant: PropTypes.bool
 }
 
 export default SystemMessageEditDialog;

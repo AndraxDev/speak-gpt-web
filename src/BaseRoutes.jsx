@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import MaterialWindow from "./components/MaterialWindow";
 import ChatList from "./components/ChatList";

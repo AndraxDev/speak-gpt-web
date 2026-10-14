@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {isMobile} from "react-device-detect";
 import {Link} from "react-router-dom";
 import Prism from "../prism.js";
@@ -22,6 +21,7 @@ import {highlightCode, linesNumbers} from "../util/MarkDownCode";
 import remarkGfm from "remark-gfm";
 import Markdown from "react-markdown";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import PropTypes from "prop-types";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -56,7 +56,7 @@ function DocPage({children, title}) {
                 <Markdown
                     components={{
                         code(props) {
-                            const {children, className, node, ...rest} = props
+                            const {children, className, ...rest} = props
                             const match = /language-(\w+)/.exec(className || '')
 
                             let language = match ? match[1] : undefined
@@ -101,6 +101,12 @@ function DocPage({children, title}) {
             </div>
         </div>
     );
+}
+
+DocPage.propTypes = {
+    children: PropTypes.node.isRequired,
+    title: PropTypes.string.isRequired,
+    className: PropTypes.string,
 }
 
 export default DocPage;

@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError} from "../widgets/MaterialButton";
 import CircularProgress from "@mui/material/CircularProgress";

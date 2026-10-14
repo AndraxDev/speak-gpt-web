@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import Tile from "./Tile"
 import packageJson from '../../package.json';
 import {BrowserView, isMobile, MobileView} from "react-device-detect";
@@ -30,6 +30,7 @@ import Photo from "@mui/icons-material/Photo";
 import PhotoSizeSelectActual from "@mui/icons-material/PhotoSizeSelectActual";
 import SmartToyRounded from "@mui/icons-material/SmartToyRounded";
 import TextFormatRounded from "@mui/icons-material/TextFormatRounded";
+import PropTypes from "prop-types";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -43,9 +44,9 @@ setFullHeight();
 window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
-function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, systemMessage, resolution, isAssistant, openImageModelDialog, imageModel}) {
-    const [apiHostDialogOpen, setApiHostDialogOpen] = React.useState(false);
-    const [apiEndpointSelector, setApiEndpointSelector] = React.useState(false);
+function ChatSettings({chatId, setIsOpen, model, openModelDialog, openResolutionDialog, openSystemMessageDialog, resolution, isAssistant, openImageModelDialog, imageModel}) {
+    const [apiHostDialogOpen, setApiHostDialogOpen] = useState(false);
+    const [apiEndpointSelector, setApiEndpointSelector] = useState(false);
 
     const SettingsComponent = () => {
         return (
@@ -129,6 +130,19 @@ function ChatSettings({chatId, setIsOpen, setDalleVersion, dalle3, model, openMo
             </div>
         </>
     );
+}
+
+ChatSettings.propTypes = {
+    chatId: PropTypes.string,
+    setIsOpen: PropTypes.func.isRequired,
+    model: PropTypes.string.isRequired,
+    openModelDialog: PropTypes.func.isRequired,
+    openResolutionDialog: PropTypes.func.isRequired,
+    openSystemMessageDialog: PropTypes.func.isRequired,
+    resolution: PropTypes.string.isRequired,
+    isAssistant: PropTypes.bool.isRequired,
+    openImageModelDialog: PropTypes.func.isRequired,
+    imageModel: PropTypes.string.isRequired
 }
 
 export default ChatSettings;

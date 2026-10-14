@@ -14,9 +14,8 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
-
 import {isMobile} from "react-device-detect";
+import PropTypes from "prop-types";
 
 function ProTip({text}) {
     return (
@@ -26,6 +25,10 @@ function ProTip({text}) {
             }} className={isMobile ? "hint-mob" : "hint"}>{text}</p>
         </div>
     );
+}
+
+ProTip.propTypes = {
+    text: PropTypes.string.isRequired
 }
 
 export default ProTip;

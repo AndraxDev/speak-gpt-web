@@ -14,13 +14,13 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import NavigationBarItem from "./NavigationBarItem";
 import Apps from "@mui/icons-material/Apps";
 import Lightbulb from "@mui/icons-material/Lightbulb";
 import MessageRounded from "@mui/icons-material/MessageRounded";
+import PropTypes from "prop-types";
 
-function NavigationBar({page, openAssistant}) {
+function NavigationBar({page}) {
     return (
         <div className={"nav-bar-mobile"}>
             <NavigationBarItem name="Chat" icon={<MessageRounded fontSize={"small"}/>} isActive={page === "chat"} page={"/chat"}/>
@@ -28,6 +28,10 @@ function NavigationBar({page, openAssistant}) {
             <NavigationBarItem name="Tips" icon={<Lightbulb fontSize={"small"}/>} isActive={page === "tips"} page={"/tips"}/>
         </div>
     );
+}
+
+NavigationBar.propTypes = {
+    page: PropTypes.string.isRequired
 }
 
 export default NavigationBar;

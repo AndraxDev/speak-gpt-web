@@ -14,38 +14,39 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
-function ApiKeyChangeDialog(props) {
-    const [apiKey, setApiKey] = React.useState("");
+function ApiKeyChangeDialog(setIsOpen, isAssistant) {
+    const [apiKey, setApiKey] = useState("");
 
     const saveApiKey = () => {
         if (apiKey !== "") {
             localStorage.removeItem('skipApiKeyCheck');
             localStorage.setItem('apiKey', apiKey);
-            props.setIsOpen(false);
+            setIsOpen(false);
         }
     }
 
     return (
-        <div className={props.isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
-            props.setIsOpen(false);
+        <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
+            setIsOpen(false);
         }}>
             <MaterialDialog open={true}>
             <div className={"dialog-paper"} onMouseDown={(e) => {
                 e.stopPropagation()
             }}>
                 <h3 className={"dialog-title"}>Change API Key</h3>
-                <div className={props.isAssistant ? "dialog-content-assistant" : "dialog-content"}>
+                <div className={isAssistant ? "dialog-content-assistant" : "dialog-content"}>
                     <MaterialEditText label="API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)}/>
                     <p className={"warning"}>You can revoke API key <a rel={"noreferrer"} href={"https://platform.openai.com/api-keys"} target={"_blank"}>here</a> and unset it. When you unset an API key your chats will not be removed.</p>
                 </div>
                 <div className={"dialog-actions"}>
                     <MaterialButtonOutlined24 onClick={() => {
-                        props.setIsOpen(false);
+                        setIsOpen(false);
                     }}>Cancel</MaterialButtonOutlined24>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <MaterialButtonError onClick={() => {
@@ -59,6 +60,11 @@ function ApiKeyChangeDialog(props) {
             </MaterialDialog>
         </div>
     );
+}
+
+ApiKeyChangeDialog.propTypes = {
+    setIsOpen: PropTypes.func.isRequired,
+    isAssistant: PropTypes.bool,
 }
 
 export default ApiKeyChangeDialog;

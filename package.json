@@ -1,6 +1,6 @@
 {
   "name": "speakgpt-web",
-  "version": "1.9.11",
+  "version": "1.10.0",
   "copyright": "© 2023-2026",
   "description": "SpeakGPT Web Application",
   "main": "index.js",
@@ -16,34 +16,28 @@
     "@mui/icons-material": "^5.18.0",
     "@mui/material": "^5.15.15",
     "@mui/system": "^7.2.0",
-    "babel-preset-gatsby": "^3.13.1",
-    "http-proxy-middleware": ">=2.0.9",
-    "jimp": "^0.22.12",
+    "babel-preset-gatsby": "^0.12.3",
+    "jimp": "^1.6.1",
     "js-sha256": "^0.11.0",
     "nth-check": ">=2.0.1",
     "openai": "^4.33.0",
     "postcss": ">=8.4.31",
     "prismjs": "1.30.0",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-lazy-hydration": "^0.1.0",
     "react-lazy-load-image-component": "^1.6.0",
     "react-markdown": "^9.0.1",
-    "react-router-dom": "^6.22.3",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-router-dom": "^7.18.4",
+    "react-syntax-highlighter": "^16.1.2",
     "remark-gfm": "^4.0.0"
   },
   "scripts": {
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "babel": {
     "presets": [
@@ -71,9 +65,10 @@
     "@babel/preset-react": "^7.24.1",
     "@vitejs/plugin-react": "^4.6.0",
     "eslint": "^8.57.1",
-    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-regexp": "^2.5.0",
-    "http-proxy-middleware": ">=2.0.9",
+    "http-proxy-middleware": "^4.1.1",
     "nth-check": ">=2.0.1",
     "postcss": ">=8.4.31",
     "vite": "^7.3.0",

@@ -14,12 +14,13 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import CircularProgress from "@mui/material/CircularProgress";
 import {getApiEndpointById, getApiEndpointId} from "../util/Settings";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
 function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
 
@@ -50,9 +51,9 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
         },
     ]
 
-    const [selectedModel, setSelectedModel] = React.useState(model);
-    const [allModels, setAllModels] = React.useState([]);
-    const [chatModelsProjection, setChatModelsProjection] = React.useState([]);
+    const [selectedModel, setSelectedModel] = useState(model);
+    const [allModels, setAllModels] = useState([]);
+    const [chatModelsProjection, setChatModelsProjection] = useState([]);
 
     const syncProjection = (query) => {
         if (query === "") {
@@ -91,7 +92,6 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
             setChatModelsProjection(mm);
         }) // Log the data
         .catch(error => console.error('Error:', error)); // Log errors, if any
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -197,6 +197,14 @@ function SelectModelDialog({setIsOpen, setModel, model, isAssistant, chatId}) {
             </MaterialDialog>
         </div>
     );
+}
+
+SelectModelDialog.propTypes = {
+    setIsOpen: PropTypes.func.isRequired,
+    setModel: PropTypes.func.isRequired,
+    model: PropTypes.string.isRequired,
+    isAssistant: PropTypes.bool.isRequired,
+    chatId: PropTypes.string.isRequired
 }
 
 export default SelectModelDialog;

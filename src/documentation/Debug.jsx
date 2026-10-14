@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {MaterialButton24} from "../widgets/MaterialButton.jsx";
 import {isMobile} from "react-device-detect";
 import {Link} from "react-router-dom";

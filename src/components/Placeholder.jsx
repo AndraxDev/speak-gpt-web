@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import PropTypes from "prop-types";
 
 function Placeholder({children, icon, message}) {
     return (
@@ -25,6 +25,12 @@ function Placeholder({children, icon, message}) {
             { message === undefined || message === null ? children : <p className={"placeholder-text"}>{message}</p> }
         </div>
     );
+}
+
+Placeholder.propTypes = {
+    children: PropTypes.node.isRequired,
+    icon: PropTypes.string.isRequired,
+    message: PropTypes.string
 }
 
 export default Placeholder;

@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import DocPage from "../components/DocPage";
 
 const pageContent = `
@@ -65,7 +64,7 @@ Playground does not remember your messages so you wil be billed only once for ea
 > Check if your API provider allows to set soft and hard budget limits. This will help you to avoid unexpected costs. Please note, that hitting hard limit will stop your API key and you will not be able to use it until you remove the limit. Soft limit will just notify you about exceeding the limit, but will not stop your API key.
 `;
 
-function Optimize(props) {
+function Optimize() {
     return (
         <DocPage title={"Optimize costs"}>
             {pageContent}

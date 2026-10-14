@@ -14,9 +14,10 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
 function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssistant}) {
     const availableResolutions = [
@@ -25,7 +26,7 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssista
         "1024x1024",
     ]
 
-    const [selectedResolution, setSelectedResolution] = React.useState(resolution);
+    const [selectedResolution, setSelectedResolution] = useState(resolution);
     return (
         <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
@@ -64,6 +65,13 @@ function SelectResolutionDialog({setIsOpen, setResolution, resolution, isAssista
             </MaterialDialog>
         </div>
     );
+}
+
+SelectResolutionDialog.propTypes = {
+    setIsOpen: PropTypes.func.isRequired,
+    setResolution: PropTypes.func.isRequired,
+    resolution: PropTypes.string.isRequired,
+    isAssistant: PropTypes.bool.isRequired
 }
 
 export default SelectResolutionDialog;

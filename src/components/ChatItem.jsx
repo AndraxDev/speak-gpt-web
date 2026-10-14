@@ -14,16 +14,17 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import gpt from "./../gpt.svg";
 import {Link} from "react-router-dom";
 import {isMobile} from "react-device-detect";
 import CancelRounded from "@mui/icons-material/CancelRounded";
 import Edit from "@mui/icons-material/Edit";
+import PropTypes from "prop-types";
 
-function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit, ...props}) {
+function ChatItem({name, id, type, firstMessage, isActive, setDeleteChat, setEditChat, setIsDelete, setIsEdit}) {
 
-    const [intType, setIntType] = React.useState(0);
+    const [intType, setIntType] = useState(0);
 
     useEffect(() => {
         if (type === "GPT 3.5") {
@@ -78,6 +79,18 @@ function ChatItem({name, id, model, type, firstMessage, isActive, setDeleteChat,
             </div>
         </Link>
     );
+}
+
+ChatItem.propTypes = {
+    name: PropTypes.string,
+    id: PropTypes.string,
+    type: PropTypes.string,
+    firstMessage: PropTypes.string,
+    isActive: PropTypes.bool,
+    setDeleteChat: PropTypes.func,
+    setEditChat: PropTypes.func,
+    setIsDelete: PropTypes.func,
+    setIsEdit: PropTypes.func
 }
 
 export default ChatItem;

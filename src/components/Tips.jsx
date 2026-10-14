@@ -14,7 +14,6 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import ProTip from "./ProTip";
 import {isMobile, MobileView} from "react-device-detect";
 

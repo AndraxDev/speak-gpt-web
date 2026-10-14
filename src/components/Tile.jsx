@@ -14,12 +14,13 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 
 import {isMobile} from "react-device-detect";
+import PropTypes from "prop-types";
 
-function Tile({clickAction, icon, title, subtitle, description, checkable, checked, setChecked}) {
-    const [checkedState, setCheckedState] = React.useState(checked);
+function Tile({clickAction, icon, title, subtitle, checkable, checked, setChecked}) {
+    const [checkedState, setCheckedState] = useState(checked);
 
     return (
         <div onClick={() => {
@@ -39,6 +40,16 @@ function Tile({clickAction, icon, title, subtitle, description, checkable, check
             </div>
         </div>
     );
+}
+
+Tile.propTypes = {
+    clickAction: PropTypes.func,
+    icon: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    checkable: PropTypes.bool,
+    checked: PropTypes.bool,
+    setChecked: PropTypes.func
 }
 
 export default Tile;

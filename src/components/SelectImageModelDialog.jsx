@@ -14,9 +14,10 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
 function SelectImageModelDialog({setIsOpen, setImageModel, imageModel, isAssistant}) {
     const availableImageModels = [
@@ -25,7 +26,7 @@ function SelectImageModelDialog({setIsOpen, setImageModel, imageModel, isAssista
         "gpt-image-1",
     ]
 
-    const [selectedImageModel, setSelectedImageModel] = React.useState(imageModel);
+    const [selectedImageModel, setSelectedImageModel] = useState(imageModel);
     return (
         <div className={isAssistant ? "dialog-backdrop-assistant" : "dialog-backdrop"} onMouseDown={() => {
             setIsOpen(false);
@@ -64,6 +65,13 @@ function SelectImageModelDialog({setIsOpen, setImageModel, imageModel, isAssista
             </MaterialDialog>
         </div>
     );
+}
+
+SelectImageModelDialog.propTypes = {
+    setIsOpen: PropTypes.func.isRequired,
+    setImageModel: PropTypes.func.isRequired,
+    imageModel: PropTypes.string.isRequired,
+    isAssistant: PropTypes.bool.isRequired,
 }
 
 export default SelectImageModelDialog;

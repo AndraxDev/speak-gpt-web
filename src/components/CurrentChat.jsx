@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
     MaterialButtonError,
     MaterialButtonTonal24Icon,
@@ -60,6 +60,7 @@ import PhotoRounded from "@mui/icons-material/PhotoRounded";
 import Send from "@mui/icons-material/Send";
 import SettingsRounded from "@mui/icons-material/SettingsRounded";
 import Photo from "@mui/icons-material/Photo";
+import PropTypes from "prop-types";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -76,28 +77,27 @@ window.addEventListener('orientationchange', setFullHeight);
 let activeControllers = [];
 
 function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
-    const [conversation, setConversation] = React.useState([]);
-    const [lockedState, setLockedState] = React.useState(false);
-    const [stateSelectedChat, setStateSelectedChat] = React.useState(chatName);
-    const [db, setDb] = React.useState(null);
-    const [currentModel, setCurrentModel] = React.useState(getModel(id));
-    const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
-    const [useDalle3, setUseDalle3] = React.useState(getDalleVersion(id) === "3");
-    const [currentImageResolution, setCurrentImageResolution] = React.useState(getResolution(id));
-    const [resolutionDialogOpened, setResolutionDialogOpened] = React.useState(false);
-    const [systemMessage, setSystemMessageX] = React.useState(getSystemMessage(id));
-    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = React.useState(false);
-    // const [slashCommands, setSlashCommands] = React.useState(true);
-    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = React.useState(false);
-    const [settingsOpen, setSettingsOpen] = React.useState(false);
-    const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
-    const [confirmClear, setConfirmClear] = React.useState(false);
-    const [selectedFile, setSelectedFile] = React.useState(null);
-    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
-    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
-    const [imageModelDialogOpened, setImageModelDialogOpened] = React.useState(false);
-    const [imageModel, setImageModel] = React.useState(getImageModelX(id));
-    const [settingsAreInitialized, setSettingsAreInitialized] = React.useState(false);
+    const [conversation, setConversation] = useState([]);
+    const [lockedState, setLockedState] = useState(false);
+    const [stateSelectedChat, setStateSelectedChat] = useState(chatName);
+    const [db, setDb] = useState(null);
+    const [currentModel, setCurrentModel] = useState(getModel(id));
+    const [modelDialogOpened, setModelDialogOpened] = useState(false);
+    const [useDalle3, setUseDalle3] = useState(getDalleVersion(id) === "3");
+    const [currentImageResolution, setCurrentImageResolution] = useState(getResolution(id));
+    const [resolutionDialogOpened, setResolutionDialogOpened] = useState(false);
+    const [systemMessage, setSystemMessageX] = useState(getSystemMessage(id));
+    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = useState(false);
+    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = useState(false);
+    const [settingsOpen, setSettingsOpen] = useState(false);
+    const [clearDialogOpen, setClearDialogOpen] = useState(false);
+    const [confirmClear, setConfirmClear] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [errorSnackBar, setErrorSnackBar] = useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = useState("");
+    const [imageModelDialogOpened, setImageModelDialogOpened] = useState(false);
+    const [imageModel, setImageModel] = useState(getImageModelX(id));
+    const [settingsAreInitialized, setSettingsAreInitialized] = useState(false);
 
     const openai = new OpenAI({
         apiKey: getApiEndpointById(getApiEndpointId(findOpenAIEndpointIdOrNull() != null ? findOpenAIEndpointIdOrNull() : sha256(stateSelectedChat))).key,
@@ -121,7 +121,6 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         })
 
         updateChats(c);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentModel, modelDialogOpened])
 
     // Load settings
@@ -144,7 +143,6 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             setSettingsAreInitialized(true);
         }
         // Ignore settingsAreInitialized. If I include it here, it will make no sense, as the whole iteration must be skipped.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentModel, useDalle3, currentImageResolution, systemMessage, id, imageModel]);
 
     const getAndroidOS = () => {
@@ -170,7 +168,6 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             setConfirmClear(false);
             setClearDialogOpen(false);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmClear])
 
     useEffect(() => {
@@ -195,7 +192,6 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
         if (db !== undefined && db !== null) {
             getConversation(sha256(stateSelectedChat));
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db, stateSelectedChat]);
 
     useEffect(() => {
@@ -497,14 +493,14 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
 
         let mx = document.querySelector(".chat-textarea").value
         if (mx.toString().trim().startsWith("/imagine ")) {
-            generateImage(mx.replace("/imagine ", "")).then(r => {
+            generateImage(mx.replace("/imagine ", "")).then(() => {
                 setLockedState(false);
                 if (!getAndroidOS()) {
                     document.querySelector(".chat-textarea").focus();
                 }
             })
         } else {
-            sendAIRequest(prepareConversation(messages)).then(r => {
+            sendAIRequest(prepareConversation(messages)).then(() => {
                 setLockedState(false);
                 if (!getAndroidOS()) {
                     document.querySelector(".chat-textarea").focus();
@@ -702,7 +698,6 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const insertImagineCommand = () => {
@@ -865,6 +860,14 @@ function CurrentChat({onUpdate, chats, id, chatName, updateChats}) {
             </div>
         </div>
     );
+}
+
+CurrentChat.propTypes = {
+    onUpdate: PropTypes.func,
+    chats: PropTypes.array,
+    id: PropTypes.string,
+    chatName: PropTypes.string,
+    updateChats: PropTypes.func
 }
 
 export default CurrentChat;

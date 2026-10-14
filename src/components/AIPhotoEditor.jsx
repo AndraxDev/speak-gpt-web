@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {MaterialButton24, MaterialButtonTonal24,} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import Alert from "@mui/material/Alert";
@@ -25,15 +25,15 @@ import OpenAI from "openai";
 import {findOpenAIEndpointIdOrNull, getApiEndpointById, migrateFromLegacyAPIs} from "../util/Settings";
 import Photo from "@mui/icons-material/Photo";
 
-function AiPhotoEditor(props) {
+function AiPhotoEditor() {
 
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const [inPhoto, setInPhoto] = useState(null);
     const [inFilePrepared, setInFilePrepared] = useState(null);
     const [outPhoto, setOutPhoto] = useState(null);
-    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
-    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
+    const [errorSnackBar, setErrorSnackBar] = useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = useState("");
 
     useEffect(() => {
         if (inPhoto !== null) {

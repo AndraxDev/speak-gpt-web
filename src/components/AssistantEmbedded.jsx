@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
     MaterialButtonTonalIcon,
     MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
@@ -52,6 +52,7 @@ import PhotoRounded from "@mui/icons-material/PhotoRounded";
 import SendRounded from "@mui/icons-material/SendRounded";
 import SettingsRounded from "@mui/icons-material/SettingsRounded";
 import Photo from "@mui/icons-material/Photo";
+import PropTypes from "prop-types";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -84,33 +85,33 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
     const payload = getParams.get("payload");
 
-    const [conversation, setConversation] = React.useState([]);
-    const [lockedState, setLockedState] = React.useState(false);
-    const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
-    const [currentModel, setCurrentModel] = React.useState(getGlobalModel());
-    const [useDalle3, setUseDalle3] = React.useState(getGlobalDalleVersion() === "3");
-    const [currentImageResolution, setCurrentImageResolution] = React.useState(getGlobalResolution());
-    const [resolutionDialogOpened, setResolutionDialogOpened] = React.useState(false);
-    const [systemMessage, setSystemMessageX] = React.useState(getGlobalSystemMessage());
-    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = React.useState(false);
-    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = React.useState(false);
-    const [settingsOpen, setSettingsOpen] = React.useState(false);
-    const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
-    const [confirmClear, setConfirmClear] = React.useState(false);
-    const [selectedFile, setSelectedFile] = React.useState(null);
-    const [db, setDb] = React.useState(null);
-    const [payloadDecoded, setPayloadDecoded] = React.useState(null);
-    const [chatName, setChatName] = React.useState("SpeakGPT");
-    const [initialMessage, setInitialMessage] = React.useState("");
-    const [initialResponse, setInitialResponse] = React.useState("");
-    const [initialSystemMessage, setInitialSystemMessage] = React.useState("");
-    const [customChatLocation, setCustomChatLocation] = React.useState(chatLocation);
-    const [assistantIcon, setAssistantIcon] = React.useState("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=");
-    const [assistantDescription, setAssistantDescription] = React.useState(getDefaultDescription());
-    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
-    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
-    const [imageModelDialogOpened, setImageModelDialogOpened] = React.useState(false);
-    const [imageModel, setImageModel] = React.useState(getGlobalImageModel());
+    const [conversation, setConversation] = useState([]);
+    const [lockedState, setLockedState] = useState(false);
+    const [modelDialogOpened, setModelDialogOpened] = useState(false);
+    const [currentModel, setCurrentModel] = useState(getGlobalModel());
+    const [useDalle3, setUseDalle3] = useState(getGlobalDalleVersion() === "3");
+    const [currentImageResolution, setCurrentImageResolution] = useState(getGlobalResolution());
+    const [resolutionDialogOpened, setResolutionDialogOpened] = useState(false);
+    const [systemMessage, setSystemMessageX] = useState(getGlobalSystemMessage());
+    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = useState(false);
+    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = useState(false);
+    const [settingsOpen, setSettingsOpen] = useState(false);
+    const [clearDialogOpen, setClearDialogOpen] = useState(false);
+    const [confirmClear, setConfirmClear] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [db, setDb] = useState(null);
+    const [payloadDecoded, setPayloadDecoded] = useState(null);
+    const [chatName, setChatName] = useState("SpeakGPT");
+    const [initialMessage, setInitialMessage] = useState("");
+    const [initialResponse, setInitialResponse] = useState("");
+    const [initialSystemMessage, setInitialSystemMessage] = useState("");
+    const [customChatLocation, setCustomChatLocation] = useState(chatLocation);
+    const [assistantIcon, setAssistantIcon] = useState("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=");
+    const [assistantDescription, setAssistantDescription] = useState(getDefaultDescription());
+    const [errorSnackBar, setErrorSnackBar] = useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = useState("");
+    const [imageModelDialogOpened, setImageModelDialogOpened] = useState(false);
+    const [imageModel, setImageModel] = useState(getGlobalImageModel());
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -118,7 +119,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         setGlobalResolution(currentImageResolution)
         setGlobalSystemMessage(systemMessage)
         setGlobalImageModel(imageModel);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentModel, useDalle3, currentImageResolution, systemMessage, imageModel]);
 
     useEffect(() => {
@@ -133,7 +133,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         } else {
             getDatabase()
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [payload]);
 
     useEffect(() => {
@@ -175,7 +174,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
         if (db !== undefined && db !== null) {
             getConversation(customChatLocation);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [db]);
 
     const getDatabase = () => {
@@ -265,7 +263,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
             setConfirmClear(false);
             setClearDialogOpen(false);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [confirmClear])
 
     useEffect(() => {
@@ -595,7 +592,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
 
         let mx = document.querySelector(".chat-textarea").value
         if (mx.toString().trim().startsWith("/imagine ")) {
-            generateImage(mx.replace("/imagine ", "")).then(r => {
+            generateImage(mx.replace("/imagine ", "")).then(() => {
                 setLockedState(false);
 
                 if (!getAndroidOS()) {
@@ -603,7 +600,7 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 }
             })
         } else {
-            sendAIRequest(prepareConversation(messages)).then(r => {
+            sendAIRequest(prepareConversation(messages)).then(() => {
                 setLockedState(false);
                 if (!getAndroidOS()) {
                     document.querySelector(".chat-textarea").focus();
@@ -711,7 +708,6 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
                 document.querySelector(".chat-textarea").innerHTML = ''
             }
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -918,6 +914,10 @@ function AssistantEmbedded({chatLocation = "assistantGlobal"}) {
             </div>
         </div>
     );
+}
+
+AssistantEmbedded.propTypes = {
+    chatLocation: PropTypes.string
 }
 
 export default AssistantEmbedded;

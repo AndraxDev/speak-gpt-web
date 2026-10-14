@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {getAllApiEndpoints} from "../util/Settings";
 import CircularProgress from "@mui/material/CircularProgress";
 import {sha256} from "js-sha256";
@@ -22,13 +22,14 @@ import {MaterialButton24, MaterialButtonOutlined24, MaterialButtonTonal24} from 
 import ApiEndpointEditDialog from "./ApiEndpointEditDialog";
 import {MaterialDialog} from "./MaterialDialog";
 import Edit from "@mui/icons-material/Edit";
+import PropTypes from "prop-types";
 
-function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, isOpened, setIsOpened, isAssistant, ...props}) {
-    const [selectedApiEndpoint, setSelectedApiEndpoint] = React.useState(selectedApiEndpointId);
-    const [apiEndpoints, setApiEndpoints] = React.useState(getAllApiEndpoints());
-    const [editDialogOpened, setEditDialogOpened] = React.useState(false);
-    const [apiEndpointForEdit, setApiEndpointForEdit] = React.useState("");
-    const [addDialogOpened, setAddDialogOpened] = React.useState(false);
+function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, setIsOpened, isAssistant}) {
+    const [selectedApiEndpoint, setSelectedApiEndpoint] = useState(selectedApiEndpointId);
+    const [apiEndpoints, setApiEndpoints] = useState(getAllApiEndpoints());
+    const [editDialogOpened, setEditDialogOpened] = useState(false);
+    const [apiEndpointForEdit, setApiEndpointForEdit] = useState("");
+    const [addDialogOpened, setAddDialogOpened] = useState(false);
 
     useEffect(() => {
         setApiEndpoints(getAllApiEndpoints());
@@ -110,6 +111,13 @@ function ApiEndpointSelector({selectedApiEndpointId, setSelectedApiEndpointId, i
             </MaterialDialog>
         </div>
     );
+}
+
+ApiEndpointSelector.propTypes = {
+    selectedApiEndpointId: PropTypes.string.isRequired,
+    setSelectedApiEndpointId: PropTypes.func.isRequired,
+    setIsOpened: PropTypes.func.isRequired,
+    isAssistant: PropTypes.bool,
 }
 
 export default ApiEndpointSelector;

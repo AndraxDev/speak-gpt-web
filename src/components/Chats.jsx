@@ -14,17 +14,18 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import ChatItem from "./ChatItem";
 import {sha256} from "js-sha256";
+import PropTypes from "prop-types";
 
-function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelectedChatForEdit, ...props}) {
+function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelectedChatForEdit, setSelected}) {
 
-    const [stateSelectedChat, setStateSelectedChat] = React.useState(selectedChat);
-    const [selectedChatForDeletionTemp, setSelectedChatForDeletionTemp] = React.useState("");
-    const [selectedChatForEditTemp, setSelectedChatForEditTemp] = React.useState("");
-    const [isEditTemp, setIsEditTemp] = React.useState(false);
-    const [isDeleteTemp, setIsDeleteTemp] = React.useState(false);
+    const [stateSelectedChat, setStateSelectedChat] = useState(selectedChat);
+    const [selectedChatForDeletionTemp, setSelectedChatForDeletionTemp] = useState("");
+    const [selectedChatForEditTemp, setSelectedChatForEditTemp] = useState("");
+    const [isEditTemp, setIsEditTemp] = useState(false);
+    const [isDeleteTemp, setIsDeleteTemp] = useState(false);
 
     useEffect(() => {
         if (chats === null) return;
@@ -59,7 +60,7 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
                 chats.map((e) => {
                     return (
                         <div key={sha256(e.title)} onClick={() => {
-                            props.setSelected(e.title);
+                            setSelected(e.title);
                         }}>
                             <ChatItem isActive={e.title === stateSelectedChat} name={e.title} model={e.model} type={e.type} firstMessage={e.firstMessage} id={sha256(e.title)} setDeleteChat={setSelectedChatForDeletionTemp} setEditChat={setSelectedChatForEditTemp} setIsDelete={setIsDeleteTemp} setIsEdit={setIsEditTemp}/>
                         </div>
@@ -71,6 +72,15 @@ function Chats({selectedChat, id, chats, setSelectedChatForDeletion, setSelected
             }}></div>
         </div>
     );
+}
+
+Chats.propTypes = {
+    selectedChat: PropTypes.string,
+    id: PropTypes.string,
+    chats: PropTypes.array,
+    setSelectedChatForDeletion: PropTypes.func,
+    setSelectedChatForEdit: PropTypes.func,
+    setSelected: PropTypes.func
 }
 
 export default Chats;

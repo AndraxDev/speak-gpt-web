@@ -14,11 +14,11 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
-function DeleteChatDialog({setOpenState, chatName, setChatName, ...props}) {
+function DeleteChatDialog({setOpenState, chatName, setChatName}) {
     return (
         <div className={"dialog-backdrop"} onMouseDown={() => {
             setChatName("");
@@ -45,6 +45,12 @@ function DeleteChatDialog({setOpenState, chatName, setChatName, ...props}) {
             </MaterialDialog>
         </div>
     );
+}
+
+DeleteChatDialog.propTypes = {
+    setOpenState: PropTypes.func,
+    chatName: PropTypes.string,
+    setChatName: PropTypes.func
 }
 
 export default DeleteChatDialog;

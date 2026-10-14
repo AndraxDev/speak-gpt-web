@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
     MaterialButtonTonalIcon,
     MaterialButtonTonalIconV2, MaterialButtonTonalIconV3
@@ -51,6 +51,7 @@ import PhotoRounded from "@mui/icons-material/PhotoRounded";
 import SendRounded from "@mui/icons-material/SendRounded";
 import SettingsRounded from "@mui/icons-material/SettingsRounded";
 import Photo from "@mui/icons-material/Photo";
+import PropTypes from "prop-types";
 
 const getDefaultDescription = () => {
     return (`
@@ -79,24 +80,24 @@ window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function Assistant({runtimePrompt, type, closeWindow}) {
-    const [conversation, setConversation] = React.useState([]);
-    const [lockedState, setLockedState] = React.useState(false);
-    const [modelDialogOpened, setModelDialogOpened] = React.useState(false);
-    const [currentModel, setCurrentModel] = React.useState(getGlobalModel());
-    const [useDalle3, setUseDalle3] = React.useState(getGlobalDalleVersion() === "3");
-    const [currentImageResolution, setCurrentImageResolution] = React.useState(getGlobalResolution());
-    const [resolutionDialogOpened, setResolutionDialogOpened] = React.useState(false);
-    const [systemMessage, setSystemMessageX] = React.useState(getGlobalSystemMessage());
-    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = React.useState(false);
-    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = React.useState(false);
-    const [settingsOpen, setSettingsOpen] = React.useState(false);
-    const [clearDialogOpen, setClearDialogOpen] = React.useState(false);
-    const [confirmClear, setConfirmClear] = React.useState(false);
-    const [selectedFile, setSelectedFile] = React.useState(null);
-    const [errorSnackBar, setErrorSnackBar] = React.useState(false);
-    const [errorSnackBarMessage, setErrorSnackBarMessage] = React.useState("");
-    const [imageModelDialogOpened, setImageModelDialogOpened] = React.useState(false);
-    const [imageModel, setImageModel] = React.useState(getGlobalImageModel());
+    const [conversation, setConversation] = useState([]);
+    const [lockedState, setLockedState] = useState(false);
+    const [modelDialogOpened, setModelDialogOpened] = useState(false);
+    const [currentModel, setCurrentModel] = useState(getGlobalModel());
+    const [useDalle3, setUseDalle3] = useState(getGlobalDalleVersion() === "3");
+    const [currentImageResolution, setCurrentImageResolution] = useState(getGlobalResolution());
+    const [resolutionDialogOpened, setResolutionDialogOpened] = useState(false);
+    const [systemMessage, setSystemMessageX] = useState(getGlobalSystemMessage());
+    const [systemMessageDialogOpened, setSystemMessageDialogOpened] = useState(false);
+    const [openAIKeyChangeDialogIsOpened, setOpenAIKeyChangeDialogIsOpened] = useState(false);
+    const [settingsOpen, setSettingsOpen] = useState(false);
+    const [clearDialogOpen, setClearDialogOpen] = useState(false);
+    const [confirmClear, setConfirmClear] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [errorSnackBar, setErrorSnackBar] = useState(false);
+    const [errorSnackBarMessage, setErrorSnackBarMessage] = useState("");
+    const [imageModelDialogOpened, setImageModelDialogOpened] = useState(false);
+    const [imageModel, setImageModel] = useState(getGlobalImageModel());
 
     useEffect(() => {
         setGlobalModel(currentModel)
@@ -134,7 +135,6 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
             processRequest();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [runtimePrompt, type]);
 
     useEffect(() => {
@@ -434,7 +434,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
 
         let mx = document.querySelector(".chat-textarea").value
         if (mx.toString().trim().startsWith("/imagine ")) {
-            generateImage(mx.replace("/imagine ", "")).then(r => {
+            generateImage(mx.replace("/imagine ", "")).then(() => {
                 setLockedState(false);
 
                 if (!getAndroidOS() && !isMobile) {
@@ -442,7 +442,7 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 }
             })
         } else {
-            sendAIRequest(prepareConversation(messages)).then(r => {
+            sendAIRequest(prepareConversation(messages)).then(() => {
                 setLockedState(false);
                 if (!getAndroidOS() && !isMobile) {
                     document.querySelector(".chat-textarea").focus();
@@ -560,7 +560,6 @@ function Assistant({runtimePrompt, type, closeWindow}) {
                 }
             });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -752,5 +751,11 @@ function Assistant({runtimePrompt, type, closeWindow}) {
         </div>
     );
 }
+
+Assistant.propTypes = {
+    runtimePrompt: PropTypes.string,
+    type: PropTypes.string,
+    closeWindow: PropTypes.func
+};
 
 export default Assistant;

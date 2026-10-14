@@ -14,16 +14,17 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonError, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {deleteEndpoint, getApiEndpointById, renameEndpoint, setApiEndpointById} from "../util/Settings";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
-function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
-    const [label, setLabel] = React.useState(endpointId === "" ? "" : getApiEndpointById(endpointId).label);
-    const [url, setUrl] = React.useState(endpointId === "" ? "" : getApiEndpointById(endpointId).url);
-    const [key, setKey] = React.useState("");
+function ApiEndpointEditDialog({endpointId, setIsOpened}) {
+    const [label, setLabel] = useState(endpointId === "" ? "" : getApiEndpointById(endpointId).label);
+    const [url, setUrl] = useState(endpointId === "" ? "" : getApiEndpointById(endpointId).url);
+    const [key, setKey] = useState("");
     const previousKey = endpointId === "" ? "" : getApiEndpointById(endpointId).key;
 
     const setApiEndpoint = () => {
@@ -49,8 +50,8 @@ function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
                     <p style={{
                         margin: "0",
                         width: "calc(100% - 32px)"
-                    }} className={"hint"}>Let's begin with setup your favorite API endpoint. Since SpeakGPT Web 1.5 you
-                        can add multiple API endpoints and use SpeakGPT to access GPR, Gemini, Claude, etc. If you're
+                    }} className={"hint"}>Let&apos;s begin with setup your favorite API endpoint. Since SpeakGPT Web 1.5 you
+                        can add multiple API endpoints and use SpeakGPT to access GPR, Gemini, Claude, etc. If you&apos;re
                         using local or unknown API and receiving CORS error (see console) make sure CORS headers are
                         present in your API endpoint.</p>
                     <p className={"warning"}>Enter the key only if you are using this app at
@@ -93,6 +94,11 @@ function ApiEndpointEditDialog({endpointId, isOpened, setIsOpened, ...props}) {
             </MaterialDialog>
         </div>
     );
+}
+
+ApiEndpointEditDialog.propTypes = {
+    endpointId: PropTypes.string.isRequired,
+    setIsOpened: PropTypes.func.isRequired
 }
 
 export default ApiEndpointEditDialog;

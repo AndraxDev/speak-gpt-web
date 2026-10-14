@@ -14,14 +14,15 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
+import {useState} from 'react';
 import {MaterialButton24} from "../widgets/MaterialButton";
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {getApiHost, setApiHost} from "../util/Settings";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
 function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
-    const [apiHostX, setApiHostX] = React.useState(getApiHost(chatId));
+    const [apiHostX, setApiHostX] = useState(getApiHost(chatId));
 
     return (
         <div className={"priority dialog-backdrop"} onMouseDown={(e) => {
@@ -46,6 +47,12 @@ function ApiHostChangeDialog({chatId, setOpen, setApiHostD}) {
             </MaterialDialog>
         </div>
     );
+}
+
+ApiHostChangeDialog.propTypes = {
+    chatId: PropTypes.string,
+    setOpen: PropTypes.func.isRequired,
+    setApiHostD: PropTypes.func
 }
 
 export default ApiHostChangeDialog;

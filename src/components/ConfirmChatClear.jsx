@@ -14,9 +14,9 @@
  * limitations under the License.
  *****************************************************************/
 
-import React from 'react';
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
 function ConfirmChatClear({setOpenState, confirm, isAssistant}) {
     return (
@@ -45,6 +45,12 @@ function ConfirmChatClear({setOpenState, confirm, isAssistant}) {
             </MaterialDialog>
         </div>
     );
+}
+
+ConfirmChatClear.propTypes = {
+    setOpenState: PropTypes.func.isRequired,
+    confirm: PropTypes.func.isRequired,
+    isAssistant: PropTypes.bool
 }
 
 export default ConfirmChatClear;

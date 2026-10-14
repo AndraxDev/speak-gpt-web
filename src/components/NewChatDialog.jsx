@@ -14,13 +14,14 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import {MaterialButton24, MaterialButtonOutlined24} from "../widgets/MaterialButton";
 import {MaterialDialog} from "./MaterialDialog";
+import PropTypes from "prop-types";
 
-function NewChatDialog({chatName, setChatName, invalidState, invalidMessage, setChatDialogOpen, isEdit, chatModel, setIsEditing, ...props}) {
-    const [tempChatName, setTempChatName] = React.useState("");
+function NewChatDialog({chatName, setChatName, invalidMessage, setChatDialogOpen, isEdit, setIsEditing}) {
+    const [tempChatName, setTempChatName] = useState("");
 
     useEffect(() => {
         setTempChatName(chatName);
@@ -52,6 +53,15 @@ function NewChatDialog({chatName, setChatName, invalidState, invalidMessage, set
             </MaterialDialog>
         </div>
     );
+}
+
+NewChatDialog.propTypes = {
+    chatName: PropTypes.string,
+    setChatName: PropTypes.func,
+    invalidMessage: PropTypes.string,
+    setChatDialogOpen: PropTypes.func,
+    isEdit: PropTypes.bool,
+    setIsEditing: PropTypes.func
 }
 
 export default NewChatDialog;

@@ -18,7 +18,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import './../theme/colors.css'
 
-export const MaterialButton = styled(Button)(({ theme }) => ({
+export const MaterialButton = styled(Button)(() => ({
     color: "var(--color-accent-50)",
     backgroundColor: "var(--color-accent-800)",
     textTransform: "none",
@@ -29,7 +29,7 @@ export const MaterialButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButton24 = styled(Button)(({ theme }) => ({
+export const MaterialButton24 = styled(Button)(() => ({
     color: "var(--color-accent-50)",
     backgroundColor: "var(--color-accent-800)",
     textTransform: "none",
@@ -46,7 +46,7 @@ export const MaterialButton24 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButton16 = styled(Button)(({ theme }) => ({
+export const MaterialButton16 = styled(Button)(() => ({
     color: "var(--color-accent-50)",
     backgroundColor: "var(--color-accent-800)",
     textTransform: "none",
@@ -60,7 +60,7 @@ export const MaterialButton16 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonal = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonal = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-300)",
     textTransform: "none",
@@ -76,7 +76,7 @@ export const MaterialButtonTonal = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonalIcon = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonalIcon = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-200)",
     textTransform: "none",
@@ -93,7 +93,7 @@ export const MaterialButtonTonalIcon = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonalIconV2 = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonalIconV2 = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "transparent",
     textTransform: "none",
@@ -110,7 +110,7 @@ export const MaterialButtonTonalIconV2 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonalIconV3 = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonalIconV3 = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "#212121",
     textTransform: "none",
@@ -127,7 +127,7 @@ export const MaterialButtonTonalIconV3 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonal16 = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonal16 = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-300)",
     textTransform: "none",
@@ -145,7 +145,7 @@ export const MaterialButtonTonal16 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonal16V2 = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonal16V2 = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-200)",
     textTransform: "none",
@@ -163,7 +163,7 @@ export const MaterialButtonTonal16V2 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonal24 = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonal24 = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-300)",
     textTransform: "none",
@@ -184,7 +184,7 @@ export const MaterialButtonTonal24 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonTonal24Icon = styled(Button)(({ theme }) => ({
+export const MaterialButtonTonal24Icon = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-300)",
     textTransform: "none",
@@ -203,7 +203,7 @@ export const MaterialButtonTonal24Icon = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonCard = styled(Button)(({ theme }) => ({
+export const MaterialButtonCard = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     backgroundColor: "var(--color-accent-200)",
     borderRadius: "24px",
@@ -216,7 +216,7 @@ export const MaterialButtonCard = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonError = styled(Button)(({ theme }) => ({
+export const MaterialButtonError = styled(Button)(() => ({
     color: "var(--color-warn)",
     backgroundColor: "rgba(255,103,103,0.2)",
     textTransform: "none",
@@ -235,7 +235,7 @@ export const MaterialButtonError = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonErrorCard = styled(Button)(({ theme }) => ({
+export const MaterialButtonErrorCard = styled(Button)(() => ({
     color: "var(--color-warn)",
     backgroundColor: "var(--color-warn-transparent)",
     borderRadius: "24px",
@@ -250,7 +250,7 @@ export const MaterialButtonErrorCard = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonOutlined = styled(Button)(({ theme }) => ({
+export const MaterialButtonOutlined = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     borderColor: "var(--color-accent-800)",
     textTransform: "none",
@@ -265,7 +265,7 @@ export const MaterialButtonOutlined = styled(Button)(({ theme }) => ({
     },
 }));
 
-export const MaterialButtonOutlined24 = styled(Button)(({ theme }) => ({
+export const MaterialButtonOutlined24 = styled(Button)(() => ({
     color: "var(--color-accent-800)",
     borderColor: "var(--color-accent-800)",
     textTransform: "none",

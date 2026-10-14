@@ -14,7 +14,7 @@
  * limitations under the License.
  *****************************************************************/
 
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {MaterialEditText} from "../widgets/MaterialEditText";
 import Assistant from "./Assistant";
 import {MaterialButton24, MaterialButtonTonal24, MaterialButtonTonalIconV2} from "../widgets/MaterialButton";
@@ -24,6 +24,7 @@ import {Link} from "react-router-dom";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import ThumbUp from "@mui/icons-material/ThumbUp";
+import PropTypes from "prop-types";
 
 function setFullHeight() {
     const vh = window.innerHeight * 0.01;
@@ -38,12 +39,12 @@ window.addEventListener('resize', setFullHeight);
 window.addEventListener('orientationchange', setFullHeight);
 
 function PromptView({prompt, updatePrompts}) {
-    const [assistantIsOpened, setAssistantIsOpened] = React.useState(false);
-    const [assistantIsOpened2, setAssistantIsOpened2] = React.useState(false);
-    const [currentPrompt, setCurrentPrompt] = React.useState(prompt.prompt);
-    const [modifiedPrompt, setModifiedPrompt] = React.useState(prompt.prompt);
-    const [likeRequest, setLikeRequest] = React.useState(false);
-    const [likeStatus, setLikeStatus] = React.useState(localStorage.getItem("likedPrompt" + prompt.id) === "true");
+    const [assistantIsOpened, setAssistantIsOpened] = useState(false);
+    const [assistantIsOpened2, setAssistantIsOpened2] = useState(false);
+    const [currentPrompt, setCurrentPrompt] = useState(prompt.prompt);
+    const [modifiedPrompt, setModifiedPrompt] = useState(prompt.prompt);
+    const [likeRequest, setLikeRequest] = useState(false);
+    const [likeStatus, setLikeStatus] = useState(localStorage.getItem("likedPrompt" + prompt.id) === "true");
 
     useEffect(() => {
         setCurrentPrompt(prompt.prompt);
@@ -160,7 +161,7 @@ function PromptView({prompt, updatePrompts}) {
                     height: "calc(var(--vh, 1vh) * 100)",
                     overflow: "hidden"
                 } : {}} className={isMobile ? "assistant-container-mob" : "assistant-container"}>
-                    <Assistant runtimePrompt={modifiedPrompt} type={prompt.type.toLowerCase()} closeWindow={setAssistantIsOpened} />
+                    <Assistant runtimePrompt={modifiedPrompt} type={String.toString(prompt.type).toLowerCase()} closeWindow={setAssistantIsOpened} />
                 </div> : null
             }
 
@@ -174,6 +175,19 @@ function PromptView({prompt, updatePrompts}) {
             }
         </div>
     );
+}
+
+PromptView.propTypes = {
+    prompt: PropTypes.shape({
+        prompt: PropTypes.string,
+        id: PropTypes.string,
+        name: PropTypes.string,
+        author: PropTypes.string,
+        category: PropTypes.string,
+        likes: PropTypes.number,
+        type: PropTypes.string
+    }),
+    updatePrompts: PropTypes.func.isRequired
 }
 
 export default PromptView;
